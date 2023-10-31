@@ -17,7 +17,7 @@ namespace PierreMizzi.Gameplay.Players
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
-			Release();
+			m_this.SetFree();
 			m_this.mouseClickAction.action.performed += CallbackMouseClick;
 		}
 
@@ -36,12 +36,6 @@ namespace PierreMizzi.Gameplay.Players
 
 		#region Movement
 
-		private void Release()
-		{
-			m_this.transform.SetParent(null);
-			m_this.isDocked = false;
-		}
-
 		private void Move()
 		{
 			m_this.transform.position += m_this.transform.up * m_this.currentSpeed * Time.deltaTime;
@@ -53,9 +47,6 @@ namespace PierreMizzi.Gameplay.Players
 		{
 			ChangeState((int)StarStateType.Returning);
 		}
-
-
-
 
 	}
 }

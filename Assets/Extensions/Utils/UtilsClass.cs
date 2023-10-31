@@ -288,6 +288,15 @@ namespace PierreMizzi.Useful
             );
         }
 
+        public static Vector3 RandomInBound(Bounds bounds)
+        {
+            Vector3 position = new Vector3();
+            position.x = Random.Range(-bounds.extents.x, bounds.extents.x);
+            position.y = Random.Range(-bounds.extents.y, bounds.extents.y);
+            position.z = Random.Range(-bounds.extents.z, bounds.extents.z);
+            return position;
+        }
+
         public static float RandomAngle()
         {
             return Random.Range(0f, 360f);

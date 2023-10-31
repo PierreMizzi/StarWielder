@@ -1,8 +1,6 @@
 namespace PierreMizzi.Gameplay.Players
 {
-	using System;
 	using PierreMizzi.Useful.StateMachines;
-	using UnityEngine;
 	using UnityEngine.InputSystem;
 
 	public class StarStateDocked : StarState
@@ -29,21 +27,16 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void DockStar()
 		{
-			m_this.transform.SetParent(m_this.ship.starAnchor);
-			m_this.transform.localPosition = Vector2.zero;
-			m_this.transform.localRotation = Quaternion.identity;
-
-			m_this.isDocked = true;
-			m_this.ResetSquish();
-			m_this.playerChannel.onStarDocked?.Invoke();
+			m_this.currentCombo = 1;
+			m_this.playerChannel.onRefreshStarCombo.Invoke(m_this.currentCombo);
 		}
 
 		private void CallbackMouseClick(InputAction.CallbackContext context)
 		{
-			Release();
+			SetFree();
 		}
 
-		private void Release()
+		private void SetFree()
 		{
 			ChangeState((int)StarStateType.Free);
 		}

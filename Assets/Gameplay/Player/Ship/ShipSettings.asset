@@ -15,6 +15,6 @@ MonoBehaviour:
   maxHealth: 300
   baseEnergy: 50
   energyDepleatRate: 10
-  speed: 80
+  speed: 150
   smoothTime: 0.5
   immediatePositionScale: 0.1

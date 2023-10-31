@@ -5,6 +5,7 @@ namespace PierreMizzi.Gameplay.Players
 		None,
 		Docked,
 		Free,
-		Returning
+		Returning,
+		Transfer,
 	}
 }

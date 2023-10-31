@@ -1,8 +1,6 @@
 using System;
-using PierreMizzi.Useful;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Diagnostics;
 
 namespace PierreMizzi.Gameplay.Players
 {

@@ -42,8 +42,8 @@ namespace PierreMizzi.Gameplay.Players
 
             if (m_playerChannel != null)
             {
-                m_playerChannel.onStarReleased += CallbackStarReleased;
-                m_playerChannel.onStarDocked += CallbackStarDocked;
+                // m_playerChannel.onStarReleased += CallbackStarReleased;
+                // m_playerChannel.onStarDocked += CallbackStarDocked;
             }
         }
 
@@ -58,8 +58,8 @@ namespace PierreMizzi.Gameplay.Players
 
             if (m_playerChannel != null)
             {
-                m_playerChannel.onStarReleased -= CallbackStarReleased;
-                m_playerChannel.onStarDocked -= CallbackStarDocked;
+                // m_playerChannel.onStarReleased -= CallbackStarReleased;
+                // m_playerChannel.onStarDocked -= CallbackStarDocked;
             }
         }
 
@@ -71,35 +71,41 @@ namespace PierreMizzi.Gameplay.Players
         private Transform m_starAnchor;
         public Transform starAnchor => m_starAnchor;
 
-        private void CallbackStarDocked()
-        {
-            m_currentEnergy = m_settings.baseEnergy;
-            m_playerChannel.onRefreshShipEnergy.Invoke(m_currentEnergy);
-        }
-
-        private void CallbackStarReleased()
-        {
-
-        }
-
         #endregion
 
         #region Energy
 
         private float m_currentEnergy = 0;
+        public float currentEnergy
+        {
+            get { return m_currentEnergy; }
+            set { m_currentEnergy = Mathf.Clamp(value, 0f, m_settings.baseEnergy); }
+        }
 
         public bool hasEnergy => m_currentEnergy > 0;
 
+        public float missingEnergy => m_settings.baseEnergy - m_currentEnergy;
+
         private void ManageEnergy()
         {
-            if (!m_star.isDocked && hasEnergy)
+            if (!m_star.isOnShip && hasEnergy)
             {
-                m_currentEnergy -= m_settings.energyDepleatRate * Time.deltaTime;
-                m_currentEnergy = Mathf.Max(m_currentEnergy, 0f);
+                currentEnergy -= m_settings.energyDepleatRate * Time.deltaTime;
                 m_playerChannel.onRefreshShipEnergy.Invoke(m_currentEnergy);
             }
 
             m_controller.enabled = hasEnergy;
+        }
+
+        public float GetMaxTransferableEnergy(float starEnergy)
+        {
+            float transferableEnergy;
+            if (currentEnergy + starEnergy > m_settings.baseEnergy)
+                transferableEnergy = m_settings.baseEnergy - currentEnergy;
+            else
+                transferableEnergy = starEnergy;
+
+            return transferableEnergy;
         }
 
         #endregion

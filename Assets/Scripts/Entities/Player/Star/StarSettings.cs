@@ -6,11 +6,17 @@ public class StarSettings : ScriptableObject
 
 	[Header("Speed")]
 	public float baseSpeed;
+	public float speedFromEnergyRatio = 0.1f;
 	public float squishRatio = 0.9f;
+
 
 
 	[Header("Energy")]
 	public float baseEnergy;
 	public float lostEnergyCollision;
-	public float gainedEnergyEnemy;
+	public float comboBonusEnergyRatio = 0.33f;
+	public float baseTransferDuration = 0.5f;
+	public float transferDurationRatio = 0.05f;
+
+
 }

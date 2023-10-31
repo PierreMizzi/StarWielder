@@ -47,7 +47,7 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void CallbackReturnToShip()
 		{
-			ChangeState((int)StarStateType.Docked);
+			ChangeState((int)StarStateType.Transfer);
 		}
 
 	}

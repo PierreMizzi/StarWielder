@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: StarSettings
   m_EditorClassIdentifier: 
   baseSpeed: 10
+  speedFromEnergyRatio: 0.05
   squishRatio: 0.1
-  baseEnergy: 50
+  baseEnergy: 20
   lostEnergyCollision: 1
-  gainedEnergyEnemy: 5
+  comboBonusEnergyRatio: 0.1
+  baseTransferDuration: 0.5
+  transferDurationRatio: 0.05
