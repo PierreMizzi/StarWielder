@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 569e19f919d13584c9d47ed127071644, type: 3}
-  m_Name: ShipSettings
+  m_Script: {fileID: 11500000, guid: 2948affcb958d2d47acb3a5101ab836f, type: 3}
+  m_Name: StarSettings
   m_EditorClassIdentifier: 
-  maxHealth: 300
+  baseSpeed: 10
   baseEnergy: 50
-  energyDepleatRate: 0.5
-  speed: 80
-  smoothTime: 0.5
-  immediatePositionScale: 0.1
+  lostEnergyCollision: 1
+  gainedEnergyEnemy: 5

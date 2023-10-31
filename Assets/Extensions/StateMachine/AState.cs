@@ -42,7 +42,7 @@ namespace PierreMizzi.Useful.StateMachines
         /// </summary>
         protected virtual void DefaultEnter()
         {
-            // Debug.Log($"ENTER : {type}");
+            Debug.Log($"ENTER : {type}");
         }
 
         /// <summary>
