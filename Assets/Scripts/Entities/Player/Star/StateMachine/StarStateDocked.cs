@@ -34,6 +34,7 @@ namespace PierreMizzi.Gameplay.Players
 			m_this.transform.localRotation = Quaternion.identity;
 
 			m_this.isDocked = true;
+			m_this.ResetSquish();
 			m_this.playerChannel.onStarDocked?.Invoke();
 		}
 

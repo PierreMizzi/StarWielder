@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,6 +29,8 @@ namespace PierreMizzi.Gameplay.Players
         public bool isDocked;
 
         #endregion
+
+
 
         #region StateMachine
 
@@ -77,6 +80,8 @@ namespace PierreMizzi.Gameplay.Players
 
         protected void Awake()
         {
+            m_currentSpeed = m_settings.baseSpeed;
+
             InitiliazeStates();
         }
 
@@ -87,6 +92,61 @@ namespace PierreMizzi.Gameplay.Players
 
         #endregion
 
+        #region Speed
+
+        private float m_currentSpeed = 0f;
+        public float currentSpeed => m_currentSpeed;
+
+        public float m_currentSquish;
+        public Vector3 m_squishFromSpeed;
+
+        public void ManageSquish()
+        {
+            m_currentSquish = 1f - ((m_currentSpeed / m_settings.baseSpeed) * m_settings.squishRatio);
+            m_squishFromSpeed.Set(m_currentSquish, 1, 1);
+            transform.localScale = m_squishFromSpeed;
+        }
+
+        public void ResetSquish()
+        {
+            transform.localScale = Vector3.one;
+        }
+
+        #endregion
+
+        #region Bounce
+
+        [Header("Bounce")]
+        [SerializeField] private LayerMask m_bounceLayer;
+
+        [SerializeField] private ContactFilter2D m_bounceFilter;
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (isDocked)
+                return;
+
+            if (UtilsClass.CheckLayer(m_bounceLayer.value, other.gameObject.layer))
+                Bounce();
+        }
+
+        private void Bounce()
+        {
+            Debug.DrawRay(transform.position, transform.up, Color.blue, 100);
+            // Debug.Break();
+            List<RaycastHit2D> hits = new List<RaycastHit2D>();
+
+            if (Physics2D.Raycast(transform.position, transform.up, m_bounceFilter, hits, 100f) > 0)
+            {
+                RaycastHit2D hit = hits[0];
+                if (hit.transform.name == "Star")
+                    Debug.LogError("Star got reaycasted");
+
+                transform.up = Vector2.Reflect(transform.up, hit.normal);
+            }
+        }
+
+        #endregion
 
 
     }

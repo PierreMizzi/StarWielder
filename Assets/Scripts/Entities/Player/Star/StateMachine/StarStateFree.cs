@@ -31,6 +31,7 @@ namespace PierreMizzi.Gameplay.Players
 		{
 			base.Update();
 			Move();
+			m_this.ManageSquish();
 		}
 
 		#region Movement
@@ -43,7 +44,7 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void Move()
 		{
-			m_this.transform.position += m_this.transform.up * m_this.settings.baseSpeed * Time.deltaTime;
+			m_this.transform.position += m_this.transform.up * m_this.currentSpeed * Time.deltaTime;
 		}
 
 		#endregion
