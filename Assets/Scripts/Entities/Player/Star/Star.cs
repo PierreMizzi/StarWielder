@@ -75,6 +75,7 @@ namespace PierreMizzi.Gameplay.Players
 
         protected void Awake()
         {
+            m_circleCollider = GetComponent<CircleCollider2D>();
             m_currentEnergy = m_settings.baseEnergy;
 
             InitiliazeStates();
@@ -94,8 +95,8 @@ namespace PierreMizzi.Gameplay.Players
             if (UtilsClass.CheckLayer(m_enemyLayer.value, other.gameObject.layer))
                 CollideWithEnemy(other);
 
-            if (UtilsClass.CheckLayer(m_bounceLayer.value, other.gameObject.layer))
-                Bounce();
+            // if (UtilsClass.CheckLayer(m_bounceLayer.value, other.gameObject.layer))
+            //     Bounce();
         }
 
 
@@ -155,25 +156,14 @@ namespace PierreMizzi.Gameplay.Players
 
         #endregion
 
-        #region Bounce
+        #region Obstacle
 
-        [Header("Bounce")]
-        [SerializeField] private LayerMask m_bounceLayer;
+        [Header("Obstacle")]
+        [SerializeField] private ContactFilter2D m_obstacleFilter;
+        [SerializeField] private CircleCollider2D m_circleCollider;
 
-        [SerializeField] private ContactFilter2D m_bounceFilter;
-
-        [ContextMenu("Test")]
-        private void Bounce()
-        {
-            List<RaycastHit2D> hits = new List<RaycastHit2D>();
-
-            if (Physics2D.Raycast(transform.position, transform.up, m_bounceFilter, hits, 100f) > 0)
-            {
-                RaycastHit2D hit_ = hits[0];
-
-                transform.up = Vector2.Reflect(transform.up, hit_.normal);
-            }
-        }
+        public ContactFilter2D obstacleFilter => m_obstacleFilter;
+        public CircleCollider2D circleCollider => m_circleCollider;
 
         #endregion
 

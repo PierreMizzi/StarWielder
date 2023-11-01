@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PierreMizzi.Gameplay.Players
@@ -84,19 +81,12 @@ namespace PierreMizzi.Gameplay.Players
 
         public bool hasEnergy => m_currentEnergy > 0;
 
-        public float missingEnergy => m_settings.baseEnergy - m_currentEnergy;
-
         private void ManageEnergy()
         {
             if (!m_star.isOnShip && hasEnergy)
             {
                 currentEnergy -= m_settings.energyDepleatRate * Time.deltaTime;
                 m_playerChannel.onRefreshShipEnergy.Invoke(m_currentEnergy);
-            }
-            else if (m_star.isOnShip && m_star.hasEnergy)
-            {
-                m_star.currentEnergy -= m_settings.starEnergyDepleatRate * Time.deltaTime;
-                m_playerChannel.onRefreshStarEnergy.Invoke(m_star.currentEnergy);
             }
 
             m_controller.enabled = hasEnergy || (m_star.isOnShip && m_star.hasEnergy);
@@ -145,8 +135,6 @@ namespace PierreMizzi.Gameplay.Players
         }
 
         #endregion
-
-
 
     }
 }

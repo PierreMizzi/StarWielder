@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7450514472928450153}
   - component: {fileID: 1778483154611847520}
   m_Layer: 7
-  m_Name: Bound
+  m_Name: ArenaBound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

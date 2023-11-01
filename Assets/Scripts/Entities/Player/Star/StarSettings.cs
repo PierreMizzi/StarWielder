@@ -13,9 +13,10 @@ public class StarSettings : ScriptableObject
 
 	[Header("Energy")]
 	public float baseEnergy;
-	public float lostEnergyCollision;
+	public float energyDepleatRate = 0.5f;
+	// public float lostEnergyCollision;
 	public float comboBonusEnergyRatio = 0.33f;
-	public float baseTransferDuration = 0.5f;
+	public float transferBaseDuration = 0.5f;
 	public float transferDurationRatio = 0.05f;
 
 

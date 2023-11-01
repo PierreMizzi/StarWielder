@@ -1,6 +1,7 @@
 namespace PierreMizzi.Gameplay.Players
 {
 	using PierreMizzi.Useful.StateMachines;
+	using UnityEngine;
 	using UnityEngine.InputSystem;
 
 	public class StarStateDocked : StarState
@@ -23,6 +24,17 @@ namespace PierreMizzi.Gameplay.Players
 		{
 			base.Exit();
 			m_this.mouseClickAction.action.performed -= CallbackMouseClick;
+		}
+
+		public override void Update()
+		{
+			base.Update();
+			m_this.currentEnergy -= m_this.settings.energyDepleatRate * Time.deltaTime;
+			m_this.playerChannel.onRefreshStarEnergy.Invoke(m_this.currentEnergy);
+
+			if (m_this.currentEnergy <= 0f)
+				Debug.LogError("GAME OVER : Star has no energy");
+
 		}
 
 		private void DockStar()

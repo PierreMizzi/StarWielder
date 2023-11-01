@@ -72,7 +72,7 @@ namespace PierreMizzi.Gameplay.Players
 		private float GetTransferDuration()
 		{
 			float duration;
-			duration = m_this.settings.baseTransferDuration;
+			duration = m_this.settings.transferBaseDuration;
 			duration += m_this.currentEnergy / m_this.settings.baseEnergy * m_this.settings.transferDurationRatio;
 			return duration;
 		}
