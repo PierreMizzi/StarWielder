@@ -777,9 +777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b340ea4caca342830f2f02b895fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_spawnFrequency: 3
+  m_spawnFrequency: 1
   m_enemySpawners:
-  - {fileID: 563632012}
   - {fileID: 1811697120}
   m_enemyGroups: []
 --- !u!4 &305180834
@@ -972,9 +971,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemyGroupContainer: {fileID: 774954685}
   m_enemyGroupPrefabs:
-  - {fileID: 3906591329740949452, guid: 642fc5c49a662924db3206670799edf8, type: 3}
   - {fileID: 3074720429936950026, guid: 53f4fd991b3a9b644a3c27551f423e86, type: 3}
+  - {fileID: 3906591329740949452, guid: 642fc5c49a662924db3206670799edf8, type: 3}
   - {fileID: 6468680779630972060, guid: ca3bbc80cd556014ca7439e387df3ad7, type: 3}
+  m_validSpawnAttempts: 10
   m_spawningBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 7, y: 3.9392235, z: 0}
@@ -2083,6 +2083,7 @@ MonoBehaviour:
   - {fileID: 6711836518891046202, guid: d89b20779fa440c4cafdcce725274863, type: 3}
   - {fileID: 2574358894420875228, guid: 00680d2b402e2b54ea8cc98bcf6cea5b, type: 3}
   - {fileID: 6981301223902254295, guid: 6a94ec730c205e44287d98a290f881f5, type: 3}
+  m_validSpawnAttempts: 10
   m_minHorizontal: 7
   m_maxHorizontal: 8
   m_minVertical: 3

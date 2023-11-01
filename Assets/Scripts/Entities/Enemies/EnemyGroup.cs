@@ -12,6 +12,9 @@ public class EnemyGroup : MonoBehaviour
 	public void Initialize(EnemyManager manager)
 	{
 		m_manager = manager;
+
+		m_area = GetComponent<Collider2D>();
+		// areaSqrRadius = Mathf.Pow(m_area.radius, 2f);
 	}
 
 	public void EnemyDestroyed(Enemy enemy)
@@ -29,11 +32,10 @@ public class EnemyGroup : MonoBehaviour
 
 	private void Awake()
 	{
+		m_area = GetComponent<Collider2D>();
+
 		foreach (Enemy enemy in m_enemies)
 			enemy.Initialize(this);
-
-		m_area = GetComponent<CircleCollider2D>();
-		m_areaSqrRadius = Mathf.Pow(m_area.radius, 2f);
 	}
 
 	private void OnDestroy()
@@ -46,17 +48,29 @@ public class EnemyGroup : MonoBehaviour
 	#region Area & Spawning
 
 	[Header("Area & Spawning")]
-	private CircleCollider2D m_area = null;
-	private float m_areaSqrRadius;
+	private Collider2D m_area;
 
-	public bool CheckInsideArea(Vector3 position)
+	[SerializeField] private ContactFilter2D m_overlapingFilter;
+
+	[HideInInspector] public float areaSqrRadius;
+
+	[ContextMenu("CheckIsOverlaping")]
+	public bool CheckIsOverlaping()
 	{
-		Vector3 areaPosition = new Vector3(m_area.offset.x, m_area.offset.y, 0);
-		areaPosition += transform.position;
+		List<Collider2D> results = new List<Collider2D>();
+		int resultsLength = m_area.OverlapCollider(m_overlapingFilter, results);
+		print(resultsLength);
+		return resultsLength > 0;
+	}
 
-		float distance = (position - areaPosition).sqrMagnitude;
+	public bool CheckNotTooClose(Vector3 otherPosition, float otherSqrRadius)
+	{
+		Vector3 selfPosition = new Vector3(m_area.offset.x, m_area.offset.y, 0);
+		selfPosition += transform.position;
 
-		return distance < m_areaSqrRadius;
+		float distance = (otherPosition - selfPosition).sqrMagnitude;
+
+		return distance < areaSqrRadius + otherSqrRadius;
 	}
 
 	#endregion

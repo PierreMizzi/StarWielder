@@ -49,16 +49,17 @@ public class EnemyManager : MonoBehaviour
 		}
 	}
 
+	[ContextMenu("SpawnEnemyGroup")]
 	private void SpawnEnemyGroup()
 	{
 		EnemySpawner spawner = UtilsClass.PickRandomInList(m_enemySpawners);
 		spawner.SpawnEnemyGroup();
 	}
 
-	private bool CheckValidSpawnPosition(Vector3 position)
+	public bool CheckValidSpawnPosition(Vector3 otherPosition, float otherSqrDistance)
 	{
 		foreach (EnemyGroup group in m_enemyGroups)
-			if (group.CheckInsideArea(position))
+			if (group.CheckNotTooClose(otherPosition, otherSqrDistance))
 				return false;
 
 		return true;

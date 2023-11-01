@@ -1,3 +1,4 @@
+using System.Collections;
 using PierreMizzi.Useful;
 using UnityEngine;
 
@@ -11,14 +12,14 @@ public class EnemySpawnerArea : EnemySpawner
 		Gizmos.DrawWireCube(transform.position, m_spawningBounds.size);
 	}
 
-	public override EnemyGroup SpawnEnemyGroup()
+	protected override Vector3 GetRandomPosition()
 	{
-		EnemyGroup newEnemyGroup = base.SpawnEnemyGroup();
-
-		newEnemyGroup.transform.rotation = UtilsClass.RandomRotation2D();
-
-		newEnemyGroup.transform.position = transform.position + UtilsClass.RandomInBound(m_spawningBounds);
-
-		return newEnemyGroup;
+		return transform.position + UtilsClass.RandomInBound(m_spawningBounds);
 	}
+
+	protected override Quaternion GetRandomRotation()
+	{
+		return UtilsClass.RandomRotation2D();
+	}
+
 }

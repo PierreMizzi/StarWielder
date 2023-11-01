@@ -5,6 +5,15 @@ using UnityEngine;
 public class EnemySpawnerEdge : EnemySpawner
 {
 
+	#region MonoBehaviour
+
+	private void OnDrawGizmos()
+	{
+		DrawEdgesGizmos();
+	}
+
+	#endregion
+
 	#region Position
 
 	[Header("Position")]
@@ -32,7 +41,7 @@ public class EnemySpawnerEdge : EnemySpawner
 		Gizmos.DrawWireCube(Vector3.zero, maxEdgesCube);
 	}
 
-	private Vector3 GetRandomPosition()
+	protected override Vector3 GetRandomPosition()
 	{
 		Vector3 position = Vector3.zero;
 
@@ -62,50 +71,24 @@ public class EnemySpawnerEdge : EnemySpawner
 
 	[SerializeField] private float m_maxRandomAngle;
 
-	public float GetRandomAngle(Vector3 position)
+	protected override Quaternion GetRandomRotation()
 	{
 		float angle = 0f;
-		Vector3 directionToCenter = -position.normalized;
+		Vector3 directionToCenter = -transform.position.normalized;
 		angle = Mathf.Atan2(directionToCenter.y, directionToCenter.x) * Mathf.Rad2Deg;
 
 		int plusOrMinus = (Random.Range(0, 2) == 0) ? 1 : -1;
 
 		angle += plusOrMinus * Random.Range(0f, m_maxRandomAngle);
-
-		return angle;
-	}
-
-
-	#endregion
-
-	#region MonoBehaviour
-
-	private void OnDrawGizmos()
-	{
-		DrawEdgesGizmos();
+		Vector3 randomEuler = new Vector3(0f, 0f, angle);
+		return Quaternion.Euler(randomEuler);
 	}
 
 	#endregion
 
-	#region Spawn
 
-	public override EnemyGroup SpawnEnemyGroup()
-	{
-		EnemyGroup newEnemyGroup = base.SpawnEnemyGroup();
 
-		// Position
-		Vector3 randomPosition = GetRandomPosition();
-		newEnemyGroup.transform.position = randomPosition;
 
-		// Rotation
-		float randomAngle = GetRandomAngle(randomPosition);
-		Vector3 randomEuler = new Vector3(0f, 0f, randomAngle);
-		newEnemyGroup.transform.rotation = Quaternion.Euler(randomEuler);
-
-		return newEnemyGroup;
-	}
-
-	#endregion
 
 
 
