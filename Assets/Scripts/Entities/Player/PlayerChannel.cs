@@ -13,6 +13,9 @@ namespace PierreMizzi.Gameplay.Players
 		*/
 		public FloatDelegate onRefreshShipEnergy;
 
+		public Action onUseDash;
+		public FloatDelegate onRefreshCooldownDash;
+		public Action onRechargeDash;
 
 		/*
 			Star
@@ -27,6 +30,10 @@ namespace PierreMizzi.Gameplay.Players
 		public void OnEnable()
 		{
 			onRefreshShipEnergy = (float energy) => { };
+
+			onUseDash = () => { };
+			onRefreshCooldownDash = (float value) => { };
+			onRechargeDash = () => { };
 
 			// onStarReleased = () => { };
 			// onStarReleased = () => { };

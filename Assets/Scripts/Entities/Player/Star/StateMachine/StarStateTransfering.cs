@@ -24,10 +24,11 @@ namespace PierreMizzi.Gameplay.Players
 
 			m_this.SetOnShip();
 
+			m_this.cameraChannel.onFocusShip.Invoke();
+
 			TransferEnergy();
 
 			m_this.mouseClickAction.action.performed += CallbackMouseClick;
-
 		}
 
 		public override void Exit()
@@ -35,18 +36,16 @@ namespace PierreMizzi.Gameplay.Players
 			base.Exit();
 
 			m_this.mouseClickAction.action.performed -= CallbackMouseClick;
-
+			m_this.cameraChannel.onFocusDefault.Invoke();
 		}
 
 		private void TransferEnergy()
 		{
 			float transferedEnergy = m_this.ship.GetMaxTransferableEnergy(m_this.currentEnergy);
 			float transferDuration = GetTransferDuration();
-			Debug.Log($"transferDuration : {transferDuration}");
 
 			float fromShipEnergy = m_this.ship.currentEnergy;
 			float toShipEnergy = fromShipEnergy + transferedEnergy;
-
 
 			float fromStarEnergy = m_this.currentEnergy;
 			float toStarEnergy = fromStarEnergy - transferedEnergy;

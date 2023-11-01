@@ -12,10 +12,11 @@ namespace PierreMizzi.Gameplay.Players
 
         #region Base
 
-
-
         [SerializeField] public PlayerChannel m_playerChannel;
         public PlayerChannel playerChannel => m_playerChannel;
+
+        [SerializeField] private CameraChannel m_cameraChannel = null;
+        public CameraChannel cameraChannel => m_cameraChannel;
 
         [SerializeField] private StarSettings m_settings;
         public StarSettings settings => m_settings;
@@ -23,14 +24,12 @@ namespace PierreMizzi.Gameplay.Players
         public InputActionReference m_mouseClickAction;
         public InputActionReference mouseClickAction => m_mouseClickAction;
 
-
-
         #endregion
 
         #region StateMachine
 
         [Header("State Machine")]
-        [SerializeField] private StarStateType m_baseState = StarStateType.Docked;
+        [SerializeField] private StarStateType m_initialState = StarStateType.Docked;
         public List<AState> states { get; set; } = new List<AState>();
         public AState currentState { get; set; }
 
@@ -44,7 +43,7 @@ namespace PierreMizzi.Gameplay.Players
                 new StarStateTransfering(this),
             };
 
-            ChangeState(m_baseState);
+            ChangeState(m_initialState);
         }
 
         public void ChangeState(StarStateType nextState, StarStateType previousState = StarStateType.None)
@@ -131,8 +130,8 @@ namespace PierreMizzi.Gameplay.Players
 
         public float currentSpeed => m_settings.baseSpeed + m_currentEnergy * m_settings.speedFromEnergyRatio;
 
-        public float m_currentSquish;
-        public Vector3 m_squishFromSpeed;
+        private float m_currentSquish;
+        private Vector3 m_squishFromSpeed;
 
         public void ManageSquish()
         {
@@ -166,21 +165,11 @@ namespace PierreMizzi.Gameplay.Players
         [ContextMenu("Test")]
         private void Bounce()
         {
-            Debug.DrawRay(transform.position, transform.up, Color.blue, 100);
-            // Debug.Break();
             List<RaycastHit2D> hits = new List<RaycastHit2D>();
 
             if (Physics2D.Raycast(transform.position, transform.up, m_bounceFilter, hits, 100f) > 0)
             {
                 RaycastHit2D hit_ = hits[0];
-
-                // Debug.Log("///// COLLISION" + hits.Count);
-
-                // foreach (RaycastHit2D hit in hits)
-                // {
-                //     Debug.Log(hit.transform.name);
-                //     Debug.Log(hit.normal);
-                // }
 
                 transform.up = Vector2.Reflect(transform.up, hit_.normal);
             }

@@ -13,6 +13,7 @@ namespace PierreMizzi.Gameplay
 		[SerializeField] private Camera m_camera = null;
 		[SerializeField] private float m_transferTransitionDuration = 0.5f;
 
+		[SerializeField] private CameraChannel m_cameraChannel = null;
 
 		#endregion
 
@@ -21,6 +22,16 @@ namespace PierreMizzi.Gameplay
 		private void Awake()
 		{
 			m_currentTarget = m_defaultTarget;
+		}
+
+		private void Start()
+		{
+			if (m_cameraChannel != null)
+			{
+				m_cameraChannel.onFocusDefault += SetDefault;
+				m_cameraChannel.onFocusShip += SetTransfer;
+			}
+
 		}
 
 		private void Update()
@@ -35,6 +46,15 @@ namespace PierreMizzi.Gameplay
 		{
 			if (m_currentTarget != null)
 				ManagePosition();
+		}
+
+		private void OnDestroy()
+		{
+			if (m_cameraChannel != null)
+			{
+				m_cameraChannel.onFocusDefault -= SetDefault;
+				m_cameraChannel.onFocusShip -= SetTransfer;
+			}
 		}
 
 		#endregion

@@ -19,3 +19,6 @@ MonoBehaviour:
   speed: 150
   smoothTime: 0.5
   immediatePositionScale: 0.1
+  dashDistance: 2
+  dashDuration: 0.2
+  dashCooldown: 3

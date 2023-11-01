@@ -211,12 +211,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8bf030855c1fd34bbd6c23717add8a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ship: {fileID: 0}
   m_playerChannel: {fileID: 11400000, guid: 1ebce8acce4141b4382229e40c13a0d8, type: 2}
+  m_cameraChannel: {fileID: 11400000, guid: 2f76be3b47611b4449681c2076c5d98a, type: 2}
   m_settings: {fileID: 11400000, guid: b24ab3511ccb22948a65f9213767a89e, type: 2}
   m_mouseClickAction: {fileID: 3150000551938037181, guid: 4d039b37c618d774e9ca8551914c073f, type: 3}
-  isDocked: 0
-  m_baseState: 1
+  m_initialState: 1
+  m_ship: {fileID: 0}
+  isOnShip: 0
+  m_bounceLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  m_bounceFilter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &267292435
 Rigidbody2D:
   serializedVersion: 4
@@ -236,7 +257,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &267292436
 CircleCollider2D:

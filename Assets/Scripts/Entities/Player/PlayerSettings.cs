@@ -23,6 +23,12 @@ namespace PierreMizzi.Gameplay.Players
 
         public float immediatePositionScale = 0.1f;
 
+        [Header("Dash")]
+        public float dashDistance = 1f;
+        public float dashDuration = 0.2f;
+        public float dashCooldownDuration = 3f;
+
+
     }
 
 }
