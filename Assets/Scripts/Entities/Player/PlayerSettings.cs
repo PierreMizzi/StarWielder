@@ -13,7 +13,8 @@ namespace PierreMizzi.Gameplay.Players
 
         [Header("Energy")]
         public float baseEnergy = 50f;
-        public float energyDepleatRate = 0.5f;
+        public float energyDepleatRate = 0.25f;
+        public float starEnergyDepleatRate = 0.25f;
 
         [Header("Speed")]
         public float speed = 80f;

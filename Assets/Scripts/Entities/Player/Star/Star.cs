@@ -152,6 +152,7 @@ namespace PierreMizzi.Gameplay.Players
 
         private float m_currentEnergy;
         public float currentEnergy { get { return m_currentEnergy; } set { m_currentEnergy = Mathf.Max(0f, value); } }
+        public bool hasEnergy => m_currentEnergy > 0;
 
         #endregion
 

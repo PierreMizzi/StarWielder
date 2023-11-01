@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	[SerializeField] private float m_energy = 10f;
+	[SerializeField] private float m_energy = 1f;
 
 	public float energy => m_energy;
 

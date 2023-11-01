@@ -17,6 +17,6 @@ MonoBehaviour:
   squishRatio: 0.1
   baseEnergy: 20
   lostEnergyCollision: 1
-  comboBonusEnergyRatio: 0.1
+  comboBonusEnergyRatio: 0.01
   baseTransferDuration: 0.5
   transferDurationRatio: 0.05

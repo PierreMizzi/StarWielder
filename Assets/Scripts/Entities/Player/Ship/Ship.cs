@@ -93,8 +93,13 @@ namespace PierreMizzi.Gameplay.Players
                 currentEnergy -= m_settings.energyDepleatRate * Time.deltaTime;
                 m_playerChannel.onRefreshShipEnergy.Invoke(m_currentEnergy);
             }
+            else if (m_star.isOnShip && m_star.hasEnergy)
+            {
+                m_star.currentEnergy -= m_settings.starEnergyDepleatRate * Time.deltaTime;
+                m_playerChannel.onRefreshStarEnergy.Invoke(m_star.currentEnergy);
+            }
 
-            m_controller.enabled = hasEnergy;
+            m_controller.enabled = hasEnergy || (m_star.isOnShip && m_star.hasEnergy);
         }
 
         public float GetMaxTransferableEnergy(float starEnergy)
