@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		m_group.DestroyEnemy(this);
+		m_group.EnemyDestroyed(this);
 	}
 
 	public void Initialize(EnemyGroup group)

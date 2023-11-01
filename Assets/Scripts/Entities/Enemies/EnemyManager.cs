@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using PierreMizzi.Useful;
 using UnityEngine;
-
-// 
-
-
 
 public class EnemyManager : MonoBehaviour
 {
@@ -14,12 +11,8 @@ public class EnemyManager : MonoBehaviour
 
 	private void Start()
 	{
+		InitializeSpawners();
 		StartSpawning();
-	}
-
-	private void OnDrawGizmos()
-	{
-		Gizmos.DrawWireCube(transform.position, m_spawningBounds.size);
 	}
 
 	#endregion
@@ -27,11 +20,16 @@ public class EnemyManager : MonoBehaviour
 	#region Spawning
 
 	[Header("Spawning")]
-	[SerializeField] private Bounds m_spawningBounds;
-	[SerializeField] private GameObject m_enemyGroupPrefab = null;
 	[SerializeField] private float m_spawnFrequency = 1f;
+	[SerializeField] private List<EnemySpawner> m_enemySpawners = null;
 
 	private IEnumerator m_spawningCoroutine;
+
+	private void InitializeSpawners()
+	{
+		foreach (EnemySpawner enemySpawners in m_enemySpawners)
+			enemySpawners.Initialize(this);
+	}
 
 	private void StartSpawning()
 	{
@@ -53,13 +51,36 @@ public class EnemyManager : MonoBehaviour
 
 	private void SpawnEnemyGroup()
 	{
-		GameObject newEnemyGroup = Instantiate(m_enemyGroupPrefab, transform);
-
-		newEnemyGroup.transform.rotation = UtilsClass.RandomRotation2D();
-
-		newEnemyGroup.transform.position = transform.position + UtilsClass.RandomInBound(m_spawningBounds);
+		EnemySpawner spawner = UtilsClass.PickRandomInList(m_enemySpawners);
+		spawner.SpawnEnemyGroup();
 	}
 
+	private bool CheckValidSpawnPosition(Vector3 position)
+	{
+		foreach (EnemyGroup group in m_enemyGroups)
+			if (group.CheckInsideArea(position))
+				return false;
+
+		return true;
+	}
+
+	#endregion
+
+	#region Enemy Groups
+
+	[SerializeField]
+	private List<EnemyGroup> m_enemyGroups;
+
+	public void AddEnemyGroup(EnemyGroup enemyGroup)
+	{
+		m_enemyGroups.Add(enemyGroup);
+	}
+
+	public void RemoveEnemyGroup(EnemyGroup enemyGroup)
+	{
+		if (m_enemyGroups.Contains(enemyGroup))
+			m_enemyGroups.Add(enemyGroup);
+	}
 
 	#endregion
 
