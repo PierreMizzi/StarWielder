@@ -106,6 +106,7 @@ namespace PierreMizzi.Gameplay.Players
 		{
 			Destroy(bullet.gameObject);
 			m_currentHealth -= bullet.damage;
+			m_playerChannel.onRefreshHealth.Invoke(m_currentHealth / m_settings.maxHealth);
 
 			if (m_currentHealth <= 0)
 			{

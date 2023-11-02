@@ -20,7 +20,7 @@ public class EnemyManager : MonoBehaviour
 	private void Start()
 	{
 		InitializeSpawners();
-		StartSpawning();
+		// StartSpawning();
 	}
 
 	#endregion
