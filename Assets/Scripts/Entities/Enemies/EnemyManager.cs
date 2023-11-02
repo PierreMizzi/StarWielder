@@ -13,6 +13,8 @@ public class EnemyManager : MonoBehaviour
 	[SerializeField] private Ship m_ship;
 	public Ship ship => m_ship;
 
+	[SerializeField] private bool m_autoSpawn = true;
+
 	#endregion
 
 	#region MonoBehaviour
@@ -20,7 +22,8 @@ public class EnemyManager : MonoBehaviour
 	private void Start()
 	{
 		InitializeSpawners();
-		// StartSpawning();
+		if (m_autoSpawn)
+			StartSpawning();
 	}
 
 	#endregion

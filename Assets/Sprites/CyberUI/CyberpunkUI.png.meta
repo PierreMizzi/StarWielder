@@ -29,6 +29,9 @@ TextureImporter:
   - first:
       213: 259503743442974435
     second: EnergyShipBackbround_02
+  - first:
+      213: -7228566984547716937
+    second: CyberpunkUI_9
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -295,7 +298,7 @@ TextureImporter:
         width: 48
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -303,6 +306,27 @@ TextureImporter:
       bones: []
       spriteID: 3e67dcd9741f99300800000000000000
       internalID: 259503743442974435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyberpunkUI_9
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 601
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b0baea40a8feab90800000000000000
+      internalID: -7228566984547716937
       vertices: []
       indices: 
       edges: []
