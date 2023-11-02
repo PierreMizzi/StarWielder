@@ -1,13 +1,21 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using PierreMizzi.Gameplay.Players;
 using PierreMizzi.Useful;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
 
-	#region Base
+	#region Main
+
+	[Header("Main")]
+	[SerializeField] private Ship m_ship;
+	public Ship ship => m_ship;
+
+	#endregion
+
+	#region MonoBehaviour
 
 	private void Start()
 	{
@@ -20,7 +28,9 @@ public class EnemyManager : MonoBehaviour
 	#region Spawning
 
 	[Header("Spawning")]
-	[SerializeField] private float m_spawnFrequency = 1f;
+	[SerializeField] private float m_minSpawnFrequency = 2f;
+	[SerializeField] private float m_maxSpawnFrequency = 5f;
+	private float m_spawnFrequency;
 	[SerializeField] private List<EnemySpawner> m_enemySpawners = null;
 
 	private IEnumerator m_spawningCoroutine;
@@ -45,6 +55,7 @@ public class EnemyManager : MonoBehaviour
 		while (true)
 		{
 			SpawnEnemyGroup();
+			m_spawnFrequency = Random.Range(m_minSpawnFrequency, m_maxSpawnFrequency);
 			yield return new WaitForSeconds(m_spawnFrequency);
 		}
 	}
@@ -82,6 +93,15 @@ public class EnemyManager : MonoBehaviour
 		if (m_enemyGroups.Contains(enemyGroup))
 			m_enemyGroups.Add(enemyGroup);
 	}
+
+	#endregion
+
+	#region Bullets
+
+	[Header("Bullets")]
+	[SerializeField] private Transform m_bulletsContainer;
+	[SerializeField] private List<EnemyBullet> m_enemyBullets = null;
+	public Transform bulletsContainer => m_bulletsContainer;
 
 	#endregion
 

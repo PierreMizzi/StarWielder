@@ -1,140 +1,120 @@
+using PierreMizzi.Useful;
 using UnityEngine;
 
 namespace PierreMizzi.Gameplay.Players
 {
-    [RequireComponent(typeof(ShipController))]
-    [RequireComponent(typeof(HealthEntity))]
-    public class Ship : MonoBehaviour
-    {
+	[RequireComponent(typeof(ShipController))]
+	public class Ship : MonoBehaviour
+	{
 
-        #region Base
+		#region Base
 
-        private ShipController m_controller;
+		private ShipController m_controller;
 
-        [SerializeField]
-        private PlayerSettings m_settings;
+		[SerializeField]
+		private PlayerSettings m_settings;
 
-        [SerializeField] private PlayerChannel m_playerChannel = null;
+		[SerializeField] private PlayerChannel m_playerChannel = null;
 
-        [SerializeField] private Star m_star;
+		[SerializeField] private Star m_star;
 
-        #endregion
+		private void Initialize()
+		{
+			m_currentHealth = m_settings.maxHealth;
 
-        #region MonoBehaviour
+			m_currentEnergy = m_settings.baseEnergy;
+		}
 
-        private void Awake()
-        {
-            m_controller = GetComponent<ShipController>();
-            m_healthEntity = GetComponent<HealthEntity>();
-        }
+		#endregion
 
-        private void Start()
-        {
-            // Health
-            m_healthEntity.Initialize(m_settings.maxHealth);
-            SubscribeHealthEntity();
+		#region MonoBehaviour
 
-            // Energy   
-            m_currentEnergy = m_settings.baseEnergy;
+		private void Awake()
+		{
+			m_controller = GetComponent<ShipController>();
+		}
 
-            if (m_playerChannel != null)
-            {
-                // m_playerChannel.onStarReleased += CallbackStarReleased;
-                // m_playerChannel.onStarDocked += CallbackStarDocked;
-            }
-        }
+		private void Start()
+		{
+			Initialize();
+		}
 
-        private void Update()
-        {
-            ManageEnergy();
-        }
+		private void Update()
+		{
+			ManageEnergy();
+		}
 
-        private void OnDestroy()
-        {
-            UnsubscribeHealthEntity();
+		private void OnTriggerEnter2D(Collider2D other)
+		{
+			if (UtilsClass.CheckLayer(m_damageLayerMask.value, other.gameObject.layer))
+				HitByBullet(other.GetComponent<EnemyBullet>());
+		}
 
-            if (m_playerChannel != null)
-            {
-                // m_playerChannel.onStarReleased -= CallbackStarReleased;
-                // m_playerChannel.onStarDocked -= CallbackStarDocked;
-            }
-        }
+		#endregion
 
-        #endregion
+		#region Star
 
-        #region Star
+		[SerializeField]
+		private Transform m_starAnchor;
+		public Transform starAnchor => m_starAnchor;
 
-        [SerializeField]
-        private Transform m_starAnchor;
-        public Transform starAnchor => m_starAnchor;
+		#endregion
 
-        #endregion
+		#region Energy
 
-        #region Energy
+		private float m_currentEnergy = 0;
+		public float currentEnergy
+		{
+			get { return m_currentEnergy; }
+			set { m_currentEnergy = Mathf.Clamp(value, 0f, m_settings.baseEnergy); }
+		}
 
-        private float m_currentEnergy = 0;
-        public float currentEnergy
-        {
-            get { return m_currentEnergy; }
-            set { m_currentEnergy = Mathf.Clamp(value, 0f, m_settings.baseEnergy); }
-        }
+		public bool hasEnergy => m_currentEnergy > 0;
 
-        public bool hasEnergy => m_currentEnergy > 0;
+		private void ManageEnergy()
+		{
+			if (!m_star.isOnShip && hasEnergy)
+			{
+				currentEnergy -= m_settings.energyDepleatRate * Time.deltaTime;
+				m_playerChannel.onRefreshShipEnergy.Invoke(m_currentEnergy);
+			}
 
-        private void ManageEnergy()
-        {
-            if (!m_star.isOnShip && hasEnergy)
-            {
-                currentEnergy -= m_settings.energyDepleatRate * Time.deltaTime;
-                m_playerChannel.onRefreshShipEnergy.Invoke(m_currentEnergy);
-            }
+			m_controller.enabled = hasEnergy || (m_star.isOnShip && m_star.hasEnergy);
+		}
 
-            m_controller.enabled = hasEnergy || (m_star.isOnShip && m_star.hasEnergy);
-        }
+		public float GetMaxTransferableEnergy(float starEnergy)
+		{
+			float transferableEnergy;
+			if (currentEnergy + starEnergy > m_settings.baseEnergy)
+				transferableEnergy = m_settings.baseEnergy - currentEnergy;
+			else
+				transferableEnergy = starEnergy;
 
-        public float GetMaxTransferableEnergy(float starEnergy)
-        {
-            float transferableEnergy;
-            if (currentEnergy + starEnergy > m_settings.baseEnergy)
-                transferableEnergy = m_settings.baseEnergy - currentEnergy;
-            else
-                transferableEnergy = starEnergy;
+			return transferableEnergy;
+		}
 
-            return transferableEnergy;
-        }
+		#endregion
 
-        #endregion
+		#region Health
 
-        #region Health
+		[Header("Health")]
+		[SerializeField] private LayerMask m_damageLayerMask;
 
-        private HealthEntity m_healthEntity;
+		private float m_currentHealth;
 
-        public HealthEntity healthEntity { get { return m_healthEntity; } }
+		private void HitByBullet(EnemyBullet bullet)
+		{
+			Destroy(bullet.gameObject);
+			m_currentHealth -= bullet.damage;
 
-        private void SubscribeHealthEntity()
-        {
-            m_healthEntity.onLostHealth += CallbackLostHealth;
-            m_healthEntity.onHealedHealth += CallbackHealedHealth;
-        }
+			if (m_currentHealth <= 0)
+			{
+				Debug.LogError("SHIP IS DESTROYED !");
+				Debug.Break();
+			}
+		}
 
-        private void UnsubscribeHealthEntity()
-        {
-            m_healthEntity.onLostHealth -= CallbackLostHealth;
-            m_healthEntity.onHealedHealth -= CallbackHealedHealth;
-        }
+		#endregion
 
-        private void CallbackHealedHealth()
-        {
-            // SoundManager.PlaySFX(SoundDataID.PLAYER_HEALED);
-        }
-
-        private void CallbackLostHealth()
-        {
-            // m_levelChannel.onPlayerHit.Invoke();
-            // SoundManager.PlayRandomSFX(m_hitSounds);
-        }
-
-        #endregion
-
-    }
+	}
 }

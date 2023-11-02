@@ -7,9 +7,12 @@ public class EnemySpawner : MonoBehaviour
 {
 
 	protected EnemyManager m_manager;
+
+	#region Spawning
+
+	[Header("Spawning")]
 	[SerializeField] protected Transform m_enemyGroupContainer;
 	[SerializeField] protected List<EnemyGroup> m_enemyGroupPrefabs;
-
 	[SerializeField] protected int m_validSpawnAttempts = 10;
 
 	public virtual void Initialize(EnemyManager manager)
@@ -60,5 +63,25 @@ public class EnemySpawner : MonoBehaviour
 	protected virtual Vector3 GetRandomPosition() { return Vector3.zero; }
 	protected virtual Quaternion GetRandomRotation() { return Quaternion.identity; }
 	protected virtual Quaternion GetRandomRotation(Vector3 enemyGroupPosition) { return Quaternion.identity; }
+
+	#endregion
+
+	#region Visualization
+
+	[Header("Visualization")]
+	[SerializeField] protected bool m_displayVisualization = true;
+	[SerializeField] protected Color m_colorVisualization = Color.red;
+
+	protected virtual void DrawVisualization() { }
+
+	#endregion
+	#region MonoBehaviour
+
+	private void OnDrawGizmos()
+	{
+		DrawVisualization();
+	}
+
+	#endregion
 
 }

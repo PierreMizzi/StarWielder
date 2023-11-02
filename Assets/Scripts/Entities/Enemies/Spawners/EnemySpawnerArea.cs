@@ -6,9 +6,13 @@ public class EnemySpawnerArea : EnemySpawner
 
 	[SerializeField] private Bounds m_spawningBounds;
 
-	private void OnDrawGizmos()
+	protected override void DrawVisualization()
 	{
-		Gizmos.DrawWireCube(transform.position, m_spawningBounds.size);
+		if (m_displayVisualization)
+		{
+			Gizmos.color = m_colorVisualization;
+			Gizmos.DrawCube(transform.position, m_spawningBounds.size);
+		}
 	}
 
 	protected override Vector3 GetRandomPosition()

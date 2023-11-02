@@ -4,17 +4,23 @@ using UnityEngine;
 public class EnemyGroup : MonoBehaviour
 {
 
-	#region Base
+	#region Main
 
 	[SerializeField] private List<Enemy> m_enemies;
 	private EnemyManager m_manager;
+	public EnemyManager manager => m_manager;
 
 	public void Initialize(EnemyManager manager)
 	{
 		m_manager = manager;
 
 		m_area = GetComponent<Collider2D>();
-		// areaSqrRadius = Mathf.Pow(m_area.radius, 2f);
+
+		foreach (Enemy enemy in m_enemies)
+			enemy.Initialize(this);
+
+		foreach (EnemyTurret turret in m_turrets)
+			turret.Initialize(this);
 	}
 
 	public void EnemyDestroyed(Enemy enemy)
@@ -29,14 +35,6 @@ public class EnemyGroup : MonoBehaviour
 	#endregion
 
 	#region MonoBehaviour
-
-	private void Awake()
-	{
-		m_area = GetComponent<Collider2D>();
-
-		foreach (Enemy enemy in m_enemies)
-			enemy.Initialize(this);
-	}
 
 	private void OnDestroy()
 	{
@@ -73,5 +71,13 @@ public class EnemyGroup : MonoBehaviour
 	}
 
 	#endregion
+
+	#region Turrets
+
+	[SerializeField] private List<EnemyTurret> m_turrets;
+
+
+	#endregion
+
 
 }

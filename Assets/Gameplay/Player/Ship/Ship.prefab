@@ -41,7 +41,8 @@ GameObject:
   - component: {fileID: 6232630160101611035}
   - component: {fileID: 6232630160101611032}
   - component: {fileID: 6232630160101611033}
-  - component: {fileID: 6232630160101611034}
+  - component: {fileID: 6232630159491153296}
+  - component: {fileID: 6232630159491153295}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -81,6 +82,9 @@ MonoBehaviour:
   m_playerChannel: {fileID: 11400000, guid: 1ebce8acce4141b4382229e40c13a0d8, type: 2}
   m_star: {fileID: 0}
   m_starAnchor: {fileID: 444499413}
+  m_damageLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &6232630160101611033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,18 +103,53 @@ MonoBehaviour:
   m_mousePositionActionReference: {fileID: -6649237964926807637, guid: 4d039b37c618d774e9ca8551914c073f, type: 3}
   m_orientationMagnitude: 2
   m_dashActionReference: {fileID: 8131866781512616076, guid: 4d039b37c618d774e9ca8551914c073f, type: 3}
---- !u!114 &6232630160101611034
-MonoBehaviour:
+--- !u!50 &6232630159491153296
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232630160101611038}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &6232630159491153295
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6232630160101611038}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99c7729300b75f94c94b11356f606a04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.08, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 0.9}
+  m_EdgeRadius: 0
 --- !u!1 &6232630160771722167
 GameObject:
   m_ObjectHideFlags: 0

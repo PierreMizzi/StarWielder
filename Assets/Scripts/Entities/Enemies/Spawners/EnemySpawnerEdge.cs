@@ -3,15 +3,6 @@ using UnityEngine;
 public class EnemySpawnerEdge : EnemySpawner
 {
 
-	#region MonoBehaviour
-
-	private void OnDrawGizmos()
-	{
-		DrawEdgesGizmos();
-	}
-
-	#endregion
-
 	#region EnemySpawner
 
 	protected override void SetEnemyGroupTransform(EnemyGroup newEnemyGroup)
@@ -20,6 +11,22 @@ public class EnemySpawnerEdge : EnemySpawner
 
 		newEnemyGroup.transform.position = position;
 		newEnemyGroup.transform.rotation = GetRandomRotation(position);
+	}
+
+	protected override void DrawVisualization()
+	{
+		if (m_displayVisualization)
+		{
+			Gizmos.color = m_colorVisualization;
+			Vector3 minEdgesCube = new Vector3(m_minHorizontal, m_minVertical, 0f);
+			Vector3 maxEdgesCube = new Vector3(m_maxHorizontal, m_maxVertical, 0f);
+
+			minEdgesCube *= 2f;
+			maxEdgesCube *= 2f;
+
+			Gizmos.DrawWireCube(Vector3.zero, minEdgesCube);
+			Gizmos.DrawWireCube(Vector3.zero, maxEdgesCube);
+		}
 	}
 
 	#endregion
@@ -32,24 +39,6 @@ public class EnemySpawnerEdge : EnemySpawner
 	[SerializeField] private float m_maxHorizontal = 7f;
 	[SerializeField] private float m_minVertical = 4f;
 	[SerializeField] private float m_maxVertical = 4.5f;
-
-	[SerializeField] private Color m_edgesColor;
-
-	private Vector3 minEdgesCube;
-	private Vector3 maxEdgesCube;
-
-	private void DrawEdgesGizmos()
-	{
-		Gizmos.color = m_edgesColor;
-		minEdgesCube.Set(m_minHorizontal, m_minVertical, 0f);
-		maxEdgesCube.Set(m_maxHorizontal, m_maxVertical, 0f);
-
-		minEdgesCube *= 2f;
-		maxEdgesCube *= 2f;
-
-		Gizmos.DrawWireCube(Vector3.zero, minEdgesCube);
-		Gizmos.DrawWireCube(Vector3.zero, maxEdgesCube);
-	}
 
 	protected override Vector3 GetRandomPosition()
 	{
