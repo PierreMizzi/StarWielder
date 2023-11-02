@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569e19f919d13584c9d47ed127071644, type: 3}
   m_Name: ShipSettings
   m_EditorClassIdentifier: 
-  maxHealth: 300
+  maxHealth: 150
   baseEnergy: 15
   energyDepleatRate: 3
   speed: 150
   smoothTime: 0.5
   immediatePositionScale: 0.1
-  dashDistance: 2
+  dashDistance: 3
   dashDuration: 0.2
   dashCooldownDuration: 3

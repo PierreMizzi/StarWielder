@@ -57,10 +57,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 194440723532682713, guid: 7340af503db93174ead274617b8d5647, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7340af503db93174ead274617b8d5647, type: 3}
+--- !u!114 &3663209079712011309 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2708583465923560786, guid: 7340af503db93174ead274617b8d5647, type: 3}
+  m_PrefabInstance: {fileID: 1675487976972783999}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1211a0b9c97fac048a9b961e6bc9d4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2239304493086132370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -438,6 +449,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8822274260329920338, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
+      propertyPath: m_turrets.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8822274260329920338, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
       propertyPath: m_enemies.Array.data[0]
       value: 
       objectReference: {fileID: 7378082970150083258}
@@ -457,6 +472,10 @@ PrefabInstance:
       propertyPath: m_enemies.Array.data[4]
       value: 
       objectReference: {fileID: 1596991748998505353}
+    - target: {fileID: -8822274260329920338, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
+      propertyPath: m_turrets.Array.data[0]
+      value: 
+      objectReference: {fileID: 3663209079712011309}
     - target: {fileID: 3986235406279098, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
       propertyPath: m_Radius
       value: 1.75
