@@ -1,5 +1,3 @@
-using System.ComponentModel;
-using PierreMizzi.Useful;
 using UnityEngine;
 
 public class EnemySpawnerEdge : EnemySpawner
@@ -10,6 +8,18 @@ public class EnemySpawnerEdge : EnemySpawner
 	private void OnDrawGizmos()
 	{
 		DrawEdgesGizmos();
+	}
+
+	#endregion
+
+	#region EnemySpawner
+
+	protected override void SetEnemyGroupTransform(EnemyGroup newEnemyGroup)
+	{
+		Vector3 position = GetRandomPosition();
+
+		newEnemyGroup.transform.position = position;
+		newEnemyGroup.transform.rotation = GetRandomRotation(position);
 	}
 
 	#endregion
@@ -71,10 +81,10 @@ public class EnemySpawnerEdge : EnemySpawner
 
 	[SerializeField] private float m_maxRandomAngle;
 
-	protected override Quaternion GetRandomRotation()
+	protected override Quaternion GetRandomRotation(Vector3 enemyGroupPosition)
 	{
 		float angle = 0f;
-		Vector3 directionToCenter = -transform.position.normalized;
+		Vector3 directionToCenter = -enemyGroupPosition.normalized;
 		angle = Mathf.Atan2(directionToCenter.y, directionToCenter.x) * Mathf.Rad2Deg;
 
 		int plusOrMinus = (Random.Range(0, 2) == 0) ? 1 : -1;

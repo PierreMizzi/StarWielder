@@ -17,38 +17,31 @@ public class EnemySpawner : MonoBehaviour
 		m_manager = manager;
 	}
 
-	public virtual EnemyGroup SpawnEnemyGroup()
+	public void SpawnEnemyGroup()
 	{
 		EnemyGroup randomGroupPrefab = UtilsClass.PickRandomInList(m_enemyGroupPrefabs);
 		EnemyGroup newEnemyGroup = Instantiate(randomGroupPrefab, m_enemyGroupContainer);
 		newEnemyGroup.Initialize(m_manager);
 		m_manager.AddEnemyGroup(newEnemyGroup);
 
-		StartCoroutine(Test(newEnemyGroup));
-
-
-		return newEnemyGroup;
+		StartCoroutine(CheckOverlapingCoroutine(newEnemyGroup));
 	}
 
-	public IEnumerator Test(EnemyGroup newEnemyGroup)
+	public IEnumerator CheckOverlapingCoroutine(EnemyGroup newEnemyGroup)
 	{
-		Vector3 position = Vector3.zero;
-
 		for (int i = 0; i <= m_validSpawnAttempts; i++)
 		{
-			newEnemyGroup.transform.position = GetRandomPosition();
-			newEnemyGroup.transform.rotation = GetRandomRotation();
+			SetEnemyGroupTransform(newEnemyGroup);
 
 			yield return new WaitForEndOfFrame();
 
 			if (newEnemyGroup.CheckIsOverlaping())
 			{
-				if (i == m_validSpawnAttempts - 1)
+				if (i == m_validSpawnAttempts)
 				{
 					Debug.Log("Unvalid spawn position");
-
 					Destroy(newEnemyGroup.gameObject);
-					yield return null;
+					yield break;
 				}
 				continue;
 			}
@@ -56,10 +49,16 @@ public class EnemySpawner : MonoBehaviour
 				break;
 
 		}
-		yield return null;
+	}
+
+	protected virtual void SetEnemyGroupTransform(EnemyGroup newEnemyGroup)
+	{
+		newEnemyGroup.transform.position = GetRandomPosition();
+		newEnemyGroup.transform.rotation = GetRandomRotation();
 	}
 
 	protected virtual Vector3 GetRandomPosition() { return Vector3.zero; }
 	protected virtual Quaternion GetRandomRotation() { return Quaternion.identity; }
+	protected virtual Quaternion GetRandomRotation(Vector3 enemyGroupPosition) { return Quaternion.identity; }
 
 }
