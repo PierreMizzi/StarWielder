@@ -79,13 +79,7 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void CallbackTransferCompleted()
 		{
-			if (m_this.currentEnergy == 0)
-			{
-				Debug.Break();
-				Debug.LogError("GAME OVER : STAR DIED");
-			}
-			else
-				ChangeState((int)StarStateType.Docked);
+			ChangeState((int)StarStateType.Docked);
 		}
 
 		private void CallbackMouseClick(InputAction.CallbackContext context)

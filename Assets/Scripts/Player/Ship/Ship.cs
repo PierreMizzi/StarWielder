@@ -1,3 +1,4 @@
+using System;
 using PierreMizzi.Useful;
 using UnityEngine;
 
@@ -9,20 +10,24 @@ namespace PierreMizzi.Gameplay.Players
 
 		#region Base
 
-		private ShipController m_controller;
-
-		[SerializeField]
-		private PlayerSettings m_settings;
-
 		[SerializeField] private PlayerChannel m_playerChannel = null;
-
-		[SerializeField] private Star m_star;
+		[SerializeField] private GameChannel m_gameChannel = null;
+		[SerializeField] private PlayerSettings m_settings;
+		private ShipController m_controller;
 
 		private void Initialize()
 		{
 			m_currentHealth = m_settings.maxHealth;
 
 			m_currentEnergy = m_settings.baseEnergy;
+
+			m_controller.enabled = true;
+
+		}
+
+		private void CallbackGameOver()
+		{
+			m_controller.enabled = false;
 		}
 
 		#endregion
@@ -37,6 +42,15 @@ namespace PierreMizzi.Gameplay.Players
 		private void Start()
 		{
 			Initialize();
+
+			if (m_gameChannel != null)
+				m_gameChannel.onGameOver += CallbackGameOver;
+		}
+
+		private void OnDestroy()
+		{
+			if (m_gameChannel != null)
+				m_gameChannel.onGameOver -= CallbackGameOver;
 		}
 
 		private void Update()
@@ -46,16 +60,17 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if (UtilsClass.CheckLayer(m_damageLayerMask.value, other.gameObject.layer))
-				HitByBullet(other.GetComponent<EnemyBullet>());
+			CheckIsBullet(other);
 		}
 
 		#endregion
 
 		#region Star
 
-		[SerializeField]
-		private Transform m_starAnchor;
+		[Header("Star")]
+		[SerializeField] private Star m_star;
+
+		[SerializeField] private Transform m_starAnchor;
 		public Transform starAnchor => m_starAnchor;
 
 		#endregion
@@ -102,6 +117,12 @@ namespace PierreMizzi.Gameplay.Players
 
 		private float m_currentHealth;
 
+		private void CheckIsBullet(Collider2D other)
+		{
+			if (UtilsClass.CheckLayer(m_damageLayerMask.value, other.gameObject.layer))
+				HitByBullet(other.GetComponent<EnemyBullet>());
+		}
+
 		private void HitByBullet(EnemyBullet bullet)
 		{
 			Destroy(bullet.gameObject);
@@ -109,10 +130,7 @@ namespace PierreMizzi.Gameplay.Players
 			m_playerChannel.onRefreshHealth.Invoke(m_currentHealth / m_settings.maxHealth);
 
 			if (m_currentHealth <= 0)
-			{
-				Debug.LogError("SHIP IS DESTROYED !");
-				Debug.Break();
-			}
+				m_gameChannel.onGameOver.Invoke();
 		}
 
 		#endregion

@@ -72,7 +72,6 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void MoveCompleted()
 		{
-			Debug.Log("MoveCompleted");
 			m_this.transform.up = m_directionMoveCompleted;
 
 			Move();

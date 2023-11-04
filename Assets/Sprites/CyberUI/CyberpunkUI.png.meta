@@ -32,6 +32,21 @@ TextureImporter:
   - first:
       213: -7228566984547716937
     second: CyberpunkUI_9
+  - first:
+      213: -3566526258751592374
+    second: AbstractBar_02
+  - first:
+      213: -5426141690682262866
+    second: AbstractBar_01
+  - first:
+      213: 5858672560484529230
+    second: Brackets_01
+  - first:
+      213: -133304985065293701
+    second: Corners_03
+  - first:
+      213: 8707692845376444352
+    second: ReplayButton
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -327,6 +342,111 @@ TextureImporter:
       bones: []
       spriteID: 7b0baea40a8feab90800000000000000
       internalID: -7228566984547716937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AbstractBar_02
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 160
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 15, y: 0, z: 3, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4822019347218ec0800000000000000
+      internalID: -3566526258751592374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AbstractBar_01
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 160
+        height: 2
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaa32f991e872b4b0800000000000000
+      internalID: -5426141690682262866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Brackets_01
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 131
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e44320737af2e4150800000000000000
+      internalID: 5858672560484529230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corners_03
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 119
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 11, y: 12, z: 11, w: 12}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b78f46682d7662ef0800000000000000
+      internalID: -133304985065293701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ReplayButton
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 576
+        width: 56
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 5, y: 2, z: 5, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c79fdde180f7d870800000000000000
+      internalID: 8707692845376444352
       vertices: []
       indices: 
       edges: []
