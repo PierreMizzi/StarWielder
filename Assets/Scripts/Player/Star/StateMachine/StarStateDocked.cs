@@ -33,7 +33,7 @@ namespace PierreMizzi.Gameplay.Players
 			m_this.playerChannel.onRefreshStarEnergy.Invoke(m_this.currentEnergy);
 
 			if (m_this.currentEnergy <= 0f)
-				m_this.gameChannel.onGameOver.Invoke();
+				m_this.gameChannel.onGameOver.Invoke(GameOverReason.StarDied);
 
 		}
 

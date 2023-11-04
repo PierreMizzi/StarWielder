@@ -8,7 +8,7 @@ namespace PierreMizzi.Gameplay.Players
 	public class Ship : MonoBehaviour
 	{
 
-		#region Base
+		#region Main
 
 		[SerializeField] private PlayerChannel m_playerChannel = null;
 		[SerializeField] private GameChannel m_gameChannel = null;
@@ -25,7 +25,7 @@ namespace PierreMizzi.Gameplay.Players
 
 		}
 
-		private void CallbackGameOver()
+		private void CallbackGameOver(GameOverReason reason)
 		{
 			m_controller.enabled = false;
 		}
@@ -47,15 +47,18 @@ namespace PierreMizzi.Gameplay.Players
 				m_gameChannel.onGameOver += CallbackGameOver;
 		}
 
+		private void Update()
+		{
+			ManageEnergy();
+
+			if (Input.GetKeyDown(KeyCode.M))
+				m_gameChannel.onGameOver.Invoke(GameOverReason.ShipDestroyed);
+		}
+
 		private void OnDestroy()
 		{
 			if (m_gameChannel != null)
 				m_gameChannel.onGameOver -= CallbackGameOver;
-		}
-
-		private void Update()
-		{
-			ManageEnergy();
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)
@@ -130,7 +133,7 @@ namespace PierreMizzi.Gameplay.Players
 			m_playerChannel.onRefreshHealth.Invoke(m_currentHealth / m_settings.maxHealth);
 
 			if (m_currentHealth <= 0)
-				m_gameChannel.onGameOver.Invoke();
+				m_gameChannel.onGameOver.Invoke(GameOverReason.ShipDestroyed);
 		}
 
 		#endregion

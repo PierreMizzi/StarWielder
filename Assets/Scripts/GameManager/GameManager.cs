@@ -1,14 +1,16 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
 	[SerializeField] private GameChannel m_gameChannel = null;
 
-	private void CallbackGameOver()
+	[ContextMenu("Replay")]
+	public void CallbackReplay()
 	{
-
+		SceneManager.LoadScene("Game");
 	}
 
 	#region Score
@@ -37,7 +39,8 @@ public class GameManager : MonoBehaviour
 		if (m_gameChannel != null)
 		{
 			m_gameChannel.onSetHighestEnergy += CallbackSetHighestEnergy;
-			m_gameChannel.onGameOver -= CallbackGameOver;
+			m_gameChannel.onGameOver += CallbackGameOver;
+			m_gameChannel.onReplay += CallbackReplay;
 		}
 	}
 
@@ -51,8 +54,21 @@ public class GameManager : MonoBehaviour
 		if (m_gameChannel != null)
 		{
 			m_gameChannel.onSetHighestEnergy -= CallbackSetHighestEnergy;
-			m_gameChannel.onGameOver += CallbackGameOver;
+			m_gameChannel.onGameOver -= CallbackGameOver;
+			m_gameChannel.onReplay -= CallbackReplay;
 		}
+	}
+
+	private void CallbackGameOver(GameOverReason reason)
+	{
+		GameOverData data = new GameOverData
+		{
+			reason = reason,
+			time = m_currentTime,
+			starEnergy = m_highestEnergy
+		};
+
+		m_gameChannel.onGameOverScreen(data);
 	}
 
 

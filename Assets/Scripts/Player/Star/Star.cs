@@ -27,7 +27,7 @@ namespace PierreMizzi.Gameplay.Players
 		public InputActionReference m_mouseClickAction;
 		public InputActionReference mouseClickAction => m_mouseClickAction;
 
-		private void CallbackGameOver()
+		private void CallbackGameOver(GameOverReason reason)
 		{
 			// Stop Moving
 			// Death animation

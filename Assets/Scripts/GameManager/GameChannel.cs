@@ -7,11 +7,13 @@ public class GameChannel : ScriptableObject
 
 	public FloatDelegate onRefreshTimer;
 
-	#region Game Over
-
 	public FloatDelegate onSetHighestEnergy;
 
-	public Action onGameOver;
+	#region Game Over
+
+	public GameOverDelegate onGameOver;
+
+	public GameOverScreenDelegate onGameOverScreen;
 
 	public Action onReplay;
 
@@ -24,7 +26,8 @@ public class GameChannel : ScriptableObject
 		// Score
 		onSetHighestEnergy = (float highestEnergy) => { };
 
-		onGameOver = () => { };
+		onGameOver = (GameOverReason reason) => { };
+		onGameOverScreen = (GameOverData data) => { };
 		onReplay = () => { };
 	}
 

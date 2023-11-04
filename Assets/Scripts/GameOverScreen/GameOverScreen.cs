@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Text;
+using DG.Tweening;
+using PierreMizzi.Useful;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 /*
 	- Les croix apparaissent et s'approchent
@@ -24,8 +25,6 @@ using UnityEngine.InputSystem;
 	TO TEST : 
 	- Succession d'étape/animations ?!
 	- 
-
-
 */
 
 public class GameOverScreen : MonoBehaviour
@@ -37,11 +36,13 @@ public class GameOverScreen : MonoBehaviour
 
 	private const string k_triggerDisplay = "Display";
 	private const string k_triggerNext = "Next";
-	private const string k_triggerHide = "Hide";
 
-	[ContextMenu("Display")]
-	private void Display()
+	private void CallbackDisplay(GameOverData data)
 	{
+		m_reasonMessage = MessageFromReason(data.reason);
+		m_time = data.time;
+		m_starEnergy = data.starEnergy;
+
 		m_animator.SetTrigger(k_triggerDisplay);
 	}
 
@@ -55,12 +56,14 @@ public class GameOverScreen : MonoBehaviour
 
 	#region Main
 
+	[SerializeField] private GameChannel m_gameChannel = null;
+
 	private void Initialize()
 	{
 		m_reasonMessageLabel.text = "";
 
 		m_timeLabel.text = "";
-		m_highestEnergyLabel.text = "";
+		m_starEnergyLabel.text = "";
 	}
 
 	#endregion
@@ -72,11 +75,22 @@ public class GameOverScreen : MonoBehaviour
 		m_animator = GetComponent<Animator>();
 
 		Initialize();
+
+		if (m_gameChannel != null)
+			m_gameChannel.onGameOverScreen += CallbackDisplay;
 	}
+
+
 
 	private void Update()
 	{
 		ManageShortcuts();
+	}
+	private void OnDestroy()
+	{
+
+		if (m_gameChannel != null)
+			m_gameChannel.onGameOverScreen -= CallbackDisplay;
 	}
 
 	#endregion
@@ -88,10 +102,11 @@ public class GameOverScreen : MonoBehaviour
 	[SerializeField] private string m_randomErrorCharacters = "01";
 	[SerializeField] private float m_delayBetweenCharacters = 0.1f;
 
-	private const string k_reasonShipDestroyed = "Your ship got destroyed ...";
-	private const string k_reasonStarImploded = "Your star imploded ...";
+	private string m_reasonMessage;
 
-	[ContextMenu("Reason Message")]
+	private const string k_reasonShipDestroyed = "Your ship got destroyed ...";
+	private const string k_reasonStarDied = "Your star ran out of energy ...";
+
 	private void AnimEventReasonMessage()
 	{
 		StartCoroutine(ReasonMessageCoroutine());
@@ -99,8 +114,7 @@ public class GameOverScreen : MonoBehaviour
 
 	private IEnumerator ReasonMessageCoroutine()
 	{
-		string reason = k_reasonShipDestroyed;
-		int reasonLength = reason.Length;
+		int reasonLength = m_reasonMessage.Length;
 		StringBuilder builtString = new StringBuilder();
 		string iChar;
 		string jChar;
@@ -110,14 +124,14 @@ public class GameOverScreen : MonoBehaviour
 			// Encrypted
 			if (i < reasonLength)
 			{
-				iChar = reason.Substring(i, 1);
+				iChar = m_reasonMessage.Substring(i, 1);
 				builtString.Append(GetRandomCharacter());
 			}
 
 			// Decrypted
 			if (j >= 0)
 			{
-				jChar = reason.Substring(j, 1);
+				jChar = m_reasonMessage.Substring(j, 1);
 				builtString[j] = char.Parse(jChar);
 			}
 
@@ -136,6 +150,18 @@ public class GameOverScreen : MonoBehaviour
 		return m_randomErrorCharacters[randomCharIndex];
 	}
 
+	private string MessageFromReason(GameOverReason reason)
+	{
+		switch (reason)
+		{
+			case GameOverReason.ShipDestroyed:
+				return k_reasonShipDestroyed;
+			case GameOverReason.StarDied:
+				return k_reasonStarDied;
+		}
+		return "";
+	}
+
 
 	#endregion
 
@@ -143,16 +169,48 @@ public class GameOverScreen : MonoBehaviour
 
 	[Header("Score")]
 	[SerializeField] private TextMeshProUGUI m_timeLabel;
-	[SerializeField] private TextMeshProUGUI m_highestEnergyLabel;
+	[SerializeField] private TextMeshProUGUI m_starEnergyLabel;
+
+	[SerializeField] private float m_scoreTextDuration = 1f;
+
+	public float m_time = 90f;
+	public float m_starEnergy = 156.9f;
 
 	public void AnimEventTime()
 	{
-
+		DOVirtual
+		.Float(
+			0f,
+			m_time,
+			m_scoreTextDuration,
+			(float value) => m_timeLabel.text = UtilsClass.SecondsToTextTime(value)
+		)
+		.SetEase(Ease.InQuad)
+		.OnComplete(Next);
 	}
 
+	// TODO : Rename HighestEnergy in StarEnergy
 	public void AnimEventHighestEnergy()
 	{
+		DOVirtual
+		.Float(
+			0f,
+			m_starEnergy,
+			m_scoreTextDuration,
+			(float value) => m_starEnergyLabel.text = String.Format("{0:0.0}", value)
+		)
+		.SetEase(Ease.InQuad)
+		.OnComplete(Next);
+	}
 
+
+	#endregion
+
+	#region Replay
+
+	public void OnClickReplay()
+	{
+		m_gameChannel.onReplay.Invoke();
 	}
 
 	#endregion
@@ -161,11 +219,11 @@ public class GameOverScreen : MonoBehaviour
 
 	private void ManageShortcuts()
 	{
-		if (Input.GetKeyDown(KeyCode.D))
-			Display();
+	}
 
-		else if (Input.GetKeyDown(KeyCode.N))
-			Next();
+	private void DebugCallbackDisplay()
+	{
+		m_animator.SetTrigger(k_triggerDisplay);
 	}
 
 	#endregion
