@@ -47,6 +47,9 @@ TextureImporter:
   - first:
       213: 8707692845376444352
     second: ReplayButton
+  - first:
+      213: 3000532024014289552
+    second: Mouse
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -153,27 +156,6 @@ TextureImporter:
       bones: []
       spriteID: 092de725a2831ed20800000000000000
       internalID: 3305985355890479760
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EnergyShipBackground
-      rect:
-        serializedVersion: 2
-        x: 353
-        y: 497
-        width: 46
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e41ffbd0c42cd270800000000000000
-      internalID: 8276530625943377122
       vertices: []
       indices: 
       edges: []
@@ -447,6 +429,27 @@ TextureImporter:
       bones: []
       spriteID: 0c79fdde180f7d870800000000000000
       internalID: 8707692845376444352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mouse
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 401
+        width: 46
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09a3e847af704a920800000000000000
+      internalID: 3000532024014289552
       vertices: []
       indices: 
       edges: []

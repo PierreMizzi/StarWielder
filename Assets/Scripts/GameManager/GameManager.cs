@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,12 +18,36 @@ public class GameManager : MonoBehaviour
 
 	private float m_currentTime;
 
+	private IEnumerator m_timerCoroutine;
+
 	private float m_highestEnergy;
 
-	private void ManageTimer()
+	private void StartTimer()
 	{
-		m_currentTime += Time.deltaTime;
-		m_gameChannel.onRefreshTimer.Invoke(m_currentTime);
+		if (m_timerCoroutine == null)
+		{
+			m_timerCoroutine = TimeCoroutine();
+			StartCoroutine(m_timerCoroutine);
+		}
+	}
+
+	private void StopTimer()
+	{
+		if (m_timerCoroutine != null)
+		{
+			StopCoroutine(m_timerCoroutine);
+			m_timerCoroutine = null;
+		}
+	}
+
+	private IEnumerator TimeCoroutine()
+	{
+		while (true)
+		{
+			m_currentTime += Time.deltaTime;
+			m_gameChannel.onRefreshTimer.Invoke(m_currentTime);
+			yield return new WaitForEndOfFrame();
+		}
 	}
 
 	private void CallbackSetHighestEnergy(float highestEnergy)
@@ -42,11 +67,7 @@ public class GameManager : MonoBehaviour
 			m_gameChannel.onGameOver += CallbackGameOver;
 			m_gameChannel.onReplay += CallbackReplay;
 		}
-	}
-
-	private void Update()
-	{
-		ManageTimer();
+		StartTimer();
 	}
 
 	private void OnDestroy()
@@ -61,6 +82,8 @@ public class GameManager : MonoBehaviour
 
 	private void CallbackGameOver(GameOverReason reason)
 	{
+		StopTimer();
+
 		GameOverData data = new GameOverData
 		{
 			reason = reason,

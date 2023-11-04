@@ -15,18 +15,19 @@ namespace PierreMizzi.Gameplay.Players
 		[SerializeField] private PlayerSettings m_settings;
 		private ShipController m_controller;
 
+		private bool m_isActive = true;
+
 		private void Initialize()
 		{
 			m_currentHealth = m_settings.maxHealth;
-
 			m_currentEnergy = m_settings.baseEnergy;
 
 			m_controller.enabled = true;
-
 		}
 
 		private void CallbackGameOver(GameOverReason reason)
 		{
+			m_isActive = false;
 			m_controller.enabled = false;
 		}
 
@@ -49,7 +50,8 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void Update()
 		{
-			ManageEnergy();
+			if (m_isActive)
+				ManageEnergy();
 
 			if (Input.GetKeyDown(KeyCode.M))
 				m_gameChannel.onGameOver.Invoke(GameOverReason.ShipDestroyed);

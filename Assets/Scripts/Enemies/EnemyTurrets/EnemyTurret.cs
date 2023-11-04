@@ -10,23 +10,38 @@ public class EnemyTurret : MonoBehaviour
 
 	private Transform m_bulletsContainer;
 
+	private bool m_isActive;
+
+
 	public void Initialize(EnemyGroup group)
 	{
 		m_group = group;
 		m_bulletsContainer = m_group.manager.bulletsContainer;
 		m_shipTransform = m_group.manager.ship.transform;
 
-		StartCoroutine(FireCoroutine());
+		Activate();
+	}
+
+	public void Activate()
+	{
+		m_isActive = true;
+		StartFiring();
+	}
+
+	public void Deactivate()
+	{
+		m_isActive = false;
+		StopFiring();
 	}
 
 	#endregion
 
 	#region MonoBehaviour
 
-
 	private void Update()
 	{
-		UpdateCanonRotation();
+		if (m_isActive)
+			UpdateCanonRotation();
 	}
 
 	#endregion
@@ -51,9 +66,9 @@ public class EnemyTurret : MonoBehaviour
 
 	#endregion
 
-	#region Bullets
+	#region Firing
 
-	[Header("Bullets")]
+	[Header("Firing")]
 	// Delay
 	[SerializeField] private float m_minDelayFiring = 2f;
 	[SerializeField] private float m_maxDelayFiring = 4f;
@@ -62,6 +77,26 @@ public class EnemyTurret : MonoBehaviour
 	[SerializeField] private float m_rateOfFire = 2f;
 
 	[SerializeField] private EnemyBullet m_bulletPrefab;
+
+	private IEnumerator m_fireCoroutine;
+
+	private void StartFiring()
+	{
+		if (m_fireCoroutine == null)
+		{
+			m_fireCoroutine = FireCoroutine();
+			StartCoroutine(m_fireCoroutine);
+		}
+	}
+
+	private void StopFiring()
+	{
+		if (m_fireCoroutine != null)
+		{
+			StopCoroutine(m_fireCoroutine);
+			m_fireCoroutine = null;
+		}
+	}
 
 	private IEnumerator FireCoroutine()
 	{

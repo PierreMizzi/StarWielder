@@ -51,7 +51,7 @@ MonoBehaviour:
   m_cameraChannel: {fileID: 11400000, guid: 2f76be3b47611b4449681c2076c5d98a, type: 2}
   m_settings: {fileID: 11400000, guid: b24ab3511ccb22948a65f9213767a89e, type: 2}
   m_mouseClickAction: {fileID: 3150000551938037181, guid: 4d039b37c618d774e9ca8551914c073f, type: 3}
-  m_initialState: 1
+  m_initialState: 2
   m_ship: {fileID: 0}
   isOnShip: 0
   m_obstacleFilter:

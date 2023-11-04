@@ -10,10 +10,18 @@ public class EnemyManager : MonoBehaviour
 	#region Main
 
 	[Header("Main")]
+	[SerializeField] private GameChannel m_gameChannel;
+
 	[SerializeField] private Ship m_ship;
 	public Ship ship => m_ship;
 
 	[SerializeField] private bool m_autoSpawn = true;
+
+	private void CallbackGameOver(GameOverReason reason)
+	{
+		DeactivateEnemyGroups();
+		StopSpawning();
+	}
 
 	#endregion
 
@@ -22,8 +30,18 @@ public class EnemyManager : MonoBehaviour
 	private void Start()
 	{
 		InitializeSpawners();
+
 		if (m_autoSpawn)
 			StartSpawning();
+
+		if (m_gameChannel != null)
+			m_gameChannel.onGameOver += CallbackGameOver;
+	}
+
+	private void OnDestroy()
+	{
+		if (m_gameChannel != null)
+			m_gameChannel.onGameOver -= CallbackGameOver;
 	}
 
 	#endregion
@@ -53,6 +71,15 @@ public class EnemyManager : MonoBehaviour
 		}
 	}
 
+	private void StopSpawning()
+	{
+		if (m_spawningCoroutine != null)
+		{
+			StopCoroutine(m_spawningCoroutine);
+			m_spawningCoroutine = null;
+		}
+	}
+
 	private IEnumerator SpawningCoroutine()
 	{
 		while (true)
@@ -70,21 +97,18 @@ public class EnemyManager : MonoBehaviour
 		spawner.SpawnEnemyGroup();
 	}
 
-	public bool CheckValidSpawnPosition(Vector3 otherPosition, float otherSqrDistance)
-	{
-		foreach (EnemyGroup group in m_enemyGroups)
-			if (group.CheckNotTooClose(otherPosition, otherSqrDistance))
-				return false;
-
-		return true;
-	}
-
 	#endregion
 
 	#region Enemy Groups
 
 	[SerializeField]
 	private List<EnemyGroup> m_enemyGroups;
+
+	public void DeactivateEnemyGroups()
+	{
+		foreach (EnemyGroup enemyGroup in m_enemyGroups)
+			enemyGroup.Deactivate();
+	}
 
 	public void AddEnemyGroup(EnemyGroup enemyGroup)
 	{
@@ -94,7 +118,7 @@ public class EnemyManager : MonoBehaviour
 	public void RemoveEnemyGroup(EnemyGroup enemyGroup)
 	{
 		if (m_enemyGroups.Contains(enemyGroup))
-			m_enemyGroups.Add(enemyGroup);
+			m_enemyGroups.Remove(enemyGroup);
 	}
 
 	#endregion
@@ -104,6 +128,7 @@ public class EnemyManager : MonoBehaviour
 	[Header("Bullets")]
 	[SerializeField] private Transform m_bulletsContainer;
 	[SerializeField] private List<EnemyBullet> m_enemyBullets = null;
+
 	public Transform bulletsContainer => m_bulletsContainer;
 
 	#endregion

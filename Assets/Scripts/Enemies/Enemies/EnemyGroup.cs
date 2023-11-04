@@ -47,10 +47,8 @@ public class EnemyGroup : MonoBehaviour
 
 	[Header("Area & Spawning")]
 	private Collider2D m_area;
-
 	[SerializeField] private ContactFilter2D m_overlapingFilter;
 
-	[HideInInspector] public float areaSqrRadius;
 
 	[ContextMenu("CheckIsOverlaping")]
 	public bool CheckIsOverlaping()
@@ -60,22 +58,17 @@ public class EnemyGroup : MonoBehaviour
 		return resultsLength > 0;
 	}
 
-	public bool CheckNotTooClose(Vector3 otherPosition, float otherSqrRadius)
-	{
-		Vector3 selfPosition = new Vector3(m_area.offset.x, m_area.offset.y, 0);
-		selfPosition += transform.position;
-
-		float distance = (otherPosition - selfPosition).sqrMagnitude;
-
-		return distance < areaSqrRadius + otherSqrRadius;
-	}
-
 	#endregion
 
 	#region Turrets
 
 	[SerializeField] private List<EnemyTurret> m_turrets;
 
+	public void Deactivate()
+	{
+		foreach (EnemyTurret turret in m_turrets)
+			turret.Deactivate();
+	}
 
 	#endregion
 

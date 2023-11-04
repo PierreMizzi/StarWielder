@@ -37,15 +37,6 @@ public class GameOverScreen : MonoBehaviour
 	private const string k_triggerDisplay = "Display";
 	private const string k_triggerNext = "Next";
 
-	private void CallbackDisplay(GameOverData data)
-	{
-		m_reasonMessage = MessageFromReason(data.reason);
-		m_time = data.time;
-		m_starEnergy = data.starEnergy;
-
-		m_animator.SetTrigger(k_triggerDisplay);
-	}
-
 	[ContextMenu("Next")]
 	private void Next()
 	{
@@ -66,6 +57,15 @@ public class GameOverScreen : MonoBehaviour
 		m_starEnergyLabel.text = "";
 	}
 
+	private void CallbackDisplay(GameOverData data)
+	{
+		m_reasonMessage = MessageFromReason(data.reason);
+		m_time = data.time;
+		m_starEnergy = data.starEnergy;
+
+		m_animator.SetTrigger(k_triggerDisplay);
+	}
+
 	#endregion
 
 	#region MonoBehaviour
@@ -79,8 +79,6 @@ public class GameOverScreen : MonoBehaviour
 		if (m_gameChannel != null)
 			m_gameChannel.onGameOverScreen += CallbackDisplay;
 	}
-
-
 
 	private void Update()
 	{
@@ -173,8 +171,8 @@ public class GameOverScreen : MonoBehaviour
 
 	[SerializeField] private float m_scoreTextDuration = 1f;
 
-	public float m_time = 90f;
-	public float m_starEnergy = 156.9f;
+	public float m_time;
+	public float m_starEnergy;
 
 	public void AnimEventTime()
 	{

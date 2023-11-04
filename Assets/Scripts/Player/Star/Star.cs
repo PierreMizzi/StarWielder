@@ -5,13 +5,21 @@ using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/*
+
+	- Game is too simple
+	- Star is too slow
+	- Need to bounce off space-ships
+
+*/
+
 namespace PierreMizzi.Gameplay.Players
 {
 
 	public class Star : MonoBehaviour, IStateMachine
 	{
 
-		#region Base
+		#region Main
 
 		[SerializeField] public PlayerChannel m_playerChannel;
 		[SerializeField] private GameChannel m_gameChannel = null;
@@ -29,8 +37,7 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void CallbackGameOver(GameOverReason reason)
 		{
-			// Stop Moving
-			// Death animation
+			ChangeState(StarStateType.Idle);
 		}
 
 		#endregion
@@ -46,6 +53,7 @@ namespace PierreMizzi.Gameplay.Players
 		{
 			states = new List<AState>()
 			{
+				new StarStateIdle(this),
 				new StarStateDocked(this),
 				new StarStateFree(this),
 				new StarStateReturning(this),
@@ -96,6 +104,7 @@ namespace PierreMizzi.Gameplay.Players
 			if (m_gameChannel.onGameOver != null)
 				m_gameChannel.onGameOver += CallbackGameOver;
 
+			m_gameChannel.onSetHighestEnergy.Invoke(m_currentEnergy);
 		}
 
 		protected void Update()
@@ -120,7 +129,6 @@ namespace PierreMizzi.Gameplay.Players
 			// if (UtilsClass.CheckLayer(m_bounceLayer.value, other.gameObject.layer))
 			//     Bounce();
 		}
-
 
 		#endregion
 

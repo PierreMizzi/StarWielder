@@ -13,6 +13,8 @@ namespace PierreMizzi.Gameplay.Players
 			type = (int)StarStateType.Returning;
 		}
 
+		private Tween m_returningTween;
+
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
@@ -22,6 +24,7 @@ namespace PierreMizzi.Gameplay.Players
 		public override void Exit()
 		{
 			base.Exit();
+			KillReturning();
 		}
 
 		private void ReturnToShip()
@@ -30,7 +33,7 @@ namespace PierreMizzi.Gameplay.Players
 
 			Vector3 fromPosition = m_this.transform.position;
 
-			DOVirtual
+			m_returningTween = DOVirtual
 			.Float(
 				0f,
 				1f,
@@ -44,10 +47,15 @@ namespace PierreMizzi.Gameplay.Players
 			.OnComplete(CallbackReturnToShip);
 		}
 
-
 		private void CallbackReturnToShip()
 		{
 			ChangeState((int)StarStateType.Transfer);
+		}
+
+		private void KillReturning()
+		{
+			if (m_returningTween != null && m_returningTween.IsPlaying())
+				m_returningTween.Kill();
 		}
 
 	}

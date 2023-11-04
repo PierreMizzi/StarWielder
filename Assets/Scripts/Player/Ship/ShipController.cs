@@ -46,9 +46,7 @@ namespace PierreMizzi.Gameplay.Players
 		[SerializeField]
 		private float m_orientationMagnitude = 2;
 
-
 		#endregion
-
 
 		#endregion
 
