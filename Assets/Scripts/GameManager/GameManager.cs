@@ -8,6 +8,32 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] private GameChannel m_gameChannel = null;
 
+	private bool m_hasGameStarted;
+
+	private void CallbackonFirstDocking()
+	{
+		if (!m_hasGameStarted)
+		{
+			m_hasGameStarted = true;
+			m_gameChannel.onStartGame.Invoke();
+			StartTimer();
+		}
+	}
+
+	private void CallbackGameOver(GameOverReason reason)
+	{
+		StopTimer();
+
+		GameOverData data = new GameOverData
+		{
+			reason = reason,
+			time = m_currentTime,
+			starEnergy = m_highestEnergy
+		};
+
+		m_gameChannel.onGameOverScreen(data);
+	}
+
 	[ContextMenu("Replay")]
 	public void CallbackReplay()
 	{
@@ -64,10 +90,11 @@ public class GameManager : MonoBehaviour
 		if (m_gameChannel != null)
 		{
 			m_gameChannel.onSetHighestEnergy += CallbackSetHighestEnergy;
+
+			m_gameChannel.onFirstDocking += CallbackonFirstDocking;
 			m_gameChannel.onGameOver += CallbackGameOver;
 			m_gameChannel.onReplay += CallbackReplay;
 		}
-		StartTimer();
 	}
 
 	private void OnDestroy()
@@ -75,24 +102,14 @@ public class GameManager : MonoBehaviour
 		if (m_gameChannel != null)
 		{
 			m_gameChannel.onSetHighestEnergy -= CallbackSetHighestEnergy;
+
+			m_gameChannel.onFirstDocking -= CallbackonFirstDocking;
 			m_gameChannel.onGameOver -= CallbackGameOver;
 			m_gameChannel.onReplay -= CallbackReplay;
 		}
 	}
 
-	private void CallbackGameOver(GameOverReason reason)
-	{
-		StopTimer();
 
-		GameOverData data = new GameOverData
-		{
-			reason = reason,
-			time = m_currentTime,
-			starEnergy = m_highestEnergy
-		};
-
-		m_gameChannel.onGameOverScreen(data);
-	}
 
 
 

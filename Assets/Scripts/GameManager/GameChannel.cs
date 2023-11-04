@@ -5,27 +5,29 @@ using UnityEngine;
 public class GameChannel : ScriptableObject
 {
 
-	public FloatDelegate onRefreshTimer;
+	// Title Screen
+	public Action onFirstDocking;
+	public Action onStartGame;
 
+	// Score
+	public FloatDelegate onRefreshTimer;
 	public FloatDelegate onSetHighestEnergy;
 
-	#region Game Over
-
+	// Game Over
 	public GameOverDelegate onGameOver;
-
 	public GameOverScreenDelegate onGameOverScreen;
-
 	public Action onReplay;
-
-	#endregion
 
 	private void OnEnable()
 	{
-		onRefreshTimer = (float time) => { };
+		// Title Screen
+		onStartGame = () => { };
 
 		// Score
+		onRefreshTimer = (float time) => { };
 		onSetHighestEnergy = (float highestEnergy) => { };
 
+		// Game
 		onGameOver = (GameOverReason reason) => { };
 		onGameOverScreen = (GameOverData data) => { };
 		onReplay = () => { };

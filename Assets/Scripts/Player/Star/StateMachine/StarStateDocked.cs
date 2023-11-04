@@ -41,6 +41,10 @@ namespace PierreMizzi.Gameplay.Players
 		{
 			m_this.currentCombo = 1;
 			m_this.playerChannel.onRefreshStarCombo.Invoke(m_this.currentCombo);
+
+			// Starts the game if it's the first time, no effect otherwiser
+			// Check callback in GameManager.cs
+			m_this.gameChannel.onFirstDocking.Invoke();
 		}
 
 		private void CallbackMouseClick(InputAction.CallbackContext context)

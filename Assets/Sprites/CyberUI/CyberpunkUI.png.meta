@@ -7,7 +7,7 @@ TextureImporter:
     second: Corners_02
   - first:
       213: 8276530625943377122
-    second: EnergyShipBackground
+    second: CyberpunkUI_1
   - first:
       213: -6618939808414466335
     second: AbstractEffect_01
@@ -50,6 +50,15 @@ TextureImporter:
   - first:
       213: 3000532024014289552
     second: Mouse
+  - first:
+      213: 8013544444269992262
+    second: CyberpunkUI_16
+  - first:
+      213: 481662186367862308
+    second: CyberpunkUI_17
+  - first:
+      213: -1843072945584303231
+    second: CyberpunkUI_18
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -450,6 +459,90 @@ TextureImporter:
       bones: []
       spriteID: 09a3e847af704a920800000000000000
       internalID: 3000532024014289552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyberpunkUI_1
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 64
+        width: 70
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e41ffbd0c42cd270800000000000000
+      internalID: 8276530625943377122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyberpunkUI_16
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 144
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6499488e634d53f60800000000000000
+      internalID: 8013544444269992262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyberpunkUI_17
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 48
+        width: 64
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 426c130e4353fa600800000000000000
+      internalID: 481662186367862308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyberpunkUI_18
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 543
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1839057cbe61c66e0800000000000000
+      internalID: -1843072945584303231
       vertices: []
       indices: 
       edges: []
