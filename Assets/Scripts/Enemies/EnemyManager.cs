@@ -15,7 +15,10 @@ public class EnemyManager : MonoBehaviour
 	[SerializeField] private Ship m_ship;
 	public Ship ship => m_ship;
 
-	[SerializeField] private bool m_autoSpawn = true;
+	private void CallbackStartGame()
+	{
+		StartSpawning();
+	}
 
 	private void CallbackGameOver(GameOverReason reason)
 	{
@@ -31,17 +34,20 @@ public class EnemyManager : MonoBehaviour
 	{
 		InitializeSpawners();
 
-		if (m_autoSpawn)
-			StartSpawning();
-
 		if (m_gameChannel != null)
+		{
+			m_gameChannel.onStartGame += CallbackStartGame;
 			m_gameChannel.onGameOver += CallbackGameOver;
+		}
 	}
 
 	private void OnDestroy()
 	{
 		if (m_gameChannel != null)
+		{
+			m_gameChannel.onStartGame -= CallbackStartGame;
 			m_gameChannel.onGameOver -= CallbackGameOver;
+		}
 	}
 
 	#endregion

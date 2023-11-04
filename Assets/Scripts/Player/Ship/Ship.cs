@@ -20,9 +20,6 @@ namespace PierreMizzi.Gameplay.Players
 		private void Initialize()
 		{
 			m_currentHealth = m_settings.maxHealth;
-			m_currentEnergy = m_settings.baseEnergy;
-
-			m_controller.enabled = true;
 		}
 
 		private void CallbackGameOver(GameOverReason reason)

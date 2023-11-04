@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ShipSettings
   m_EditorClassIdentifier: 
   maxHealth: 150
-  baseEnergy: 15
+  baseEnergy: 8
   energyDepleatRate: 3
-  speed: 150
+  speed: 100
   smoothTime: 0.5
   immediatePositionScale: 0.1
   dashDistance: 3

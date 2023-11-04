@@ -96,7 +96,6 @@ namespace PierreMizzi.Gameplay.Players
 			m_currentEnergy = m_settings.baseEnergy;
 
 			InitiliazeStates();
-			SetOnShip();
 		}
 
 		private void Start()

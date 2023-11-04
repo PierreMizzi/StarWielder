@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2948affcb958d2d47acb3a5101ab836f, type: 3}
   m_Name: StarSettings
   m_EditorClassIdentifier: 
-  baseSpeed: 10
+  baseSpeed: 5
   speedFromEnergyRatio: 0.05
   squishRatio: 0.1
-  baseEnergy: 20
+  baseEnergy: 40
   energyDepleatRate: 1
   comboBonusEnergyRatio: 0.02
   transferBaseDuration: 0.5
