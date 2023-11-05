@@ -10,10 +10,10 @@ namespace PierreMizzi.Gameplay.Players
 		[Header("Health")]
 		public float maxHealth = 300f;
 
-		[Header("Energy")]
-		public float baseEnergy = 50f;
-		public float energyDepleatRate = 0.25f;
-
+		[Header("Emergency Energy")]
+		public float maxEmergencyEnergy = 40f;
+		public float emergencyEnergyDepleatRate = 0.25f;
+		public float emergencyEnergyDuration;
 
 		[Header("Speed")]
 		public float speed = 80f;
@@ -26,6 +26,11 @@ namespace PierreMizzi.Gameplay.Players
 		public float dashDistance = 1f;
 		public float dashDuration = 0.2f;
 		public float dashCooldownDuration = 3f;
+
+		private void OnValidate()
+		{
+			emergencyEnergyDuration = maxEmergencyEnergy / emergencyEnergyDepleatRate;
+		}
 
 
 	}

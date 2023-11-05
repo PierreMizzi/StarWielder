@@ -65,6 +65,7 @@ namespace PierreMizzi.Gameplay.Players
 		private void Update()
 		{
 			ReadMousePositionInputs();
+			Rotate();
 
 			if (m_canDash && m_dashActionReference.action.IsPressed())
 				Dash();
@@ -74,11 +75,6 @@ namespace PierreMizzi.Gameplay.Players
 				ReadLocomotionInputs();
 				Move();
 			}
-		}
-
-		private void LateUpdate()
-		{
-			Rotate();
 		}
 
 		#endregion

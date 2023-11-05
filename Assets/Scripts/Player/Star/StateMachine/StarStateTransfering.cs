@@ -45,7 +45,7 @@ namespace PierreMizzi.Gameplay.Players
 			float transferedEnergy = m_this.ship.GetMaxTransferableEnergy(m_this.currentEnergy);
 			float transferDuration = GetTransferDuration();
 
-			float fromShipEnergy = m_this.ship.currentEnergy;
+			float fromShipEnergy = m_this.ship.emergencyEnergy;
 			float toShipEnergy = fromShipEnergy + transferedEnergy;
 
 			float fromStarEnergy = m_this.currentEnergy;
@@ -61,8 +61,8 @@ namespace PierreMizzi.Gameplay.Players
 					m_this.currentEnergy = Mathf.Lerp(fromStarEnergy, toStarEnergy, value);
 					m_this.playerChannel.onRefreshStarEnergy.Invoke(m_this.currentEnergy);
 
-					m_this.ship.currentEnergy = Mathf.Lerp(fromShipEnergy, toShipEnergy, value);
-					m_this.playerChannel.onRefreshShipEnergy.Invoke(m_this.ship.currentEnergy);
+					m_this.ship.emergencyEnergy = Mathf.Lerp(fromShipEnergy, toShipEnergy, value);
+					m_this.playerChannel.onRefreshShipEnergy.Invoke(m_this.ship.emergencyEnergy);
 
 				}
 			)

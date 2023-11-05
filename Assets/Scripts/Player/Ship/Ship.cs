@@ -1,5 +1,6 @@
 using System;
 using PierreMizzi.Useful;
+using TMPro;
 using UnityEngine;
 
 namespace PierreMizzi.Gameplay.Players
@@ -61,6 +62,13 @@ namespace PierreMizzi.Gameplay.Players
 
 			if (Input.GetKeyDown(KeyCode.M))
 				m_gameChannel.onGameOver.Invoke(GameOverReason.ShipDestroyed);
+
+
+		}
+
+		private void LateUpdate()
+		{
+			UpdateCountdownTransform();
 		}
 
 		private void OnDestroy()
@@ -87,24 +95,23 @@ namespace PierreMizzi.Gameplay.Players
 		#endregion
 
 		#region Energy
-
-		private float m_currentEnergy = 0;
-		public float currentEnergy
+		private float m_emergencyEnergy = 0;
+		public float emergencyEnergy
 		{
-			get { return m_currentEnergy; }
-			set { m_currentEnergy = Mathf.Clamp(value, 0f, m_settings.baseEnergy); }
+			get { return m_emergencyEnergy; }
+			set { m_emergencyEnergy = Mathf.Clamp(value, 0f, m_settings.maxEmergencyEnergy); }
 		}
-
 		public bool hasEnergy;
 
 		private void ManageEnergy()
 		{
-			if (!m_star.isOnShip && m_currentEnergy > 0)
+			if (!m_star.isOnShip && m_emergencyEnergy > 0)
 			{
-				currentEnergy -= m_settings.energyDepleatRate * Time.deltaTime;
-				m_playerChannel.onRefreshShipEnergy.Invoke(m_currentEnergy);
+				emergencyEnergy -= m_settings.emergencyEnergyDepleatRate * Time.deltaTime;
+				m_playerChannel.onRefreshShipEnergy.Invoke(m_emergencyEnergy);
+				ComputeCountdown();
 			}
-			hasEnergy = m_currentEnergy > 0 || (m_star.isOnShip && m_star.hasEnergy);
+			hasEnergy = m_emergencyEnergy > 0 || (m_star.isOnShip && m_star.hasEnergy);
 			m_controller.enabled = hasEnergy;
 			m_animator.SetBool(k_triggerHasEnergy, hasEnergy);
 		}
@@ -112,12 +119,33 @@ namespace PierreMizzi.Gameplay.Players
 		public float GetMaxTransferableEnergy(float starEnergy)
 		{
 			float transferableEnergy;
-			if (currentEnergy + starEnergy > m_settings.baseEnergy)
-				transferableEnergy = m_settings.baseEnergy - currentEnergy;
+			if (emergencyEnergy + starEnergy > m_settings.maxEmergencyEnergy)
+				transferableEnergy = m_settings.maxEmergencyEnergy - emergencyEnergy;
 			else
 				transferableEnergy = starEnergy;
 
 			return transferableEnergy;
+		}
+
+		#endregion
+
+		#region Countdown
+
+		[Header("Countdown")]
+		[SerializeField] private TextMeshPro m_countdownLabel;
+		[SerializeField] private Vector3 m_countdownTransformOffset;
+		private float m_countdown;
+
+		private void ComputeCountdown()
+		{
+			m_countdown = m_emergencyEnergy / m_settings.emergencyEnergyDepleatRate;
+			m_countdownLabel.text = String.Format("{0:0.0}", m_countdown);
+		}
+
+		private void UpdateCountdownTransform()
+		{
+			m_countdownLabel.transform.position = transform.position + m_countdownTransformOffset;
+			m_countdownLabel.transform.rotation = Quaternion.identity;
 		}
 
 		#endregion
