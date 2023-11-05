@@ -112,8 +112,8 @@ namespace PierreMizzi.Gameplay.Players
 		#region Dash
 
 		[Header("Dash")]
-		[SerializeField]
-		private InputActionReference m_dashActionReference = null;
+		[SerializeField] private DashStar m_dashStar;
+		[SerializeField] private InputActionReference m_dashActionReference;
 
 		private float m_dashCooldownTime;
 
@@ -138,7 +138,8 @@ namespace PierreMizzi.Gameplay.Players
 					 .SetEase(Ease.OutSine)
 					 .OnComplete(OnCompleteDash);
 
-			m_playerChannel.onUseDash.Invoke();
+			// m_playerChannel.onUseDash.Invoke();
+			m_dashStar.Use();
 		}
 
 		private void OnCompleteDash()
@@ -156,10 +157,12 @@ namespace PierreMizzi.Gameplay.Players
 				yield return null;
 			}
 
-			m_playerChannel.onRefreshCooldownDash.Invoke(1f);
-			m_playerChannel.onRechargeDash.Invoke();
+			// m_playerChannel.onRefreshCooldownDash.Invoke(1f);
+			// m_playerChannel.onRechargeDash.Invoke();
+			m_dashStar.Recharge();
 
 			m_canDash = true;
+
 
 		}
 
