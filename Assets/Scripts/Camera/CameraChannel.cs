@@ -5,13 +5,18 @@ using UnityEngine;
 public class CameraChannel : ScriptableObject
 {
 
-	public Action onFocusShip;
-	public Action onFocusDefault;
+	public Action onStartEnergyTransfer;
+	public Action onStopEnergyTransfer;
+
+	public Action onShipHurt;
+
 
 	private void OnEnable()
 	{
-		onFocusShip = () => { };
-		onFocusDefault = () => { };
+		onStartEnergyTransfer = () => { };
+		onStopEnergyTransfer = () => { };
+
+		onShipHurt = () => { };
 	}
 
 }

@@ -7,11 +7,18 @@ namespace PierreMizzi.Gameplay.Players
 	[RequireComponent(typeof(ShipController))]
 	public class Ship : MonoBehaviour
 	{
+		#region Channels
+
+		[Header("Channels")]
+		[SerializeField] private PlayerChannel m_playerChannel = null;
+		[SerializeField] private GameChannel m_gameChannel = null;
+		[SerializeField] private CameraChannel m_cameraChannel = null;
+
+		#endregion
 
 		#region Main
 
-		[SerializeField] private PlayerChannel m_playerChannel = null;
-		[SerializeField] private GameChannel m_gameChannel = null;
+		[Header("Main")]
 		[SerializeField] private PlayerSettings m_settings;
 		private ShipController m_controller;
 
@@ -133,6 +140,8 @@ namespace PierreMizzi.Gameplay.Players
 			Destroy(bullet.gameObject);
 			m_currentHealth -= bullet.damage;
 			m_playerChannel.onRefreshHealth.Invoke(m_currentHealth / m_settings.maxHealth);
+
+			m_cameraChannel.onShipHurt.Invoke();
 
 			if (m_currentHealth <= 0)
 				m_gameChannel.onGameOver.Invoke(GameOverReason.ShipDestroyed);

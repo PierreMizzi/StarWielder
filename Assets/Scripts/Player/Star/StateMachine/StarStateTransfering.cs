@@ -24,7 +24,7 @@ namespace PierreMizzi.Gameplay.Players
 
 			m_this.SetOnShip();
 
-			m_this.cameraChannel.onFocusShip.Invoke();
+			m_this.cameraChannel.onStartEnergyTransfer.Invoke();
 
 			TransferEnergy();
 
@@ -36,7 +36,7 @@ namespace PierreMizzi.Gameplay.Players
 			base.Exit();
 
 			m_this.mouseClickAction.action.performed -= CallbackMouseClick;
-			m_this.cameraChannel.onFocusDefault.Invoke();
+			m_this.cameraChannel.onStopEnergyTransfer.Invoke();
 			KillTransfer();
 		}
 

@@ -1,6 +1,6 @@
 using DG.Tweening;
+using PierreMizzi.Useful;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace PierreMizzi.Gameplay
 {
@@ -15,6 +15,11 @@ namespace PierreMizzi.Gameplay
 
 		[SerializeField] private CameraChannel m_cameraChannel = null;
 
+		private void ResetCameraPosition()
+		{
+			m_camera.transform.localPosition = Vector3.zero;
+		}
+
 		#endregion
 
 		#region MonoBehaviour
@@ -28,18 +33,19 @@ namespace PierreMizzi.Gameplay
 		{
 			if (m_cameraChannel != null)
 			{
-				m_cameraChannel.onFocusDefault += SetDefault;
-				m_cameraChannel.onFocusShip += SetTransfer;
-			}
+				m_cameraChannel.onStartEnergyTransfer += CallbackStartEnergyTransfer;
+				m_cameraChannel.onStopEnergyTransfer += CallbackStopEnergyTransfer;
 
+				m_cameraChannel.onShipHurt += CallbackShipHurt;
+			}
 		}
 
 		private void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.I))
-				SetTransfer();
+				CallbackStartEnergyTransfer();
 			else if (Input.GetKeyDown(KeyCode.O))
-				SetDefault();
+				CallbackStopEnergyTransfer();
 		}
 
 		private void LateUpdate()
@@ -52,8 +58,10 @@ namespace PierreMizzi.Gameplay
 		{
 			if (m_cameraChannel != null)
 			{
-				m_cameraChannel.onFocusDefault -= SetDefault;
-				m_cameraChannel.onFocusShip -= SetTransfer;
+				m_cameraChannel.onStartEnergyTransfer -= CallbackStartEnergyTransfer;
+				m_cameraChannel.onStopEnergyTransfer -= CallbackStopEnergyTransfer;
+
+				m_cameraChannel.onShipHurt -= CallbackShipHurt;
 			}
 		}
 
@@ -77,7 +85,6 @@ namespace PierreMizzi.Gameplay
 			transform.position = Vector3.SmoothDamp(transform.position, m_nextPosition, ref m_currentVelocity, m_trackingSpeed);
 		}
 
-
 		#endregion
 
 		#region Zoom
@@ -85,7 +92,6 @@ namespace PierreMizzi.Gameplay
 		[Header("Zoom")]
 		[SerializeField] private float m_defaultZoom = 5;
 		[SerializeField] private float m_shipZoom = 4;
-
 
 		private Tween m_zoomTween;
 
@@ -104,16 +110,19 @@ namespace PierreMizzi.Gameplay
 		#region Shaking
 
 		[Header("Shaking")]
-		[SerializeField] private float m_shakeDuration = 1f;
-		[SerializeField] private float m_shakeStrength = 1f;
-		[SerializeField] private int m_shakeVibrato = 10;
-		[SerializeField] private float m_shakeRandomness = 90f;
+		[SerializeField] private ShakeTweenSettings m_energyTransferShakeSettings;
 
 		private Tween m_shakeTween;
 
 		private void StartShaking()
 		{
-			m_shakeTween = m_camera.DOShakePosition(m_shakeDuration, m_shakeStrength, m_shakeVibrato, m_shakeRandomness, false).SetLoops(-1);
+			m_shakeTween = m_camera.DOShakePosition(
+				m_energyTransferShakeSettings.duration,
+				m_energyTransferShakeSettings.strength,
+				m_energyTransferShakeSettings.vibrato,
+				m_energyTransferShakeSettings.randomness,
+				false)
+			.SetLoops(-1);
 		}
 
 		private void StopShaking()
@@ -121,16 +130,36 @@ namespace PierreMizzi.Gameplay
 			if (m_shakeTween != null && m_shakeTween.IsPlaying())
 				m_shakeTween.Kill();
 
-			m_camera.transform.localPosition = Vector3.zero;
+			ResetCameraPosition();
 		}
 
+		#endregion
+
+		#region Energy Transfer Shaking
+
+		#endregion
+
+		#region Ship Hurt Shaking
+
+		[SerializeField] private ShakeTweenSettings m_shipHurtShakeSettings;
+
+		private void CallbackShipHurt()
+		{
+			m_camera.DOShakePosition(
+				m_shipHurtShakeSettings.duration,
+				m_shipHurtShakeSettings.strength,
+				m_shipHurtShakeSettings.vibrato,
+				m_shipHurtShakeSettings.randomness,
+				false)
+			.OnComplete(ResetCameraPosition);
+		}
 
 		#endregion
 
 		#region Debug
 
 		[ContextMenu("Set Transfer")]
-		public void SetTransfer()
+		public void CallbackStartEnergyTransfer()
 		{
 			// m_currentTarget = m_shipTarget;
 			ZoomInShip();
@@ -138,7 +167,7 @@ namespace PierreMizzi.Gameplay
 		}
 
 		[ContextMenu("Default")]
-		public void SetDefault()
+		public void CallbackStopEnergyTransfer()
 		{
 			// m_currentTarget = m_defaultTarget;
 			ZoomOutShip();
