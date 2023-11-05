@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Obstacle
+  - EnemyShip
   - Bound
   - Enemies
   - EnemyGroup
@@ -40,4 +40,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: GridBackground
+    uniqueID: 2134520779
+    locked: 0
+  - name: EnemyShip
+    uniqueID: 4223185739
+    locked: 0
+  - name: EnemyTurret
+    uniqueID: 4067615783
+    locked: 0
+  - name: EnemyBullet
+    uniqueID: 1425251661
+    locked: 0
+  - name: DashStar
+    uniqueID: 3203172993
+    locked: 0
+  - name: Ship
+    uniqueID: 1834917681
     locked: 0

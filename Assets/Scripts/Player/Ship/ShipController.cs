@@ -12,8 +12,8 @@ namespace PierreMizzi.Gameplay.Players
 
 		#region Fields
 
+		private Ship m_ship;
 		[SerializeField] private PlayerSettings m_settings = null;
-		[SerializeField] private PlayerChannel m_playerChannel = null;
 
 
 		private Camera m_camera;
@@ -51,6 +51,11 @@ namespace PierreMizzi.Gameplay.Players
 		#endregion
 
 		#region Monobehaviour
+
+		private void Awake()
+		{
+			m_ship = GetComponent<Ship>();
+		}
 
 		private void Start()
 		{
@@ -129,22 +134,23 @@ namespace PierreMizzi.Gameplay.Players
 				dashDirection = m_locomotionActionValue;
 			Vector3 endPosition = transform.position + dashDirection * m_settings.dashDistance;
 
-			m_isDashing = true;
 			m_canDash = false;
-
 			m_dashCooldownTime = 0f;
+
+			m_isDashing = true;
+			m_ship.SetIsDashing(m_isDashing);
 
 			transform.DOMove(endPosition, m_settings.dashDuration)
 					 .SetEase(Ease.OutSine)
 					 .OnComplete(OnCompleteDash);
 
-			// m_playerChannel.onUseDash.Invoke();
 			m_dashStar.Use();
 		}
 
 		private void OnCompleteDash()
 		{
 			m_isDashing = false;
+			m_ship.SetIsDashing(m_isDashing);
 			StartCoroutine(DashCooldownIEnumerator());
 		}
 
@@ -153,17 +159,11 @@ namespace PierreMizzi.Gameplay.Players
 			while (m_dashCooldownTime <= m_settings.dashCooldownDuration)
 			{
 				m_dashCooldownTime += Time.deltaTime;
-				m_playerChannel.onRefreshCooldownDash.Invoke(m_dashCooldownTime / m_settings.dashCooldownDuration);
 				yield return null;
 			}
 
-			// m_playerChannel.onRefreshCooldownDash.Invoke(1f);
-			// m_playerChannel.onRechargeDash.Invoke();
-			m_dashStar.Recharge();
-
 			m_canDash = true;
-
-
+			m_dashStar.Recharge();
 		}
 
 		#endregion

@@ -35,6 +35,8 @@ namespace PierreMizzi.Gameplay.Players
 		private void Awake()
 		{
 			m_controller = GetComponent<ShipController>();
+
+			m_animator = GetComponent<Animator>();
 		}
 
 		private void Start()
@@ -86,17 +88,18 @@ namespace PierreMizzi.Gameplay.Players
 			set { m_currentEnergy = Mathf.Clamp(value, 0f, m_settings.baseEnergy); }
 		}
 
-		public bool hasEnergy => m_currentEnergy > 0;
+		public bool hasEnergy;
 
 		private void ManageEnergy()
 		{
-			if (!m_star.isOnShip && hasEnergy)
+			if (!m_star.isOnShip && m_currentEnergy > 0)
 			{
 				currentEnergy -= m_settings.energyDepleatRate * Time.deltaTime;
 				m_playerChannel.onRefreshShipEnergy.Invoke(m_currentEnergy);
 			}
-
-			m_controller.enabled = hasEnergy || (m_star.isOnShip && m_star.hasEnergy);
+			hasEnergy = m_currentEnergy > 0 || (m_star.isOnShip && m_star.hasEnergy);
+			m_controller.enabled = hasEnergy;
+			m_animator.SetBool(k_triggerHasEnergy, hasEnergy);
 		}
 
 		public float GetMaxTransferableEnergy(float starEnergy)
@@ -133,6 +136,19 @@ namespace PierreMizzi.Gameplay.Players
 
 			if (m_currentHealth <= 0)
 				m_gameChannel.onGameOver.Invoke(GameOverReason.ShipDestroyed);
+		}
+
+		#endregion
+
+		#region Animations
+
+		private Animator m_animator = null;
+		private const string k_triggerHasEnergy = "HasEnergy";
+		private const string k_triggerIsDashing = "IsDashing";
+
+		public void SetIsDashing(bool isDashing)
+		{
+			m_animator.SetBool(k_triggerIsDashing, isDashing);
 		}
 
 		#endregion
