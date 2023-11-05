@@ -14,18 +14,9 @@ namespace PierreMizzi.Gameplay.Players
 
 		private Ship m_ship;
 		[SerializeField] private PlayerSettings m_settings = null;
-
-
 		private Camera m_camera;
-
-
-		[SerializeField]
-		private InputActionReference m_locomotionActionReference = null;
-
-		[SerializeField]
-		private InputActionReference m_mousePositionActionReference = null;
-
-
+		[SerializeField] private InputActionReference m_locomotionActionReference = null;
+		[SerializeField] private InputActionReference m_mousePositionActionReference = null;
 
 		#region Locomotion
 
@@ -141,6 +132,7 @@ namespace PierreMizzi.Gameplay.Players
 					 .OnComplete(OnCompleteDash);
 
 			m_dashStar.Use();
+			SoundManager.SoundManager.PlaySFX(SoundDataID.SHIP_DASH);
 		}
 
 		private void OnCompleteDash()

@@ -1,13 +1,16 @@
 using System;
+using System.Collections.Generic;
 using PierreMizzi.Useful;
+using PierreMizzi.Useful.StateMachines;
 using TMPro;
 using UnityEngine;
 
 namespace PierreMizzi.Gameplay.Players
 {
 	[RequireComponent(typeof(ShipController))]
-	public class Ship : MonoBehaviour
+	public class Ship : MonoBehaviour, IStateMachine
 	{
+
 		#region Channels
 
 		[Header("Channels")]
@@ -21,19 +24,56 @@ namespace PierreMizzi.Gameplay.Players
 
 		[Header("Main")]
 		[SerializeField] private PlayerSettings m_settings;
+		public PlayerSettings settings => m_settings;
 		private ShipController m_controller;
-
-		private bool m_isActive = true;
-
-		private void Initialize()
-		{
-			m_currentHealth = m_settings.maxHealth;
-		}
+		public ShipController controller => m_controller;
 
 		private void CallbackGameOver(GameOverReason reason)
 		{
-			m_isActive = false;
 			m_controller.enabled = false;
+		}
+
+		#endregion
+
+		#region StateMachine
+
+		[SerializeField] private ShipStateType m_initialState = ShipStateType.NoPower;
+		public List<AState> states { get; set; } = new List<AState>();
+		public AState currentState { get; set; }
+
+		public void InitializeStates()
+		{
+			states = new List<AState>()
+			{
+				new ShipStateNoPower(this),
+				new ShipStateStarPower(this),
+				new ShipStateEmergencyPower(this),
+			};
+
+			ChangeState(m_initialState);
+		}
+
+		public void UpdateState()
+		{
+			currentState?.Update();
+		}
+
+		public void ChangeState(ShipStateType nextState, ShipStateType previousState = ShipStateType.None)
+		{
+			ChangeState((int)previousState, (int)nextState);
+		}
+
+		public void ChangeState(int previousState, int nextState)
+		{
+			currentState?.Exit();
+
+			currentState = states.Find((AState newState) => newState.type == nextState);
+			if (currentState != null)
+				currentState.Enter(previousState);
+			else
+			{
+				Debug.LogError($"Couldn't find a new state of type : {nextState}. Going Inactive");
+			}
 		}
 
 		#endregion
@@ -42,28 +82,23 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void Awake()
 		{
-			m_controller = GetComponent<ShipController>();
+			m_currentHealth = m_settings.maxHealth;
 
+			m_controller = GetComponent<ShipController>();
 			m_animator = GetComponent<Animator>();
+
+			InitializeStates();
 		}
 
 		private void Start()
 		{
-			Initialize();
-
 			if (m_gameChannel != null)
 				m_gameChannel.onGameOver += CallbackGameOver;
 		}
 
 		private void Update()
 		{
-			if (m_isActive)
-				ManageEnergy();
-
-			if (Input.GetKeyDown(KeyCode.M))
-				m_gameChannel.onGameOver.Invoke(GameOverReason.ShipDestroyed);
-
-
+			UpdateState();
 		}
 
 		private void LateUpdate()
@@ -88,32 +123,27 @@ namespace PierreMizzi.Gameplay.Players
 
 		[Header("Star")]
 		[SerializeField] private Star m_star;
-
 		[SerializeField] private Transform m_starAnchor;
+
+		public Star star => m_star;
 		public Transform starAnchor => m_starAnchor;
 
 		#endregion
 
 		#region Energy
+
 		private float m_emergencyEnergy = 0;
 		public float emergencyEnergy
 		{
 			get { return m_emergencyEnergy; }
 			set { m_emergencyEnergy = Mathf.Clamp(value, 0f, m_settings.maxEmergencyEnergy); }
 		}
-		public bool hasEnergy;
 
-		private void ManageEnergy()
+		public void DepleateEmergencyEnergy()
 		{
-			if (!m_star.isOnShip && m_emergencyEnergy > 0)
-			{
-				emergencyEnergy -= m_settings.emergencyEnergyDepleatRate * Time.deltaTime;
-				m_playerChannel.onRefreshShipEnergy.Invoke(m_emergencyEnergy);
-				ComputeCountdown();
-			}
-			hasEnergy = m_emergencyEnergy > 0 || (m_star.isOnShip && m_star.hasEnergy);
-			m_controller.enabled = hasEnergy;
-			m_animator.SetBool(k_triggerHasEnergy, hasEnergy);
+			emergencyEnergy -= m_settings.emergencyEnergyDepleatRate * Time.deltaTime;
+			m_playerChannel.onRefreshShipEnergy.Invoke(m_emergencyEnergy);
+			ComputeCountdown();
 		}
 
 		public float GetMaxTransferableEnergy(float starEnergy)
@@ -139,7 +169,7 @@ namespace PierreMizzi.Gameplay.Players
 		private void ComputeCountdown()
 		{
 			m_countdown = m_emergencyEnergy / m_settings.emergencyEnergyDepleatRate;
-			m_countdownLabel.text = String.Format("{0:0.0}", m_countdown);
+			m_countdownLabel.text = String.Format("{0:0.0}", m_countdown) + "<size=50%>s</size>";
 		}
 
 		private void UpdateCountdownTransform()
@@ -180,8 +210,10 @@ namespace PierreMizzi.Gameplay.Players
 		#region Animations
 
 		private Animator m_animator = null;
-		private const string k_triggerHasEnergy = "HasEnergy";
-		private const string k_triggerIsDashing = "IsDashing";
+		public Animator animator => m_animator;
+
+		public const string k_triggerHasEnergy = "HasEnergy";
+		public const string k_triggerIsDashing = "IsDashing";
 
 		public void SetIsDashing(bool isDashing)
 		{

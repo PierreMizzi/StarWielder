@@ -10,23 +10,12 @@ public class EnergyUI : MonoBehaviour
 	#region Energy
 
 	[Header("Energy")]
-	[SerializeField] private TextMeshProUGUI m_shipEnergyLabel;
 	[SerializeField] private TextMeshProUGUI m_starEnergyLabel;
-	[SerializeField] private TextMeshProUGUI m_comboLabel;
 
-	private void CallbackRefreshShipEnergy(float value)
-	{
-		m_shipEnergyLabel.text = String.Format("{0:0.0}", value);
-	}
 
 	private void CallbackRefreshStarEnergy(float value)
 	{
-		m_starEnergyLabel.text = String.Format("{0:0.0}", value);
-	}
-
-	private void CallbackRefreshStarCombo(int value)
-	{
-		m_comboLabel.text = $"<size=\"33%\">x</size>{value.ToString()}";
+		m_starEnergyLabel.text = String.Format("{0:0.0}", value) + "<size=40%>K</size>";
 	}
 
 	#endregion
@@ -39,8 +28,6 @@ public class EnergyUI : MonoBehaviour
 		if (m_playerChannel != null)
 		{
 			m_playerChannel.onRefreshStarEnergy += CallbackRefreshStarEnergy;
-			m_playerChannel.onRefreshShipEnergy += CallbackRefreshShipEnergy;
-			m_playerChannel.onRefreshStarCombo += CallbackRefreshStarCombo;
 		}
 	}
 
@@ -48,9 +35,7 @@ public class EnergyUI : MonoBehaviour
 	{
 		if (m_playerChannel != null)
 		{
-			m_playerChannel.onRefreshShipEnergy -= CallbackRefreshShipEnergy;
-			m_playerChannel.onRefreshStarEnergy -= CallbackRefreshStarEnergy;
-			m_playerChannel.onRefreshStarCombo -= CallbackRefreshStarCombo;
+			m_playerChannel.onRefreshStarEnergy += CallbackRefreshStarEnergy;
 		}
 	}
 

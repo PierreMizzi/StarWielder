@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf2351776f653b4b9d3eb40701b378c, type: 3}
+  m_Name: Ship
+  m_EditorClassIdentifier: 
+  m_description: Ship's SFX
+  m_type: 0
+  m_soundDatas:
+  - m_ID: Ship_Dash
+    m_clip: {fileID: 8300000, guid: 195e2eb9e13cbce4db7150d06543c2a4, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: Ship_EnergyTransfer
+    m_clip: {fileID: 8300000, guid: 51438b44195b15d439864caffa373aa5, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: Ship_PowerDown
+    m_clip: {fileID: 8300000, guid: f54ae4262ea86f04e9c7f58b1e4547b9, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  m_generateStatic: 1
+  m_audioClips: []
+  m_mixerGroup: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}

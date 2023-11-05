@@ -62,6 +62,36 @@ TextureImporter:
   - first:
       213: -6814401711219206271
     second: TimerBackground_01
+  - first:
+      213: -1516796682914255654
+    second: SunIcon
+  - first:
+      213: -5997498706960821434
+    second: CyberpunkUI_21
+  - first:
+      213: -7227101389403374142
+    second: EnergyShipBackbround_03
+  - first:
+      213: 7895517496916002864
+    second: AbstractBar_03
+  - first:
+      213: -2538780202579218508
+    second: AbstractBar_05
+  - first:
+      213: -3107575808652756599
+    second: CyberpunkUI_25
+  - first:
+      213: 3599732839912205317
+    second: CyberpunkUI_26
+  - first:
+      213: -1850169324680446496
+    second: CyberpunkUI_27
+  - first:
+      213: -118551214427591287
+    second: PlusMinus
+  - first:
+      213: -773212913521204130
+    second: CyberpunkUI_30
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -84,6 +114,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -138,6 +169,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
@@ -266,7 +309,7 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -308,7 +351,7 @@ TextureImporter:
         height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 3, y: 0, z: 8, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -467,27 +510,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CyberpunkUI_1
-      rect:
-        serializedVersion: 2
-        x: 138
-        y: 64
-        width: 70
-        height: 31
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e41ffbd0c42cd270800000000000000
-      internalID: 8276530625943377122
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: CyberpunkUI_16
       rect:
         serializedVersion: 2
@@ -559,7 +581,7 @@ TextureImporter:
         width: 48
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -567,6 +589,216 @@ TextureImporter:
       bones: []
       spriteID: 18717f57fb16e61a0800000000000000
       internalID: -6814401711219206271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SunIcon
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 177
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adca766047143fae0800000000000000
+      internalID: -1516796682914255654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyberpunkUI_21
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 144
+        width: 31
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6435cbeb3ba94cca0800000000000000
+      internalID: -5997498706960821434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnergyShipBackbround_03
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 512
+        width: 46
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cd31e0c39d24bb90800000000000000
+      internalID: -7227101389403374142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AbstractBar_03
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 59
+        width: 66
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0384f89c453829d60800000000000000
+      internalID: 7895517496916002864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AbstractBar_05
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 48
+        width: 19
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bfa8765bd074ccd0800000000000000
+      internalID: -2538780202579218508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyberpunkUI_25
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 144
+        width: 35
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 989b7a4444cafd4d0800000000000000
+      internalID: -3107575808652756599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyberpunkUI_26
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 91
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50c664912f1d4f130800000000000000
+      internalID: 3599732839912205317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyberpunkUI_27
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 53
+        width: 19
+        height: 2
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0edf8144dc0e256e0800000000000000
+      internalID: -1850169324680446496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlusMinus
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 36
+        width: 25
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98d2a507c42da5ef0800000000000000
+      internalID: -118551214427591287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyberpunkUI_30
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 98
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e54e2d9a3fef445f0800000000000000
+      internalID: -773212913521204130
       vertices: []
       indices: 
       edges: []
@@ -581,6 +813,36 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      AbstractBar_01: -5426141690682262866
+      AbstractBar_02: -3566526258751592374
+      AbstractBar_03: 7895517496916002864
+      AbstractBar_05: -2538780202579218508
+      AbstractEffect_01: -6618939808414466335
+      AbstractEffect_02: 6736974695835851795
+      AbstractEfffect_02: -2140090827313000884
+      Brackets_01: 5858672560484529230
+      Corners_01: 2497425846062138918
+      Corners_02: 3305985355890479760
+      Corners_03: -133304985065293701
+      CyberpunkUI_16: 8013544444269992262
+      CyberpunkUI_17: 481662186367862308
+      CyberpunkUI_18: -1843072945584303231
+      CyberpunkUI_21: -5997498706960821434
+      CyberpunkUI_25: -3107575808652756599
+      CyberpunkUI_26: 3599732839912205317
+      CyberpunkUI_27: -1850169324680446496
+      CyberpunkUI_30: -773212913521204130
+      CyberpunkUI_6: -4151998218942895579
+      CyberpunkUI_9: -7228566984547716937
+      EnergyShipBackbround_02: 259503743442974435
+      EnergyShipBackbround_03: -7227101389403374142
+      Mouse: 3000532024014289552
+      PlusMinus: -118551214427591287
+      ReplayButton: 8707692845376444352
+      SunIcon: -1516796682914255654
+      TimerBackground: -8189158745092568657
+      TimerBackground_01: -6814401711219206271
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

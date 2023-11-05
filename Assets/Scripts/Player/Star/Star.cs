@@ -5,14 +5,6 @@ using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/*
-
-	- Game is too simple
-	- Star is too slow
-	- Need to bounce off space-ships
-
-*/
-
 namespace PierreMizzi.Gameplay.Players
 {
 
@@ -49,7 +41,7 @@ namespace PierreMizzi.Gameplay.Players
 		public List<AState> states { get; set; } = new List<AState>();
 		public AState currentState { get; set; }
 
-		public virtual void InitiliazeStates()
+		public virtual void InitializeStates()
 		{
 			states = new List<AState>()
 			{
@@ -95,7 +87,7 @@ namespace PierreMizzi.Gameplay.Players
 			m_circleCollider = GetComponent<CircleCollider2D>();
 			m_currentEnergy = m_settings.baseEnergy;
 
-			InitiliazeStates();
+			InitializeStates();
 		}
 
 		private void Start()

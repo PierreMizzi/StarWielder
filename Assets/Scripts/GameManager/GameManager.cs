@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using PierreMizzi.SoundManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +11,7 @@ public class GameManager : MonoBehaviour
 
 	private bool m_hasGameStarted;
 
-	private void CallbackonFirstDocking()
+	private void CallbackOnFirstDocking()
 	{
 		if (!m_hasGameStarted)
 		{
@@ -39,6 +40,36 @@ public class GameManager : MonoBehaviour
 	{
 		SceneManager.LoadScene("Game");
 	}
+
+	#region MonoBehaviour
+
+	private void Start()
+	{
+		InitializeSoundManager();
+
+		if (m_gameChannel != null)
+		{
+			m_gameChannel.onSetHighestEnergy += CallbackSetHighestEnergy;
+
+			m_gameChannel.onFirstDocking += CallbackOnFirstDocking;
+			m_gameChannel.onGameOver += CallbackGameOver;
+			m_gameChannel.onReplay += CallbackReplay;
+		}
+	}
+
+	private void OnDestroy()
+	{
+		if (m_gameChannel != null)
+		{
+			m_gameChannel.onSetHighestEnergy -= CallbackSetHighestEnergy;
+
+			m_gameChannel.onFirstDocking -= CallbackOnFirstDocking;
+			m_gameChannel.onGameOver -= CallbackGameOver;
+			m_gameChannel.onReplay -= CallbackReplay;
+		}
+	}
+
+	#endregion
 
 	#region Score
 
@@ -83,35 +114,15 @@ public class GameManager : MonoBehaviour
 
 	#endregion
 
-	#region MonoBehaviour
+	#region Sound Manager
 
-	private void Start()
+	[SerializeField] private SoundManagerToolSettings m_soundSettings = null;
+
+	[ContextMenu("Sound Manager")]
+	public void InitializeSoundManager()
 	{
-		if (m_gameChannel != null)
-		{
-			m_gameChannel.onSetHighestEnergy += CallbackSetHighestEnergy;
-
-			m_gameChannel.onFirstDocking += CallbackonFirstDocking;
-			m_gameChannel.onGameOver += CallbackGameOver;
-			m_gameChannel.onReplay += CallbackReplay;
-		}
+		SoundManager.Init("SoundManager");
 	}
-
-	private void OnDestroy()
-	{
-		if (m_gameChannel != null)
-		{
-			m_gameChannel.onSetHighestEnergy -= CallbackSetHighestEnergy;
-
-			m_gameChannel.onFirstDocking -= CallbackonFirstDocking;
-			m_gameChannel.onGameOver -= CallbackGameOver;
-			m_gameChannel.onReplay -= CallbackReplay;
-		}
-	}
-
-
-
-
 
 	#endregion
 
