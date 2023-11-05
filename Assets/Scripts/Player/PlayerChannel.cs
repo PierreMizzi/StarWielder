@@ -10,7 +10,6 @@ namespace PierreMizzi.Gameplay.Players
 	{
 		#region Energy
 
-		public FloatDelegate onRefreshShipEnergy;
 		public FloatDelegate onRefreshStarEnergy;
 		public IntDelegate onRefreshStarCombo;
 
@@ -32,7 +31,6 @@ namespace PierreMizzi.Gameplay.Players
 
 		public void OnEnable()
 		{
-			onRefreshShipEnergy = (float energy) => { };
 			onRefreshStarEnergy = (float energy) => { };
 			onRefreshStarCombo = (int combo) => { };
 

@@ -14,7 +14,7 @@ namespace PierreMizzi.Gameplay.Players
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
-			Debug.Log("ShipStateEmergencyPower");
+			m_this.animator.SetBool(Ship.k_boolDisplayCountdown, true);
 		}
 
 		public override void Update()

@@ -62,8 +62,6 @@ namespace PierreMizzi.Gameplay.Players
 					m_this.playerChannel.onRefreshStarEnergy.Invoke(m_this.currentEnergy);
 
 					m_this.ship.emergencyEnergy = Mathf.Lerp(fromShipEnergy, toShipEnergy, value);
-					m_this.playerChannel.onRefreshShipEnergy.Invoke(m_this.ship.emergencyEnergy);
-
 				}
 			)
 			.SetEase(Ease.Linear)

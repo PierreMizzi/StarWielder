@@ -142,7 +142,6 @@ namespace PierreMizzi.Gameplay.Players
 		public void DepleateEmergencyEnergy()
 		{
 			emergencyEnergy -= m_settings.emergencyEnergyDepleatRate * Time.deltaTime;
-			m_playerChannel.onRefreshShipEnergy.Invoke(m_emergencyEnergy);
 			ComputeCountdown();
 		}
 
@@ -170,6 +169,7 @@ namespace PierreMizzi.Gameplay.Players
 		{
 			m_countdown = m_emergencyEnergy / m_settings.emergencyEnergyDepleatRate;
 			m_countdownLabel.text = String.Format("{0:0.0}", m_countdown) + "<size=50%>s</size>";
+			m_animator.SetFloat(k_floatCountdown, m_countdown);
 		}
 
 		private void UpdateCountdownTransform()
@@ -212,12 +212,15 @@ namespace PierreMizzi.Gameplay.Players
 		private Animator m_animator = null;
 		public Animator animator => m_animator;
 
-		public const string k_triggerHasEnergy = "HasEnergy";
-		public const string k_triggerIsDashing = "IsDashing";
+		public const string k_boolHasEnergy = "HasEnergy";
+		public const string k_boolIsDashing = "IsDashing";
+
+		public const string k_floatCountdown = "Countdown";
+		public const string k_boolDisplayCountdown = "DisplayCountdown";
 
 		public void SetIsDashing(bool isDashing)
 		{
-			m_animator.SetBool(k_triggerIsDashing, isDashing);
+			m_animator.SetBool(k_boolIsDashing, isDashing);
 		}
 
 		#endregion

@@ -14,10 +14,9 @@ namespace PierreMizzi.Gameplay.Players
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
-			Debug.Log("ShipStateNoPower");
 			SoundManager.SoundManager.PlaySFX(SoundDataID.SHIP_POWER_DOWN);
 			m_this.controller.enabled = false;
-			m_this.animator.SetBool(Ship.k_triggerHasEnergy, false);
+			m_this.animator.SetBool(Ship.k_boolHasEnergy, false);
 		}
 
 		public override void Update()

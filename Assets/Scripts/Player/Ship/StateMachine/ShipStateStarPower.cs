@@ -14,9 +14,9 @@ namespace PierreMizzi.Gameplay.Players
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
-			Debug.Log("ShipStateStarPower");
 			m_this.controller.enabled = true;
-			m_this.animator.SetBool(Ship.k_triggerHasEnergy, true);
+			m_this.animator.SetBool(Ship.k_boolHasEnergy, true);
+			m_this.animator.SetBool(Ship.k_boolDisplayCountdown, false);
 		}
 
 		public override void Update()
