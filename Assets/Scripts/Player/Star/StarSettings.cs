@@ -9,7 +9,11 @@ public class StarSettings : ScriptableObject
 	public float speedFromEnergyRatio = 0.1f;
 	public float squishRatio = 0.9f;
 
+	[Header("Returning")]
 
+	public float acceleration = 15.0f; // L'accélération de l'objet
+	public float maxSpeed = 20.0f; // La vitesse maximale de l'objet
+	public float arrivalDistance = 0.1f; // La distance minimale pour considérer l'arrivée
 
 	[Header("Energy")]
 	public float baseEnergy;

@@ -29,8 +29,9 @@ namespace PierreMizzi.Gameplay.Players
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
-			Move();
+			// Move();
 			m_this.SetFree();
+			m_this.rigidbody.velocity = m_this.transform.up * m_this.currentSpeed;
 			SoundManager.PlaySFX(SoundDataID.STAR_FREE);
 			m_this.mouseClickAction.action.performed += CallbackMouseClick;
 		}
@@ -45,7 +46,7 @@ namespace PierreMizzi.Gameplay.Players
 		public override void Update()
 		{
 			base.Update();
-			m_this.ManageSquish();
+			m_this.UpdateRotationFromVelocity();
 		}
 
 		private void CallbackMouseClick(InputAction.CallbackContext context)

@@ -94,9 +94,10 @@ namespace PierreMizzi.Gameplay.Players
 
 		protected void Awake()
 		{
-			onTriggerEnter2D = (GameObject other) => { };
+			onCollisionEnter = (GameObject other) => { };
 
 			m_circleCollider = GetComponent<CircleCollider2D>();
+			m_rigidbody = GetComponent<Rigidbody2D>();
 			m_currentEnergy = m_settings.baseEnergy;
 
 			InitializeStates();
@@ -108,6 +109,8 @@ namespace PierreMizzi.Gameplay.Players
 				m_gameChannel.onGameOver += CallbackGameOver;
 
 			m_gameChannel.onSetHighestEnergy.Invoke(m_currentEnergy);
+
+			m_rigidbody.AddForce(transform.up * 10, ForceMode2D.Impulse);
 		}
 
 		protected void Update()
@@ -121,6 +124,12 @@ namespace PierreMizzi.Gameplay.Players
 				m_gameChannel.onGameOver -= CallbackGameOver;
 		}
 
+		private void OnCollisionEnter2D(Collision2D other)
+		{
+			if (UtilsClass.CheckLayer(m_obstacleFilter.layerMask.value, other.gameObject.layer))
+				onCollisionEnter.Invoke(other.gameObject);
+		}
+
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			if (isOnShip)
@@ -128,10 +137,37 @@ namespace PierreMizzi.Gameplay.Players
 
 			if (UtilsClass.CheckLayer(m_enemyLayer.value, other.gameObject.layer))
 				CollideWithEnemy(other);
-
-			if (UtilsClass.CheckLayer(m_obstacleFilter.layerMask.value, other.gameObject.layer))
-				onTriggerEnter2D.Invoke(other.gameObject);
 		}
+
+		#endregion
+
+		#region Physic
+
+		public void UpdateRotationFromVelocity()
+		{
+			if (rigidbody.velocity != Vector2.zero)
+				transform.up = rigidbody.velocity.normalized;
+		}
+
+		// Align up to velocity
+		// private int m_previousPositionFrequency = 4;
+		// private int m_previousPositionFrame;
+		// private Vector3 m_previousPosition;
+
+		// private Vector3 m_up
+
+		// private void UpdateUp()
+		// {
+		// 	m_previousPositionFrame++;
+		// 	if (m_previousPositionFrame > m_previousPositionFrequency)
+		// 	{
+		// 		transform.up = (transform.position - m_previousPosition).normalized;
+
+		// 		m_previousPositionFrame = 0;
+		// 		m_previousPosition = transform.position;
+		// 	}
+		// 	ManageSquish();
+		// }
 
 		#endregion
 
@@ -153,6 +189,9 @@ namespace PierreMizzi.Gameplay.Players
 		public void SetOnShip()
 		{
 			isOnShip = true;
+
+			m_rigidbody.velocity = Vector2.zero;
+
 			transform.SetParent(ship.starAnchor);
 			transform.localPosition = Vector2.zero;
 			transform.localRotation = Quaternion.identity;
@@ -164,14 +203,15 @@ namespace PierreMizzi.Gameplay.Players
 
 		public float currentSpeed => m_settings.baseSpeed + m_currentEnergy * m_settings.speedFromEnergyRatio;
 
-		private float m_currentSquish;
-		private Vector3 m_squishFromSpeed;
+		private float m_scaleFromVelocity;
+		private Vector3 m_localScaleFromVelocity;
 
 		public void ManageSquish()
 		{
-			m_currentSquish = 1f - ((currentSpeed / m_settings.baseSpeed) * m_settings.squishRatio);
-			m_squishFromSpeed.Set(m_currentSquish, 1, 1);
-			transform.localScale = m_squishFromSpeed;
+			// m_currentSquish = 1f - ((currentSpeed / m_settings.baseSpeed) * m_settings.squishRatio);
+			// m_scaleFromVelocity = m_rigidbody
+			// m_localScaleFromVelocity.Set(m_scaleFromVelocity, 1, 1);
+			transform.localScale = Vector3.one;
 		}
 
 		public void ResetSquish()
@@ -199,9 +239,11 @@ namespace PierreMizzi.Gameplay.Players
 		public ContactFilter2D obstacleFilter => m_obstacleFilter;
 
 		private CircleCollider2D m_circleCollider;
+		private Rigidbody2D m_rigidbody;
 		public CircleCollider2D circleCollider => m_circleCollider;
+		public new Rigidbody2D rigidbody => m_rigidbody;
 
-		public GameObjectDelegate onTriggerEnter2D;
+		public GameObjectDelegate onCollisionEnter;
 
 		#endregion
 
