@@ -762,12 +762,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlusMinus
+      name: Plus
       rect:
         serializedVersion: 2
         x: 209
         y: 36
-        width: 25
+        width: 12
         height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -799,6 +799,27 @@ TextureImporter:
       bones: []
       spriteID: e54e2d9a3fef445f0800000000000000
       internalID: -773212913521204130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpeedBoost
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 308270e2617d16e42861da7cbcf10d6f
+      internalID: -947807816
       vertices: []
       indices: 
       edges: []
@@ -838,8 +859,9 @@ TextureImporter:
       EnergyShipBackbround_02: 259503743442974435
       EnergyShipBackbround_03: -7227101389403374142
       Mouse: 3000532024014289552
-      PlusMinus: -118551214427591287
+      Plus: -118551214427591287
       ReplayButton: 8707692845376444352
+      SpeedBoost: -947807816
       SunIcon: -1516796682914255654
       TimerBackground: -8189158745092568657
       TimerBackground_01: -6814401711219206271

@@ -1,8 +1,9 @@
+using PierreMizzi.Useful.StateMachines;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
 namespace PierreMizzi.Gameplay.Players
 {
-	using PierreMizzi.Useful.StateMachines;
-	using UnityEngine;
-	using UnityEngine.InputSystem;
 
 	public class StarStateDocked : StarState
 	{
@@ -16,7 +17,7 @@ namespace PierreMizzi.Gameplay.Players
 		{
 			base.DefaultEnter();
 			DockStar();
-
+			SoundManager.SoundManager.PlaySFX(SoundDataID.STAR_DOCKING);
 			m_this.mouseClickAction.action.performed += CallbackMouseClick;
 		}
 

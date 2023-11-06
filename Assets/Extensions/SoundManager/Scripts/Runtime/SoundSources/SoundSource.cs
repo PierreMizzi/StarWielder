@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace PierreMizzi.SoundManager
 {
@@ -16,8 +17,9 @@ namespace PierreMizzi.SoundManager
 		#region Fields
 
 		protected AudioSource m_audioSource = null;
-		protected SoundData m_soundData = null;
+		public AudioMixerGroup audioMixerGroup => m_audioSource?.outputAudioMixerGroup;
 
+		protected SoundData m_soundData = null;
 		public SoundSourceState state { get; private set; }
 
 		public bool IsPlaying
@@ -50,6 +52,11 @@ namespace PierreMizzi.SoundManager
 		#region Methods
 
 		#region MonoBehaviour
+
+		private void Awake()
+		{
+			CheckAudioSource();
+		}
 
 		protected virtual IEnumerator Start()
 		{

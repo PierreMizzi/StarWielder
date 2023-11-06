@@ -12,9 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf2351776f653b4b9d3eb40701b378c, type: 3}
   m_Name: Star
   m_EditorClassIdentifier: 
-  m_description: 
-  m_type: 0
-  m_soundDatas: []
+  m_description: All SFXs related to the Star
+  m_type: 4
+  m_soundDatas:
+  - m_ID: Star_Free
+    m_clip: {fileID: 8300000, guid: 7c671d5be00e3e141a8313e5aa739b29, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: Star_Returning
+    m_clip: {fileID: 8300000, guid: 8ab5dabc1d24353418a903f69cebbfb3, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: Star_Combo
+    m_clip: {fileID: 8300000, guid: 8f269b0e33cf90c45b4542a03cef2ba5, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: Star_Docking
+    m_clip: {fileID: 8300000, guid: 61742f7766e7f984e879cade646a9f95, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: Star_Bounce_01
+    m_clip: {fileID: 8300000, guid: 4812f589eb0240e4fb70437fdfa2e4b4, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: Star_Bounce_02
+    m_clip: {fileID: 8300000, guid: b795cd18eeca37e4693c02ea3e009e0d, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
   m_generateStatic: 1
   m_audioClips: []
-  m_mixerGroup: {fileID: 0}
+  m_mixerGroup: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}

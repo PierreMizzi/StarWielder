@@ -13,8 +13,23 @@ MonoBehaviour:
   m_Name: Enemies
   m_EditorClassIdentifier: 
   m_description: 
-  m_type: 0
-  m_soundDatas: []
+  m_type: 4
+  m_soundDatas:
+  - m_ID: EnemyStarDestroyed_01
+    m_clip: {fileID: 8300000, guid: fb6e2d03bcf37ef42b658aa84b466f22, type: 3}
+    m_mixer: {fileID: 1423029599184917498, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: EnemyStarDestroyed_02
+    m_clip: {fileID: 8300000, guid: b68484a1f3fec9d4d8d3f7f881cf7b57, type: 3}
+    m_mixer: {fileID: 1423029599184917498, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: EnemyStarDestroyed_03
+    m_clip: {fileID: 8300000, guid: be86e9fe643632140b21ebddcbc847e3, type: 3}
+    m_mixer: {fileID: 1423029599184917498, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: EnemyStarDestroyed_04
+    m_clip: {fileID: 8300000, guid: d86dbfd8fdf4ebc4096648d7538df1de, type: 3}
+    m_mixer: {fileID: 1423029599184917498, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: EnemyStarDestroyed_05
+    m_clip: {fileID: 8300000, guid: 12033fc342a909244bdff2d019eb97be, type: 3}
+    m_mixer: {fileID: 1423029599184917498, guid: c8c43a808a920de4eb565950dd246141, type: 2}
   m_generateStatic: 1
   m_audioClips: []
-  m_mixerGroup: {fileID: 0}
+  m_mixerGroup: {fileID: 1423029599184917498, guid: c8c43a808a920de4eb565950dd246141, type: 2}

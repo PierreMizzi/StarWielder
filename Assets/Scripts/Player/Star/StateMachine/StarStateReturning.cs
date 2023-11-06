@@ -18,6 +18,7 @@ namespace PierreMizzi.Gameplay.Players
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
+			SoundManager.SoundManager.PlaySFX(SoundDataID.STAR_RETURNING);
 			ReturnToShip();
 		}
 

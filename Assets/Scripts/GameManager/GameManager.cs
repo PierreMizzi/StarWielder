@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using PierreMizzi.Extensions.CursorManagement;
 using PierreMizzi.SoundManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +8,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-	[SerializeField] private GameChannel m_gameChannel = null;
+	[SerializeField] private GameChannel m_gameChannel;
+	[SerializeField] private CursorChannel m_cursorChannel;
 
 	private bool m_hasGameStarted;
 
@@ -18,11 +20,14 @@ public class GameManager : MonoBehaviour
 			m_hasGameStarted = true;
 			m_gameChannel.onStartGame.Invoke();
 			StartTimer();
+			SetNormalCutoff();
 		}
 	}
 
 	private void CallbackGameOver(GameOverReason reason)
 	{
+		m_cursorChannel.onSetCursor(CursorType.Normal);
+
 		StopTimer();
 
 		GameOverData data = new GameOverData
@@ -33,6 +38,8 @@ public class GameManager : MonoBehaviour
 		};
 
 		m_gameChannel.onGameOverScreen(data);
+
+		SetLowCutoff();
 	}
 
 	[ContextMenu("Replay")]
@@ -46,6 +53,8 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		InitializeSoundManager();
+		SetLowCutoff();
+		m_cursorChannel.onSetCursor(CursorType.Aim);
 
 		if (m_gameChannel != null)
 		{
@@ -116,12 +125,33 @@ public class GameManager : MonoBehaviour
 
 	#region Sound Manager
 
+	[Header("Sound Manager")]
 	[SerializeField] private SoundManagerToolSettings m_soundSettings = null;
 
 	[ContextMenu("Sound Manager")]
 	public void InitializeSoundManager()
 	{
 		SoundManager.Init("SoundManager");
+	}
+
+	#endregion
+
+	#region Main Loop
+
+	[Header("Main Loop")]
+	[SerializeField] private SoundSource m_mainLoop;
+	private const string k_cutoffParameter = "MainLoopCutoff";
+	private const int k_normalCutoffFrequency = 5000;
+	private const int k_lowCutoffFrequency = 1000;
+
+	private void SetNormalCutoff()
+	{
+		m_mainLoop.audioMixerGroup.audioMixer.SetFloat(k_cutoffParameter, k_normalCutoffFrequency);
+	}
+
+	private void SetLowCutoff()
+	{
+		m_mainLoop.audioMixerGroup.audioMixer.SetFloat(k_cutoffParameter, k_lowCutoffFrequency);
 	}
 
 	#endregion

@@ -4,6 +4,7 @@ using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace PierreMizzi.Gameplay.Players
 {
@@ -99,6 +100,9 @@ namespace PierreMizzi.Gameplay.Players
 		private void Update()
 		{
 			UpdateState();
+
+			if (Input.GetKeyDown(KeyCode.M))
+				m_gameChannel.onGameOver.Invoke(GameOverReason.ShipDestroyed);
 		}
 
 		private void LateUpdate()

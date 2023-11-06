@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using PierreMizzi.Extensions.CursorManagement;
+using PierreMizzi.SoundManager;
 using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
@@ -11,16 +13,24 @@ namespace PierreMizzi.Gameplay.Players
 	public class Star : MonoBehaviour, IStateMachine
 	{
 
-		#region Main
+		#region Channels
 
+		[Header("Channels")]
 		[SerializeField] public PlayerChannel m_playerChannel;
-		[SerializeField] private GameChannel m_gameChannel = null;
-		[SerializeField] private CameraChannel m_cameraChannel = null;
+		[SerializeField] private GameChannel m_gameChannel;
+		[SerializeField] private CameraChannel m_cameraChannel;
+		[SerializeField] private CursorChannel m_cursorChannel;
 
 		public PlayerChannel playerChannel => m_playerChannel;
 		public GameChannel gameChannel => m_gameChannel;
 		public CameraChannel cameraChannel => m_cameraChannel;
+		public CursorChannel cursorChannel => m_cursorChannel;
 
+		#endregion
+
+		#region Main
+
+		[Header("Main")]
 		[SerializeField] private StarSettings m_settings;
 		public StarSettings settings => m_settings;
 
@@ -206,6 +216,7 @@ namespace PierreMizzi.Gameplay.Players
 			{
 				m_currentCombo += 1;
 				m_playerChannel.onRefreshStarCombo.Invoke(m_currentCombo);
+				PlayStarComboSFX();
 
 				m_currentEnergy += enemy.energy + ComputeComboBonusEnergy(enemy.energy);
 
@@ -227,6 +238,22 @@ namespace PierreMizzi.Gameplay.Players
 			else
 				return gainedEnergy * m_currentCombo * m_settings.comboBonusEnergyRatio;
 		}
+
+		#region Audio
+
+		[SerializeField] private SoundSource m_soundSource;
+		private const float k_basePitchValue = 1f;
+		private const string k_pitchParameterName = "EnemyStarPitch";
+
+		private void PlayStarComboSFX()
+		{
+			float pitch = k_basePitchValue + m_currentCombo * m_settings.pitchShift;
+			pitch = Mathf.Clamp(pitch, 0, m_settings.maxPitch);
+			m_soundSource.audioMixerGroup.audioMixer.SetFloat(k_pitchParameterName, pitch);
+			m_soundSource.Play();
+		}
+
+		#endregion
 
 		#endregion
 

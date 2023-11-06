@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-
-
-
 /*
 
 Type de SoundSource
@@ -93,7 +90,11 @@ namespace PierreMizzi.SoundManager
 			if (container != null)
 				m_SFXSSContainer = container.transform;
 			else
-				Debug.LogError("couldn't find SFXSSContainer");
+			{
+				m_SFXSSContainer = new GameObject(k_SFXSSContainerName).transform;
+				Debug.LogError("couldn't find SFXSSContainer, created it");
+			}
+			UnityEngine.Object.DontDestroyOnLoad(m_SFXSSContainer.gameObject);
 
 			// Pool
 			m_SFXSSPool = new ObjectPool<SFXSoundSource>(

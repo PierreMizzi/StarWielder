@@ -3,6 +3,8 @@ namespace PierreMizzi.Gameplay.Players
 	using System;
 	using System.Collections.Generic;
 	using DG.Tweening;
+	using PierreMizzi.SoundManager;
+	using PierreMizzi.Useful;
 	using PierreMizzi.Useful.StateMachines;
 	using UnityEngine;
 	using UnityEngine.InputSystem;
@@ -14,13 +16,22 @@ namespace PierreMizzi.Gameplay.Players
 			: base(stateMachine)
 		{
 			type = (int)StarStateType.Free;
+
+			m_bounceSoundIDS = new List<string>()
+			{
+				SoundDataID.STAR_BOUNCE_01,
+				SoundDataID.STAR_BOUNCE_02,
+			};
 		}
+
+		private List<string> m_bounceSoundIDS = new List<string>();
 
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
 			Move();
 			m_this.SetFree();
+			SoundManager.PlaySFX(SoundDataID.STAR_FREE);
 			m_this.mouseClickAction.action.performed += CallbackMouseClick;
 		}
 
@@ -73,8 +84,8 @@ namespace PierreMizzi.Gameplay.Players
 		private void MoveCompleted()
 		{
 			m_this.transform.up = m_directionMoveCompleted;
-
 			Move();
+			SoundManager.PlaySFX(UtilsClass.PickRandomInList(m_bounceSoundIDS));
 		}
 
 		private void Stop()

@@ -19,5 +19,7 @@ public class StarSettings : ScriptableObject
 	public float transferBaseDuration = 0.5f;
 	public float transferDurationRatio = 0.05f;
 
-
+	[Header("Enemy")]
+	public float pitchShift = 0.1f;
+	public float maxPitch = 1.7f;
 }

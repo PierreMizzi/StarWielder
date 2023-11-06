@@ -5,6 +5,7 @@ namespace PierreMizzi.Gameplay.Players
 	using UnityEngine;
 	using System;
 	using UnityEngine.InputSystem;
+	using PierreMizzi.SoundManager;
 
 	public class StarStateTransfering : StarState
 	{
@@ -16,15 +17,16 @@ namespace PierreMizzi.Gameplay.Players
 
 		private Tween m_transferTween;
 
+		private SoundSource m_transferSoundSource;
+
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
 
 			m_this.ResetSquish();
-
 			m_this.SetOnShip();
-
 			m_this.cameraChannel.onStartEnergyTransfer.Invoke();
+			m_transferSoundSource = SoundManager.PlaySFX(SoundDataID.SHIP_ENERGY_TRANSFER);
 
 			TransferEnergy();
 
@@ -37,6 +39,8 @@ namespace PierreMizzi.Gameplay.Players
 
 			m_this.mouseClickAction.action.performed -= CallbackMouseClick;
 			m_this.cameraChannel.onStopEnergyTransfer.Invoke();
+			m_transferSoundSource.FadeOut(0.1f);
+
 			KillTransfer();
 		}
 
@@ -66,6 +70,8 @@ namespace PierreMizzi.Gameplay.Players
 			)
 			.SetEase(Ease.Linear)
 			.OnComplete(CallbackTransferCompleted);
+
+
 		}
 
 		private float GetTransferDuration()

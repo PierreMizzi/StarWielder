@@ -22,6 +22,11 @@ public class TitleScreen : MonoBehaviour
         m_mouseClickInputAction.action.performed += CallbackStartGame;
     }
 
+    private void OnDestroy()
+    {
+        m_mouseClickInputAction.action.performed -= CallbackStartGame;
+    }
+
     private void CallbackStartGame(InputAction.CallbackContext context)
     {
         m_mouseClickInputAction.action.performed -= CallbackStartGame;
