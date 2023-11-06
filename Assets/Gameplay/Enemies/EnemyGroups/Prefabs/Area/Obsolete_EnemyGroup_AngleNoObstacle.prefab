@@ -305,7 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3140436414104003385, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
       propertyPath: m_Name
-      value: EnemyGroup_AngleNoObstacle
+      value: Obsolete_EnemyGroup_AngleNoObstacle
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3986235406279098, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
@@ -313,11 +313,6 @@ PrefabInstance:
 --- !u!1 &1743717788641193051 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3140436414104003385, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
-  m_PrefabInstance: {fileID: 3722221040561164130}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3497157187961157686 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 229571154757744468, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
   m_PrefabInstance: {fileID: 3722221040561164130}
   m_PrefabAsset: {fileID: 0}
 --- !u!60 &9101819405530421013
@@ -330,7 +325,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -348,6 +343,11 @@ PolygonCollider2D:
     - - {x: 2.168825, y: 1.6241223}
       - {x: -1.0446746, y: -0.0030441582}
       - {x: 2.1895587, y: -1.6671851}
+--- !u!4 &3497157187961157686 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 229571154757744468, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
+  m_PrefabInstance: {fileID: 3722221040561164130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4607323223586587800
 PrefabInstance:
   m_ObjectHideFlags: 0

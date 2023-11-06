@@ -39,7 +39,7 @@ namespace PierreMizzi.Gameplay.Players
 		public override void Exit()
 		{
 			base.Exit();
-			Stop();
+			// Stop();
 			m_this.mouseClickAction.action.performed -= CallbackMouseClick;
 		}
 
@@ -54,47 +54,47 @@ namespace PierreMizzi.Gameplay.Players
 			ChangeState((int)StarStateType.Returning);
 		}
 
-		#region Movement
+		// #region Movement
 
-		private Tween m_moveTween = null;
+		// private Tween m_moveTween = null;
 
-		private Vector3 m_directionMoveCompleted;
+		// private Vector3 m_directionMoveCompleted;
 
-		private void Move()
-		{
-			List<RaycastHit2D> hits = new List<RaycastHit2D>();
+		// private void Move()
+		// {
+		// 	List<RaycastHit2D> hits = new List<RaycastHit2D>();
 
-			if (Physics2D.Raycast(m_this.transform.position, m_this.transform.up, m_this.obstacleFilter, hits, 100f) > 0)
-			{
-				RaycastHit2D hit = hits[0];
+		// 	if (Physics2D.Raycast(m_this.transform.position, m_this.transform.up, m_this.obstacleFilter, hits, 100f) > 0)
+		// 	{
+		// 		RaycastHit2D hit = hits[0];
 
-				Vector3 endPosition = hit.point;
-				endPosition -= m_this.transform.up * m_this.circleCollider.radius;
+		// 		Vector3 endPosition = hit.point;
+		// 		endPosition -= m_this.transform.up * m_this.circleCollider.radius;
 
-				float duration = hit.distance / m_this.currentSpeed;
+		// 		float duration = hit.distance / m_this.currentSpeed;
 
-				m_moveTween = m_this.transform.DOMove(endPosition, duration)
-											  .SetEase(Ease.Linear)
-											  .OnComplete(MoveCompleted);
+		// 		m_moveTween = m_this.transform.DOMove(endPosition, duration)
+		// 									  .SetEase(Ease.Linear)
+		// 									  .OnComplete(MoveCompleted);
 
-				m_directionMoveCompleted = Vector2.Reflect(m_this.transform.up, hit.normal);
-			}
-		}
+		// 		m_directionMoveCompleted = Vector2.Reflect(m_this.transform.up, hit.normal);
+		// 	}
+		// }
 
-		private void MoveCompleted()
-		{
-			m_this.transform.up = m_directionMoveCompleted;
-			Move();
-			SoundManager.PlaySFX(UtilsClass.PickRandomInList(m_bounceSoundIDS));
-		}
+		// private void MoveCompleted()
+		// {
+		// 	m_this.transform.up = m_directionMoveCompleted;
+		// 	Move();
+		// 	SoundManager.PlaySFX(UtilsClass.PickRandomInList(m_bounceSoundIDS));
+		// }
 
-		private void Stop()
-		{
-			if (m_moveTween != null && m_moveTween.IsPlaying())
-				m_moveTween.Kill();
-		}
+		// private void Stop()
+		// {
+		// 	if (m_moveTween != null && m_moveTween.IsPlaying())
+		// 		m_moveTween.Kill();
+		// }
 
-		#endregion
+		// #endregion
 
 	}
 }

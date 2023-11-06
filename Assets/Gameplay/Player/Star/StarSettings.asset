@@ -15,8 +15,13 @@ MonoBehaviour:
   baseSpeed: 5
   speedFromEnergyRatio: 0.05
   squishRatio: 0.1
+  acceleration: 15
+  maxSpeed: 20
+  arrivalDistance: 0.3
   baseEnergy: 40
   energyDepleatRate: 1
   comboBonusEnergyRatio: 0.02
   transferBaseDuration: 0.5
   transferDurationRatio: 0.05
+  pitchShift: 0.1
+  maxPitch: 1.7

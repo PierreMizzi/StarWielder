@@ -4,6 +4,7 @@ namespace PierreMizzi.Gameplay.Players
 	using PierreMizzi.Useful.StateMachines;
 	using DG.Tweening;
 	using UnityEngine;
+	using System.Collections.Generic;
 
 	public class StarStateReturning : StarState
 	{
@@ -13,23 +14,47 @@ namespace PierreMizzi.Gameplay.Players
 			type = (int)StarStateType.Returning;
 		}
 
-		private Tween m_returningTween;
 
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
 			SoundManager.SoundManager.PlaySFX(SoundDataID.STAR_RETURNING);
+			m_this.onCollisionEnter += CallbackCollisionEnter;
 		}
 
-		// public override void Exit()
-		// {
-		// 	base.Exit();
-		// 	// KillReturning();
-		// }
+		private bool m_hasCollided;
+
+		private void CallbackCollisionEnter(GameObject gameObject)
+		{
+			m_hasCollided = true;
+			m_this.rigidbody.velocity = Vector2.zero;
+
+			List<RaycastHit2D> hits = new List<RaycastHit2D>();
+
+			if (Physics2D.Raycast(m_this.transform.position, m_this.transform.up, m_this.obstacleFilter, hits, 100f) > 0)
+			{
+				RaycastHit2D hit = hits[0];
+				Vector3 reflectedDirection = Vector2.Reflect(m_this.transform.up, hit.normal);
+				m_this.transform.up = reflectedDirection;
+				ChangeState((int)StarStateType.Free);
+			}
+
+		}
+
+		public override void Exit()
+		{
+			base.Exit();
+			m_hasCollided = false;
+			m_this.onCollisionEnter -= CallbackCollisionEnter;
+		}
 
 		public override void Update()
 		{
 			base.Update();
+
+			if (m_hasCollided)
+				return;
+
 			m_this.UpdateRotationFromVelocity();
 
 			Vector3 direction = m_this.ship.transform.position - m_this.transform.position;
@@ -52,49 +77,9 @@ namespace PierreMizzi.Gameplay.Players
 			else
 			{
 				// L'objet est arrivé à destination
-				Debug.Log("Arrivé à destination!");
 				ChangeState((int)StarStateType.Transfer);
 			}
 		}
-
-		// private void ReturnToShip()
-		// {
-		// 	float duration = 1;
-
-		// 	Vector3 fromPosition = m_this.transform.position;
-
-		// 	m_returningTween = DOVirtual
-		// 	.Float(
-		// 		0f,
-		// 		1f,
-		// 		duration,
-		// 		(float value) =>
-		// 		{
-		// 			m_this.transform.position = Vector3.LerpUnclamped(fromPosition, m_this.ship.starAnchor.position, value);
-		// 		}
-		// 	)
-		// 	.SetEase(Ease.InBack)
-		// 	.OnComplete(CallbackReturnToShip);
-		// }
-
-		// private void CallbackReturnToShip()
-		// {
-		// 	m_this.rigidbody.velocity = Vector2.zero;
-		// 	ChangeState((int)StarStateType.Transfer);
-		// }
-
-		// private void KillReturning()
-		// {
-		// 	if (m_returningTween != null && m_returningTween.IsPlaying())
-		// 		m_returningTween.Kill();
-		// }
-
-
-
-
-
-
-
 
 	}
 }
