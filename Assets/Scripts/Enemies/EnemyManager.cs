@@ -133,7 +133,6 @@ public class EnemyManager : MonoBehaviour
 
 	[Header("Bullets")]
 	[SerializeField] private Transform m_bulletsContainer;
-	[SerializeField] private List<EnemyBullet> m_enemyBullets = null;
 
 	public Transform bulletsContainer => m_bulletsContainer;
 

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 5
   speedFromEnergyRatio: 0.05
-  squishRatio: 0.1
+  squishRatio: 0.005
+  minScaleFromVelocity: 0.5
   acceleration: 15
   maxSpeed: 20
   arrivalDistance: 0.3

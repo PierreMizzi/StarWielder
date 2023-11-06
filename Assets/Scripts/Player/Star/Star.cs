@@ -116,6 +116,7 @@ namespace PierreMizzi.Gameplay.Players
 		protected void Update()
 		{
 			UpdateState();
+			ManageScaleFromVelocity();
 		}
 
 		private void OnDestroy()
@@ -148,26 +149,6 @@ namespace PierreMizzi.Gameplay.Players
 			if (rigidbody.velocity != Vector2.zero)
 				transform.up = rigidbody.velocity.normalized;
 		}
-
-		// Align up to velocity
-		// private int m_previousPositionFrequency = 4;
-		// private int m_previousPositionFrame;
-		// private Vector3 m_previousPosition;
-
-		// private Vector3 m_up
-
-		// private void UpdateUp()
-		// {
-		// 	m_previousPositionFrame++;
-		// 	if (m_previousPositionFrame > m_previousPositionFrequency)
-		// 	{
-		// 		transform.up = (transform.position - m_previousPosition).normalized;
-
-		// 		m_previousPositionFrame = 0;
-		// 		m_previousPosition = transform.position;
-		// 	}
-		// 	ManageSquish();
-		// }
 
 		#endregion
 
@@ -206,17 +187,17 @@ namespace PierreMizzi.Gameplay.Players
 		private float m_scaleFromVelocity;
 		private Vector3 m_localScaleFromVelocity;
 
-		public void ManageSquish()
+		public void ManageScaleFromVelocity()
 		{
-			// m_currentSquish = 1f - ((currentSpeed / m_settings.baseSpeed) * m_settings.squishRatio);
-			// m_scaleFromVelocity = m_rigidbody
-			// m_localScaleFromVelocity.Set(m_scaleFromVelocity, 1, 1);
-			transform.localScale = Vector3.one;
-		}
-
-		public void ResetSquish()
-		{
-			transform.localScale = Vector3.one;
+			if (m_rigidbody.velocity == Vector2.zero)
+				transform.localScale = Vector3.one;
+			else
+			{
+				m_scaleFromVelocity = 1f - m_rigidbody.velocity.sqrMagnitude * m_settings.squishRatio;
+				m_scaleFromVelocity = Mathf.Clamp(m_scaleFromVelocity, m_settings.minScaleFromVelocity, 1f);
+				m_localScaleFromVelocity.Set(m_scaleFromVelocity, 1, 1);
+				transform.localScale = m_localScaleFromVelocity;
+			}
 		}
 
 		#endregion
@@ -228,7 +209,6 @@ namespace PierreMizzi.Gameplay.Players
 
 		private float m_highestEnergy;
 
-		public bool hasEnergy => m_currentEnergy > 0;
 
 		#endregion
 

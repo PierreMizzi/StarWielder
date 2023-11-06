@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
 		InitializeSoundManager();
 		SetLowCutoff();
 		m_cursorChannel.onSetCursor(CursorType.Aim);
+		Cursor.lockState = CursorLockMode.Confined;
 
 		if (m_gameChannel != null)
 		{

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InGameScreen : MonoBehaviour
+public class HUDScreen : MonoBehaviour
 {
     [SerializeField] private GameChannel m_gameChannel = null;
 

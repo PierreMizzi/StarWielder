@@ -55,6 +55,7 @@ public class EnemyGroup : MonoBehaviour
 	{
 		List<Collider2D> results = new List<Collider2D>();
 		int resultsLength = m_area.OverlapCollider(m_overlapingFilter, results);
+		Debug.Log(resultsLength);
 		return resultsLength > 0;
 	}
 
