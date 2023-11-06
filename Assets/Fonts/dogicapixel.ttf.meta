@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c3214494487645548bd35c3c0a94b04a
+guid: e7766ad55d585704f81a4296aaac63a9
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Pixelify Sans
+  - Dogica Pixel
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

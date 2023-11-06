@@ -36,6 +36,11 @@ public class EnemyGroup : MonoBehaviour
 
 	#region MonoBehaviour
 
+	private void Awake()
+	{
+		m_area = GetComponent<Collider2D>();
+	}
+
 	private void OnDestroy()
 	{
 		m_manager.RemoveEnemyGroup(this);

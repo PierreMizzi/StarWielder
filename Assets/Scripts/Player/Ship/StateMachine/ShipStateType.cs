@@ -1,7 +1,7 @@
 public enum ShipStateType
 {
 	None,
-	Dead,
+	Destroyed,
 	NoPower,
 	EmergencyPower,
 	StarPower,

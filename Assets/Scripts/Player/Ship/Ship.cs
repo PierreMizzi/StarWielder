@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
 using TMPro;
@@ -18,6 +19,8 @@ namespace PierreMizzi.Gameplay.Players
 		[SerializeField] private PlayerChannel m_playerChannel = null;
 		[SerializeField] private GameChannel m_gameChannel = null;
 		[SerializeField] private CameraChannel m_cameraChannel = null;
+
+		public GameChannel gameChannel => m_gameChannel;
 
 		#endregion
 
@@ -49,6 +52,7 @@ namespace PierreMizzi.Gameplay.Players
 				new ShipStateNoPower(this),
 				new ShipStateStarPower(this),
 				new ShipStateEmergencyPower(this),
+				new ShipStateDestroyed(this),
 			};
 
 			ChangeState(m_initialState);
@@ -206,7 +210,7 @@ namespace PierreMizzi.Gameplay.Players
 			m_cameraChannel.onShipHurt.Invoke();
 
 			if (m_currentHealth <= 0)
-				m_gameChannel.onGameOver.Invoke(GameOverReason.ShipDestroyed);
+				ChangeState(ShipStateType.Destroyed);
 		}
 
 		#endregion
@@ -215,6 +219,9 @@ namespace PierreMizzi.Gameplay.Players
 
 		private Animator m_animator = null;
 		public Animator animator => m_animator;
+
+
+		public const string k_boolIsDead = "IsDead";
 
 		public const string k_boolHasEnergy = "HasEnergy";
 		public const string k_boolIsDashing = "IsDashing";

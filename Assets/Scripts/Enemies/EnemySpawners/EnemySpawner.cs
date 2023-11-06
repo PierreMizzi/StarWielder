@@ -36,8 +36,7 @@ public class EnemySpawner : MonoBehaviour
 		{
 			SetEnemyGroupTransform(newEnemyGroup);
 
-			// yield return new WaitForEndOfFrame();
-			yield return new WaitForSeconds(1f);
+			yield return new WaitForEndOfFrame();
 
 			if (newEnemyGroup.CheckIsOverlaping())
 			{
