@@ -2,6 +2,8 @@ using PierreMizzi.SoundManager;
 using PierreMizzi.Useful;
 using UnityEngine;
 using UnityEngine.Audio;
+using DG.Tweening;
+using System;
 
 public class Sandbox : MonoBehaviour
 {
@@ -9,6 +11,16 @@ public class Sandbox : MonoBehaviour
 	#region Trigger 2D
 
 	// [SerializeField] private LayerMask m_layerMask;
+
+	// [SerializeField] private Transform m_targetDestination = null;
+
+	// [SerializeField] private float m_duration = 5f;
+
+	// private void Update()
+	// {
+	// 	if (Input.GetKeyDown(KeyCode.S))
+	// 		TweenTarget();
+	// }
 
 	// private void OnTriggerEnter2D(Collider2D other)
 	// {
@@ -18,46 +30,78 @@ public class Sandbox : MonoBehaviour
 	// 	}
 	// }
 
+	// private void TweenTarget()
+	// {
+	// 	transform.position = Vector3.zero;
+	// 	transform.DOMove(m_targetDestination.position, m_duration);
+
+	// }
+
 	#endregion
 
-	#region Pitch Variation
+	#region Test Physic
 
-	[SerializeField] private SoundManagerToolSettings m_soundManagerSettings;
+	[SerializeField] private Rigidbody2D m_rigidbody2D;
 
-	[SerializeField] private SoundSource m_soundSource;
+	[SerializeField] private Transform m_targetReturn;
 
-	[SerializeField] private float m_basePitchValue = 1f;
+	private int m_previousPositionFrequency = 2;
+	private int m_previousPositionFrame;
+	private Vector3 m_previousPosition;
 
-	[SerializeField] private float m_pitchShift = 0.1f;
-
-	private const string k_pitchParameterName = "EnemyStarPitch";
 
 	private void Awake()
 	{
-		SoundManager.Init("SoundManager");
+		// m_rigidbody2D.velocity = transform.up;
 	}
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-			PlayAtPitch(1f);
-		else if (Input.GetKeyDown(KeyCode.Alpha2))
-			PlayAtPitch(2f);
-		else if (Input.GetKeyDown(KeyCode.Alpha3))
-			PlayAtPitch(3f);
-		else if (Input.GetKeyDown(KeyCode.Alpha4))
-			PlayAtPitch(4f);
-		else if (Input.GetKeyDown(KeyCode.Alpha5))
-			PlayAtPitch(5f);
+		if (Input.GetKeyDown(KeyCode.S))
+			Force();
+
+		else if (Input.GetKeyDown(KeyCode.T))
+			ToTarget();
+
+
+		if (m_isAimingTarget)
+			m_rigidbody2D.AddForce(m_toTargetDirection * m_toTargetAcceleration);
+		else
+		{
+			m_previousPositionFrame++;
+			if (m_previousPositionFrame > m_previousPositionFrequency)
+			{
+				transform.up = (transform.position - m_previousPosition).normalized;
+
+				m_previousPositionFrame = 0;
+				m_previousPosition = transform.position;
+			}
+		}
 	}
 
-	private void PlayAtPitch(float pitchShiftIndex)
+	private void Force()
 	{
-		float pitch = m_basePitchValue + pitchShiftIndex * m_pitchShift;
-		Debug.Log(pitch);
-		m_soundSource.audioMixerGroup.audioMixer.SetFloat(k_pitchParameterName, pitch);
-		m_soundSource.Play();
+		m_rigidbody2D.AddForce(transform.up, ForceMode2D.Impulse);
 	}
+
+	[SerializeField] private bool m_isAimingTarget;
+	private Vector2 m_toTargetDirection;
+	[SerializeField] private float m_toTargetAcceleration;
+
+	private void ToTarget()
+	{
+		m_rigidbody2D.velocity = Vector2.zero;
+
+		m_isAimingTarget = true;
+		m_toTargetDirection = (m_targetReturn.position - transform.position).normalized;
+		transform.up = m_toTargetDirection;
+
+		float m_magnitude = (transform.position - m_targetReturn.position).magnitude;
+
+		float duration = Mathf.Sqrt(2f * m_magnitude / m_toTargetAcceleration);
+		DOVirtual.DelayedCall(duration, Debug.Break);
+	}
+
 
 	#endregion
 

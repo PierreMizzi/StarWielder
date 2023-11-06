@@ -69,7 +69,6 @@ namespace PierreMizzi.Gameplay.Players
 
 				Vector3 endPosition = hit.point;
 				endPosition -= m_this.transform.up * m_this.circleCollider.radius;
-				Debug.DrawLine(m_this.transform.position, hit.point, Color.blue, 3);
 
 				float duration = hit.distance / m_this.currentSpeed;
 

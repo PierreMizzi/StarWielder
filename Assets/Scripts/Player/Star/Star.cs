@@ -94,6 +94,8 @@ namespace PierreMizzi.Gameplay.Players
 
 		protected void Awake()
 		{
+			onTriggerEnter2D = (GameObject other) => { };
+
 			m_circleCollider = GetComponent<CircleCollider2D>();
 			m_currentEnergy = m_settings.baseEnergy;
 
@@ -127,8 +129,8 @@ namespace PierreMizzi.Gameplay.Players
 			if (UtilsClass.CheckLayer(m_enemyLayer.value, other.gameObject.layer))
 				CollideWithEnemy(other);
 
-			// if (UtilsClass.CheckLayer(m_bounceLayer.value, other.gameObject.layer))
-			//     Bounce();
+			if (UtilsClass.CheckLayer(m_obstacleFilter.layerMask.value, other.gameObject.layer))
+				onTriggerEnter2D.Invoke(other.gameObject);
 		}
 
 		#endregion
@@ -194,10 +196,12 @@ namespace PierreMizzi.Gameplay.Players
 
 		[Header("Obstacle")]
 		[SerializeField] private ContactFilter2D m_obstacleFilter;
-		[SerializeField] private CircleCollider2D m_circleCollider;
-
 		public ContactFilter2D obstacleFilter => m_obstacleFilter;
+
+		private CircleCollider2D m_circleCollider;
 		public CircleCollider2D circleCollider => m_circleCollider;
+
+		public GameObjectDelegate onTriggerEnter2D;
 
 		#endregion
 

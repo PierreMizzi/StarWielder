@@ -20,12 +20,16 @@ namespace PierreMizzi.Gameplay.Players
 			base.DefaultEnter();
 			SoundManager.SoundManager.PlaySFX(SoundDataID.STAR_RETURNING);
 			ReturnToShip();
+			m_this.onTriggerEnter2D += CallbackTriggerEnter2D;
+			m_this.ResetSquish();
 		}
 
 		public override void Exit()
 		{
 			base.Exit();
 			KillReturning();
+			m_this.onTriggerEnter2D -= CallbackTriggerEnter2D;
+
 		}
 
 		private void ReturnToShip()
@@ -57,6 +61,33 @@ namespace PierreMizzi.Gameplay.Players
 		{
 			if (m_returningTween != null && m_returningTween.IsPlaying())
 				m_returningTween.Kill();
+		}
+
+		private Vector3 m_previousPosition;
+
+		private int m_previousPositionFrequency = 10;
+		private int m_previousPositionFrame;
+
+
+		public override void Update()
+		{
+			base.Update();
+
+			m_previousPositionFrame++;
+			if (m_previousPositionFrame > m_previousPositionFrequency)
+			{
+				m_previousPositionFrame = 0;
+				m_previousPosition = m_this.transform.position;
+			}
+		}
+
+		private void CallbackTriggerEnter2D(GameObject GameObject)
+		{
+			Debug.DrawLine(m_previousPosition, m_this.transform.position, Color.red, 10);
+			KillReturning();
+
+			m_this.transform.up *= -1;
+			ChangeState((int)StarStateType.Free);
 		}
 
 	}
