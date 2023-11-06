@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnergyTransferShakeSettings
   m_EditorClassIdentifier: 
   m_duration: 1
-  m_strength: {x: 0.04, y: 0.04, z: 0}
+  m_strength: {x: 0.06, y: 0.06, z: 0}
   m_vibrato: 40
   m_randomness: 70
   m_snapping: 0
