@@ -94,7 +94,8 @@ namespace PierreMizzi.Gameplay.Players
 
 		protected void Awake()
 		{
-			onCollisionEnter = (GameObject other) => { };
+			onCollisionEnter2D = (Collision2D other) => { };
+			onTriggerEnter2D = (Collider2D other) => { };
 
 			m_circleCollider = GetComponent<CircleCollider2D>();
 			m_rigidbody = GetComponent<Rigidbody2D>();
@@ -129,14 +130,15 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void OnCollisionEnter2D(Collision2D other)
 		{
-			if (UtilsClass.CheckLayer(m_obstacleFilter.layerMask.value, other.gameObject.layer))
-				onCollisionEnter.Invoke(other.gameObject);
+			onCollisionEnter2D.Invoke(other);
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			if (isOnShip)
 				return;
+
+			onTriggerEnter2D.Invoke(other);
 
 			if (UtilsClass.CheckLayer(m_enemyLayer.value, other.gameObject.layer))
 				AbsorbEnemyStar(other);
@@ -234,7 +236,8 @@ namespace PierreMizzi.Gameplay.Players
 		public CircleCollider2D circleCollider => m_circleCollider;
 		public new Rigidbody2D rigidbody => m_rigidbody;
 
-		public GameObjectDelegate onCollisionEnter;
+		public Collision2DDelegate onCollisionEnter2D;
+		public Collider2DDelegate onTriggerEnter2D;
 
 		#endregion
 
@@ -245,8 +248,7 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void AbsorbEnemyStar(Collider2D other)
 		{
-			Enemy enemyStar;
-			if (other.gameObject.TryGetComponent(out enemyStar))
+			if (other.gameObject.TryGetComponent(out Enemy enemyStar))
 			{
 				PlayStarComboSFX();
 				m_currentCombo += 1;

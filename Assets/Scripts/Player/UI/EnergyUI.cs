@@ -59,8 +59,6 @@ public class EnergyUI : MonoBehaviour
 
 	private void CallbackIncrementEnergy(float currentStarEnergy)
 	{
-		KillIncrementTween();
-
 		float fromStarEnergy = m_displayedStarEnergy;
 		m_incrementTween = DOVirtual
 		.Float(
@@ -74,12 +72,6 @@ public class EnergyUI : MonoBehaviour
 			}
 		)
 		.SetEase(Ease.OutCubic);
-	}
-
-	private void KillIncrementTween()
-	{
-		if (m_incrementTween != null && m_incrementTween.IsPlaying())
-			m_incrementTween.Kill();
 	}
 
 	#endregion

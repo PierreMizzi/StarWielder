@@ -5,6 +5,7 @@ namespace PierreMizzi.Gameplay.Players
 	using DG.Tweening;
 	using UnityEngine;
 	using System.Collections.Generic;
+	using PierreMizzi.Useful;
 
 	public class StarStateReturning : StarState
 	{
@@ -14,38 +15,46 @@ namespace PierreMizzi.Gameplay.Players
 			type = (int)StarStateType.Returning;
 		}
 
-
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
 			SoundManager.SoundManager.PlaySFX(SoundDataID.STAR_RETURNING);
-			m_this.onCollisionEnter += CallbackCollisionEnter;
+			m_this.onCollisionEnter2D += CallbackCollisionEnter;
+			m_this.onTriggerEnter2D += CallbackTriggerEnter;
 		}
 
 		private bool m_hasCollided;
 
-		private void CallbackCollisionEnter(GameObject gameObject)
+		private void CallbackTriggerEnter(Collider2D other)
 		{
-			m_hasCollided = true;
-			m_this.rigidbody.velocity = Vector2.zero;
+			if (other.gameObject == m_this.ship.gameObject)
+				ChangeState((int)StarStateType.Docked);
+		}
 
-			List<RaycastHit2D> hits = new List<RaycastHit2D>();
-
-			if (Physics2D.Raycast(m_this.transform.position, m_this.transform.up, m_this.obstacleFilter, hits, 100f) > 0)
+		private void CallbackCollisionEnter(Collision2D other)
+		{
+			if (UtilsClass.CheckLayer(m_this.obstacleFilter.layerMask.value, other.gameObject.layer))
 			{
-				RaycastHit2D hit = hits[0];
-				Vector3 reflectedDirection = Vector2.Reflect(m_this.transform.up, hit.normal);
-				m_this.transform.up = reflectedDirection;
-				ChangeState((int)StarStateType.Free);
-			}
+				m_hasCollided = true;
+				m_this.rigidbody.velocity = Vector2.zero;
 
+				List<RaycastHit2D> hits = new List<RaycastHit2D>();
+
+				if (Physics2D.Raycast(m_this.transform.position, m_this.transform.up, m_this.obstacleFilter, hits, 100f) > 0)
+				{
+					RaycastHit2D hit = hits[0];
+					Vector3 reflectedDirection = Vector2.Reflect(m_this.transform.up, hit.normal);
+					m_this.transform.up = reflectedDirection;
+					ChangeState((int)StarStateType.Free);
+				}
+			}
 		}
 
 		public override void Exit()
 		{
 			base.Exit();
 			m_hasCollided = false;
-			m_this.onCollisionEnter -= CallbackCollisionEnter;
+			m_this.onCollisionEnter2D -= CallbackCollisionEnter;
 		}
 
 		public override void Update()
@@ -62,23 +71,14 @@ namespace PierreMizzi.Gameplay.Players
 
 			if (distance > m_this.settings.arrivalDistance)
 			{
-				// Calcule la vitesse souhaitée en fonction de l'accélération
 				float desiredSpeed = Mathf.Sqrt(2f * m_this.settings.acceleration * distance);
-
-				// Limite la vitesse à la vitesse maximale
 				float finalSpeed = Mathf.Min(desiredSpeed, m_this.settings.maxSpeed);
-
-				// Calcule la direction de déplacement
 				Vector3 velocity = direction.normalized * finalSpeed;
 
-				// Applique la vélocité à l'objet
 				m_this.rigidbody.velocity = velocity;
 			}
 			else
-			{
-				// L'objet est arrivé à destination
 				ChangeState((int)StarStateType.Transfer);
-			}
 		}
 
 	}

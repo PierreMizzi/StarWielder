@@ -1,3 +1,4 @@
+using System;
 using PierreMizzi.Useful;
 using UnityEngine;
 
@@ -12,15 +13,45 @@ public class EnemyBullet : MonoBehaviour
 
     [SerializeField] private LayerMask m_destroyLayerMask;
 
+    private bool m_isMoving = true;
+
+    private Animator m_animator = null;
+
+    private const string k_triggerIsWall = "IsWall";
+    private const string k_triggerIsShip = "IsShip";
+
+    private void Awake()
+    {
+        m_animator = GetComponent<Animator>();
+    }
+
     private void Update()
     {
-        transform.position += transform.up * m_speed * Time.deltaTime;
+        if (m_isMoving)
+            transform.position += transform.up * m_speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (UtilsClass.CheckLayer(m_destroyLayerMask.value, other.gameObject.layer))
-            Destroy(gameObject);
+            HitWall();
+    }
+
+    private void HitWall()
+    {
+        m_isMoving = false;
+        m_animator.SetTrigger(k_triggerIsWall);
+    }
+
+    public void HitShip()
+    {
+        m_isMoving = false;
+        m_animator.SetTrigger(k_triggerIsShip);
+    }
+
+    public void AnimEventDestroy()
+    {
+        Destroy(gameObject);
     }
 
 }

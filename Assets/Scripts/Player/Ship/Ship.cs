@@ -198,19 +198,23 @@ namespace PierreMizzi.Gameplay.Players
 		private void CheckIsBullet(Collider2D other)
 		{
 			if (UtilsClass.CheckLayer(m_damageLayerMask.value, other.gameObject.layer))
-				HitByBullet(other.GetComponent<EnemyBullet>());
+				HitByBullet(other);
 		}
 
-		private void HitByBullet(EnemyBullet bullet)
+		private void HitByBullet(Collider2D other)
 		{
-			Destroy(bullet.gameObject);
-			m_currentHealth -= bullet.damage;
-			m_playerChannel.onRefreshHealth.Invoke(m_currentHealth / m_settings.maxHealth);
+			if (other.TryGetComponent(out EnemyBullet bullet))
+			{
+				bullet.HitShip();
 
-			m_cameraChannel.onShipHurt.Invoke();
+				m_currentHealth -= bullet.damage;
+				m_playerChannel.onRefreshHealth.Invoke(m_currentHealth / m_settings.maxHealth);
 
-			if (m_currentHealth <= 0)
-				ChangeState(ShipStateType.Destroyed);
+				m_cameraChannel.onShipHurt.Invoke();
+
+				if (m_currentHealth <= 0)
+					ChangeState(ShipStateType.Destroyed);
+			}
 		}
 
 		#endregion
