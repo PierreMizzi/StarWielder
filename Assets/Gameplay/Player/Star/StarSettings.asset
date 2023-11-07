@@ -18,7 +18,7 @@ MonoBehaviour:
   minScaleFromVelocity: 0.5
   acceleration: 15
   maxSpeed: 20
-  arrivalDistance: 0.3
+  arrivalDistance: 1
   baseEnergy: 40
   energyDepleatRate: 1
   comboBonusEnergyRatio: 0.02

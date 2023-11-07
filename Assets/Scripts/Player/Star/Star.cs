@@ -98,6 +98,8 @@ namespace PierreMizzi.Gameplay.Players
 
 			m_circleCollider = GetComponent<CircleCollider2D>();
 			m_rigidbody = GetComponent<Rigidbody2D>();
+			m_animator = GetComponent<Animator>();
+
 			m_currentEnergy = m_settings.baseEnergy;
 
 			InitializeStates();
@@ -137,7 +139,7 @@ namespace PierreMizzi.Gameplay.Players
 				return;
 
 			if (UtilsClass.CheckLayer(m_enemyLayer.value, other.gameObject.layer))
-				CollideWithEnemy(other);
+				AbsorbEnemyStar(other);
 		}
 
 		#endregion
@@ -206,9 +208,18 @@ namespace PierreMizzi.Gameplay.Players
 
 		private float m_currentEnergy;
 		public float currentEnergy { get { return m_currentEnergy; } set { m_currentEnergy = Mathf.Max(0f, value); } }
-
 		private float m_highestEnergy;
 
+		private int m_currentCombo = 1;
+		public int currentCombo { get { return m_currentCombo; } set { m_currentCombo = value; } }
+
+		private float ComputeComboBonusEnergy(float gainedEnergy)
+		{
+			if (m_currentCombo == 1)
+				return 0;
+			else
+				return gainedEnergy * m_currentCombo * m_settings.comboBonusEnergyRatio;
+		}
 
 		#endregion
 
@@ -227,24 +238,23 @@ namespace PierreMizzi.Gameplay.Players
 
 		#endregion
 
-		#region Enemy
+		#region EnemyStar
 
-		[Header("Enemy")]
+		[Header("EnemyStar")]
 		[SerializeField] private LayerMask m_enemyLayer;
 
-		private int m_currentCombo = 1;
-		public int currentCombo { get { return m_currentCombo; } set { m_currentCombo = value; } }
-
-		private void CollideWithEnemy(Collider2D other)
+		private void AbsorbEnemyStar(Collider2D other)
 		{
-			Enemy enemy;
-			if (other.gameObject.TryGetComponent(out enemy))
+			Enemy enemyStar;
+			if (other.gameObject.TryGetComponent(out enemyStar))
 			{
 				m_currentCombo += 1;
 				m_playerChannel.onRefreshStarCombo.Invoke(m_currentCombo);
 				PlayStarComboSFX();
 
-				m_currentEnergy += enemy.energy + ComputeComboBonusEnergy(enemy.energy);
+				m_currentEnergy += enemyStar.energy + ComputeComboBonusEnergy(enemyStar.energy);
+
+				m_animator.SetTrigger(k_triggerAbsorb);
 
 				if (m_currentEnergy > m_highestEnergy)
 				{
@@ -253,16 +263,8 @@ namespace PierreMizzi.Gameplay.Players
 				}
 
 				m_playerChannel.onRefreshStarEnergy.Invoke(m_currentEnergy);
-				Destroy(enemy.gameObject);
+				Destroy(enemyStar.gameObject);
 			}
-		}
-
-		private float ComputeComboBonusEnergy(float gainedEnergy)
-		{
-			if (m_currentCombo == 1)
-				return 0;
-			else
-				return gainedEnergy * m_currentCombo * m_settings.comboBonusEnergyRatio;
 		}
 
 		#region Audio
@@ -280,6 +282,14 @@ namespace PierreMizzi.Gameplay.Players
 		}
 
 		#endregion
+
+		#endregion
+
+		#region Animations
+
+		private Animator m_animator;
+
+		private const string k_triggerAbsorb = "Absorb";
 
 		#endregion
 
