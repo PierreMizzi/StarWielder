@@ -4,6 +4,17 @@ using PierreMizzi.Gameplay.Players;
 using PierreMizzi.Useful;
 using UnityEngine;
 
+/* New enemies
+
+	1. Black Hole (Absorbe energy)
+		+ Facile à mettre en place
+		+ Résouds mon problème de perte d'energie
+		- Assez lazy
+
+	2. Space Storm :  Zone qui ralentie 
+
+*/
+
 public class EnemyManager : MonoBehaviour
 {
 

@@ -39,8 +39,6 @@ namespace PierreMizzi.Gameplay.Players
 			m_this.mouseClickAction.action.performed -= CallbackMouseClick;
 			m_this.cameraChannel.onStopEnergyTransfer.Invoke();
 			m_transferSoundSource.FadeOut(0.1f);
-
-			KillTransfer();
 		}
 
 		private void TransferEnergy()
@@ -88,16 +86,10 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void CallbackMouseClick(InputAction.CallbackContext context)
 		{
-			KillTransfer();
-
 			ChangeState((int)StarStateType.Free);
 		}
 
-		private void KillTransfer()
-		{
-			if (m_transferTween != null && m_transferTween.IsPlaying())
-				m_transferTween.Kill();
-		}
+
 
 	}
 

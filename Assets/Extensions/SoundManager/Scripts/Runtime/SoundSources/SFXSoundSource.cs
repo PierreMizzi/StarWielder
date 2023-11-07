@@ -8,11 +8,22 @@ namespace PierreMizzi.SoundManager
 
 		#region Fields 
 
-		protected override void AudioClipEnded()
+		private void Release()
 		{
 			UnsetSoundData();
-			onAudioClipEnded?.Invoke();
 			SoundManager.ReleaseSFXSSToPool(this);
+		}
+
+		protected override void AudioClipEnded()
+		{
+			base.AudioClipEnded();
+			Release();
+		}
+
+		protected override void FadeOutComplete()
+		{
+			base.FadeOutComplete();
+			Release();
 		}
 
 		#endregion

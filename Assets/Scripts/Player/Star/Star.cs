@@ -169,6 +169,7 @@ namespace PierreMizzi.Gameplay.Players
 		{
 			isOnShip = false;
 			transform.SetParent(null);
+			m_circleCollider.enabled = true;
 		}
 
 		public void SetOnShip()
@@ -176,6 +177,8 @@ namespace PierreMizzi.Gameplay.Players
 			isOnShip = true;
 
 			m_rigidbody.velocity = Vector2.zero;
+
+			m_circleCollider.enabled = false;
 
 			transform.SetParent(ship.starAnchor);
 			transform.localPosition = Vector2.zero;
@@ -225,14 +228,14 @@ namespace PierreMizzi.Gameplay.Players
 
 		#endregion
 
-		#region Obstacle
+		#region Physics
 
-		[Header("Obstacle")]
+		[Header("Physics")]
 		[SerializeField] private ContactFilter2D m_obstacleFilter;
-		public ContactFilter2D obstacleFilter => m_obstacleFilter;
-
 		private CircleCollider2D m_circleCollider;
 		private Rigidbody2D m_rigidbody;
+
+		public ContactFilter2D obstacleFilter => m_obstacleFilter;
 		public CircleCollider2D circleCollider => m_circleCollider;
 		public new Rigidbody2D rigidbody => m_rigidbody;
 

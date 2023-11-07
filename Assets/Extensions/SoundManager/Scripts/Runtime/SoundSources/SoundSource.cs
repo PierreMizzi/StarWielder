@@ -64,13 +64,25 @@ namespace PierreMizzi.SoundManager
 			Initialize();
 		}
 
+		public float clipLength;
+		public float clipTime;
+
+		public bool clipEndedApprox;
+		public bool clipEndedCompare;
+
 		protected virtual void Update()
 		{
-			if (m_audioSource != null && m_audioSource.clip != null)
-			{
-				if ((m_audioSource.clip.length - m_audioSource.time) < 0.01f)
-					AudioClipEnded();
-			}
+			// if (m_audioSource != null && m_audioSource.clip != null)
+			// {
+			// 	clipLength = m_audioSource.clip.length;
+			// 	clipTime = m_audioSource.time;
+
+			// 	clipEndedApprox = Mathf.Approximately(m_audioSource.clip.length - m_audioSource.time, 0f);
+			// 	clipEndedCompare = m_audioSource.clip.length - m_audioSource.time < 0.01f;
+
+			// 	if (clipEndedApprox)
+			// 		AudioClipEnded();
+			// }
 		}
 
 		#endregion
@@ -100,30 +112,42 @@ namespace PierreMizzi.SoundManager
 		#region Control Behaviour
 
 		[ContextMenu("Play")]
-		public void Play()
+		public virtual void Play()
 		{
 			if (m_audioSource.clip != null)
 			{
+				StartCheckAudioEnded();
 				m_audioSource.Play();
 				state = SoundSourceState.Playing;
 			}
 		}
 
-		public void Pause()
+		public virtual void Pause()
 		{
 			if (m_audioSource.isPlaying)
 			{
+				PauseCheckAudioEnded();
 				m_audioSource.Pause();
 				state = SoundSourceState.Pause;
 			}
 		}
 
-		public void Stop()
+		public virtual void Stop()
 		{
+			StopCheckAudioEnded();
 			m_audioSource.Stop();
 			m_audioSource.clip = null;
 			m_audioSource.outputAudioMixerGroup = null;
 			state = SoundSourceState.None;
+		}
+
+		public virtual void Restart()
+		{
+			StopCheckAudioEnded();
+			m_audioSource.Stop();
+
+			StartCheckAudioEnded();
+			m_audioSource.Play();
 		}
 
 		public void FadeInFromZero(float duration, float toVolume = 1)
@@ -146,7 +170,10 @@ namespace PierreMizzi.SoundManager
 			state = SoundSourceState.FadeIn;
 
 			if (!m_audioSource.isPlaying)
+			{
+				StartCheckAudioEnded();
 				m_audioSource.Play();
+			}
 
 			m_audioSource
 				.DOFade(toVolume, duration)
@@ -154,8 +181,13 @@ namespace PierreMizzi.SoundManager
 				.OnComplete(() =>
 				{
 					onComplete?.Invoke();
-					state = SoundSourceState.Playing;
+					FadeInComplete();
 				});
+		}
+
+		protected virtual void FadeInComplete()
+		{
+			state = SoundSourceState.Playing;
 		}
 
 		/// <summary>
@@ -176,8 +208,14 @@ namespace PierreMizzi.SoundManager
 				.OnComplete(() =>
 				{
 					onComplete?.Invoke();
-					state = SoundSourceState.None;
+					FadeOutComplete();
 				});
+		}
+
+		protected virtual void FadeOutComplete()
+		{
+			state = SoundSourceState.None;
+			StopCheckAudioEnded();
 		}
 
 		public void FadeTransition(string soundDataID, float duration = 0, Action onComplete = null)
@@ -192,12 +230,6 @@ namespace PierreMizzi.SoundManager
 			});
 		}
 
-		public void Restart()
-		{
-			m_audioSource.Stop();
-			m_audioSource.Play();
-		}
-
 		#endregion
 
 		#region Callbacks
@@ -205,9 +237,12 @@ namespace PierreMizzi.SoundManager
 		protected virtual void AudioClipEnded()
 		{
 			if (m_audioSource.loop)
-				onAudioClipEnded?.Invoke();
-			else
 				onAudioClipLooped?.Invoke();
+			else
+			{
+				StopCheckAudioEnded();
+				onAudioClipEnded?.Invoke();
+			}
 		}
 
 		#endregion
@@ -262,6 +297,59 @@ namespace PierreMizzi.SoundManager
 		{
 			if (m_audioSource == null)
 				m_audioSource = GetComponent<AudioSource>();
+		}
+
+		#endregion
+
+		#region Check Audio Ended
+
+		private IEnumerator m_checkAudioEnded;
+
+		private float m_playTime = 0;
+
+		private void StartCheckAudioEnded()
+		{
+			m_playTime = 0;
+			if (m_checkAudioEnded == null)
+			{
+				m_checkAudioEnded = CheckAudioEndedCoroutine();
+				StartCoroutine(m_checkAudioEnded);
+			}
+		}
+
+		private void StopCheckAudioEnded()
+		{
+			m_playTime = 0;
+			if (m_checkAudioEnded != null)
+			{
+				StopCoroutine(m_checkAudioEnded);
+				m_checkAudioEnded = null;
+			}
+		}
+
+		private void PauseCheckAudioEnded()
+		{
+			if (m_checkAudioEnded != null)
+				StopCoroutine(m_checkAudioEnded);
+		}
+
+		private IEnumerator CheckAudioEndedCoroutine()
+		{
+			while (true)
+			{
+				m_playTime += Time.deltaTime;
+
+				clipLength = m_audioSource.clip.length;
+				clipTime = m_audioSource.time;
+
+				if (name == "Debug")
+					Debug.Log(m_playTime);
+
+				if (m_playTime > m_audioSource.clip.length)
+					AudioClipEnded();
+
+				yield return null;
+			}
 		}
 
 		#endregion

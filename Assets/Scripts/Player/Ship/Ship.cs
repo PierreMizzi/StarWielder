@@ -106,7 +106,7 @@ namespace PierreMizzi.Gameplay.Players
 			UpdateState();
 
 			if (Input.GetKeyDown(KeyCode.M))
-				m_gameChannel.onGameOver.Invoke(GameOverReason.ShipDestroyed);
+				SoundManager.SoundManager.PlaySFX(SoundDataID.SHIP_DASH);
 		}
 
 		private void LateUpdate()

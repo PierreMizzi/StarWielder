@@ -55,6 +55,7 @@ namespace PierreMizzi.Gameplay.Players
 			base.Exit();
 			m_hasCollided = false;
 			m_this.onCollisionEnter2D -= CallbackCollisionEnter;
+			m_this.onTriggerEnter2D -= CallbackTriggerEnter;
 		}
 
 		public override void Update()
