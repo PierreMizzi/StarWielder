@@ -170,9 +170,10 @@ namespace PierreMizzi.Gameplay.Players
 			isOnShip = false;
 			transform.SetParent(null);
 			m_circleCollider.enabled = true;
+			m_playerChannel.onStarFree.Invoke();
 		}
 
-		public void SetOnShip()
+		public void SetDocked()
 		{
 			isOnShip = true;
 
@@ -183,6 +184,8 @@ namespace PierreMizzi.Gameplay.Players
 			transform.SetParent(ship.starAnchor);
 			transform.localPosition = Vector2.zero;
 			transform.localRotation = Quaternion.identity;
+
+			m_playerChannel.onStarDocked.Invoke();
 		}
 
 		#endregion

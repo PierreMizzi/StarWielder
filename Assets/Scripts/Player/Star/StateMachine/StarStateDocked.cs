@@ -39,7 +39,7 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void DockStar()
 		{
-			m_this.SetOnShip();
+			// m_this.SetDocked();
 
 			m_this.currentCombo = 1;
 			m_this.playerChannel.onRefreshStarCombo.Invoke(m_this.currentCombo);

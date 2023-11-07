@@ -12,6 +12,8 @@ namespace PierreMizzi.Gameplay.Players
 
 		public FloatDelegate onAbsorbEnemyStar;
 		public FloatDelegate onRefreshStarEnergy;
+		public Action onStarDocked;
+		public Action onStarFree;
 
 		#endregion
 
@@ -39,6 +41,8 @@ namespace PierreMizzi.Gameplay.Players
 		{
 			onAbsorbEnemyStar = (float energy) => { };
 			onRefreshStarEnergy = (float energy) => { };
+			onStarDocked = () => { };
+			onStarFree = () => { };
 
 			onUseDash = () => { };
 			onRefreshCooldownDash = (float value) => { };

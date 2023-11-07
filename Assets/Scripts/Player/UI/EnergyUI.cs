@@ -15,12 +15,15 @@ public class EnergyUI : MonoBehaviour
 
 	private void CallbackRefreshStarEnergy(float starEnergy)
 	{
-		m_displayedStarEnergy = starEnergy;
-		SetStarEnergyLabel();
+		SetStarEnergy(starEnergy);
 	}
-	private void SetStarEnergyLabel()
+
+	private void SetStarEnergy(float starEnergy)
 	{
+		m_displayedStarEnergy = starEnergy;
+
 		m_starEnergyLabel.text = String.Format("{0:0.0}", m_displayedStarEnergy) + "<size=40%>K</size>";
+		m_animator.SetFloat(k_floatStarEnergy, m_displayedStarEnergy);
 	}
 
 	#endregion
@@ -28,10 +31,18 @@ public class EnergyUI : MonoBehaviour
 
 	#region MonoBehaviour
 
+	private void Awake()
+	{
+		m_animator = GetComponent<Animator>();
+	}
+
 	private void Start()
 	{
 		if (m_playerChannel != null)
 		{
+			m_playerChannel.onStarDocked += CallbackStarDocked;
+			m_playerChannel.onStarFree += CallbackStarFree;
+
 			m_playerChannel.onAbsorbEnemyStar += CallbackIncrementEnergy;
 			m_playerChannel.onRefreshStarEnergy += CallbackRefreshStarEnergy;
 		}
@@ -41,6 +52,9 @@ public class EnergyUI : MonoBehaviour
 	{
 		if (m_playerChannel != null)
 		{
+			m_playerChannel.onStarDocked -= CallbackStarDocked;
+			m_playerChannel.onStarFree -= CallbackStarFree;
+
 			m_playerChannel.onAbsorbEnemyStar -= CallbackIncrementEnergy;
 			m_playerChannel.onRefreshStarEnergy -= CallbackRefreshStarEnergy;
 		}
@@ -49,7 +63,7 @@ public class EnergyUI : MonoBehaviour
 
 	#endregion
 
-	#region Increment Animation
+	#region Increment Tween
 
 	[SerializeField] private float m_incrementDuration = 0.75f;
 
@@ -59,19 +73,42 @@ public class EnergyUI : MonoBehaviour
 
 	private void CallbackIncrementEnergy(float currentStarEnergy)
 	{
+		m_animator.SetTrigger(k_triggerIncrement);
+
 		float fromStarEnergy = m_displayedStarEnergy;
 		m_incrementTween = DOVirtual
 		.Float(
 			fromStarEnergy,
 			currentStarEnergy,
 			m_incrementDuration,
-			(float value) =>
+			(float starEnergy) =>
 			{
-				m_displayedStarEnergy = value;
-				SetStarEnergyLabel();
+				SetStarEnergy(starEnergy);
 			}
 		)
 		.SetEase(Ease.OutCubic);
+	}
+
+	#endregion
+
+	#region Animations
+
+	[Header("Animations")]
+
+	private Animator m_animator;
+
+	private const string k_boolIsStarDocked = "IsStarDocked";
+	private const string k_triggerIncrement = "Increment";
+	private const string k_floatStarEnergy = "StarEnergy";
+
+	private void CallbackStarDocked()
+	{
+		m_animator.SetBool(k_boolIsStarDocked, true);
+	}
+
+	private void CallbackStarFree()
+	{
+		m_animator.SetBool(k_boolIsStarDocked, false);
 	}
 
 	#endregion

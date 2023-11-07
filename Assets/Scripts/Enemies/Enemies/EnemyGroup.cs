@@ -57,7 +57,7 @@ public class EnemyGroup : MonoBehaviour
 
 
 	[ContextMenu("CheckIsOverlaping")]
-	public bool CheckIsOverlaping()
+	public bool IsOverlaping()
 	{
 		List<Collider2D> results = new List<Collider2D>();
 		int resultsLength = m_area.OverlapCollider(m_overlapingFilter, results);

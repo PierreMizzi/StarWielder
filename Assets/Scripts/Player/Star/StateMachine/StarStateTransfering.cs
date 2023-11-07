@@ -23,7 +23,7 @@ namespace PierreMizzi.Gameplay.Players
 		{
 			base.DefaultEnter();
 
-			m_this.SetOnShip();
+			m_this.SetDocked();
 			m_this.cameraChannel.onStartEnergyTransfer.Invoke();
 			m_transferSoundSource = SoundManager.PlaySFX(SoundDataID.SHIP_ENERGY_TRANSFER);
 

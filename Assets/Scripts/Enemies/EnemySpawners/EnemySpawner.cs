@@ -22,9 +22,6 @@ public class EnemySpawner : MonoBehaviour
 
 	public void SpawnEnemyGroup()
 	{
-
-
-
 		EnemyGroup randomGroupPrefab = UtilsClass.PickRandomInList(m_enemyGroupPrefabs);
 		EnemyGroup newEnemyGroup = Instantiate(randomGroupPrefab, m_enemyGroupContainer);
 		newEnemyGroup.Initialize(m_manager);
@@ -39,9 +36,9 @@ public class EnemySpawner : MonoBehaviour
 		{
 			SetEnemyGroupTransform(newEnemyGroup);
 
-			yield return new WaitForEndOfFrame();
+			yield return new WaitForSeconds(0.01f);
 
-			if (newEnemyGroup.CheckIsOverlaping())
+			if (newEnemyGroup.IsOverlaping())
 			{
 				if (i == m_validSpawnAttempts)
 				{
