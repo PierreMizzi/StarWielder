@@ -101,6 +101,12 @@ namespace PierreMizzi.Gameplay.Players
 			m_rigidbody = GetComponent<Rigidbody2D>();
 			m_animator = GetComponent<Animator>();
 
+			m_bounceSoundIDS = new List<string>()
+			{
+				SoundDataID.STAR_BOUNCE_01,
+				SoundDataID.STAR_BOUNCE_02,
+			};
+
 			m_currentEnergy = m_settings.baseEnergy;
 
 			InitializeStates();
@@ -130,6 +136,8 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void OnCollisionEnter2D(Collision2D other)
 		{
+			PlayBounceSound();
+
 			onCollisionEnter2D.Invoke(other);
 		}
 
@@ -142,16 +150,6 @@ namespace PierreMizzi.Gameplay.Players
 
 			if (UtilsClass.CheckLayer(m_enemyLayer.value, other.gameObject.layer))
 				AbsorbEnemyStar(other);
-		}
-
-		#endregion
-
-		#region Physic
-
-		public void UpdateRotationFromVelocity()
-		{
-			if (rigidbody.velocity != Vector2.zero)
-				transform.up = rigidbody.velocity.normalized;
 		}
 
 		#endregion
@@ -221,6 +219,8 @@ namespace PierreMizzi.Gameplay.Players
 		private int m_currentCombo = 1;
 		public int currentCombo { get { return m_currentCombo; } set { m_currentCombo = value; } }
 
+
+
 		private float ComputeComboBonusEnergy(float gainedEnergy)
 		{
 			if (m_currentCombo == 1)
@@ -235,15 +235,32 @@ namespace PierreMizzi.Gameplay.Players
 
 		[Header("Physics")]
 		[SerializeField] private ContactFilter2D m_obstacleFilter;
-		private CircleCollider2D m_circleCollider;
 		private Rigidbody2D m_rigidbody;
 
 		public ContactFilter2D obstacleFilter => m_obstacleFilter;
-		public CircleCollider2D circleCollider => m_circleCollider;
 		public new Rigidbody2D rigidbody => m_rigidbody;
 
+		private CircleCollider2D m_circleCollider;
 		public Collision2DDelegate onCollisionEnter2D;
 		public Collider2DDelegate onTriggerEnter2D;
+
+		private List<string> m_bounceSoundIDS = new List<string>();
+
+		public void SetVelocityFromEnergy()
+		{
+			m_rigidbody.velocity = transform.up * currentSpeed;
+		}
+
+		public void UpdateRotationFromVelocity()
+		{
+			if (rigidbody.velocity != Vector2.zero)
+				transform.up = rigidbody.velocity.normalized;
+		}
+
+		private void PlayBounceSound()
+		{
+			SoundManager.SoundManager.PlaySFX(UtilsClass.PickRandomInList(m_bounceSoundIDS));
+		}
 
 		#endregion
 
@@ -262,6 +279,7 @@ namespace PierreMizzi.Gameplay.Players
 
 				m_currentEnergy += enemyStar.energy + ComputeComboBonusEnergy(enemyStar.energy);
 				m_playerChannel.onAbsorbEnemyStar.Invoke(m_currentEnergy);
+				SetVelocityFromEnergy();
 
 				m_animator.SetTrigger(k_triggerAbsorb);
 
@@ -271,7 +289,6 @@ namespace PierreMizzi.Gameplay.Players
 					m_highestEnergy = m_currentEnergy;
 				}
 
-				m_playerChannel.onRefreshStarEnergy.Invoke(m_currentEnergy);
 				Destroy(enemyStar.gameObject);
 			}
 		}

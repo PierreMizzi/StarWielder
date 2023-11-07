@@ -66,10 +66,12 @@ public class EnemyManager : MonoBehaviour
 	#region Spawning
 
 	[Header("Spawning")]
-	[SerializeField] private float m_minSpawnFrequency = 2f;
-	[SerializeField] private float m_maxSpawnFrequency = 5f;
-	private float m_spawnFrequency;
 	[SerializeField] private List<EnemySpawner> m_enemySpawners = null;
+	[SerializeField] private AnimationCurve m_minSpawnDelayCurve;
+	[SerializeField] private AnimationCurve m_maxSpawnDelayCurve;
+
+	private float m_spawnTimer;
+	private float m_spawnFrequency;
 
 	private IEnumerator m_spawningCoroutine;
 
@@ -102,9 +104,20 @@ public class EnemyManager : MonoBehaviour
 		while (true)
 		{
 			SpawnEnemyGroup();
-			m_spawnFrequency = Random.Range(m_minSpawnFrequency, m_maxSpawnFrequency);
+
+			m_spawnTimer += Time.deltaTime;
+			m_spawnFrequency = GetRandomSpawnDelay();
 			yield return new WaitForSeconds(m_spawnFrequency);
 		}
+	}
+
+
+
+	private float GetRandomSpawnDelay()
+	{
+		float min = m_minSpawnDelayCurve.Evaluate(m_spawnTimer);
+		float max = m_minSpawnDelayCurve.Evaluate(m_spawnTimer);
+		return Random.Range(min, max);
 	}
 
 	[ContextMenu("SpawnEnemyGroup")]

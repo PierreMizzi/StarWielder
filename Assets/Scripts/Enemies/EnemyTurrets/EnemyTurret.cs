@@ -1,4 +1,5 @@
 using System.Collections;
+using PierreMizzi.SoundManager;
 using UnityEngine;
 
 public class EnemyTurret : MonoBehaviour
@@ -121,6 +122,7 @@ public class EnemyTurret : MonoBehaviour
 
 	private void FireBullet()
 	{
+		SoundManager.PlaySFX(SoundDataID.TURRET_FIRE);
 		EnemyBullet bullet = Instantiate(m_bulletPrefab, m_bulletsContainer);
 		bullet.transform.position = m_firePosition.position;
 		bullet.transform.up = m_canonAxisTransform.right;

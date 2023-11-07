@@ -24,6 +24,9 @@ MonoBehaviour:
   - m_ID: Ship_PowerDown
     m_clip: {fileID: 8300000, guid: f54ae4262ea86f04e9c7f58b1e4547b9, type: 3}
     m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: Ship_Hurt
+    m_clip: {fileID: 8300000, guid: bcb9a6a8a763ecb4db261209d0a8f8e0, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
   m_generateStatic: 1
   m_audioClips: []
   m_mixerGroup: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}

@@ -21,5 +21,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8cc41b0d48f97bd4788de7abd7d55e87, type: 2}
   m_baseFadeInDuration: 1
   m_baseFadeOutDuration: 1
-  m_SFXSSPoolMaxSize: 10
-  m_SFXSSPoolDefaultSize: 10
+  m_SFXSSPoolMaxSize: 20
+  m_SFXSSPoolDefaultSize: 20

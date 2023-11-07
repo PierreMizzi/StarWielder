@@ -8,7 +8,7 @@
 			/*
 				Ship
 			*/
-		public static readonly string SHIP_DASH = "Ship_Dash"; public static readonly string SHIP_ENERGY_TRANSFER = "Ship_EnergyTransfer"; public static readonly string SHIP_POWER_DOWN = "Ship_PowerDown"; 
+		public static readonly string SHIP_DASH = "Ship_Dash"; public static readonly string SHIP_ENERGY_TRANSFER = "Ship_EnergyTransfer"; public static readonly string SHIP_POWER_DOWN = "Ship_PowerDown"; public static readonly string SHIP_HURT = "Ship_Hurt"; 
 			/*
 				Star
 			*/
@@ -16,5 +16,5 @@
 			/*
 				Enemies
 			*/
-		public static readonly string ENEMY_STAR_DESTROYED_01 = "EnemyStarDestroyed_01"; public static readonly string ENEMY_STAR_DESTROYED_02 = "EnemyStarDestroyed_02"; public static readonly string ENEMY_STAR_DESTROYED_03 = "EnemyStarDestroyed_03"; public static readonly string ENEMY_STAR_DESTROYED_04 = "EnemyStarDestroyed_04"; public static readonly string ENEMY_STAR_DESTROYED_05 = "EnemyStarDestroyed_05";  }  
+		public static readonly string ENEMY_STAR_DESTROYED_01 = "EnemyStarDestroyed_01"; public static readonly string ENEMY_STAR_DESTROYED_02 = "EnemyStarDestroyed_02"; public static readonly string ENEMY_STAR_DESTROYED_03 = "EnemyStarDestroyed_03"; public static readonly string ENEMY_STAR_DESTROYED_04 = "EnemyStarDestroyed_04"; public static readonly string ENEMY_STAR_DESTROYED_05 = "EnemyStarDestroyed_05"; public static readonly string TURRET_FIRE = "TurretFire";  }  
 		

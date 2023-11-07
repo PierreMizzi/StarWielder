@@ -212,6 +212,8 @@ namespace PierreMizzi.Gameplay.Players
 
 				m_cameraChannel.onShipHurt.Invoke();
 
+				SoundManager.SoundManager.PlaySFX(SoundDataID.SHIP_HURT);
+
 				if (m_currentHealth <= 0)
 					ChangeState(ShipStateType.Destroyed);
 			}
