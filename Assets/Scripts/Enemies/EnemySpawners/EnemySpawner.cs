@@ -22,6 +22,9 @@ public class EnemySpawner : MonoBehaviour
 
 	public void SpawnEnemyGroup()
 	{
+
+
+
 		EnemyGroup randomGroupPrefab = UtilsClass.PickRandomInList(m_enemyGroupPrefabs);
 		EnemyGroup newEnemyGroup = Instantiate(randomGroupPrefab, m_enemyGroupContainer);
 		newEnemyGroup.Initialize(m_manager);
@@ -50,8 +53,9 @@ public class EnemySpawner : MonoBehaviour
 			}
 			else
 				break;
-
 		}
+
+		newEnemyGroup.Appear();
 	}
 
 	protected virtual void SetEnemyGroupTransform(EnemyGroup newEnemyGroup)

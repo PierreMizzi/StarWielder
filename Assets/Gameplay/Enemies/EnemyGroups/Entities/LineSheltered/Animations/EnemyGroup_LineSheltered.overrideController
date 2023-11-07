@@ -6,10 +6,10 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyGroup_Triple
+  m_Name: EnemyGroup_LineSheltered
   m_Controller: {fileID: 9100000, guid: e7b9f79fc0dfd10488a7c5d23ca0e339, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: cc2fd132ac1daeb4a8714ed5e658385b, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: cda4afe3359fc8c4c833c4899f3cdcf1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 80ea233fbe3ca8840b2947dcbcf71053, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 4e1dc550895b7e8458ebd39e3971e587, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 0f6384423a3831843a25293a6fd303ca, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f3d4e5c370fffaa45a8621fd849c4fc2, type: 2}

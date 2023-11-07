@@ -113,7 +113,7 @@ public class EnemyManager : MonoBehaviour
 	public void DeactivateEnemyGroups()
 	{
 		foreach (EnemyGroup enemyGroup in m_enemyGroups)
-			enemyGroup.Deactivate();
+			enemyGroup.DeactivateTurrets();
 	}
 
 	public void AddEnemyGroup(EnemyGroup enemyGroup)

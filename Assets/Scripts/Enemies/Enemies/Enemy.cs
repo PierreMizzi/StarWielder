@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
 	private void OnDestroy()
 	{
 		SoundManager.PlaySFX(UtilsClass.PickRandom(m_destroyedSoundIDs));
-		m_group.EnemyDestroyed(this);
+		m_group.EnemyStarDestroyed(this);
 	}
 
 	public void Initialize(EnemyGroup group)

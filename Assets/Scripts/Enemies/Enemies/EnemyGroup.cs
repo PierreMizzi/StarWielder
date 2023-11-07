@@ -14,19 +14,19 @@ public class EnemyGroup : MonoBehaviour
 	{
 		m_manager = manager;
 
-		m_area = GetComponent<Collider2D>();
+		Awake();
 
-		foreach (Enemy enemy in m_enemies)
-			enemy.Initialize(this);
+		foreach (Enemy enemyStar in m_enemies)
+			enemyStar.Initialize(this);
 
 		foreach (EnemyTurret turret in m_turrets)
 			turret.Initialize(this);
 	}
 
-	public void EnemyDestroyed(Enemy enemy)
+	public void EnemyStarDestroyed(Enemy enemyStar)
 	{
-		if (m_enemies.Contains(enemy))
-			m_enemies.Remove(enemy);
+		if (m_enemies.Contains(enemyStar))
+			m_enemies.Remove(enemyStar);
 
 		if (m_enemies.Count == 0)
 			Destroy(gameObject);
@@ -39,6 +39,7 @@ public class EnemyGroup : MonoBehaviour
 	private void Awake()
 	{
 		m_area = GetComponent<Collider2D>();
+		m_animator = GetComponent<Animator>();
 	}
 
 	private void OnDestroy()
@@ -70,10 +71,35 @@ public class EnemyGroup : MonoBehaviour
 
 	[SerializeField] private List<EnemyTurret> m_turrets;
 
-	public void Deactivate()
+	private void ActivateTurrets()
+	{
+		foreach (EnemyTurret turret in m_turrets)
+			turret.Activate();
+	}
+
+	public void DeactivateTurrets()
 	{
 		foreach (EnemyTurret turret in m_turrets)
 			turret.Deactivate();
+	}
+
+	#endregion
+
+	#region Animations
+
+	private Animator m_animator = null;
+
+	private const string k_triggerAppear = "Appear";
+	private const string m_triggerDestroy = "Destroy";
+
+	public void Appear()
+	{
+		m_animator.SetTrigger(k_triggerAppear);
+	}
+
+	public void AnimEventAppearCompleted()
+	{
+		ActivateTurrets();
 	}
 
 	#endregion

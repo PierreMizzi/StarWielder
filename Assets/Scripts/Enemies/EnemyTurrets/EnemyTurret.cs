@@ -19,7 +19,7 @@ public class EnemyTurret : MonoBehaviour
 		m_bulletsContainer = m_group.manager.bulletsContainer;
 		m_shipTransform = m_group.manager.ship.transform;
 
-		Activate();
+		// Activate();
 	}
 
 	public void Activate()
