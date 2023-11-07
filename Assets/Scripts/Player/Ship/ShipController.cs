@@ -46,11 +46,13 @@ namespace PierreMizzi.Gameplay.Players
 		private void Awake()
 		{
 			m_ship = GetComponent<Ship>();
+			m_boxCollider = GetComponent<BoxCollider2D>();
 		}
 
 		private void Start()
 		{
 			m_camera = Camera.main;
+			ComputeCorners();
 		}
 
 		private void Update()
@@ -68,6 +70,37 @@ namespace PierreMizzi.Gameplay.Players
 			}
 		}
 
+		private void LateUpdate()
+		{
+			ClampPositionInsideBoundaries();
+		}
+
+		#endregion
+
+		#region Boundaries
+
+		private BoxCollider2D m_boxCollider;
+
+		private Vector2 m_topRightBoundCorner;
+		private Vector2 m_botLeftBoundCorner;
+
+		private Vector3 clampedPosition;
+
+		public void ComputeCorners()
+		{
+			Vector2 extents = new Vector2(m_boxCollider.bounds.extents.x, m_boxCollider.bounds.extents.y);
+			m_topRightBoundCorner = GameManager.topRightBoundCorner - extents;
+			m_botLeftBoundCorner = GameManager.botLeftBoundCorner + extents;
+		}
+
+		private void ClampPositionInsideBoundaries()
+		{
+			clampedPosition = transform.position;
+			clampedPosition.x = Mathf.Clamp(clampedPosition.x, m_botLeftBoundCorner.x, m_topRightBoundCorner.x);
+			clampedPosition.y = Mathf.Clamp(clampedPosition.y, m_botLeftBoundCorner.y, m_topRightBoundCorner.y);
+			transform.position = clampedPosition;
+		}
+
 		#endregion
 
 		#region Locomotion
@@ -77,8 +110,7 @@ namespace PierreMizzi.Gameplay.Players
 			m_offsetPosition = m_locomotionActionValue * m_settings.speed * Time.deltaTime;
 			m_nextPosition = transform.position + m_offsetPosition;
 
-			if (true)
-				transform.position = Vector3.SmoothDamp(transform.position, m_nextPosition, ref m_currentVelocity, m_settings.smoothTime);
+			transform.position = Vector3.SmoothDamp(transform.position, m_nextPosition, ref m_currentVelocity, m_settings.smoothTime);
 		}
 
 		private void ReadLocomotionInputs()
@@ -155,6 +187,8 @@ namespace PierreMizzi.Gameplay.Players
 		}
 
 		#endregion
+
+
 
 	}
 }

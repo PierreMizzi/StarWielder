@@ -50,12 +50,20 @@ public class GameManager : MonoBehaviour
 
 	#region MonoBehaviour
 
+	private void Awake()
+	{
+		InitializeBoundaries();
+	}
+
 	private void Start()
 	{
 		InitializeSoundManager();
 		SetLowCutoff();
 		m_cursorChannel.onSetCursor(CursorType.Aim);
-		Cursor.lockState = CursorLockMode.Confined;
+
+#if !UNITY_EDITOR
+			Cursor.lockState = CursorLockMode.Confined;
+#endif
 
 		if (m_gameChannel != null)
 		{
@@ -77,6 +85,38 @@ public class GameManager : MonoBehaviour
 			m_gameChannel.onGameOver -= CallbackGameOver;
 			m_gameChannel.onReplay -= CallbackReplay;
 		}
+	}
+
+	#endregion
+
+	#region Boundaries
+
+	private Camera m_camera;
+	public static Vector2 topRightBoundCorner;
+	public static Vector2 botLeftBoundCorner;
+
+	private void InitializeBoundaries()
+	{
+		m_camera = Camera.main;
+
+		float m_horizontalSize = m_camera.orthographicSize * m_camera.aspect;
+		Vector2 extents = new Vector2(m_horizontalSize, m_camera.orthographicSize);
+
+		topRightBoundCorner = m_camera.transform.position;
+		topRightBoundCorner += extents;
+
+		botLeftBoundCorner = m_camera.transform.position;
+		botLeftBoundCorner -= extents;
+		Debug.Log($"TopRight : {topRightBoundCorner} | BotLeft : {botLeftBoundCorner}");
+
+	}
+
+	public static bool CheckInBoundaries(Vector2 topRight, Vector2 botLeft)
+	{
+		return topRight.x < topRightBoundCorner.x &&
+			   topRight.y < topRightBoundCorner.y &&
+			   botLeft.x > botLeftBoundCorner.x &&
+			   botLeft.y > botLeftBoundCorner.y;
 	}
 
 	#endregion
