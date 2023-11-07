@@ -15,11 +15,10 @@ public class EnemyTurret : MonoBehaviour
 
 	public void Initialize(EnemyGroup group)
 	{
+		Awake();
 		m_group = group;
 		m_bulletsContainer = m_group.manager.bulletsContainer;
 		m_shipTransform = m_group.manager.ship.transform;
-
-		// Activate();
 	}
 
 	public void Activate()
@@ -37,6 +36,11 @@ public class EnemyTurret : MonoBehaviour
 	#endregion
 
 	#region MonoBehaviour
+
+	private void Awake()
+	{
+		m_animator = GetComponent<Animator>();
+	}
 
 	private void Update()
 	{
@@ -105,9 +109,14 @@ public class EnemyTurret : MonoBehaviour
 
 		while (true)
 		{
-			FireBullet();
+			LoadBullet();
 			yield return new WaitForSeconds(m_rateOfFire);
 		}
+	}
+
+	private void LoadBullet()
+	{
+		m_animator.SetTrigger(k_triggerLoad);
 	}
 
 	private void FireBullet()
@@ -115,6 +124,19 @@ public class EnemyTurret : MonoBehaviour
 		EnemyBullet bullet = Instantiate(m_bulletPrefab, m_bulletsContainer);
 		bullet.transform.position = m_firePosition.position;
 		bullet.transform.up = m_canonAxisTransform.right;
+	}
+
+	#endregion
+
+	#region Animations
+
+	private Animator m_animator = null;
+
+	private const string k_triggerLoad = "Load";
+
+	public void AnimEventFireBullet()
+	{
+		FireBullet();
 	}
 
 	#endregion

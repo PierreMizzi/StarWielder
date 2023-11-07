@@ -10,8 +10,8 @@ namespace PierreMizzi.Gameplay.Players
 	{
 		#region Energy
 
+		public FloatDelegate onAbsorbEnemyStar;
 		public FloatDelegate onRefreshStarEnergy;
-		public IntDelegate onRefreshStarCombo;
 
 		#endregion
 
@@ -29,16 +29,24 @@ namespace PierreMizzi.Gameplay.Players
 
 		#endregion
 
+		#region Combo
+
+		public IntDelegate onRefreshStarCombo;
+
+		#endregion
+
 		public void OnEnable()
 		{
+			onAbsorbEnemyStar = (float energy) => { };
 			onRefreshStarEnergy = (float energy) => { };
-			onRefreshStarCombo = (int combo) => { };
 
 			onUseDash = () => { };
 			onRefreshCooldownDash = (float value) => { };
 			onRechargeDash = () => { };
 
 			onRefreshHealth = (float normalizedHealth) => { };
+
+			onRefreshStarCombo = (int combo) => { };
 		}
 	}
 }

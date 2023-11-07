@@ -248,11 +248,12 @@ namespace PierreMizzi.Gameplay.Players
 			Enemy enemyStar;
 			if (other.gameObject.TryGetComponent(out enemyStar))
 			{
+				PlayStarComboSFX();
 				m_currentCombo += 1;
 				m_playerChannel.onRefreshStarCombo.Invoke(m_currentCombo);
-				PlayStarComboSFX();
 
 				m_currentEnergy += enemyStar.energy + ComputeComboBonusEnergy(enemyStar.energy);
+				m_playerChannel.onAbsorbEnemyStar.Invoke(m_currentEnergy);
 
 				m_animator.SetTrigger(k_triggerAbsorb);
 

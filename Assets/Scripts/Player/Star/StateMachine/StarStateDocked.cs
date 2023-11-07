@@ -35,7 +35,6 @@ namespace PierreMizzi.Gameplay.Players
 
 			if (m_this.currentEnergy <= 0f)
 				m_this.gameChannel.onGameOver.Invoke(GameOverReason.StarDied);
-
 		}
 
 		private void DockStar()

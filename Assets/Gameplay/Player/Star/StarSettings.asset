@@ -20,7 +20,7 @@ MonoBehaviour:
   maxSpeed: 20
   arrivalDistance: 1
   baseEnergy: 40
-  energyDepleatRate: 1
+  energyDepleatRate: 1.5
   comboBonusEnergyRatio: 0.02
   transferBaseDuration: 0.5
   transferDurationRatio: 0.05
