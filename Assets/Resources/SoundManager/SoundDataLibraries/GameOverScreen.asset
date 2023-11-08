@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf2351776f653b4b9d3eb40701b378c, type: 3}
+  m_Name: GameOverScreen
+  m_EditorClassIdentifier: 
+  m_description: 
+  m_type: 8
+  m_soundDatas:
+  - m_ID: Counter
+    m_clip: {fileID: 8300000, guid: fa315547347b99446a9cad4ac18e3142, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: GameDisplay
+    m_clip: {fileID: 8300000, guid: 906df021bdc181241865be84d06d099f, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: InterfaceBeep
+    m_clip: {fileID: 8300000, guid: a1e44500140d45f44af3d215f5fb7c26, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: OverDisplay
+    m_clip: {fileID: 8300000, guid: 58e14a6a88bbafe458cbf79af8cf9bbe, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: ReasonMessage_1
+    m_clip: {fileID: 8300000, guid: 74374510f8e52e7419774b160a998afb, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: ReasonMessage_2
+    m_clip: {fileID: 8300000, guid: f2d24b8cb0b86af4faa584a7b5e1ae07, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: ReasonMessage_3
+    m_clip: {fileID: 8300000, guid: 1e4d23b9fbcba4d4cb9acf717070e581, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: ReplayButtonDisplay
+    m_clip: {fileID: 8300000, guid: 7683fbc3ad411dd418da535d4fa93483, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: ReplayButtonPlay
+    m_clip: {fileID: 8300000, guid: 1c9864be4a451eb4fac51ccb34b3b0eb, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  - m_ID: ScoreDisplay
+    m_clip: {fileID: 8300000, guid: 0bbf08a2af5953b4d8dd4c9bfbbb75a4, type: 3}
+    m_mixer: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}
+  m_generateStatic: 1
+  m_audioClips: []
+  m_mixerGroup: {fileID: -1105291563222444289, guid: c8c43a808a920de4eb565950dd246141, type: 2}

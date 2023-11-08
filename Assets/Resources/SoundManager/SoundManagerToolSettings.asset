@@ -15,10 +15,10 @@ MonoBehaviour:
   _path: 
   m_audioMixerControllers: []
   m_soundDataLibraries:
-  - {fileID: 11400000, guid: 58abe6ab820be0a43bf07a65689cff3d, type: 2}
   - {fileID: 11400000, guid: 33be0584e89f10747bee6ab76c26b853, type: 2}
   - {fileID: 11400000, guid: e303489b8821e7345bd7577681df3f63, type: 2}
   - {fileID: 11400000, guid: 8cc41b0d48f97bd4788de7abd7d55e87, type: 2}
+  - {fileID: 11400000, guid: 58abe6ab820be0a43bf07a65689cff3d, type: 2}
   m_baseFadeInDuration: 1
   m_baseFadeOutDuration: 1
   m_SFXSSPoolMaxSize: 20

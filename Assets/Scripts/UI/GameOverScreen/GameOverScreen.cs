@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using DG.Tweening;
+using PierreMizzi.SoundManager;
 using PierreMizzi.Useful;
 using QGamesTest.Gameplay;
 using TMPro;
@@ -74,6 +76,16 @@ namespace QGamesTest.UI
 
 		#region MonoBehaviour
 
+		private void Awake()
+		{
+			m_reasonMessageBeeps = new List<string>()
+			{
+				SoundDataID.REASON_MESSAGE_1,
+				SoundDataID.REASON_MESSAGE_2,
+				SoundDataID.REASON_MESSAGE_3,
+			};
+		}
+
 		private void Start()
 		{
 			m_animator = GetComponent<Animator>();
@@ -139,6 +151,8 @@ namespace QGamesTest.UI
 
 				m_reasonMessageLabel.text = builtString.ToString();
 
+				SoundManager.PlayRandomSFX(m_reasonMessageBeeps);
+
 				yield return new WaitForSeconds(m_delayBetweenCharacters);
 			}
 
@@ -184,6 +198,8 @@ namespace QGamesTest.UI
 
 		public void AnimEventTime()
 		{
+			SoundManager.PlaySFX(SoundDataID.COUNTER);
+
 			DOVirtual
 			.Float(
 				0f,
@@ -197,6 +213,8 @@ namespace QGamesTest.UI
 
 		public void AnimEventHighestEnergy()
 		{
+			SoundManager.PlaySFX(SoundDataID.COUNTER);
+
 			DOVirtual
 			.Float(
 				0f,
@@ -211,7 +229,16 @@ namespace QGamesTest.UI
 
 		#endregion
 
+		#region SFXs
 
+		private List<string> m_reasonMessageBeeps;
+
+		public void AnimEventPlaySFX(string soundDataID)
+		{
+			SoundManager.PlaySFX(soundDataID);
+		}
+
+		#endregion
 
 	}
 

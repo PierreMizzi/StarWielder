@@ -52,6 +52,7 @@ namespace QGamesTest.Gameplay
 		public void CallbackReplay()
 		{
 			DOTween.KillAll();
+			SoundManager.PlaySFX(SoundDataID.REPLAY_BUTTON_PLAY);
 			SceneManager.LoadScene("Game");
 		}
 
