@@ -1,14 +1,19 @@
 using System;
 using System.Collections.Generic;
-using DG.Tweening;
+using PierreMizzi.Gameplay.Players;
+using PierreMizzi.SoundManager;
 using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
+using QGamesTest.Gameplay.Enemies;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace PierreMizzi.Gameplay.Players
+namespace QGamesTest.Gameplay.Player
 {
+	/// <summary>
+	/// Ship's class and all it's gameplay capabilities.
+	/// For movement related behaviours, see ShipController.cs
+	/// </summary>
 	[RequireComponent(typeof(ShipController))]
 	public class Ship : MonoBehaviour, IStateMachine
 	{
@@ -18,7 +23,6 @@ namespace PierreMizzi.Gameplay.Players
 		[Header("Channels")]
 		[SerializeField] private PlayerChannel m_playerChannel = null;
 		[SerializeField] private GameChannel m_gameChannel = null;
-		[SerializeField] private CameraChannel m_cameraChannel = null;
 
 		public GameChannel gameChannel => m_gameChannel;
 
@@ -28,7 +32,6 @@ namespace PierreMizzi.Gameplay.Players
 
 		[Header("Main")]
 		[SerializeField] private PlayerSettings m_settings;
-		public PlayerSettings settings => m_settings;
 		private ShipController m_controller;
 		public ShipController controller => m_controller;
 
@@ -104,9 +107,6 @@ namespace PierreMizzi.Gameplay.Players
 		private void Update()
 		{
 			UpdateState();
-
-			if (Input.GetKeyDown(KeyCode.M))
-				SoundManager.SoundManager.PlaySFX(SoundDataID.SHIP_DASH);
 		}
 
 		private void LateUpdate()
@@ -131,16 +131,19 @@ namespace PierreMizzi.Gameplay.Players
 
 		[Header("Star")]
 		[SerializeField] private Star m_star;
+
+		/// <summary>
+		/// Container transform of the Star when docked to the ship
+		/// </summary>
 		[SerializeField] private Transform m_starAnchor;
 
 		public Star star => m_star;
-		public Transform starAnchor => m_starAnchor;
 
 		#endregion
 
 		#region Energy
 
-		private float m_emergencyEnergy = 0;
+		private float m_emergencyEnergy;
 		public float emergencyEnergy
 		{
 			get { return m_emergencyEnergy; }
@@ -153,6 +156,7 @@ namespace PierreMizzi.Gameplay.Players
 			ComputeCountdown();
 		}
 
+		[Obsolete]
 		public float GetMaxTransferableEnergy(float starEnergy)
 		{
 			float transferableEnergy;
@@ -167,6 +171,11 @@ namespace PierreMizzi.Gameplay.Players
 		#endregion
 
 		#region Countdown
+
+		/*
+			Countdown before all emergency energy has been consumed.
+			Only visible when Star is not docked
+		*/
 
 		[Header("Countdown")]
 		[SerializeField] private TextMeshPro m_countdownLabel;
@@ -208,11 +217,10 @@ namespace PierreMizzi.Gameplay.Players
 				bullet.HitShip();
 
 				m_currentHealth -= bullet.damage;
-				m_playerChannel.onRefreshHealth.Invoke(m_currentHealth / m_settings.maxHealth);
+				m_playerChannel.onShipHurt.Invoke(m_currentHealth / m_settings.maxHealth);
 
-				m_cameraChannel.onShipHurt.Invoke();
 
-				SoundManager.SoundManager.PlaySFX(SoundDataID.SHIP_HURT);
+				SoundManager.PlaySFX(SoundDataID.SHIP_HURT);
 
 				if (m_currentHealth <= 0)
 					ChangeState(ShipStateType.Destroyed);
@@ -225,7 +233,6 @@ namespace PierreMizzi.Gameplay.Players
 
 		private Animator m_animator = null;
 		public Animator animator => m_animator;
-
 
 		public const string k_boolIsDead = "IsDead";
 

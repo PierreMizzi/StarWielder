@@ -14,20 +14,14 @@ namespace PierreMizzi.Gameplay.Players
 		public FloatDelegate onRefreshStarEnergy;
 		public Action onStarDocked;
 		public Action onStarFree;
-
-		#endregion
-
-		#region Dash
-
-		public Action onUseDash;
-		public FloatDelegate onRefreshCooldownDash;
-		public Action onRechargeDash;
+		public Action onStartEnergyTransfer;
+		public Action onStopEnergyTransfer;
 
 		#endregion
 
 		#region Health
 
-		public FloatDelegate onRefreshHealth;
+		public FloatDelegate onShipHurt;
 
 		#endregion
 
@@ -43,12 +37,10 @@ namespace PierreMizzi.Gameplay.Players
 			onRefreshStarEnergy = (float energy) => { };
 			onStarDocked = () => { };
 			onStarFree = () => { };
+			onStartEnergyTransfer = () => { };
+			onStopEnergyTransfer = () => { };
 
-			onUseDash = () => { };
-			onRefreshCooldownDash = (float value) => { };
-			onRechargeDash = () => { };
-
-			onRefreshHealth = (float normalizedHealth) => { };
+			onShipHurt = (float normalizedHealth) => { };
 
 			onRefreshStarCombo = (int combo) => { };
 		}

@@ -1,9 +1,11 @@
 using DG.Tweening;
 using PierreMizzi.Useful.StateMachines;
-using UnityEngine;
 
-namespace PierreMizzi.Gameplay.Players
+namespace QGamesTest.Gameplay.Player
 {
+	/// <summary>
+	/// Ship's state when he got destroyed. o7
+	/// </summary>
 	public class ShipStateDestroyed : ShipState
 	{
 		public ShipStateDestroyed(IStateMachine stateMachine)

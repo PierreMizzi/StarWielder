@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace PierreMizzi.Gameplay.Players
+namespace QGamesTest.Gameplay.Player
 {
 
-	[CreateAssetMenu(fileName = "PlayerSettings", menuName = "Custom/PlayerSettings", order = 0)]
+	[CreateAssetMenu(fileName = "ShipSettings", menuName = "ScriptableObjects/Settings/ShipSettings", order = 0)]
 	public class PlayerSettings : ScriptableObject
 	{
 
@@ -12,15 +12,17 @@ namespace PierreMizzi.Gameplay.Players
 
 		[Header("Emergency Energy")]
 		public float maxEmergencyEnergy = 40f;
+
+		// [Tooltip("How fast the Ship draws energy from the Star when docked")]
+		[Tooltip("How fast the Ship consume it's emergency energy")]
 		public float emergencyEnergyDepleatRate = 0.25f;
+
+		[Tooltip("NO INFLUENCE ! Calculated from maxEmergencyEnergy & emergencyEnergyDepleatRate")]
 		public float emergencyEnergyDuration;
 
 		[Header("Speed")]
 		public float speed = 80f;
-
 		public float smoothTime = 0.5f;
-
-		public float immediatePositionScale = 0.1f;
 
 		[Header("Dash")]
 		public float dashDistance = 1f;

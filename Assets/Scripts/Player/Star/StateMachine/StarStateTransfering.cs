@@ -24,7 +24,7 @@ namespace PierreMizzi.Gameplay.Players
 			base.DefaultEnter();
 
 			m_this.SetDocked();
-			m_this.cameraChannel.onStartEnergyTransfer.Invoke();
+			m_this.playerChannel.onStartEnergyTransfer.Invoke();
 			m_transferSoundSource = SoundManager.PlaySFX(SoundDataID.SHIP_ENERGY_TRANSFER);
 
 			TransferEnergy();
@@ -37,7 +37,7 @@ namespace PierreMizzi.Gameplay.Players
 			base.Exit();
 
 			m_this.mouseClickAction.action.performed -= CallbackMouseClick;
-			m_this.cameraChannel.onStopEnergyTransfer.Invoke();
+			m_this.playerChannel.onStopEnergyTransfer.Invoke();
 			m_transferSoundSource.FadeOut(0.1f);
 		}
 

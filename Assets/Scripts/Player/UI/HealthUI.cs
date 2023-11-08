@@ -75,13 +75,13 @@ public class HealthUI : MonoBehaviour
 	private void Start()
 	{
 		if (m_playerChannel != null)
-			m_playerChannel.onRefreshHealth += CallbackRefreshHealth;
+			m_playerChannel.onShipHurt += CallbackRefreshHealth;
 	}
 
 	private void OnDestroy()
 	{
 		if (m_playerChannel != null)
-			m_playerChannel.onRefreshHealth -= CallbackRefreshHealth;
+			m_playerChannel.onShipHurt -= CallbackRefreshHealth;
 	}
 
 	#endregion

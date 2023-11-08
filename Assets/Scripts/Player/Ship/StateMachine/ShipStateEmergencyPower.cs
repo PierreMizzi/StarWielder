@@ -1,8 +1,10 @@
 using PierreMizzi.Useful.StateMachines;
-using UnityEngine;
 
-namespace PierreMizzi.Gameplay.Players
+namespace QGamesTest.Gameplay.Player
 {
+	/// <summary>
+	/// Ship's state when the Star is no longer docked and is consuming it's emergency power
+	/// </summary>
 	public class ShipStateEmergencyPower : ShipState
 	{
 		public ShipStateEmergencyPower(IStateMachine stateMachine)

@@ -1,8 +1,11 @@
-public enum ShipStateType
+namespace QGamesTest.Gameplay.Player
 {
-	None,
-	Destroyed,
-	NoPower,
-	EmergencyPower,
-	StarPower,
+	public enum ShipStateType
+	{
+		None,
+		Destroyed,
+		NoPower,
+		EmergencyPower,
+		StarPower,
+	}
 }

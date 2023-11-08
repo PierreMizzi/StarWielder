@@ -1,8 +1,11 @@
 using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
 
-namespace PierreMizzi.Gameplay.Players
+namespace QGamesTest.Gameplay.Player
 {
+	/// <summary>
+	/// Ship's state when the Star is docked and powering the Ship
+	/// </summary>
 	public class ShipStateStarPower : ShipState
 	{
 		public ShipStateStarPower(IStateMachine stateMachine)

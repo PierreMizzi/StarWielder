@@ -1,43 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using PierreMizzi.SoundManager;
 
-namespace PierreMizzi.Gameplay.Players
+namespace QGamesTest.Gameplay.Player
 {
-
+	/// <summary>
+	/// Ship's controlling class for all it's movement capabilities.
+	/// For gameplay related behaviours, see Ship.cs
+	/// </summary>
 	public class ShipController : MonoBehaviour
 	{
 
-		#region Fields
+		#region Main
 
-		private Ship m_ship;
 		[SerializeField] private PlayerSettings m_settings = null;
+		private Ship m_ship;
 		private Camera m_camera;
-		[SerializeField] private InputActionReference m_locomotionActionReference = null;
-		[SerializeField] private InputActionReference m_mousePositionActionReference = null;
-
-		#region Locomotion
-
-		// Locomotion
-		private Vector3 m_locomotionActionValue;
-		private Vector3 m_offsetPosition;
-		private Vector3 m_nextPosition;
-		private Vector3 m_currentVelocity;
-
-		// Rotation
-		private Vector2 m_mousePositionActionValue;
-		private Vector2 m_screenSpacePosition;
-		private Vector3 m_orientation;
-
-		/// <summary> 
-		/// Multiply the direction Ship-Mouse Cursor by this value to avoid weird jittering
-		/// </summary>
-		[SerializeField]
-		private float m_orientationMagnitude = 2;
-
-		#endregion
 
 		#endregion
 
@@ -93,6 +73,9 @@ namespace PierreMizzi.Gameplay.Players
 			m_botLeftBoundCorner = GameManager.botLeftBoundCorner + extents;
 		}
 
+		/// <summary>
+		/// Make sure the Ship can't leave Screen boundaries
+		/// </summary>
 		private void ClampPositionInsideBoundaries()
 		{
 			clampedPosition = transform.position;
@@ -103,7 +86,28 @@ namespace PierreMizzi.Gameplay.Players
 
 		#endregion
 
-		#region Locomotion
+		#region Position & Rotation
+
+		[Header("Position & Rotation")]
+		[SerializeField] private InputActionReference m_locomotionActionReference = null;
+		[SerializeField] private InputActionReference m_mousePositionActionReference = null;
+
+		// Position
+		private Vector3 m_locomotionActionValue;
+		private Vector3 m_offsetPosition;
+		private Vector3 m_nextPosition;
+		private Vector3 m_currentVelocity;
+
+		// Rotation
+		private Vector2 m_mousePositionActionValue;
+		private Vector2 m_screenSpacePosition;
+		private Vector3 m_orientation;
+
+		/// <summary> 
+		/// Multiply the direction Ship-Mouse Cursor by this value to avoid weird jittering
+		/// </summary>
+		[SerializeField]
+		private float m_orientationMagnitude = 2;
 
 		private void Move()
 		{
@@ -164,7 +168,7 @@ namespace PierreMizzi.Gameplay.Players
 					 .OnComplete(OnCompleteDash);
 
 			m_dashStar.Use();
-			SoundManager.SoundManager.PlaySFX(SoundDataID.SHIP_DASH);
+			SoundManager.PlaySFX(SoundDataID.SHIP_DASH);
 		}
 
 		private void OnCompleteDash()

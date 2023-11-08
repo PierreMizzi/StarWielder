@@ -1,28 +1,31 @@
 using PierreMizzi.Useful;
 using UnityEngine;
 
-public class EnemySpawnerArea : EnemySpawner
+namespace QGamesTest.Gameplay.Enemies
 {
-
-	[SerializeField] private Bounds m_spawningBounds;
-
-	protected override void DrawVisualization()
+	public class EnemySpawnerArea : EnemySpawner
 	{
-		if (m_displayVisualization)
+
+		[SerializeField] private Bounds m_spawningBounds;
+
+		protected override void DrawVisualization()
 		{
-			Gizmos.color = m_colorVisualization;
-			Gizmos.DrawCube(transform.position, m_spawningBounds.size);
+			if (m_displayVisualization)
+			{
+				Gizmos.color = m_colorVisualization;
+				Gizmos.DrawCube(transform.position, m_spawningBounds.size);
+			}
 		}
-	}
 
-	protected override Vector3 GetRandomPosition()
-	{
-		return transform.position + UtilsClass.RandomInBound(m_spawningBounds);
-	}
+		protected override Vector3 GetRandomPosition()
+		{
+			return transform.position + UtilsClass.RandomInBound(m_spawningBounds);
+		}
 
-	protected override Quaternion GetRandomRotation()
-	{
-		return UtilsClass.RandomRotation2D();
-	}
+		protected override Quaternion GetRandomRotation()
+		{
+			return UtilsClass.RandomRotation2D();
+		}
 
+	}
 }

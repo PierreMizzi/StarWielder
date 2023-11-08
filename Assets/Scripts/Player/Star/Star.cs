@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using PierreMizzi.Extensions.CursorManagement;
 using PierreMizzi.SoundManager;
 using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
+using QGamesTest.Gameplay.Enemies;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,13 +18,9 @@ namespace PierreMizzi.Gameplay.Players
 		[Header("Channels")]
 		[SerializeField] public PlayerChannel m_playerChannel;
 		[SerializeField] private GameChannel m_gameChannel;
-		[SerializeField] private CameraChannel m_cameraChannel;
-		[SerializeField] private CursorChannel m_cursorChannel;
 
 		public PlayerChannel playerChannel => m_playerChannel;
 		public GameChannel gameChannel => m_gameChannel;
-		public CameraChannel cameraChannel => m_cameraChannel;
-		public CursorChannel cursorChannel => m_cursorChannel;
 
 		#endregion
 
@@ -271,7 +267,7 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void AbsorbEnemyStar(Collider2D other)
 		{
-			if (other.gameObject.TryGetComponent(out Enemy enemyStar))
+			if (other.gameObject.TryGetComponent(out EnemyStar enemyStar))
 			{
 				PlayStarComboSFX();
 				m_currentCombo += 1;
