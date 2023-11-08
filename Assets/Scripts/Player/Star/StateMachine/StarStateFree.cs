@@ -1,14 +1,12 @@
-namespace PierreMizzi.Gameplay.Players
-{
-	using System;
-	using System.Collections.Generic;
-	using DG.Tweening;
-	using PierreMizzi.SoundManager;
-	using PierreMizzi.Useful;
-	using PierreMizzi.Useful.StateMachines;
-	using UnityEngine;
-	using UnityEngine.InputSystem;
+using PierreMizzi.SoundManager;
+using PierreMizzi.Useful.StateMachines;
+using UnityEngine.InputSystem;
 
+namespace QGamesTest.Gameplay.Player
+{
+	/// <summary>
+	/// Star's state when it's moving, bouncing and absorbing EnemyStar's energy
+	/// </summary>
 	public class StarStateFree : StarState
 	{
 

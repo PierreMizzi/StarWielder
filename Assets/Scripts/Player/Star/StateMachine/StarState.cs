@@ -1,7 +1,11 @@
 using PierreMizzi.Useful.StateMachines;
 
-namespace PierreMizzi.Gameplay.Players
+namespace QGamesTest.Gameplay.Player
 {
+
+	/// <summary>
+	/// Main class for all Star's sub-states
+	/// </summary>
 	public class StarState : AState
 	{
 		public StarState(IStateMachine stateMachine)

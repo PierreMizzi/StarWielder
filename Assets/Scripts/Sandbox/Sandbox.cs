@@ -1,10 +1,9 @@
-using PierreMizzi.SoundManager;
-using PierreMizzi.Useful;
 using UnityEngine;
-using UnityEngine.Audio;
-using DG.Tweening;
-using System;
 
+
+/// <summary>
+/// Here we try, we experiment and sometimes fail
+/// </summary>
 public class Sandbox : MonoBehaviour
 {
 
@@ -105,13 +104,6 @@ public class Sandbox : MonoBehaviour
 
 	#endregion
 
-	#region Scale From Velocity
 
-	[SerializeField] private Vector2 m_velocity;
-
-
-
-
-	#endregion
 
 }

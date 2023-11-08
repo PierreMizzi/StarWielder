@@ -1,35 +1,36 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using QGamesTest.Gameplay;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TitleScreen : MonoBehaviour
+namespace QGamesTest.UI
 {
-    [SerializeField] private GameChannel m_gameChannel = null;
-    [SerializeField] private InputActionReference m_mouseClickInputAction;
-
-    private Animator _animator = null;
-    private const string k_triggerHide = "Hide";
-
-    private void Awake()
+    public class TitleScreen : MonoBehaviour
     {
-        _animator = GetComponent<Animator>();
-    }
+        [SerializeField] private GameChannel m_gameChannel = null;
+        [SerializeField] private InputActionReference m_mouseClickInputAction;
 
-    private void Start()
-    {
-        m_mouseClickInputAction.action.performed += CallbackStartGame;
-    }
+        private Animator _animator = null;
+        private const string k_triggerHide = "Hide";
 
-    private void OnDestroy()
-    {
-        m_mouseClickInputAction.action.performed -= CallbackStartGame;
-    }
+        private void Awake()
+        {
+            _animator = GetComponent<Animator>();
+        }
 
-    private void CallbackStartGame(InputAction.CallbackContext context)
-    {
-        m_mouseClickInputAction.action.performed -= CallbackStartGame;
-        _animator.SetTrigger(k_triggerHide);
+        private void Start()
+        {
+            m_mouseClickInputAction.action.performed += CallbackStartGame;
+        }
+
+        private void OnDestroy()
+        {
+            m_mouseClickInputAction.action.performed -= CallbackStartGame;
+        }
+
+        private void CallbackStartGame(InputAction.CallbackContext context)
+        {
+            m_mouseClickInputAction.action.performed -= CallbackStartGame;
+            _animator.SetTrigger(k_triggerHide);
+        }
     }
 }

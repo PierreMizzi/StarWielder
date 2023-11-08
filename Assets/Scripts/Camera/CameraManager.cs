@@ -1,6 +1,6 @@
 using DG.Tweening;
-using PierreMizzi.Gameplay.Players;
 using PierreMizzi.Useful;
+using QGamesTest.Gameplay.Player;
 using UnityEngine;
 
 namespace QGamesTest.Gameplay

@@ -24,6 +24,7 @@ namespace QGamesTest.Gameplay.Enemies
 
 		private void CallbackStartGame()
 		{
+			Debug.Log("CallbackStartGame : " + gameObject.GetInstanceID());
 			StartSpawning();
 		}
 
@@ -73,6 +74,7 @@ namespace QGamesTest.Gameplay.Enemies
 
 		private void InitializeSpawners()
 		{
+			Debug.Log("InitializeSpawners" + gameObject.GetInstanceID());
 			foreach (EnemySpawner enemySpawners in m_enemySpawners)
 				enemySpawners.Initialize(this);
 		}
@@ -125,7 +127,7 @@ namespace QGamesTest.Gameplay.Enemies
 
 		#region Enemy Groups
 
-		private List<EnemyGroup> m_enemyGroups;
+		private List<EnemyGroup> m_enemyGroups = new List<EnemyGroup>();
 
 		public void DeactivateEnemyGroups()
 		{

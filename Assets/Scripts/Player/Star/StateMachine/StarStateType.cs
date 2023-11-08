@@ -1,4 +1,4 @@
-namespace PierreMizzi.Gameplay.Players
+namespace QGamesTest.Gameplay.Player
 {
 	public enum StarStateType
 	{

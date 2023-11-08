@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using PierreMizzi.SoundManager;
 using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
@@ -7,9 +7,12 @@ using QGamesTest.Gameplay.Enemies;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace PierreMizzi.Gameplay.Players
+namespace QGamesTest.Gameplay.Player
 {
 
+	/// <summary>
+	/// Star's class for all movement and gameplay behaviours
+	/// </summary>
 	public class Star : MonoBehaviour, IStateMachine
 	{
 
@@ -30,7 +33,7 @@ namespace PierreMizzi.Gameplay.Players
 		[SerializeField] private StarSettings m_settings;
 		public StarSettings settings => m_settings;
 
-		public InputActionReference m_mouseClickAction;
+		[SerializeField] private InputActionReference m_mouseClickAction;
 		public InputActionReference mouseClickAction => m_mouseClickAction;
 
 		private void CallbackGameOver(GameOverReason reason)
@@ -104,6 +107,7 @@ namespace PierreMizzi.Gameplay.Players
 			};
 
 			m_currentEnergy = m_settings.baseEnergy;
+			SetVelocityFromEnergy();
 
 			InitializeStates();
 		}
@@ -114,8 +118,6 @@ namespace PierreMizzi.Gameplay.Players
 				m_gameChannel.onGameOver += CallbackGameOver;
 
 			m_gameChannel.onSetHighestEnergy.Invoke(m_currentEnergy);
-
-			m_rigidbody.AddForce(transform.up * 10, ForceMode2D.Impulse);
 		}
 
 		protected void Update()
@@ -191,6 +193,9 @@ namespace PierreMizzi.Gameplay.Players
 		private float m_scaleFromVelocity;
 		private Vector3 m_localScaleFromVelocity;
 
+		/// <summary>
+		/// The faster the Sun, the more it's squished by it's velocity
+		/// </summary>
 		public void ManageScaleFromVelocity()
 		{
 			if (m_rigidbody.velocity == Vector2.zero)
@@ -214,8 +219,6 @@ namespace PierreMizzi.Gameplay.Players
 
 		private int m_currentCombo = 1;
 		public int currentCombo { get { return m_currentCombo; } set { m_currentCombo = value; } }
-
-
 
 		private float ComputeComboBonusEnergy(float gainedEnergy)
 		{
@@ -255,7 +258,7 @@ namespace PierreMizzi.Gameplay.Players
 
 		private void PlayBounceSound()
 		{
-			SoundManager.SoundManager.PlaySFX(UtilsClass.PickRandomInList(m_bounceSoundIDS));
+			SoundManager.PlaySFX(UtilsClass.PickRandomInList(m_bounceSoundIDS));
 		}
 
 		#endregion
@@ -295,6 +298,9 @@ namespace PierreMizzi.Gameplay.Players
 		private const float k_basePitchValue = 1f;
 		private const string k_pitchParameterName = "EnemyStarPitch";
 
+		/// <summary>
+		/// The higher the combo, the higher the pitch when absorbing an EnemyStar
+		/// </summary>
 		private void PlayStarComboSFX()
 		{
 			float pitch = k_basePitchValue + m_currentCombo * m_settings.pitchShift;

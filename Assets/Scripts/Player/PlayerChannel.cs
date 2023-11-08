@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace PierreMizzi.Gameplay.Players
+namespace QGamesTest.Gameplay.Player
 {
 
 

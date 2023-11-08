@@ -1,36 +1,38 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using QGamesTest.Gameplay;
 using UnityEngine;
 
-public class HUDScreen : MonoBehaviour
+namespace QGamesTest.UI
 {
-    [SerializeField] private GameChannel m_gameChannel = null;
 
-    private Animator _animator = null;
+	public class HUDScreen : MonoBehaviour
+	{
+		[SerializeField] private GameChannel m_gameChannel = null;
 
-    private const string k_display = "Display";
+		private Animator _animator = null;
 
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
+		private const string k_display = "Display";
 
-    private void Start()
-    {
-        if (m_gameChannel != null)
-            m_gameChannel.onStartGame += CallbackStartGame;
-    }
+		private void Awake()
+		{
+			_animator = GetComponent<Animator>();
+		}
 
-    private void OnDestroy()
-    {
+		private void Start()
+		{
+			if (m_gameChannel != null)
+				m_gameChannel.onStartGame += CallbackStartGame;
+		}
 
-        if (m_gameChannel != null)
-            m_gameChannel.onStartGame -= CallbackStartGame;
-    }
+		private void OnDestroy()
+		{
 
-    private void CallbackStartGame()
-    {
-        _animator.SetTrigger(k_display);
-    }
+			if (m_gameChannel != null)
+				m_gameChannel.onStartGame -= CallbackStartGame;
+		}
+
+		private void CallbackStartGame()
+		{
+			_animator.SetTrigger(k_display);
+		}
+	}
 }

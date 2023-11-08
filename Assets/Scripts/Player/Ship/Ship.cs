@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using PierreMizzi.Gameplay.Players;
 using PierreMizzi.SoundManager;
 using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
@@ -107,6 +106,15 @@ namespace QGamesTest.Gameplay.Player
 		private void Update()
 		{
 			UpdateState();
+
+#if UNITY_EDITOR
+
+			//To test GameOverScreen's animation
+			if (Input.GetKeyDown(KeyCode.M))
+				m_gameChannel.onGameOver.Invoke(GameOverReason.ShipDestroyed);
+
+#endif
+
 		}
 
 		private void LateUpdate()
@@ -139,6 +147,8 @@ namespace QGamesTest.Gameplay.Player
 
 		public Star star => m_star;
 
+		public Transform starAnchor => m_starAnchor;
+
 		#endregion
 
 		#region Energy
@@ -156,7 +166,6 @@ namespace QGamesTest.Gameplay.Player
 			ComputeCountdown();
 		}
 
-		[Obsolete]
 		public float GetMaxTransferableEnergy(float starEnergy)
 		{
 			float transferableEnergy;

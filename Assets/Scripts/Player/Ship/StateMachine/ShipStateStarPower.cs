@@ -1,5 +1,4 @@
 using PierreMizzi.Useful.StateMachines;
-using UnityEngine;
 
 namespace QGamesTest.Gameplay.Player
 {

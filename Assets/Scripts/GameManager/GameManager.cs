@@ -1,5 +1,5 @@
-using System;
 using System.Collections;
+using DG.Tweening;
 using PierreMizzi.Extensions.CursorManagement;
 using PierreMizzi.SoundManager;
 using UnityEngine;
@@ -51,6 +51,7 @@ namespace QGamesTest.Gameplay
 		[ContextMenu("Replay")]
 		public void CallbackReplay()
 		{
+			DOTween.KillAll();
 			SceneManager.LoadScene("Game");
 		}
 

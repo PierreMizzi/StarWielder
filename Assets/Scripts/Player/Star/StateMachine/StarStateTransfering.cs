@@ -1,12 +1,15 @@
-namespace PierreMizzi.Gameplay.Players
-{
-	using PierreMizzi.Useful.StateMachines;
-	using DG.Tweening;
-	using UnityEngine;
-	using System;
-	using UnityEngine.InputSystem;
-	using PierreMizzi.SoundManager;
+using PierreMizzi.Useful.StateMachines;
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using PierreMizzi.SoundManager;
 
+namespace QGamesTest.Gameplay.Player
+{
+
+	/// <summary>
+	/// Star's is transfering it's energy to the Ship, replinishing it's emergency energy
+	/// </summary>
 	public class StarStateTransfering : StarState
 	{
 		public StarStateTransfering(IStateMachine stateMachine)
@@ -39,6 +42,8 @@ namespace PierreMizzi.Gameplay.Players
 			m_this.mouseClickAction.action.performed -= CallbackMouseClick;
 			m_this.playerChannel.onStopEnergyTransfer.Invoke();
 			m_transferSoundSource.FadeOut(0.1f);
+
+			KillTransfer();
 		}
 
 		private void TransferEnergy()
@@ -89,7 +94,11 @@ namespace PierreMizzi.Gameplay.Players
 			ChangeState((int)StarStateType.Free);
 		}
 
-
+		private void KillTransfer()
+		{
+			if (m_transferTween != null && m_transferTween.IsPlaying())
+				m_transferTween.Kill();
+		}
 
 	}
 

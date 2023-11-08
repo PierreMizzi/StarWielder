@@ -1,14 +1,19 @@
-using PierreMizzi.Gameplay.Players;
 using PierreMizzi.Useful.StateMachines;
 
-public class StarStateIdle : StarState
+namespace QGamesTest.Gameplay.Player
 {
-
-	public StarStateIdle(IStateMachine stateMachine)
-		: base(stateMachine)
+	/// <summary>
+	/// Star's state when the game is over. No more bouncing
+	/// </summary>
+	public class StarStateIdle : StarState
 	{
-		type = (int)StarStateType.Idle;
+
+		public StarStateIdle(IStateMachine stateMachine)
+			: base(stateMachine)
+		{
+			type = (int)StarStateType.Idle;
+		}
+
+
 	}
-
-
 }
