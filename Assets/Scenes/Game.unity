@@ -907,7 +907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.3764706, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1079,7 +1079,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 3.5
+      value: 3
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1088,17 +1088,17 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 60
-      value: 3.5
+      value: 3
       inSlope: -0
-      outSlope: -0.008333334
+      outSlope: -0.0019230439
       tangentMode: 69
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0
     - serializedVersion: 3
-      time: 180
-      value: 2.5
-      inSlope: -0.008333334
+      time: 450
+      value: 2.2500129
+      inSlope: -0.0019230439
       outSlope: 0
       tangentMode: 5
       weightedMode: 0
@@ -1112,7 +1112,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 5.5
+      value: 5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1121,17 +1121,17 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 60
-      value: 5.5
+      value: 5
       inSlope: -0
-      outSlope: -0.016666668
+      outSlope: -0.006617686
       tangentMode: 69
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0
     - serializedVersion: 3
-      time: 180
-      value: 3.5
-      inSlope: -0.016666668
+      time: 400
+      value: 2.749987
+      inSlope: -0.006617686
       outSlope: 0
       tangentMode: 5
       weightedMode: 0
@@ -1831,6 +1831,7 @@ MonoBehaviour:
   - {fileID: 3074720429936950026, guid: 4e988cea3d3ad794a9750c24834eeb70, type: 3}
   - {fileID: 6468680779630972060, guid: ca3bbc80cd556014ca7439e387df3ad7, type: 3}
   - {fileID: 7136870522080015994, guid: 38baf1cfbf0960543957947c9a5b21a0, type: 3}
+  - {fileID: 2109094396306291817, guid: 47884a42a4f03714da5be490589219b9, type: 3}
   m_validSpawnAttempts: 10
   m_displayVisualization: 0
   m_colorVisualization: {r: 0.5411765, g: 0, b: 1, a: 0.13725491}
@@ -4292,8 +4293,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285081343
-  m_fontColor: {r: 1, g: 0.14779866, b: 0.41276896, a: 1}
+    rgba: 4284481791
+  m_fontColor: {r: 1, g: 0, b: 0.3764706, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5743,7 +5744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemyGroupContainer: {fileID: 774954685}
   m_enemyGroupPrefabs:
-  - {fileID: 6468680779630972060, guid: ca3bbc80cd556014ca7439e387df3ad7, type: 3}
+  - {fileID: 2109094396306291817, guid: 47884a42a4f03714da5be490589219b9, type: 3}
   m_validSpawnAttempts: 10
   m_displayVisualization: 0
   m_colorVisualization: {r: 1, g: 0, b: 0, a: 1}
@@ -6973,12 +6974,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af219645b5f0004fa66a2aab6e08306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerChannel: {fileID: 0}
+  m_playerChannel: {fileID: 11400000, guid: 1ebce8acce4141b4382229e40c13a0d8, type: 2}
   m_camera: {fileID: 1284691504}
   m_transferTransitionDuration: 0.5
   m_energyTransferShakeSettings: {fileID: 11400000, guid: 5d98cbac511182e479d3d940d6ce325c, type: 2}
   m_defaultZoom: 7
-  m_shipZoom: 6
+  m_shipZoom: 6.33
   m_shipHurtShakeSettings: {fileID: 11400000, guid: 9cc1783942b9a204dbc52f81c6e37b61, type: 2}
 --- !u!1 &2034333349
 GameObject:

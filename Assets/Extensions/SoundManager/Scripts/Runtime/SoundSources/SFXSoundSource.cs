@@ -8,6 +8,12 @@ namespace PierreMizzi.SoundManager
 
 		#region Fields 
 
+		public override void Play()
+		{
+			m_audioSource.volume = 1f;
+			base.Play();
+		}
+
 		private void Release()
 		{
 			UnsetSoundData();
