@@ -1,4 +1,4 @@
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 	public enum ShipStateType
 	{

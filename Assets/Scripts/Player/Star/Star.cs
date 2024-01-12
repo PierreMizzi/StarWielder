@@ -3,11 +3,11 @@ using System.Runtime.CompilerServices;
 using PierreMizzi.SoundManager;
 using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
-using QGamesTest.Gameplay.Enemies;
+using StarWielder.Gameplay.Enemies;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 
 	/// <summary>

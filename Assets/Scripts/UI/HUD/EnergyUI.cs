@@ -1,10 +1,10 @@
 using System;
 using DG.Tweening;
-using QGamesTest.Gameplay.Player;
+using StarWielder.Gameplay.Player;
 using TMPro;
 using UnityEngine;
 
-namespace QGamesTest.UI
+namespace StarWielder.UI
 {
 
 	public class EnergyUI : MonoBehaviour

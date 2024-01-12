@@ -2,7 +2,7 @@ using System.Collections;
 using PierreMizzi.SoundManager;
 using UnityEngine;
 
-namespace QGamesTest.Gameplay.Enemies
+namespace StarWielder.Gameplay.Enemies
 {
 	/// <summary>
 	/// Fire an EnemyBullet at the player periodicaly

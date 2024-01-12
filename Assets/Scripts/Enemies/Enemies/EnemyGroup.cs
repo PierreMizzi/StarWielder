@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace QGamesTest.Gameplay.Enemies
+namespace StarWielder.Gameplay.Enemies
 {
 	/// <summary>
 	/// Base class for enemies. EnemyGroup are composed of EnemyStars, EnemyShips & EnemyTurrets

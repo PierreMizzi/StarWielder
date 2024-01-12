@@ -1,7 +1,7 @@
-using QGamesTest.Gameplay;
+using StarWielder.Gameplay;
 using UnityEngine;
 
-namespace QGamesTest.UI
+namespace StarWielder.UI
 {
 
 	public class HUDScreen : MonoBehaviour

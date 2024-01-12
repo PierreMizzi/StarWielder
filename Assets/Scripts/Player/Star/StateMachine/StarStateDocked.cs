@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 	/// <summary>
 	/// Star's state when it's docked on the Ship. When docked, the Ship consume the Star's energy rapidly

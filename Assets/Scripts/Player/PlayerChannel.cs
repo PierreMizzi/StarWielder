@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 
 

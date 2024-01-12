@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using PierreMizzi.Useful;
 using PierreMizzi.SoundManager;
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 	/// <summary>
 	/// Star's state when it's coming back the Ship.

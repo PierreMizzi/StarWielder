@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using PierreMizzi.SoundManager;
 using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
-using QGamesTest.Gameplay.Enemies;
+using StarWielder.Gameplay.Enemies;
 using TMPro;
 using UnityEngine;
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 	/// <summary>
 	/// Ship's class and all it's gameplay capabilities.

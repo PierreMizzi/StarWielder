@@ -1,8 +1,8 @@
-using QGamesTest.Gameplay;
+using StarWielder.Gameplay;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace QGamesTest.UI
+namespace StarWielder.UI
 {
     public class TitleScreen : MonoBehaviour
     {

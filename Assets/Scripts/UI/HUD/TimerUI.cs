@@ -1,9 +1,9 @@
 using PierreMizzi.Useful;
-using QGamesTest.Gameplay;
+using StarWielder.Gameplay;
 using TMPro;
 using UnityEngine;
 
-namespace QGamesTest.UI
+namespace StarWielder.UI
 {
 	public class TimerUI : MonoBehaviour
 	{

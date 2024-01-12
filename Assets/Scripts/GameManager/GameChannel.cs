@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace QGamesTest.Gameplay
+namespace StarWielder.Gameplay
 {
 
 	[CreateAssetMenu(fileName = "GameChannel", menuName = "ScriptableObjects/Channels/GameChannel", order = 0)]

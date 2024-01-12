@@ -1,7 +1,7 @@
 using DG.Tweening;
 using PierreMizzi.Useful.StateMachines;
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 	/// <summary>
 	/// Ship's state when he got destroyed. o7

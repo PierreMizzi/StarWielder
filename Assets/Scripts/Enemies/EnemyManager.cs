@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using QGamesTest.Gameplay.Player;
+using StarWielder.Gameplay.Player;
 using PierreMizzi.Useful;
 using UnityEngine;
 
 
-namespace QGamesTest.Gameplay.Enemies
+namespace StarWielder.Gameplay.Enemies
 {
 
 	/// <summary>

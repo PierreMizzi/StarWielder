@@ -1,6 +1,6 @@
 using PierreMizzi.Useful.StateMachines;
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 	/// <summary>
 	/// Star's state when the game is over. No more bouncing

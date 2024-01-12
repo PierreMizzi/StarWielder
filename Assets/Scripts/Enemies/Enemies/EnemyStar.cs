@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using PierreMizzi.SoundManager;
 using UnityEngine;
 
-namespace QGamesTest.Gameplay.Enemies
+namespace StarWielder.Gameplay.Enemies
 {
 	/// <summary>
 	/// Linked to EnemyGroups. ShipStar absorbs energy from EnemyStar

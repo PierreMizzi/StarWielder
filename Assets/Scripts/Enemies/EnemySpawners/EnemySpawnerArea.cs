@@ -1,7 +1,7 @@
 using PierreMizzi.Useful;
 using UnityEngine;
 
-namespace QGamesTest.Gameplay.Enemies
+namespace StarWielder.Gameplay.Enemies
 {
 	public class EnemySpawnerArea : EnemySpawner
 	{

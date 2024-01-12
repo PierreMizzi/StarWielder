@@ -1,6 +1,6 @@
 using PierreMizzi.Useful.StateMachines;
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 	/// <summary>
 	/// Ship's state when the Star is docked and powering the Ship

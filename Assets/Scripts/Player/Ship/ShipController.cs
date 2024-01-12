@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using DG.Tweening;
 using PierreMizzi.SoundManager;
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 	/// <summary>
 	/// Ship's controlling class for all it's movement capabilities.

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using PierreMizzi.SoundManager;
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 
 	/// <summary>

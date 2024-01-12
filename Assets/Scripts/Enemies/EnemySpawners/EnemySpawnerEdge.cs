@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace QGamesTest.Gameplay.Enemies
+namespace StarWielder.Gameplay.Enemies
 {
 
 	/// <summary>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using PierreMizzi.Useful;
 using UnityEngine;
 
-namespace QGamesTest.Gameplay.Enemies
+namespace StarWielder.Gameplay.Enemies
 {
 	/// <summary>
 	/// Mother class from different type of spawner

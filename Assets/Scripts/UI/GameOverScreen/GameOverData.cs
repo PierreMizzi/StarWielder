@@ -1,4 +1,4 @@
-namespace QGamesTest.Gameplay
+namespace StarWielder.Gameplay
 {
 
 	public enum GameOverReason

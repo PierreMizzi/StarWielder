@@ -5,11 +5,11 @@ using System.Text;
 using DG.Tweening;
 using PierreMizzi.SoundManager;
 using PierreMizzi.Useful;
-using QGamesTest.Gameplay;
+using StarWielder.Gameplay;
 using TMPro;
 using UnityEngine;
 
-namespace QGamesTest.UI
+namespace StarWielder.UI
 {
 	/// <summary>
 	/// GameOverScreen manages the succession of animations & tweens to display the Player's score.

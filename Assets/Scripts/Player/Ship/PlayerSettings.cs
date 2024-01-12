@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 	/// <summary>
 	/// All gameplay & movement related settings for the Player

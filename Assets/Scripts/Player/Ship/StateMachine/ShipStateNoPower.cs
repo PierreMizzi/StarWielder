@@ -1,7 +1,7 @@
 using PierreMizzi.SoundManager;
 using PierreMizzi.Useful.StateMachines;
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 	public class ShipStateNoPower : ShipState
 	{

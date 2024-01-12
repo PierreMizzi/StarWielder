@@ -1,9 +1,9 @@
 using DG.Tweening;
 using PierreMizzi.Useful;
-using QGamesTest.Gameplay.Player;
+using StarWielder.Gameplay.Player;
 using UnityEngine;
 
-namespace QGamesTest.Gameplay
+namespace StarWielder.Gameplay
 {
 
 	public class CameraManager : MonoBehaviour

@@ -2,7 +2,7 @@ using PierreMizzi.SoundManager;
 using PierreMizzi.Useful.StateMachines;
 using UnityEngine.InputSystem;
 
-namespace QGamesTest.Gameplay.Player
+namespace StarWielder.Gameplay.Player
 {
 	/// <summary>
 	/// Star's state when it's moving, bouncing and absorbing EnemyStar's energy

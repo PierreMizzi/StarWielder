@@ -1,10 +1,10 @@
 using DG.Tweening;
-using QGamesTest.Gameplay.Player;
+using StarWielder.Gameplay.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace QGamesTest.UI
+namespace StarWielder.UI
 {
 	public class HealthUI : MonoBehaviour
 	{
