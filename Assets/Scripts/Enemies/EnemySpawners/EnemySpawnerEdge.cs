@@ -10,6 +10,11 @@ namespace StarWielder.Gameplay.Enemies
 	public class EnemySpawnerEdge : EnemySpawner
 	{
 
+		private void Awake()
+		{
+			ComputeEdges();
+		}
+
 		#region EnemySpawner
 
 		protected override void SetEnemyGroupTransform(EnemyGroup newEnemyGroup)
@@ -25,11 +30,13 @@ namespace StarWielder.Gameplay.Enemies
 		#region Position
 
 		[Header("Position")]
-		// TODO : Make sure min can't go above max, and max can't go below min
-		[SerializeField] private float m_minHorizontal = 5f;
-		[SerializeField] private float m_maxHorizontal = 7f;
-		[SerializeField] private float m_minVertical = 4f;
-		[SerializeField] private float m_maxVertical = 4.5f;
+		[SerializeField] private Bounds m_minBounds;
+		[SerializeField] private Bounds m_maxBounds;
+
+		private Vector2 m_edgesRight;
+		private Vector2 m_edgesLeft;
+		private Vector2 m_edgesTop;
+		private Vector2 m_edgesBot;
 
 		protected override Vector3 GetRandomPosition()
 		{
@@ -38,19 +45,55 @@ namespace StarWielder.Gameplay.Enemies
 			bool isHorizontalOrVertical = Random.Range(0, 2) == 0;
 			bool isPositiveOrNegative = Random.Range(0, 2) == 0;
 
+			// Along width
 			if (isHorizontalOrVertical)
 			{
-				position.x = Random.Range(-m_maxHorizontal, m_maxHorizontal);
-				position.y = Random.Range(m_minVertical, m_maxVertical) * (isPositiveOrNegative ? 1 : -1);
+				position.x = Random.Range(m_edgesLeft.y, m_edgesRight.y);
+
+				// Top
+				if (isPositiveOrNegative)
+					position.y = Random.Range(m_edgesTop.x, m_edgesTop.y);
+				// Bot
+				else
+					position.y = Random.Range(m_edgesBot.x, m_edgesBot.y);
+
 			}
 			else
 			{
-				position.x = Random.Range(m_minHorizontal, m_maxHorizontal) * (isPositiveOrNegative ? 1 : -1);
-				position.y = Random.Range(-m_maxVertical, m_maxVertical);
+				position.y = Random.Range(m_edgesBot.y, m_edgesTop.y);
+				// Right
+				if (isPositiveOrNegative)
+					position.x = Random.Range(m_edgesRight.x, m_edgesRight.y);
+				// Left
+				else
+					position.x = Random.Range(m_edgesLeft.x, m_edgesLeft.y);
+
 			}
 
 			return position;
+
 		}
+
+		private void ComputeEdges()
+		{
+			m_edgesRight.x = m_minBounds.center.x + m_minBounds.extents.x;
+			m_edgesRight.y = m_maxBounds.center.x + m_maxBounds.extents.x;
+
+			m_edgesLeft.x = m_minBounds.center.x + -m_minBounds.extents.x;
+			m_edgesLeft.y = m_maxBounds.center.x + -m_maxBounds.extents.x;
+
+			m_edgesTop.x = m_minBounds.center.y + m_minBounds.extents.y;
+			m_edgesTop.y = m_maxBounds.center.y + m_maxBounds.extents.y;
+
+			m_edgesBot.x = m_minBounds.center.y + -m_minBounds.extents.y;
+			m_edgesBot.y = m_maxBounds.center.y + -m_maxBounds.extents.y;
+
+			// Debug.Log($"Right : {m_edgesRight}");
+			// Debug.Log($"Left : {m_edgesLeft}");
+			// Debug.Log($"Top : {m_edgesTop}");
+			// Debug.Log($"Bot : {m_edgesBot}");
+		}
+
 
 		#endregion
 
@@ -83,14 +126,10 @@ namespace StarWielder.Gameplay.Enemies
 			if (m_displayVisualization)
 			{
 				Gizmos.color = m_colorVisualization;
-				Vector3 minEdgesCube = new Vector3(m_minHorizontal, m_minVertical, 0f);
-				Vector3 maxEdgesCube = new Vector3(m_maxHorizontal, m_maxVertical, 0f);
+				Gizmos.DrawWireCube(m_minBounds.center, m_minBounds.size);
+				Gizmos.DrawWireCube(m_maxBounds.center, m_maxBounds.size);
 
-				minEdgesCube *= 2f;
-				maxEdgesCube *= 2f;
-
-				Gizmos.DrawWireCube(Vector3.zero, minEdgesCube);
-				Gizmos.DrawWireCube(Vector3.zero, maxEdgesCube);
+				return;
 			}
 		}
 

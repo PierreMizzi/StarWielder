@@ -57,8 +57,10 @@ namespace StarWielder.Gameplay.Player
 
 		#endregion
 
-		#region Boundaries
+		#region Arena Boundaries
 
+		[Header("Arena Boundaries")]
+		[SerializeField] private ArenaManager m_arenaManager;
 		private BoxCollider2D m_boxCollider;
 
 		private Vector2 m_topRightBoundCorner;
@@ -69,8 +71,8 @@ namespace StarWielder.Gameplay.Player
 		public void ComputeCorners()
 		{
 			Vector2 extents = new Vector2(m_boxCollider.bounds.extents.x, m_boxCollider.bounds.extents.y);
-			m_topRightBoundCorner = GameManager.topRightBoundCorner - extents;
-			m_botLeftBoundCorner = GameManager.botLeftBoundCorner + extents;
+			m_topRightBoundCorner = m_arenaManager.topRightCorner - extents;
+			m_botLeftBoundCorner = m_arenaManager.botLeftCorner + extents;
 		}
 
 		/// <summary>
