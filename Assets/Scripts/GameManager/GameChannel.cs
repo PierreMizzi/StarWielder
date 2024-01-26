@@ -16,6 +16,10 @@ namespace StarWielder.Gameplay
 		public FloatDelegate onRefreshTimer;
 		public FloatDelegate onSetHighestEnergy;
 
+		// Stages
+		public IntDelegate onStartFightStage;
+		public Action onEndFightStage;
+
 		// Game Over
 		public GameOverDelegate onGameOver;
 		public GameOverScreenDelegate onGameOverScreen;
@@ -29,6 +33,10 @@ namespace StarWielder.Gameplay
 			// Score
 			onRefreshTimer = (float time) => { };
 			onSetHighestEnergy = (float highestEnergy) => { };
+
+			// Stage
+			onStartFightStage = (int enemyCount) => { };
+			onEndFightStage = () => { };
 
 			// Game
 			onGameOver = (GameOverReason reason) => { };

@@ -211,6 +211,8 @@ namespace StarWielder.Gameplay.Player
 		[Header("Health")]
 		[SerializeField] private LayerMask m_damageLayerMask;
 
+		[SerializeField] private BoxCollider2D m_boxCollider;
+
 		private float m_currentHealth;
 
 		private void CheckIsBullet(Collider2D other)
@@ -236,6 +238,11 @@ namespace StarWielder.Gameplay.Player
 			}
 		}
 
+		private void SetInvincible(bool isInvincible)
+		{
+			m_boxCollider.enabled = isInvincible;
+		}
+
 		#endregion
 
 		#region Animations
@@ -253,6 +260,7 @@ namespace StarWielder.Gameplay.Player
 
 		public void SetIsDashing(bool isDashing)
 		{
+			SetInvincible(!isDashing);
 			m_animator.SetBool(k_boolIsDashing, isDashing);
 		}
 

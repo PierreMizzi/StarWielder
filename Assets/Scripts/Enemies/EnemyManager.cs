@@ -30,7 +30,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		private void CallbackGameOver(GameOverReason reason)
 		{
-			DeactivateEnemyGroups();
+			DeactivateSpawnedEnemies();
 			StopSpawning();
 		}
 
@@ -127,23 +127,23 @@ namespace StarWielder.Gameplay.Enemies
 
 		#region Enemy Groups
 
-		private List<EnemyGroup> m_enemyGroups = new List<EnemyGroup>();
+		private List<EnemyGroup> m_spawnedEnemies = new List<EnemyGroup>();
 
-		public void DeactivateEnemyGroups()
+		public void DeactivateSpawnedEnemies()
 		{
-			foreach (EnemyGroup enemyGroup in m_enemyGroups)
+			foreach (EnemyGroup enemyGroup in m_spawnedEnemies)
 				enemyGroup.DeactivateTurrets();
 		}
 
-		public void AddEnemyGroup(EnemyGroup enemyGroup)
+		public void AddSpawnedEnemy(EnemyGroup enemy)
 		{
-			m_enemyGroups.Add(enemyGroup);
+			m_spawnedEnemies.Add(enemy);
 		}
 
-		public void RemoveEnemyGroup(EnemyGroup enemyGroup)
+		public void RemoveSpawnedEnemy(EnemyGroup enemy)
 		{
-			if (m_enemyGroups.Contains(enemyGroup))
-				m_enemyGroups.Remove(enemyGroup);
+			if (m_spawnedEnemies.Contains(enemy))
+				m_spawnedEnemies.Remove(enemy);
 		}
 
 		#endregion

@@ -5,7 +5,6 @@ using PierreMizzi.SoundManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 namespace StarWielder.Gameplay
 {
 

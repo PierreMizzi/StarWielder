@@ -57,7 +57,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		private void OnDestroy()
 		{
-			m_manager.RemoveEnemyGroup(this);
+			m_manager.RemoveSpawnedEnemy(this);
 		}
 
 		#endregion
@@ -83,6 +83,7 @@ namespace StarWielder.Gameplay.Enemies
 		#region Turrets
 
 		private List<EnemyTurret> m_turrets = new List<EnemyTurret>();
+
 		private void ActivateTurrets()
 		{
 			foreach (EnemyTurret turret in m_turrets)
