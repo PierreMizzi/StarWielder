@@ -17,11 +17,6 @@ namespace PierreMizzi.Useful.StateMachines
 
         public int type { get; protected set; }
 
-        public void Initialize(IStateMachine stateMachine)
-        {
-            m_stateMachine = stateMachine;
-        }
-
         /// <summary>
         /// Dictionnary to store specific "EnterState" mode when transitioning from one state to another
         /// </summary>
@@ -40,9 +35,7 @@ namespace PierreMizzi.Useful.StateMachines
         /// <summary>
         /// Default method called when entering this behaviour
         /// </summary>
-        protected virtual void DefaultEnter()
-        {
-        }
+        protected virtual void DefaultEnter() { }
 
         /// <summary>
         /// Seach for an "Enter" method matching previous state, if none, DefaultEnter is called

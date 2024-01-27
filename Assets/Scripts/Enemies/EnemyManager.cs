@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using StarWielder.Gameplay.Player;
 using PierreMizzi.Useful;
 using UnityEngine;
+using System;
 
 
 namespace StarWielder.Gameplay.Enemies
@@ -19,15 +20,29 @@ namespace StarWielder.Gameplay.Enemies
 		[Header("Main")]
 		[SerializeField] private GameChannel m_gameChannel;
 
+		// TODO : Kinda weird
 		[SerializeField] private Ship m_ship;
 		public Ship ship => m_ship;
 
+		private int m_spawnedEnemiesCount;
+		private int m_killedEnemiesCount;
+
+		private void CallbackStartFightStage(int enemyCount)
+		{
+			this.m_spawnedEnemiesCount = enemyCount;
+			this.m_killedEnemiesCount = enemyCount;
+
+			StartSpawning();
+		}
+
+		[Obsolete]
 		private void CallbackStartGame()
 		{
 			Debug.Log("CallbackStartGame : " + gameObject.GetInstanceID());
 			StartSpawning();
 		}
 
+		[Obsolete]
 		private void CallbackGameOver(GameOverReason reason)
 		{
 			DeactivateSpawnedEnemies();
@@ -44,17 +59,25 @@ namespace StarWielder.Gameplay.Enemies
 
 			if (m_gameChannel != null)
 			{
-				m_gameChannel.onStartGame += CallbackStartGame;
-				m_gameChannel.onGameOver += CallbackGameOver;
+				// TODO : Start called by LevelManager
+				m_gameChannel.onFightStageStart += CallbackStartFightStage;
+
+
+				// m_gameChannel.onStartGame += CallbackStartGame;
+				// m_gameChannel.onGameOver += CallbackGameOver;
 			}
 		}
+
+
 
 		private void OnDestroy()
 		{
 			if (m_gameChannel != null)
 			{
-				m_gameChannel.onStartGame -= CallbackStartGame;
-				m_gameChannel.onGameOver -= CallbackGameOver;
+				m_gameChannel.onFightStageStart -= CallbackStartFightStage;
+
+				// m_gameChannel.onStartGame -= CallbackStartGame;
+				// m_gameChannel.onGameOver -= CallbackGameOver;
 			}
 		}
 
@@ -113,14 +136,18 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			float min = m_minSpawnDelayCurve.Evaluate(m_spawnTimer);
 			float max = m_minSpawnDelayCurve.Evaluate(m_spawnTimer);
-			return Random.Range(min, max);
+			return UnityEngine.Random.Range(min, max);
 		}
 
 		[ContextMenu("SpawnEnemyGroup")]
 		private void SpawnEnemyGroup()
 		{
+			m_spawnedEnemiesCount--;
 			EnemySpawner spawner = UtilsClass.PickRandomInList(m_enemySpawners);
 			spawner.SpawnEnemyGroup();
+
+			if (m_spawnedEnemiesCount == 0)
+				StopSpawning();
 		}
 
 		#endregion
@@ -143,7 +170,13 @@ namespace StarWielder.Gameplay.Enemies
 		public void RemoveSpawnedEnemy(EnemyGroup enemy)
 		{
 			if (m_spawnedEnemies.Contains(enemy))
+			{
 				m_spawnedEnemies.Remove(enemy);
+				m_killedEnemiesCount--;
+
+				if (m_killedEnemiesCount == 0)
+					m_gameChannel.onFightStageEnd.Invoke();
+			}
 		}
 
 		#endregion

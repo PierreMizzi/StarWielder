@@ -1,6 +1,6 @@
 namespace StarWielder.Gameplay
 {
-	public enum StageType
+	public enum StageStateType
 	{
 		None,
 		Fight,
