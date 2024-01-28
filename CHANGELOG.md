@@ -11,6 +11,7 @@
 ### Changes
 
 - Changed the "playing" space of the game. There is now a unreachable space at the bottom. Impacts spawning of enemies
+- Ship can grab the Sun without recalling him 
 
 ### Bug Fix
 

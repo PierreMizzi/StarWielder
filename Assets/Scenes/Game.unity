@@ -5062,6 +5062,7 @@ GameObject:
   - component: {fileID: 1452353542}
   - component: {fileID: 1452353541}
   - component: {fileID: 1452353540}
+  - component: {fileID: 1452353544}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5116,7 +5117,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452353539}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -5154,6 +5155,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1452353544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452353539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a533270d5ca1f647bb8d23eba5087ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_canvas: {fileID: 1452353542}
 --- !u!1 &1461222850
 GameObject:
   m_ObjectHideFlags: 0
@@ -7694,6 +7708,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1709517717}
     - target: {fileID: 3153189582022618723, guid: c741c91ed74e40e44945eb3cc91e1195, type: 3}
+      propertyPath: m_settings
+      value: 
+      objectReference: {fileID: 11400000, guid: cb6c8a45a378a724c95fa2ea094a3b29, type: 2}
+    - target: {fileID: 3153189582022618723, guid: c741c91ed74e40e44945eb3cc91e1195, type: 3}
       propertyPath: m_soundSource
       value: 
       objectReference: {fileID: 1689705774}
@@ -7868,6 +7886,10 @@ PrefabInstance:
       propertyPath: m_dashStar
       value: 
       objectReference: {fileID: 318517793}
+    - target: {fileID: 6232630160101611033, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
+      propertyPath: m_settings
+      value: 
+      objectReference: {fileID: 11400000, guid: 15a4c765d0a6ae742a14552be33dbdf5, type: 2}
     - target: {fileID: 6232630160101611033, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
       propertyPath: m_arenaManager
       value: 
