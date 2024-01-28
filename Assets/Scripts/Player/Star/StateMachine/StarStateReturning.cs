@@ -66,7 +66,7 @@ namespace StarWielder.Gameplay.Player
 		private void CallbackTriggerEnter(Collider2D other)
 		{
 			if (other.gameObject == m_this.ship.gameObject)
-				ChangeState((int)StarStateType.Docked);
+				ChangeState((int)StarStateType.Transfer);
 		}
 
 		private void CallbackCollisionEnter(Collision2D other)
