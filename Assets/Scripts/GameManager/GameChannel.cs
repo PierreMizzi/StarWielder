@@ -17,7 +17,7 @@ namespace StarWielder.Gameplay
 		public FloatDelegate onSetHighestEnergy;
 
 		// Stages
-		public IntDelegate onFightStageStart;
+		public FightStageDelegate onFightStageStart;
 		public Action onFightStageEnd;
 
 		// Game Over
@@ -35,7 +35,7 @@ namespace StarWielder.Gameplay
 			onSetHighestEnergy = (float highestEnergy) => { };
 
 			// Stage
-			onFightStageStart = (int enemyCount) => { };
+			onFightStageStart = (FightStageData data) => { };
 			onFightStageEnd = () => { };
 
 			// Game

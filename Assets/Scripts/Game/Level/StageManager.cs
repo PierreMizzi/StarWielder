@@ -104,7 +104,8 @@ namespace StarWielder.Gameplay
 		#region Stage Succession
 
 		private int m_currentStageIndex = 0;
-
+		[SerializeField] private FightStageSettings m_fightStageSettings;
+		public FightStageSettings fightStageSettings { get { return m_fightStageSettings; } }
 
 		private void StartStage()
 		{

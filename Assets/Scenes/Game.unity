@@ -3733,7 +3733,7 @@ GameObject:
   - component: {fileID: 1022066250}
   - component: {fileID: 1022066251}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: StageManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3766,6 +3766,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47f002829cb8ed4d8f433ee61d2975a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_enemyManager: {fileID: 305180833}
+  m_gameChannel: {fileID: 11400000, guid: 7fa2ee207c87f4e42827ce90cc2e7f70, type: 2}
   m_stagesAmount: 6
 --- !u!1 &1053841660
 GameObject:

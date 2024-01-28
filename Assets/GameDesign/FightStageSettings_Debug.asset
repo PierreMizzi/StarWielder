@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f49d46507d313f348a18c6a7ed9d2653, type: 3}
+  m_Name: FightStageSettings_Debug
+  m_EditorClassIdentifier: 
+  m_datas:
+  - enemiesCount: 5
+    minSpawnDelay: 4
+    maxSpawnDelay: 5.5
+  - enemiesCount: 0
+    minSpawnDelay: 0
+    maxSpawnDelay: 0
+  - enemiesCount: 0
+    minSpawnDelay: 0
+    maxSpawnDelay: 0
+  - enemiesCount: 0
+    minSpawnDelay: 0
+    maxSpawnDelay: 0

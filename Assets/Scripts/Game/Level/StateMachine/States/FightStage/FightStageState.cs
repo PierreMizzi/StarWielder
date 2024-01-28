@@ -10,6 +10,9 @@ using UnityEngine;
 
 namespace StarWielder.Gameplay
 {
+
+	public delegate void FightStageDelegate(FightStageData data);
+
 	public class FightStageState : StageState
 	{
 		[SerializeField] private GameChannel m_gameChannel;
@@ -24,10 +27,15 @@ namespace StarWielder.Gameplay
 
 		#region Behaviour
 
+		private int fightStageIndex = 0;
+
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
-			m_this.gameChannel.onFightStageStart.Invoke(1);
+			FightStageData data = (FightStageData)m_this.fightStageSettings.datas[fightStageIndex].Clone();
+			m_this.gameChannel.onFightStageStart.Invoke(data);
+
+			fightStageIndex++;
 		}
 
 		#endregion
