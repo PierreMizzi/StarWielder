@@ -113,7 +113,7 @@ namespace StarWielder.Gameplay.Player
 
 		private void Move()
 		{
-			m_offsetPosition = m_locomotionActionValue * m_settings.speed * Time.deltaTime;
+			m_offsetPosition = m_locomotionActionValue * m_ship.stats.speed * Time.deltaTime;
 			m_nextPosition = transform.position + m_offsetPosition;
 
 			transform.position = Vector3.SmoothDamp(transform.position, m_nextPosition, ref m_currentVelocity, m_settings.smoothTime);
@@ -182,7 +182,7 @@ namespace StarWielder.Gameplay.Player
 
 		private IEnumerator DashCooldownIEnumerator()
 		{
-			while (m_dashCooldownTime <= m_settings.dashCooldownDuration)
+			while (m_dashCooldownTime <= m_ship.stats.dashCooldownDuration)
 			{
 				m_dashCooldownTime += Time.deltaTime;
 				yield return null;

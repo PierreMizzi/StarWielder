@@ -31,6 +31,10 @@ namespace StarWielder.Gameplay.Player
 
 		[Header("Main")]
 		[SerializeField] private PlayerSettings m_settings;
+
+		private ShipStats m_stats;
+		public ShipStats stats { get { return m_stats; } }
+
 		private ShipController m_controller;
 		public ShipController controller => m_controller;
 
@@ -89,7 +93,8 @@ namespace StarWielder.Gameplay.Player
 
 		private void Awake()
 		{
-			m_currentHealth = m_settings.maxHealth;
+			m_stats = new ShipStats(m_settings);
+			m_currentHealth = m_stats.maxHealth;
 
 			m_controller = GetComponent<ShipController>();
 			m_animator = GetComponent<Animator>();
@@ -157,7 +162,7 @@ namespace StarWielder.Gameplay.Player
 		public float emergencyEnergy
 		{
 			get { return m_emergencyEnergy; }
-			set { m_emergencyEnergy = Mathf.Clamp(value, 0f, m_settings.maxEmergencyEnergy); }
+			set { m_emergencyEnergy = Mathf.Clamp(value, 0f, m_stats.maxEmergencyEnergy); }
 		}
 
 		public void DepleateEmergencyEnergy()
@@ -169,8 +174,8 @@ namespace StarWielder.Gameplay.Player
 		public float GetMaxTransferableEnergy(float starEnergy)
 		{
 			float transferableEnergy;
-			if (emergencyEnergy + starEnergy > m_settings.maxEmergencyEnergy)
-				transferableEnergy = m_settings.maxEmergencyEnergy - emergencyEnergy;
+			if (emergencyEnergy + starEnergy > m_stats.maxEmergencyEnergy)
+				transferableEnergy = m_stats.maxEmergencyEnergy - emergencyEnergy;
 			else
 				transferableEnergy = starEnergy;
 
