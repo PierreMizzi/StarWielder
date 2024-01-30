@@ -19,6 +19,12 @@ namespace StarWielder.Gameplay.Player
 
 		#endregion
 
+		#region Emergency Energy
+
+		public FloatDelegate onRefreshEmergencyEnergy;
+
+		#endregion
+
 		#region Health
 
 		public FloatDelegate onShipHurt;
@@ -39,6 +45,8 @@ namespace StarWielder.Gameplay.Player
 			onStarFree = () => { };
 			onStartEnergyTransfer = () => { };
 			onStopEnergyTransfer = () => { };
+
+			onRefreshEmergencyEnergy = (float energy) => { };
 
 			onShipHurt = (float normalizedHealth) => { };
 

@@ -10,11 +10,6 @@ namespace PierreMizzi.Useful
 		private void Start()
 		{
 			DebugDisplay();
-		}
-
-		public void DebugDisplay()
-		{
-			m_canvas.enabled = true;
 
 			// Display all child
 			int count = transform.childCount;
@@ -26,6 +21,11 @@ namespace PierreMizzi.Useful
 			}
 		}
 
+		public void DebugDisplay()
+		{
+			m_canvas.enabled = true;
+		}
+
 		public void DebugHide()
 		{
 			m_canvas.enabled = false;
@@ -33,6 +33,8 @@ namespace PierreMizzi.Useful
 
 		public void IsolateChild(int childIndex)
 		{
+			DebugDisplay();
+
 			int count = transform.childCount;
 			GameObject child;
 			for (int i = 0; i < count; i++)

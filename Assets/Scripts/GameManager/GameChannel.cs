@@ -16,6 +16,9 @@ namespace StarWielder.Gameplay
 		public FloatDelegate onRefreshTimer;
 		public FloatDelegate onSetHighestEnergy;
 
+		// Currency
+		public IntDelegate onCollectCurrency;
+
 		// Stages
 		public FightStageDelegate onFightStageStart;
 		public Action onFightStageEnd;
@@ -33,6 +36,9 @@ namespace StarWielder.Gameplay
 			// Score
 			onRefreshTimer = (float time) => { };
 			onSetHighestEnergy = (float highestEnergy) => { };
+
+			// Currency
+			onCollectCurrency = (int amount) => { };
 
 			// Stage
 			onFightStageStart = (FightStageData data) => { };

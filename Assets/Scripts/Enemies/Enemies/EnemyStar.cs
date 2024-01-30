@@ -22,6 +22,8 @@ namespace StarWielder.Gameplay.Enemies
 			m_group = group;
 		}
 
+		#region MonoBehaviour
+
 		private void Awake()
 		{
 			m_destroyedSoundIDs = new List<string>
@@ -38,7 +40,23 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			SoundManager.PlayRandomSFX(m_destroyedSoundIDs);
 			m_group.EnemyStarDestroyed(this);
+			CreateCurrency();
 		}
+
+		#endregion
+
+		#region Currency
+
+		[Header("Currency")]
+		[SerializeField] private Currency m_currencyPrefab;
+
+		private void CreateCurrency()
+		{
+			Currency currency = Instantiate(m_currencyPrefab, transform.position, Quaternion.identity);
+			currency.Collect();
+		}
+
+		#endregion
 
 
 	}

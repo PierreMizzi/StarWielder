@@ -824,6 +824,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: CyberpunkUI_0
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 285
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b21c0f045dbd76f49adc98fe0ab01273
+      internalID: 1571440639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyberCash
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 266
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63dd374bbd9659b4d9f53187f2276f2a
+      internalID: 623715619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Currency
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 416
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f105659261e89545a3f25b16859db01
+      internalID: -250073034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -846,6 +909,9 @@ TextureImporter:
       Corners_01: 2497425846062138918
       Corners_02: 3305985355890479760
       Corners_03: -133304985065293701
+      Currency: -250073034
+      CyberCash: 623715619
+      CyberpunkUI_0: 1571440639
       CyberpunkUI_16: 8013544444269992262
       CyberpunkUI_17: 481662186367862308
       CyberpunkUI_18: -1843072945584303231

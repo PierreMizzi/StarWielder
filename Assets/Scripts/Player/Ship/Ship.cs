@@ -158,17 +158,27 @@ namespace StarWielder.Gameplay.Player
 
 		#region Energy
 
+		public float normalizedEmergencyEnergy
+		{
+			get
+			{
+				return m_emergencyEnergy / m_stats.maxEmergencyEnergy;
+			}
+		}
 		private float m_emergencyEnergy;
 		public float emergencyEnergy
 		{
 			get { return m_emergencyEnergy; }
-			set { m_emergencyEnergy = Mathf.Clamp(value, 0f, m_stats.maxEmergencyEnergy); }
+			set
+			{
+				m_emergencyEnergy = Mathf.Clamp(value, 0f, m_stats.maxEmergencyEnergy);
+				m_playerChannel.onRefreshEmergencyEnergy.Invoke(normalizedEmergencyEnergy);
+			}
 		}
 
 		public void DepleateEmergencyEnergy()
 		{
 			emergencyEnergy -= m_settings.emergencyEnergyDepleatRate * Time.deltaTime;
-			ComputeCountdown();
 		}
 
 		public float GetMaxTransferableEnergy(float starEnergy)
@@ -196,6 +206,7 @@ namespace StarWielder.Gameplay.Player
 		[SerializeField] private Vector3 m_countdownTransformOffset;
 		private float m_countdown;
 
+		[Obsolete]
 		private void ComputeCountdown()
 		{
 			m_countdown = m_emergencyEnergy / m_settings.emergencyEnergyDepleatRate;
@@ -203,6 +214,7 @@ namespace StarWielder.Gameplay.Player
 			m_animator.SetFloat(k_floatCountdown, m_countdown);
 		}
 
+		[Obsolete]
 		private void UpdateCountdownTransform()
 		{
 			m_countdownLabel.transform.position = transform.position + m_countdownTransformOffset;

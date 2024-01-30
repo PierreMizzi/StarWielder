@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace StarWielder.UI
 {
-
+	// Sun's energy UI
 	public class EnergyUI : MonoBehaviour
 	{
 		[SerializeField] private PlayerChannel m_playerChannel = null;
