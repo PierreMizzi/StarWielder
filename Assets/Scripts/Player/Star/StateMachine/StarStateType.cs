@@ -8,5 +8,6 @@ namespace StarWielder.Gameplay.Player
 		Free,
 		Returning,
 		Transfer,
+		Locked,
 	}
 }

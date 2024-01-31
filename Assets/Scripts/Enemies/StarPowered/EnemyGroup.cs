@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
 namespace StarWielder.Gameplay.Enemies
@@ -6,18 +7,16 @@ namespace StarWielder.Gameplay.Enemies
 	/// <summary>
 	/// Base class for enemies. EnemyGroup are composed of EnemyStars, EnemyShips & EnemyTurrets
 	/// </summary>
-	public class EnemyGroup : MonoBehaviour
+	public class EnemyGroup : Enemy
 	{
 
 		#region Main
 
 		private List<EnemyStar> m_enemyStars = new List<EnemyStar>();
-		private EnemyManager m_manager;
-		public EnemyManager manager => m_manager;
 
-		public void Initialize(EnemyManager manager)
+		public override void Initialize(EnemyManager manager)
 		{
-			m_manager = manager;
+			base.Initialize(manager);
 
 			Awake();
 
@@ -36,6 +35,12 @@ namespace StarWielder.Gameplay.Enemies
 			}
 		}
 
+		public override void StopBehaviour()
+		{
+			base.StopBehaviour();
+			DeactivateTurrets();
+		}
+
 		public void EnemyStarDestroyed(EnemyStar enemyStar)
 		{
 			if (m_enemyStars.Contains(enemyStar))
@@ -49,33 +54,14 @@ namespace StarWielder.Gameplay.Enemies
 
 		#region MonoBehaviour
 
-		private void Awake()
+		protected override void Awake()
 		{
-			m_area = GetComponent<Collider2D>();
-			m_animator = GetComponent<Animator>();
+			base.Awake();
 		}
 
-		private void OnDestroy()
+		protected override void OnDestroy()
 		{
 			m_manager.RemoveSpawnedEnemy(this);
-		}
-
-		#endregion
-
-		#region Area & Spawning
-
-		[Header("Area & Spawning")]
-		private Collider2D m_area;
-		[SerializeField] private ContactFilter2D m_overlapingFilter;
-
-
-		[ContextMenu("CheckIsOverlaping")]
-		public bool IsOverlaping()
-		{
-			List<Collider2D> results = new List<Collider2D>();
-			int resultsLength = m_area.OverlapCollider(m_overlapingFilter, results);
-			// Debug.Log(resultsLength);
-			return resultsLength > 0;
 		}
 
 		#endregion
@@ -100,17 +86,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		#region Animations
 
-		private Animator m_animator = null;
-
-		private const string k_triggerAppear = "Appear";
-		private const string m_triggerDestroy = "Destroy";
-
-		public void Appear()
-		{
-			m_animator.SetTrigger(k_triggerAppear);
-		}
-
-		public void AnimEventAppearCompleted()
+		public override void AnimEventAppearCompleted()
 		{
 			ActivateTurrets();
 		}

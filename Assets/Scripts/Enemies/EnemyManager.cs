@@ -5,7 +5,6 @@ using PierreMizzi.Useful;
 using UnityEngine;
 using System;
 
-
 namespace StarWielder.Gameplay.Enemies
 {
 
@@ -45,7 +44,7 @@ namespace StarWielder.Gameplay.Enemies
 		[Obsolete]
 		private void CallbackGameOver(GameOverReason reason)
 		{
-			DeactivateSpawnedEnemies();
+			SpawnedEnemiesStopBehaviour();
 			StopSpawning();
 		}
 
@@ -67,8 +66,6 @@ namespace StarWielder.Gameplay.Enemies
 				// m_gameChannel.onGameOver += CallbackGameOver;
 			}
 		}
-
-
 
 		private void OnDestroy()
 		{
@@ -97,6 +94,9 @@ namespace StarWielder.Gameplay.Enemies
 
 		private void InitializeSpawners()
 		{
+			if (m_isDebugging)
+				SetDebugging();
+
 			Debug.Log("InitializeSpawners" + gameObject.GetInstanceID());
 			foreach (EnemySpawner enemySpawners in m_enemySpawners)
 				enemySpawners.Initialize(this);
@@ -144,7 +144,7 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			m_spawnedEnemiesCount--;
 			EnemySpawner spawner = UtilsClass.PickRandomInList(m_enemySpawners);
-			spawner.SpawnEnemyGroup();
+			spawner.SpawnEnemy();
 
 			if (m_spawnedEnemiesCount == 0)
 				StopSpawning();
@@ -154,20 +154,20 @@ namespace StarWielder.Gameplay.Enemies
 
 		#region Enemy Groups
 
-		private List<EnemyGroup> m_spawnedEnemies = new List<EnemyGroup>();
+		private List<Enemy> m_spawnedEnemies = new List<Enemy>();
 
-		public void DeactivateSpawnedEnemies()
+		public void SpawnedEnemiesStopBehaviour()
 		{
-			foreach (EnemyGroup enemyGroup in m_spawnedEnemies)
-				enemyGroup.DeactivateTurrets();
+			foreach (Enemy enemy in m_spawnedEnemies)
+				enemy.StopBehaviour();
 		}
 
-		public void AddSpawnedEnemy(EnemyGroup enemy)
+		public void AddSpawnedEnemy(Enemy enemy)
 		{
 			m_spawnedEnemies.Add(enemy);
 		}
 
-		public void RemoveSpawnedEnemy(EnemyGroup enemy)
+		public void RemoveSpawnedEnemy(Enemy enemy)
 		{
 			if (m_spawnedEnemies.Contains(enemy))
 			{
@@ -187,6 +187,21 @@ namespace StarWielder.Gameplay.Enemies
 		[SerializeField] private Transform m_bulletsContainer;
 
 		public Transform bulletsContainer => m_bulletsContainer;
+
+		#endregion
+
+		#region Debug
+
+		[Header("Debug")]
+
+		[SerializeField] private bool m_isDebugging;
+
+		[SerializeField] private List<EnemySpawner> m_debugEnemySpawners;
+
+		private void SetDebugging()
+		{
+			m_enemySpawners = new List<EnemySpawner>(m_debugEnemySpawners);
+		}
 
 		#endregion
 

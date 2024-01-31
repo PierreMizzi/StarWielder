@@ -6,7 +6,9 @@
 
 - A Game is divided into stages :
   - Fighting stage : Fights enemies to survive and earn currencies
-  - Resources stage : Heal and 
+  - Resources stage : Heal and earn currencies
+- Added currency :
+  - Looted when absorbing energy from enemy's star, they can be used to purchase upgrades and modifications 
 
 ### Changes
 

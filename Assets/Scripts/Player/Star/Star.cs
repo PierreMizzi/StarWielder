@@ -59,6 +59,7 @@ namespace StarWielder.Gameplay.Player
 				new StarStateFree(this),
 				new StarStateReturning(this),
 				new StarStateTransfering(this),
+				new StarStateLocked(this),
 			};
 
 			ChangeState(m_initialState);
@@ -182,6 +183,11 @@ namespace StarWielder.Gameplay.Player
 			transform.localRotation = Quaternion.identity;
 
 			m_playerChannel.onStarDocked.Invoke();
+		}
+
+		public void SetLocked()
+		{
+
 		}
 
 		#endregion

@@ -17,12 +17,12 @@ namespace StarWielder.Gameplay.Enemies
 
 		#region EnemySpawner
 
-		protected override void SetEnemyGroupTransform(EnemyGroup newEnemyGroup)
+		protected override void SetEnemyTransform(Enemy newEnemy)
 		{
 			Vector3 position = GetRandomPosition();
 
-			newEnemyGroup.transform.position = position;
-			newEnemyGroup.transform.rotation = GetRandomRotation(position);
+			newEnemy.transform.position = position;
+			newEnemy.transform.rotation = GetRandomRotation(position);
 		}
 
 		#endregion
