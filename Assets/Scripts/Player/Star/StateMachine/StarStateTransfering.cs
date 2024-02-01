@@ -65,7 +65,6 @@ namespace StarWielder.Gameplay.Player
 				(float value) =>
 				{
 					m_this.currentEnergy = Mathf.Lerp(fromStarEnergy, toStarEnergy, value);
-					m_this.playerChannel.onRefreshStarEnergy.Invoke(m_this.currentEnergy);
 
 					m_this.ship.emergencyEnergy = Mathf.Lerp(fromShipEnergy, toShipEnergy, value);
 				}

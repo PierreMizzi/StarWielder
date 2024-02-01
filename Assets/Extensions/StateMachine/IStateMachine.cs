@@ -13,7 +13,18 @@ namespace PierreMizzi.Useful.StateMachines
         public AState currentState { get; set; }
         public List<AState> states { get; set; }
         public void InitializeStates();
+        // {
+        //     currentState = new List<AState>()
+        //     {
+        //         // MyState
+        //     };
+        // }
+
         public void UpdateState();
+        // {
+        // 	currentState?.Update();
+        // }
+
         public void ChangeState(int previousState, int nextState);
         // {
         //     currentState?.Exit();

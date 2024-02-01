@@ -35,7 +35,6 @@ namespace StarWielder.Gameplay.Player
 		{
 			base.Update();
 			m_this.currentEnergy -= m_this.settings.dockedEnergyDepleateSpeed * Time.deltaTime;
-			m_this.playerChannel.onRefreshStarEnergy.Invoke(m_this.currentEnergy);
 
 			if (m_this.currentEnergy <= 0f)
 				m_this.gameChannel.onGameOver.Invoke(GameOverReason.StarDied);

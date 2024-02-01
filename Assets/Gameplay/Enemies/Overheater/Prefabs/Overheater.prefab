@@ -83,6 +83,11 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  m_maxEnergy: 10
+  m_energyDrainDuration: 5
+  m_energyCoolingDuration: 3
+  m_materialPropertyBlock: {fileID: 0}
+  m_currencyPrefab: {fileID: 6358587482772539009, guid: 263495008f2fa344eb095a4e2846e9d3, type: 3}
 --- !u!58 &106619557
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -332,4 +337,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.35
+  m_Radius: 0.23

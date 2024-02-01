@@ -220,7 +220,15 @@ namespace StarWielder.Gameplay.Player
 		#region Energy
 
 		private float m_currentEnergy;
-		public float currentEnergy { get { return m_currentEnergy; } set { m_currentEnergy = Mathf.Max(0f, value); } }
+		public float currentEnergy
+		{
+			get { return m_currentEnergy; }
+			set
+			{
+				m_currentEnergy = Mathf.Max(0f, value);
+				playerChannel.onRefreshStarEnergy.Invoke(m_currentEnergy);
+			}
+		}
 		private float m_highestEnergy;
 
 		private int m_currentCombo = 1;
