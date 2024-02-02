@@ -1,6 +1,7 @@
 using UnityEngine;
 using PierreMizzi.Useful.StateMachines;
 using UnityEngine.InputSystem;
+using StarWielder.Gameplay.Player;
 
 namespace StarWielder.Gameplay.Enemies
 {
@@ -17,6 +18,8 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			base.DefaultEnter();
 
+			m_this.SetHasStar(true);
+
 			m_this.star.transform.position = m_this.transform.position;
 			m_this.star.mouseClickAction.action.performed += CallbackMouseClickAction;
 		}
@@ -30,19 +33,26 @@ namespace StarWielder.Gameplay.Enemies
 
 			// Overheater
 			m_this.currentEnergy += m_this.energyDrainSpeed * Time.deltaTime;
-			// TODO Update visual
-
-			Debug.Log("Normalized : " + m_this.currentEnergyNormalized);
 
 			if (m_this.currentEnergy >= m_this.maxEnergy)
-				Object.Destroy(m_this.gameObject);
+			{
+				m_this.star.ChangeState(StarStateType.Free);
+				m_this.Kill();
+			}
+		}
 
+		public override void Exit()
+		{
+			base.Exit();
+			if (m_this.star != null)
+				m_this.star.mouseClickAction.action.performed -= CallbackMouseClickAction;
 		}
 
 		private void CallbackMouseClickAction(InputAction.CallbackContext context)
 		{
 			m_this.star.mouseClickAction.action.performed -= CallbackMouseClickAction;
-			m_this.UnlockStar();
+			m_this.star = null;
+			m_this.SetHasStar(false);
 
 			ChangeState((int)OverheaterStateType.Cooling);
 		}

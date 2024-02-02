@@ -11,8 +11,11 @@ namespace StarWielder.Gameplay.Enemies
 
 		#region MonoBehaviour
 
+		[SerializeField] private float m_rotationSpeed = 10f;
+
 		private void Update()
 		{
+			transform.rotation *= Quaternion.Euler(Vector3.forward * m_rotationSpeed * Time.deltaTime);
 			UpdateState();
 		}
 
@@ -21,11 +24,6 @@ namespace StarWielder.Gameplay.Enemies
 			base.Awake();
 			energyDrainSpeed = m_maxEnergy / m_energyDrainDuration;
 			energyCoolingSpeed = m_maxEnergy / m_energyCoolingDuration;
-		}
-
-		protected override void OnDestroy()
-		{
-			CreateCurrency();
 		}
 
 		#endregion
@@ -40,6 +38,22 @@ namespace StarWielder.Gameplay.Enemies
 
 			InitializeStates();
 		}
+
+		public override void Kill()
+		{
+			base.Kill();
+
+			ChangeState(OverheaterStateType.Idle);
+			CreateCurrency();
+
+			Destroy(gameObject);
+		}
+
+		public override void StopBehaviour()
+		{
+			ChangeState(OverheaterStateType.Idle);
+		}
+
 
 		#endregion
 
@@ -62,6 +76,7 @@ namespace StarWielder.Gameplay.Enemies
 
 			ChangeState(OverheaterStateType.Idle);
 		}
+
 		public void UpdateState()
 		{
 			currentState?.Update();
@@ -99,7 +114,7 @@ namespace StarWielder.Gameplay.Enemies
 		public float energyCoolingSpeed { get; private set; }
 		public float maxEnergy => m_maxEnergy;
 
-		public Star star { get; private set; }
+		public Star star { get; set; }
 		private float m_currentEnergy;
 
 		public float currentEnergy
@@ -108,6 +123,7 @@ namespace StarWielder.Gameplay.Enemies
 			set
 			{
 				m_currentEnergy = Mathf.Clamp(value, 0f, m_maxEnergy);
+				m_animator.SetFloat(k_floatEnergyNormalized, currentEnergyNormalized);
 			}
 		}
 
@@ -116,7 +132,7 @@ namespace StarWielder.Gameplay.Enemies
 			get { return m_currentEnergy / m_maxEnergy; }
 		}
 
-		public void LockStar(Star star)
+		public void CallbackTriggerEnterStar(Star star)
 		{
 			this.star = star;
 			star.ChangeState(StarStateType.Locked);
@@ -124,9 +140,16 @@ namespace StarWielder.Gameplay.Enemies
 			ChangeState(OverheaterStateType.Overheating);
 		}
 
-		public void UnlockStar()
+		#endregion
+
+		#region Animations
+
+		private const string k_floatEnergyNormalized = "EnergyNormalized";
+		private const string k_boolHasStar = "HasStar";
+
+		public void SetHasStar(bool hasStar)
 		{
-			this.star = null;
+			m_animator.SetBool(k_boolHasStar, hasStar);
 		}
 
 		#endregion

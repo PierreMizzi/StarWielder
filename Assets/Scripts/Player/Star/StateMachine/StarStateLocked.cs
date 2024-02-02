@@ -16,17 +16,26 @@ namespace StarWielder.Gameplay.Player
 			type = (int)StarStateType.Locked;
 		}
 
+		private Vector2 m_savedVelocity;
+
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
+			m_savedVelocity = m_this.rigidbody.velocity;
 			m_this.rigidbody.velocity = Vector2.zero;
 
 			m_this.mouseClickAction.action.performed += CallbackMouseClick;
 		}
 
+		public override void Update()
+		{
+			base.Update();
+		}
+
 		public override void Exit()
 		{
 			base.Exit();
+			m_this.rigidbody.velocity = m_savedVelocity;
 			m_this.mouseClickAction.action.performed -= CallbackMouseClick;
 		}
 

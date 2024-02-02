@@ -59,11 +59,6 @@ namespace StarWielder.Gameplay.Enemies
 			base.Awake();
 		}
 
-		protected override void OnDestroy()
-		{
-			m_manager.RemoveSpawnedEnemy(this);
-		}
-
 		#endregion
 
 		#region Turrets

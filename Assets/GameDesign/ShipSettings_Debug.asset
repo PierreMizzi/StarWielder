@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 150
   maxEmergencyEnergy: 10
-  emergencyEnergyDepleatRate: 0
-  emergencyEnergyDuration: Infinity
-  speed: 300
+  emergencyEnergyDepleatRate: 2
+  emergencyEnergyDuration: 5
+  speed: 150
   smoothTime: 0.5
   dashDistance: 3
   dashDuration: 0.2

@@ -6939,7 +6939,6 @@ MonoBehaviour:
   m_enemyGroupPrefabs: []
   m_enemyPrefabs:
   - {fileID: 1614948553425005040, guid: ba03d9fe4aa25b143b698a15daf90062, type: 3}
-  - {fileID: 3074720429936950026, guid: 4e988cea3d3ad794a9750c24834eeb70, type: 3}
   m_validSpawnAttempts: 10
   m_displayVisualization: 0
   m_colorVisualization: {r: 1, g: 0, b: 0, a: 1}
@@ -8944,6 +8943,10 @@ PrefabInstance:
       propertyPath: m_star
       value: 
       objectReference: {fileID: 267292437}
+    - target: {fileID: 6232630160101611032, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
+      propertyPath: m_settings
+      value: 
+      objectReference: {fileID: 11400000, guid: 15a4c765d0a6ae742a14552be33dbdf5, type: 2}
     - target: {fileID: 6232630160101611032, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
       propertyPath: m_boxCollider
       value: 

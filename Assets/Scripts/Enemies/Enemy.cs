@@ -15,13 +15,16 @@ namespace StarWielder.Gameplay.Enemies
 			m_manager = manager;
 		}
 
+		public virtual void Kill()
+		{
+			m_manager.RemoveSpawnedEnemy(this);
+		}
+
 		protected virtual void Awake()
 		{
 			m_area = GetComponent<Collider2D>();
 			m_animator = GetComponent<Animator>();
 		}
-
-		protected virtual void OnDestroy() { }
 
 		#region Area & Spawning
 

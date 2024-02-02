@@ -124,6 +124,7 @@ namespace StarWielder.Gameplay.Player
 		protected void Update()
 		{
 			UpdateState();
+			CheckEnergy();
 			ManageScaleFromVelocity();
 		}
 
@@ -242,6 +243,12 @@ namespace StarWielder.Gameplay.Player
 				return gainedEnergy * m_currentCombo * m_settings.comboBonusEnergyRatio;
 		}
 
+		private void CheckEnergy()
+		{
+			if (m_currentEnergy <= 0f)
+				gameChannel.onGameOver.Invoke(GameOverReason.StarDied);
+		}
+
 		#endregion
 
 		#region Physics
@@ -302,7 +309,7 @@ namespace StarWielder.Gameplay.Player
 					m_highestEnergy = m_currentEnergy;
 				}
 
-				Destroy(enemyStar.gameObject);
+				enemyStar.Kill();
 			}
 		}
 

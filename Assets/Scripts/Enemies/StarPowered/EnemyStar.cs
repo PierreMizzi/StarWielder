@@ -36,11 +36,13 @@ namespace StarWielder.Gameplay.Enemies
 			};
 		}
 
-		private void OnDestroy()
+		public void Kill()
 		{
 			SoundManager.PlayRandomSFX(m_destroyedSoundIDs);
 			m_group.EnemyStarDestroyed(this);
 			CreateCurrency();
+
+			Destroy(gameObject);
 		}
 
 		#endregion

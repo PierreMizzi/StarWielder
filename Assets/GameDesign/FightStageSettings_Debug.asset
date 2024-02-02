@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FightStageSettings_Debug
   m_EditorClassIdentifier: 
   m_datas:
-  - enemiesCount: 10
+  - enemiesCount: 5
     minSpawnDelay: 4
     maxSpawnDelay: 5.5
   - enemiesCount: 1
