@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using PierreMizzi.SoundManager;
 using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
@@ -148,8 +148,8 @@ namespace StarWielder.Gameplay.Player
 
 			onTriggerEnter2D.Invoke(other);
 
-			if (UtilsClass.CheckLayer(m_enemyLayer.value, other.gameObject.layer))
-				AbsorbEnemyStar(other);
+			if (other.gameObject.TryGetComponent(out StarAbsorbable absorbable))
+				AbsorbEnergy(absorbable);
 		}
 
 		#endregion
@@ -289,7 +289,20 @@ namespace StarWielder.Gameplay.Player
 		[Header("EnemyStar")]
 		[SerializeField] private LayerMask m_enemyLayer;
 
-		private void AbsorbEnemyStar(Collider2D other)
+		private void AbsorbEnergy(StarAbsorbable absorbable)
+		{
+			absorbable.onAbsorb.Invoke();
+
+			// Energy
+			m_currentEnergy += absorbable.energy;
+			m_playerChannel.onAbsorbEnemyStar.Invoke(m_currentEnergy);
+
+			// Animation
+			m_animator.SetTrigger(k_triggerAbsorb);
+		}
+
+		[Obsolete]
+		private void AbsorbEnergy(Collider2D other)
 		{
 			if (other.gameObject.TryGetComponent(out EnemyStar enemyStar))
 			{
@@ -297,7 +310,7 @@ namespace StarWielder.Gameplay.Player
 				m_currentCombo += 1;
 				m_playerChannel.onRefreshStarCombo.Invoke(m_currentCombo);
 
-				m_currentEnergy += enemyStar.energy + ComputeComboBonusEnergy(enemyStar.energy);
+				// m_currentEnergy += enemyStar.energy + ComputeComboBonusEnergy(enemyStar.energy);
 				m_playerChannel.onAbsorbEnemyStar.Invoke(m_currentEnergy);
 				SetVelocityFromEnergy();
 

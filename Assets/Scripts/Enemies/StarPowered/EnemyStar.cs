@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using PierreMizzi.SoundManager;
+using StarWielder.Gameplay.Player;
 using UnityEngine;
 
 namespace StarWielder.Gameplay.Enemies
@@ -12,14 +13,22 @@ namespace StarWielder.Gameplay.Enemies
 
 		private EnemyGroup m_group;
 
-		[SerializeField] private float m_absorbedEnergy = 3f;
-		public float energy => m_absorbedEnergy;
+		private List<string> m_destroyedSoundIDs = new List<string>();
 
-		private List<string> m_destroyedSoundIDs = null;
+		[SerializeField] private StarAbsorbable m_starAbsorbable;
 
 		public void Initialize(EnemyGroup group)
 		{
 			m_group = group;
+		}
+
+		public void Kill()
+		{
+			SoundManager.PlayRandomSFX(m_destroyedSoundIDs);
+			m_group.EnemyStarDestroyed(this);
+			CreateCurrency();
+
+			Destroy(gameObject);
 		}
 
 		#region MonoBehaviour
@@ -36,13 +45,16 @@ namespace StarWielder.Gameplay.Enemies
 			};
 		}
 
-		public void Kill()
+		private void Start()
 		{
-			SoundManager.PlayRandomSFX(m_destroyedSoundIDs);
-			m_group.EnemyStarDestroyed(this);
-			CreateCurrency();
+			if (m_starAbsorbable != null)
+				m_starAbsorbable.onAbsorb += Kill;
+		}
 
-			Destroy(gameObject);
+		private void OnDestroy()
+		{
+			if (m_starAbsorbable != null)
+				m_starAbsorbable.onAbsorb -= Kill;
 		}
 
 		#endregion

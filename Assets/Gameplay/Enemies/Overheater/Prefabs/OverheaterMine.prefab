@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3268544277504792656}
   - component: {fileID: 5524270627933002946}
   - component: {fileID: 9101162268200462018}
+  - component: {fileID: 3305945878230515566}
   m_Layer: 0
   m_Name: OverheaterMine
   m_TagString: Untagged
@@ -46,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04fb6cea1ae963b4893bb1f677b7c31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_starAbsorbable: {fileID: 3305945878230515566}
 --- !u!58 &9101162268200462018
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -61,7 +63,20 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.16
+--- !u!114 &3305945878230515566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831093600091185284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e258fc577fb1941b4a819ce09d1c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_energy: 3
 --- !u!1001 &6503253417832679798
 PrefabInstance:
   m_ObjectHideFlags: 0

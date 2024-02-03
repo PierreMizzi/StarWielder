@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5832544189220738642}
   - component: {fileID: 5832544189220738653}
   - component: {fileID: 5832544189220738652}
+  - component: {fileID: 8185016142299587741}
   m_Layer: 8
   m_Name: EnemyStar
   m_TagString: Untagged
@@ -62,8 +63,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a060c163985a15a47836686c23cf5d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_absorbedEnergy: 3
+  m_starAbsorbable: {fileID: 8185016142299587741}
   m_currencyPrefab: {fileID: 6358587482772539009, guid: 263495008f2fa344eb095a4e2846e9d3, type: 3}
+--- !u!114 &8185016142299587741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5832544189220738643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e258fc577fb1941b4a819ce09d1c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_energy: 5
 --- !u!1001 &8596432402723735188
 PrefabInstance:
   m_ObjectHideFlags: 0
