@@ -359,6 +359,59 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &103668389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 103668391}
+  - component: {fileID: 103668390}
+  m_Layer: 0
+  m_Name: EnemySpawnerAreaDebug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &103668390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103668389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acda26e192a705f40a26042d2c64b2cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enemyGroupContainer: {fileID: 774954685}
+  m_enemyPrefabs:
+  - {fileID: 1614948553425005040, guid: ba03d9fe4aa25b143b698a15daf90062, type: 3}
+  m_validSpawnAttempts: 10
+  m_displayVisualization: 0
+  m_colorVisualization: {r: 0.5411765, g: 0, b: 1, a: 0.13725491}
+  m_spawningBounds:
+    m_Center: {x: 0, y: 1.18, z: 0}
+    m_Extent: {x: 10, y: 4.59, z: 0}
+--- !u!4 &103668391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103668389}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 305180834}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &109114000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1309,7 @@ MonoBehaviour:
   m_bulletsContainer: {fileID: 806116049}
   m_isDebugging: 1
   m_debugEnemySpawners:
-  - {fileID: 1637411424}
+  - {fileID: 103668390}
 --- !u!4 &305180834
 Transform:
   m_ObjectHideFlags: 0
@@ -1271,6 +1324,7 @@ Transform:
   m_Children:
   - {fileID: 563632011}
   - {fileID: 1811697119}
+  - {fileID: 103668391}
   - {fileID: 1637411423}
   m_Father: {fileID: 0}
   m_RootOrder: 12
@@ -2353,7 +2407,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemyGroupContainer: {fileID: 774954685}
-  m_enemyGroupPrefabs: []
   m_enemyPrefabs:
   - {fileID: 3074720429936950026, guid: 4e988cea3d3ad794a9750c24834eeb70, type: 3}
   - {fileID: 6468680779630972060, guid: ca3bbc80cd556014ca7439e387df3ad7, type: 3}
@@ -6902,7 +6955,7 @@ GameObject:
   - component: {fileID: 1637411423}
   - component: {fileID: 1637411424}
   m_Layer: 0
-  m_Name: EnemySpawnerDebug
+  m_Name: EnemySpawnerEdgeDebug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6921,7 +6974,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 305180834}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1637411424
 MonoBehaviour:
@@ -6936,7 +6989,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemyGroupContainer: {fileID: 774954685}
-  m_enemyGroupPrefabs: []
   m_enemyPrefabs:
   - {fileID: 1614948553425005040, guid: ba03d9fe4aa25b143b698a15daf90062, type: 3}
   m_validSpawnAttempts: 10
@@ -7565,7 +7617,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemyGroupContainer: {fileID: 774954685}
-  m_enemyGroupPrefabs: []
   m_enemyPrefabs:
   - {fileID: 6711836518891046202, guid: d89b20779fa440c4cafdcce725274863, type: 3}
   - {fileID: 2574358894420875228, guid: 00680d2b402e2b54ea8cc98bcf6cea5b, type: 3}

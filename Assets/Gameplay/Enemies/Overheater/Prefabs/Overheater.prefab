@@ -1,5 +1,698 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &295953968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 295953969}
+  - component: {fileID: 295953970}
+  m_Layer: 0
+  m_Name: MineSpawner_01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &295953969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295953968}
+  m_LocalRotation: {x: -0, y: -0, z: -0.4999987, w: 0.8660262}
+  m_LocalPosition: {x: 0.46765423, y: 0.26999903, z: 0}
+  m_LocalScale: {x: 0.2956761, y: 1.016395, z: 1.048794}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2755226323873606695}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &295953970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295953968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e492062784260040b8f58570a22d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minRange: 0.63
+  m_maxRange: 2.54
+  m_tweenDuration: 1
+  m_minePrefab: {fileID: 5524270627933002946, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+  m_contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &779669061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 779669062}
+  - component: {fileID: 779669063}
+  m_Layer: 0
+  m_Name: MineSpawner_11
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &779669062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779669061}
+  m_LocalRotation: {x: -0, y: -0, z: 0.86602503, w: -0.5000007}
+  m_LocalPosition: {x: 0.46765232, y: -0.27000237, z: 0}
+  m_LocalScale: {x: 0.29567608, y: 1.0163949, z: 1.048794}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2755226323873606695}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &779669063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779669061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e492062784260040b8f58570a22d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minRange: 0.63
+  m_maxRange: 2.54
+  m_tweenDuration: 1
+  m_minePrefab: {fileID: 5524270627933002946, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+  m_contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &803846720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 803846721}
+  - component: {fileID: 803846722}
+  m_Layer: 0
+  m_Name: MineSpawner_06
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &803846721
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803846720}
+  m_LocalRotation: {x: -0, y: -0, z: 0.8660261, w: 0.49999887}
+  m_LocalPosition: {x: -0.46765423, y: -0.26999855, z: 0}
+  m_LocalScale: {x: 0.2956761, y: 1.0163949, z: 1.048794}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2755226323873606695}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &803846722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803846720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e492062784260040b8f58570a22d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minRange: 0.63
+  m_maxRange: 2.54
+  m_tweenDuration: 1
+  m_minePrefab: {fileID: 5524270627933002946, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+  m_contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &891404579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 891404580}
+  - component: {fileID: 891404581}
+  m_Layer: 0
+  m_Name: MineSpawner_03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &891404580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891404579}
+  m_LocalRotation: {x: -0, y: -0, z: 0.25882044, w: 0.9659255}
+  m_LocalPosition: {x: -0.26999855, y: 0.4676547, z: 0}
+  m_LocalScale: {x: 0.29567614, y: 1.0163951, z: 1.048794}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2755226323873606695}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &891404581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891404579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e492062784260040b8f58570a22d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minRange: 0.63
+  m_maxRange: 2.54
+  m_tweenDuration: 1
+  m_minePrefab: {fileID: 5524270627933002946, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+  m_contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &939910268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 939910269}
+  - component: {fileID: 939910270}
+  m_Layer: 0
+  m_Name: MineSpawner_08
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &939910269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939910268}
+  m_LocalRotation: {x: -0, y: -0, z: 0.9659262, w: 0.25881782}
+  m_LocalPosition: {x: -0.2700014, y: -0.46765327, z: 0}
+  m_LocalScale: {x: 0.29567608, y: 1.016395, z: 1.048794}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2755226323873606695}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &939910270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939910268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e492062784260040b8f58570a22d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minRange: 0.63
+  m_maxRange: 2.54
+  m_tweenDuration: 1
+  m_minePrefab: {fileID: 5524270627933002946, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+  m_contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1120380637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1120380638}
+  - component: {fileID: 1120380639}
+  m_Layer: 0
+  m_Name: MineSpawner_10
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1120380638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120380637}
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: -0.00000086426724}
+  m_LocalPosition: {x: -0, y: -0.53999996, z: 0}
+  m_LocalScale: {x: 0.29567617, y: 1.0163951, z: 1.048794}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2755226323873606695}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &1120380639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120380637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e492062784260040b8f58570a22d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minRange: 0.63
+  m_maxRange: 2.54
+  m_tweenDuration: 1
+  m_minePrefab: {fileID: 5524270627933002946, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+  m_contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1256296341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1256296342}
+  - component: {fileID: 1256296343}
+  m_Layer: 0
+  m_Name: MineSpawner_05
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1256296342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256296341}
+  m_LocalRotation: {x: -0, y: -0, z: 0.50000125, w: 0.86602473}
+  m_LocalPosition: {x: -0.46765327, y: 0.2700014, z: 0}
+  m_LocalScale: {x: 0.2956761, y: 1.0163951, z: 1.048794}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2755226323873606695}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &1256296343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256296341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e492062784260040b8f58570a22d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minRange: 0.63
+  m_maxRange: 2.54
+  m_tweenDuration: 1
+  m_minePrefab: {fileID: 5524270627933002946, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+  m_contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1348935647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1348935648}
+  - component: {fileID: 1348935649}
+  m_Layer: 0
+  m_Name: MineSpawner_07
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1348935648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348935647}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071078, w: 0.7071058}
+  m_LocalPosition: {x: -0.53999996, y: 0, z: 0}
+  m_LocalScale: {x: 0.2956761, y: 1.016395, z: 1.048794}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2755226323873606695}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &1348935649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348935647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e492062784260040b8f58570a22d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minRange: 0.63
+  m_maxRange: 2.54
+  m_tweenDuration: 1
+  m_minePrefab: {fileID: 5524270627933002946, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+  m_contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1447454053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1447454054}
+  - component: {fileID: 1447454055}
+  m_Layer: 0
+  m_Name: MineSpawner_09
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1447454054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447454053}
+  m_LocalRotation: {x: -0, y: -0, z: 0.9659257, w: -0.25881982}
+  m_LocalPosition: {x: 0.26999855, y: -0.46765518, z: 0}
+  m_LocalScale: {x: 0.29567605, y: 1.0163947, z: 1.048794}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2755226323873606695}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &1447454055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447454053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e492062784260040b8f58570a22d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minRange: 0.63
+  m_maxRange: 2.54
+  m_tweenDuration: 1
+  m_minePrefab: {fileID: 5524270627933002946, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+  m_contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1475892861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1475892862}
+  - component: {fileID: 1475892863}
+  m_Layer: 0
+  m_Name: MineSpawner_02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1475892862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475892861}
+  m_LocalRotation: {x: -0, y: -0, z: -0.25881764, w: 0.96592623}
+  m_LocalPosition: {x: 0.2700014, y: 0.4676528, z: 0}
+  m_LocalScale: {x: 0.2956761, y: 1.016395, z: 1.048794}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2755226323873606695}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &1475892863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475892861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e492062784260040b8f58570a22d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minRange: 0.63
+  m_maxRange: 2.54
+  m_tweenDuration: 1
+  m_minePrefab: {fileID: 5524270627933002946, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+  m_contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1565570225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1565570226}
+  - component: {fileID: 1565570227}
+  m_Layer: 0
+  m_Name: MineSpawner_04
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1565570226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565570225}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0000013709067, w: 1}
+  m_LocalPosition: {x: 0, y: 0.53999996, z: 0}
+  m_LocalScale: {x: 0.29567614, y: 1.0163951, z: 1.048794}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2755226323873606695}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &1565570227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565570225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e492062784260040b8f58570a22d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minRange: 0.63
+  m_maxRange: 2.54
+  m_tweenDuration: 1
+  m_minePrefab: {fileID: 5524270627933002946, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+  m_contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2144091273
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +957,8 @@ GameObject:
   - component: {fileID: 1614948553425005047}
   - component: {fileID: 1614948553425005040}
   - component: {fileID: 106619557}
-  m_Layer: 0
+  - component: {fileID: 6588951254146379352}
+  m_Layer: 9
   m_Name: Overheater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,6 +980,7 @@ Transform:
   - {fileID: 1609159777291365220}
   - {fileID: 1614948553694350773}
   - {fileID: 3622542374950477134}
+  - {fileID: 2755226323873606695}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -337,6 +1032,8 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   m_rotationSpeed: 10
+  m_mineSpawnersContainer: {fileID: 2755226323873606695}
+  m_mineSpawningTimer: {fileID: 6588951254146379352}
   m_maxEnergy: 10
   m_energyDrainDuration: 5
   m_energyCoolingDuration: 10
@@ -358,6 +1055,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.44
+--- !u!114 &6588951254146379352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614948553425005042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b108913cceeb54882652d7a9d61b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_cycleDuration: 1.5
+  m_useRandomCycleDuration: 0
+  m_minCycleDuration: 1
+  m_maxCycleDuration: 2
 --- !u!1 &1614948553694350774
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,6 +1450,112 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4725594831131403841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8174195839672240553}
+  - component: {fileID: 3622589772237712899}
+  m_Layer: 0
+  m_Name: MineSpawner_00
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8174195839672240553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4725594831131403841}
+  m_LocalRotation: {x: -0, y: -0, z: -0.70710576, w: 0.70710784}
+  m_LocalPosition: {x: 0.54, y: -0.0000014305115, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2755226323873606695}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &3622589772237712899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4725594831131403841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e492062784260040b8f58570a22d0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_minRange: 0.63
+  m_maxRange: 2.54
+  m_tweenDuration: 1
+  m_minePrefab: {fileID: 5524270627933002946, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+  m_contactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &5519908947093169815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2755226323873606695}
+  m_Layer: 0
+  m_Name: MineSpawners
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2755226323873606695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5519908947093169815}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8174195839672240553}
+  - {fileID: 295953969}
+  - {fileID: 1475892862}
+  - {fileID: 891404580}
+  - {fileID: 1565570226}
+  - {fileID: 1256296342}
+  - {fileID: 803846721}
+  - {fileID: 1348935648}
+  - {fileID: 939910269}
+  - {fileID: 1447454054}
+  - {fileID: 1120380638}
+  - {fileID: 779669062}
+  m_Father: {fileID: 1614948553425005041}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5925489147119073398
 GameObject:
   m_ObjectHideFlags: 0

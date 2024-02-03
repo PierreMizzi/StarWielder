@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using PierreMizzi.Rendering;
+using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
 using StarWielder.Gameplay.Player;
 using UnityEngine;
@@ -13,17 +14,22 @@ namespace StarWielder.Gameplay.Enemies
 
 		[SerializeField] private float m_rotationSpeed = 10f;
 
+		private void Start()
+		{
+			if (m_mineSpawningTimer != null)
+				m_mineSpawningTimer.onCycleCompleted += SpawnMine;
+		}
+
 		private void Update()
 		{
-			transform.rotation *= Quaternion.Euler(Vector3.forward * m_rotationSpeed * Time.deltaTime);
+			// transform.rotation *= Quaternion.Euler(Vector3.forward * m_rotationSpeed * Time.deltaTime);
 			UpdateState();
 		}
 
-		protected override void Awake()
+		private void OnDestroy()
 		{
-			base.Awake();
-			energyDrainSpeed = m_maxEnergy / m_energyDrainDuration;
-			energyCoolingSpeed = m_maxEnergy / m_energyCoolingDuration;
+			if (m_mineSpawningTimer != null)
+				m_mineSpawningTimer.onCycleCompleted -= SpawnMine;
 		}
 
 		#endregion
@@ -36,6 +42,12 @@ namespace StarWielder.Gameplay.Enemies
 
 			Awake();
 
+			energyDrainSpeed = m_maxEnergy / m_energyDrainDuration;
+			energyCoolingSpeed = m_maxEnergy / m_energyCoolingDuration;
+
+			InitializeMineSpawners();
+			StartSpawning();
+
 			InitializeStates();
 		}
 
@@ -43,7 +55,8 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			base.Kill();
 
-			ChangeState(OverheaterStateType.Idle);
+			StopBehaviour();
+
 			CreateCurrency();
 
 			Destroy(gameObject);
@@ -51,6 +64,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		public override void StopBehaviour()
 		{
+			StopSpawning();
 			ChangeState(OverheaterStateType.Idle);
 		}
 
@@ -58,6 +72,51 @@ namespace StarWielder.Gameplay.Enemies
 		#endregion
 
 		#region Mine
+
+		[Header("Mine")]
+
+		// TODO  : Pool Manager for EnemyBullet & Mine
+		[SerializeField] private Transform m_mineSpawnersContainer;
+		private List<OverheaterMineSpawner> m_mineSpawners = new List<OverheaterMineSpawner>();
+		private List<OverheaterMineSpawner> m_availableMineSpawners = new List<OverheaterMineSpawner>();
+
+		[SerializeField] private CyclicTimer m_mineSpawningTimer;
+
+		private void InitializeMineSpawners()
+		{
+			foreach (Transform child in m_mineSpawnersContainer)
+				m_mineSpawners.Add(child.GetComponent<OverheaterMineSpawner>());
+		}
+
+		public void StartSpawning()
+		{
+			m_mineSpawningTimer.StartBehaviour();
+		}
+
+		public void StopSpawning()
+		{
+			m_mineSpawningTimer.StopBehaviour();
+		}
+
+		private void SpawnMine()
+		{
+			OverheaterMineSpawner spawner = GetAvailableMineSpawner();
+
+			if (spawner != null)
+				spawner.SpawnMine();
+		}
+
+		private OverheaterMineSpawner GetAvailableMineSpawner()
+		{
+			m_availableMineSpawners.Clear();
+
+			foreach (OverheaterMineSpawner mineSpawner in m_mineSpawners)
+			{
+				if (mineSpawner.canSpawn)
+					m_availableMineSpawners.Add(mineSpawner);
+			}
+			return m_availableMineSpawners.PickRandom();
+		}
 
 		#endregion
 

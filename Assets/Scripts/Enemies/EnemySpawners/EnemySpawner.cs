@@ -18,9 +18,6 @@ namespace StarWielder.Gameplay.Enemies
 
 		[Header("Spawning")]
 		[SerializeField] protected Transform m_enemyGroupContainer;
-
-		[Obsolete]
-		[SerializeField] protected List<EnemyGroup> m_enemyGroupPrefabs;
 		[SerializeField] protected List<Enemy> m_enemyPrefabs;
 		[SerializeField] protected int m_validSpawnAttempts = 10;
 
