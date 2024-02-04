@@ -16,7 +16,7 @@ MonoBehaviour:
   maxEmergencyEnergy: 10
   emergencyEnergyDepleatRate: 2
   emergencyEnergyDuration: 5
-  speed: 150
+  speed: 350
   smoothTime: 0.5
   dashDistance: 3
   dashDuration: 0.2

@@ -391,6 +391,7 @@ MonoBehaviour:
   m_enemyGroupContainer: {fileID: 774954685}
   m_enemyPrefabs:
   - {fileID: 1614948553425005040, guid: ba03d9fe4aa25b143b698a15daf90062, type: 3}
+  - {fileID: 3074720429936950026, guid: 4e988cea3d3ad794a9750c24834eeb70, type: 3}
   m_validSpawnAttempts: 10
   m_displayVisualization: 0
   m_colorVisualization: {r: 0.5411765, g: 0, b: 1, a: 0.13725491}
@@ -2804,6 +2805,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &597661983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 597661984}
+  m_Layer: 0
+  m_Name: ------DEBUG------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &597661984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597661983}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &617793261
 GameObject:
   m_ObjectHideFlags: 0
@@ -5849,6 +5881,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1373273956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1373273958}
+  - component: {fileID: 1373273957}
+  m_Layer: 0
+  m_Name: TestFramerate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1373273957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373273956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f21c1fe77f250c49a1dec1fb8cb5bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_frameRate: 60
+--- !u!4 &1373273958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373273956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1419375113
 GameObject:
@@ -9019,8 +9096,16 @@ PrefabInstance:
       value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6232630160101611035, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232630160101611035, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232630160101611035, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.2534013
       objectReference: {fileID: 0}
     - target: {fileID: 6232630160101611035, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
       propertyPath: m_LocalRotation.x
@@ -9032,7 +9117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6232630160101611035, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.9673613
       objectReference: {fileID: 0}
     - target: {fileID: 6232630160101611035, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

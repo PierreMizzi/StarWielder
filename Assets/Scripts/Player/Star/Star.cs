@@ -108,7 +108,7 @@ namespace StarWielder.Gameplay.Player
 			};
 
 			m_currentEnergy = m_settings.baseEnergy;
-			SetVelocityFromEnergy();
+			// SetVelocityFromEnergy();
 
 			InitializeStates();
 		}
