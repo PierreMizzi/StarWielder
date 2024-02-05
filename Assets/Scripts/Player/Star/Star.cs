@@ -186,11 +186,6 @@ namespace StarWielder.Gameplay.Player
 			m_playerChannel.onStarDocked.Invoke();
 		}
 
-		public void SetLocked()
-		{
-
-		}
-
 		#endregion
 
 		#region Speed
@@ -352,6 +347,15 @@ namespace StarWielder.Gameplay.Player
 		private Animator m_animator;
 
 		private const string k_triggerAbsorb = "Absorb";
+
+		#endregion
+
+		#region Shine Strength
+
+		public float GetShineStrength(Transform other)
+		{
+			return Vector3.Distance(transform.position, other.position);
+		}
 
 		#endregion
 
