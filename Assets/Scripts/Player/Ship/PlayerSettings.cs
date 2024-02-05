@@ -24,7 +24,7 @@ namespace StarWielder.Gameplay.Player
 
 		[Header("Speed")]
 		public float speed = 80f;
-		public float smoothTime = 0.5f;
+		public float friction = 0.05f;
 
 		[Header("Dash")]
 		public float dashDistance = 1f;

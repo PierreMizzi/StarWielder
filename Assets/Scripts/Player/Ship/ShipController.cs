@@ -35,10 +35,7 @@ namespace StarWielder.Gameplay.Player
 			ComputeCorners();
 		}
 
-		private void OnValidate()
-		{
-			SetSmoothTime();
-		}
+
 
 		private void Update()
 		{
@@ -50,8 +47,21 @@ namespace StarWielder.Gameplay.Player
 
 			if (!m_isDashing)
 			{
-				ReadLocomotionInputs();
-				Move();
+
+				m_locomotionActionValue = m_locomotionActionReference.action.ReadValue<Vector2>().normalized;
+
+				if (m_locomotionActionValue == Vector3.zero)
+				{
+					m_velocityCoef -= m_settings.friction * Time.deltaTime;
+					m_velocityCoef = Mathf.Max(m_velocityCoef, 0);
+				}
+				else
+				{
+					m_velocity = m_locomotionActionValue;
+					m_velocityCoef = 1f;
+				}
+
+				transform.position += m_velocity * m_ship.stats.speed * Time.deltaTime * m_velocityCoef;
 			}
 		}
 
@@ -101,9 +111,8 @@ namespace StarWielder.Gameplay.Player
 
 		// Position
 		[SerializeField] private Vector3 m_locomotionActionValue;
-		private Vector3 m_offsetPosition;
-		private Vector3 m_nextPosition;
-		private Vector3 m_currentVelocity;
+		private Vector3 m_velocity;
+		private float m_velocityCoef;
 
 		// Rotation
 		private Vector2 m_mousePositionActionValue;
@@ -113,26 +122,7 @@ namespace StarWielder.Gameplay.Player
 		/// <summary> 
 		/// Multiply the direction Ship-Mouse Cursor by this value to avoid weird jittering
 		/// </summary>
-
 		[SerializeField] private float m_orientationMagnitude = 2;
-
-		private float m_smoothTime;
-		private const float k_baseFrameRate = 60f;
-		[SerializeField] private float m_currentFrameRate = 60f;
-
-		private void Move()
-		{
-			m_offsetPosition = m_locomotionActionValue * m_ship.stats.speed * Time.deltaTime;
-			m_nextPosition = transform.position + m_offsetPosition;
-
-			transform.position = Vector3.SmoothDamp(transform.position, m_nextPosition, ref m_currentVelocity, 1f);
-			// transform.position += m_offsetPosition;
-		}
-
-		private void ReadLocomotionInputs()
-		{
-			m_locomotionActionValue = m_locomotionActionReference.action.ReadValue<Vector2>().normalized;
-		}
 
 		private void Rotate()
 		{
@@ -201,17 +191,6 @@ namespace StarWielder.Gameplay.Player
 			m_canDash = true;
 			m_dashStar.Recharge();
 		}
-
-		#endregion
-
-		#region Debug
-
-		[ContextMenu("Set SmoothStep")]
-		public void SetSmoothTime()
-		{
-			m_smoothTime = (m_currentFrameRate * m_settings.smoothTime) / k_baseFrameRate;
-		}
-
 
 		#endregion
 
