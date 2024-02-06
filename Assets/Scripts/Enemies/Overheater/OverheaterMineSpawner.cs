@@ -2,15 +2,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-/*
-	TODO : Set range
-	TODO : Visualize range
-	TODO : Spawn a mine
-		- Random range
-	TODO : Check if available 
-		- No osbtacle ?
-		- Has spawned a mine
-*/
+
 namespace StarWielder.Gameplay.Enemies
 {
 
@@ -58,7 +50,6 @@ namespace StarWielder.Gameplay.Enemies
 
 		#region MonoBehaviour
 
-		Color defaultGizmosColor;
 
 		private void Awake()
 		{
@@ -115,6 +106,8 @@ namespace StarWielder.Gameplay.Enemies
 
 		[Header("Debug")]
 		[SerializeField] private Color m_gizmosColor;
+		Color defaultGizmosColor;
+
 
 		#endregion
 
