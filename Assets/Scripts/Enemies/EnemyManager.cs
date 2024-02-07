@@ -28,8 +28,8 @@ namespace StarWielder.Gameplay.Enemies
 
 		private void CallbackStartFightStage(FightStageData data)
 		{
-			this.m_spawnedEnemiesCount = data.enemiesCount;
-			this.m_killedEnemiesCount = data.enemiesCount;
+			m_spawnedEnemiesCount = data.enemiesCount;
+			m_killedEnemiesCount = data.enemiesCount;
 
 			StartSpawning();
 		}

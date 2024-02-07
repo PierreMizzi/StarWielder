@@ -77,13 +77,13 @@ namespace StarWielder.UI
 		private void Start()
 		{
 			if (m_playerChannel != null)
-				m_playerChannel.onShipHurt += CallbackRefreshHealth;
+				m_playerChannel.onRefreshShipHealth += CallbackRefreshHealth;
 		}
 
 		private void OnDestroy()
 		{
 			if (m_playerChannel != null)
-				m_playerChannel.onShipHurt -= CallbackRefreshHealth;
+				m_playerChannel.onRefreshShipHealth -= CallbackRefreshHealth;
 		}
 
 		#endregion

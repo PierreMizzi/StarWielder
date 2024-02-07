@@ -31,7 +31,7 @@ namespace StarWielder.Gameplay
 				m_playerChannel.onStartEnergyTransfer += CallbackStartEnergyTransfer;
 				m_playerChannel.onStopEnergyTransfer += CallbackStopEnergyTransfer;
 
-				m_playerChannel.onShipHurt += CallbackShipHurt;
+				m_playerChannel.onRefreshShipHealth += CallbackShipHurt;
 			}
 		}
 
@@ -42,7 +42,7 @@ namespace StarWielder.Gameplay
 				m_playerChannel.onStartEnergyTransfer -= CallbackStartEnergyTransfer;
 				m_playerChannel.onStopEnergyTransfer -= CallbackStopEnergyTransfer;
 
-				m_playerChannel.onShipHurt -= CallbackShipHurt;
+				m_playerChannel.onRefreshShipHealth -= CallbackShipHurt;
 			}
 		}
 

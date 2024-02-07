@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 521183378832562525}
   - component: {fileID: 521183378832562514}
+  - component: {fileID: 2771056276115490526}
   - component: {fileID: 521183378832562515}
   - component: {fileID: 2598415080981068070}
   - component: {fileID: 717628081}
@@ -49,11 +50,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806b219d953800c48837ebebe6b9ce9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 15
-  m_speed: 5
   m_destroyLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  m_speed: 5
+--- !u!114 &2771056276115490526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521183378832562512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcbbf9cf2650daf4eb119281cfc66adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_healthModification: -7.5
 --- !u!58 &521183378832562515
 CircleCollider2D:
   m_ObjectHideFlags: 0

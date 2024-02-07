@@ -22,8 +22,6 @@ namespace StarWielder.Gameplay.Enemies
 		[Header("Spawning")]
 		[SerializeField] private float m_minRange = 1f;
 		[SerializeField] private float m_maxRange = 2f;
-		[SerializeField] private float m_tweenDuration = 1f;
-
 		[SerializeField] private OverheaterMine m_minePrefab;
 
 		public bool hasMine { get; set; }
@@ -39,11 +37,9 @@ namespace StarWielder.Gameplay.Enemies
 			m_openFieldRay = new Ray(m_rangeStartPosition, transform.up);
 
 			OverheaterMine mine = Instantiate(m_minePrefab, transform.position, Quaternion.identity);
-			mine.Initialize(this);
-			hasMine = true;
 			Vector3 rndPosition = transform.position + transform.up * Random.Range(m_minRange, m_maxRange);
-
-			mine.transform.DOMove(rndPosition, m_tweenDuration).SetEase(Ease.OutCubic);
+			mine.Initialize(this, rndPosition);
+			hasMine = true;
 		}
 
 		#endregion

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using PierreMizzi.Useful;
 using UnityEngine;
+
 namespace StarWielder.Gameplay.Player
 {
 	[RequireComponent(typeof(Animator))]
@@ -72,10 +73,6 @@ namespace StarWielder.Gameplay.Player
 
 		private void ManageBloomingProgress()
 		{
-			// Blooming Speed
-			m_isFacingFlower = CheckIsFacingFlower();
-			m_hasRightShineStrength = CheckHasRightShineStrength();
-
 			if (CheckIsFacingFlower() && CheckHasRightShineStrength())
 			{
 				m_currentBloomingProgress += m_bloomingSpeed * Time.deltaTime;
@@ -113,8 +110,8 @@ namespace StarWielder.Gameplay.Player
 
 			SetBloomState();
 
-			HealthPollen pollen = Instantiate(m_healthPollenPrefab, transform.position, UtilsClass.RandomRotation());
-			pollen.transform.DOMove(transform.position + transform.up * 0.5f, 0.75f);
+			HealthPollen pollen = Instantiate(m_healthPollenPrefab, transform.position, UtilsClass.RandomRotation2D());
+			pollen.transform.DOMove(transform.position + transform.up * 3f, 1.5f);
 		}
 
 		#endregion
@@ -122,8 +119,6 @@ namespace StarWielder.Gameplay.Player
 		#region Debug
 
 		[Header("Debug")]
-		[SerializeField] private bool m_isFacingFlower = false;
-		[SerializeField] private bool m_hasRightShineStrength = false;
 		Color defaultGizmosColor;
 
 		protected void OnDrawGizmos()

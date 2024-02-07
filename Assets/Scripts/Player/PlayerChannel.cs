@@ -26,7 +26,7 @@ namespace StarWielder.Gameplay.Player
 
 		#region Health
 
-		public FloatDelegate onShipHurt;
+		public FloatDelegate onRefreshShipHealth;
 
 		#endregion
 
@@ -47,7 +47,7 @@ namespace StarWielder.Gameplay.Player
 
 			onRefreshEmergencyEnergy = (float energy) => { };
 
-			onShipHurt = (float normalizedHealth) => { };
+			onRefreshShipHealth = (float normalizedHealth) => { };
 
 			onRefreshStarCombo = (int combo) => { };
 		}

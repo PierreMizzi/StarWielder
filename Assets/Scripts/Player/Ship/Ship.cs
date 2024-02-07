@@ -135,7 +135,7 @@ namespace StarWielder.Gameplay.Player
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			CheckIsBullet(other);
+			CheckIsHealthModifier(other);
 		}
 
 		#endregion
@@ -226,29 +226,23 @@ namespace StarWielder.Gameplay.Player
 		#region Health
 
 		[Header("Health")]
-		[SerializeField] private LayerMask m_damageLayerMask;
-
 		[SerializeField] private BoxCollider2D m_boxCollider;
 
 		private float m_currentHealth;
 
-		private void CheckIsBullet(Collider2D other)
+		private void CheckIsHealthModifier(Collider2D other)
 		{
-			if (UtilsClass.CheckLayer(m_damageLayerMask.value, other.gameObject.layer))
-				HitByBullet(other);
-		}
-
-		private void HitByBullet(Collider2D other)
-		{
-			if (other.TryGetComponent(out EnemyBullet bullet))
+			if (other.TryGetComponent(out ShipHealthModifier healthModifier))
 			{
-				bullet.HitShip();
+				healthModifier.onModify.Invoke();
 
-				m_currentHealth -= bullet.damage;
-				m_playerChannel.onShipHurt.Invoke(m_currentHealth / m_settings.maxHealth);
+				// Note : can add negative values (values etc)
+				m_currentHealth += healthModifier.healthModification;
+				m_currentHealth = Math.Clamp(m_currentHealth, 0, m_stats.maxHealth);
+				m_playerChannel.onRefreshShipHealth.Invoke(m_currentHealth / m_settings.maxHealth);
 
-
-				SoundManager.PlaySFX(SoundDataID.SHIP_HURT);
+				if (healthModifier.healthModification < 0)
+					SoundManager.PlaySFX(SoundDataID.SHIP_HURT);
 
 				if (m_currentHealth <= 0)
 					ChangeState(ShipStateType.Destroyed);

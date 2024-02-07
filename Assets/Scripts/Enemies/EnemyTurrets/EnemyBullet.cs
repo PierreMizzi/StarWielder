@@ -1,30 +1,48 @@
 using PierreMizzi.Useful;
+using StarWielder.Gameplay.Player;
 using UnityEngine;
 
 namespace StarWielder.Gameplay.Enemies
 {
-
+    [RequireComponent(typeof(ShipHealthModifier))]
     public class EnemyBullet : MonoBehaviour
     {
-        [Header("Damage")]
-        [SerializeField] private float m_damage = 10f;
-        public float damage => m_damage;
-
-        [Header("Move")]
-        [SerializeField] private float m_speed = 10f;
-
+        [Header("Main")]
         [SerializeField] private LayerMask m_destroyLayerMask;
-
+        [SerializeField] private float m_speed = 10f;
         private bool m_isMoving = true;
+        private ShipHealthModifier m_healthModifier;
 
-        private Animator m_animator = null;
+        private void HitWall()
+        {
+            m_isMoving = false;
+            m_animator.SetTrigger(k_triggerIsWall);
+        }
 
-        private const string k_triggerIsWall = "IsWall";
-        private const string k_triggerIsShip = "IsShip";
+        public void HitShip()
+        {
+            m_isMoving = false;
+            m_animator.SetTrigger(k_triggerIsShip);
+        }
+
+        #region MonoBehaviour
 
         private void Awake()
         {
             m_animator = GetComponent<Animator>();
+            m_healthModifier = GetComponent<ShipHealthModifier>();
+        }
+
+        private void Start()
+        {
+            if (m_healthModifier != null)
+                m_healthModifier.onModify += HitShip;
+        }
+
+        private void OnDestroy()
+        {
+            if (m_healthModifier != null)
+                m_healthModifier.onModify -= HitShip;
         }
 
         private void Update()
@@ -39,22 +57,21 @@ namespace StarWielder.Gameplay.Enemies
                 HitWall();
         }
 
-        private void HitWall()
-        {
-            m_isMoving = false;
-            m_animator.SetTrigger(k_triggerIsWall);
-        }
+        #endregion
 
-        public void HitShip()
-        {
-            m_isMoving = false;
-            m_animator.SetTrigger(k_triggerIsShip);
-        }
+        #region Animation
+
+        private Animator m_animator = null;
+
+        private const string k_triggerIsWall = "IsWall";
+        private const string k_triggerIsShip = "IsShip";
 
         public void AnimEventDestroy()
         {
             Destroy(gameObject);
         }
+
+        #endregion
 
     }
 }

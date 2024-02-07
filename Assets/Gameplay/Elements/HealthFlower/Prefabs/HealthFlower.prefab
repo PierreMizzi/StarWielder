@@ -186,9 +186,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_minShineStrength: 1.25
   m_maxShineStrength: 2
-  m_bloomingSpeed: 0.15
-  m_isFacingFlower: 0
-  m_hasRightShineStrength: 0
+  m_bloomingSpeed: 1
+  m_healthPollenPrefab: {fileID: 3398693817910911581, guid: 65ea817f8eb5fcc42b6d238dbc992b16, type: 3}
 --- !u!1 &8402170078060116423
 GameObject:
   m_ObjectHideFlags: 0
