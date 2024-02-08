@@ -20,6 +20,8 @@ namespace StarWielder.Gameplay
 		public FightStageState(IStateMachine stateMachine) : base(stateMachine)
 		{
 			type = (int)StageStateType.Fight;
+			m_manager = m_this.GetStageManager<FightStageManager>();
+			Debug.Log(type + " : " + m_manager != null);
 
 			if (m_this.gameChannel != null)
 				m_this.gameChannel.onFightStageEnd += CallbackFightStageEnd;

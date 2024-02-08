@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PierreMizzi.Useful.StateMachines;
 using StarWielder.Gameplay.Enemies;
@@ -31,6 +32,17 @@ namespace StarWielder.Gameplay
 		private void CallbackStartGame()
 		{
 			StartStage();
+		}
+
+		#endregion
+
+		#region Stage State Manager
+
+		[SerializeField] private List<StageStateManager> m_stageStateManagers = new List<StageStateManager>();
+
+		public StageStateManager GetStageManager<T>()
+		{
+			return m_stageStateManagers.Find((StageStateManager item) => item.GetType() == typeof(T));
 		}
 
 		#endregion
@@ -137,9 +149,10 @@ namespace StarWielder.Gameplay
 			states = new List<AState>()
 			{
 				new FightStageState(this),
+				new ResourcesStageState(this),
 			};
 
-			FightStageState fightState = GetState<FightStageState>();
+			// FightStageState fightState = GetState<FightStageState>();
 			// Debug.Log((StageStateType)fightState.type);
 		}
 
@@ -181,6 +194,8 @@ namespace StarWielder.Gameplay
 
 			return null;
 		}
+
+
 
 
 

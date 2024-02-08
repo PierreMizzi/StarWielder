@@ -11,7 +11,7 @@ namespace StarWielder.Gameplay.Enemies
 	/// <summary>
 	/// Controls EnemySpawners. The spawning speed is increased over time for balancing reasons
 	/// </summary>
-	public class EnemyManager : MonoBehaviour
+	public class EnemyManager : StageStateManager
 	{
 
 		#region Main

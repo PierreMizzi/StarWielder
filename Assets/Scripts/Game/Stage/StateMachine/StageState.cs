@@ -12,5 +12,10 @@ namespace StarWielder.Gameplay
 
 		protected StageManager m_this;
 
+		protected StageStateManager m_manager;
+
+		// TODO : use StageStateManager -> FightStageManager (ex-EnemyManager)
+		//								-> ResourcesStagaManager
+
 	}
 }
