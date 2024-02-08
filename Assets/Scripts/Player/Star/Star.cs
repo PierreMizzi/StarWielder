@@ -190,7 +190,7 @@ namespace StarWielder.Gameplay.Player
 
 		#region Speed
 
-		public float currentSpeed => m_settings.baseSpeed + m_currentEnergy * m_settings.speedFromEnergyRatio;
+		public float currentSpeed => m_settings.baseSpeed; //+ m_currentEnergy * m_settings.speedFromEnergyRatio;
 
 		private float m_scaleFromVelocity;
 		private Vector3 m_localScaleFromVelocity;

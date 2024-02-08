@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using PierreMizzi.Rendering;
 using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
@@ -46,7 +47,9 @@ namespace StarWielder.Gameplay.Enemies
 			energyCoolingSpeed = m_maxEnergy / m_energyCoolingDuration;
 
 			InitializeMineSpawners();
-			StartSpawning();
+
+			float rndDelay = Random.Range(m_minDelayBeforeSpawning, m_maxDelayBeforeSpawning);
+			DOVirtual.DelayedCall(rndDelay, StartSpawning);
 
 			InitializeStates();
 		}
@@ -77,9 +80,10 @@ namespace StarWielder.Gameplay.Enemies
 
 		// TODO  : Pool Manager for EnemyBullet & Mine
 		[SerializeField] private Transform m_mineSpawnersContainer;
+		[SerializeField] private float m_minDelayBeforeSpawning = 1f;
+		[SerializeField] private float m_maxDelayBeforeSpawning = 2f;
 		private List<OverheaterMineSpawner> m_mineSpawners = new List<OverheaterMineSpawner>();
 		private List<OverheaterMineSpawner> m_availableMineSpawners = new List<OverheaterMineSpawner>();
-
 		[SerializeField] private CyclicTimer m_mineSpawningTimer;
 
 		private void InitializeMineSpawners()
@@ -90,6 +94,9 @@ namespace StarWielder.Gameplay.Enemies
 
 		public void StartSpawning()
 		{
+			foreach (OverheaterMineSpawner spawner in m_mineSpawners)
+				spawner.ComputeRangePositions();
+
 			m_mineSpawningTimer.StartBehaviour();
 		}
 

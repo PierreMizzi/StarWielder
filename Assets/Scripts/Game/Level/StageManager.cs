@@ -140,7 +140,7 @@ namespace StarWielder.Gameplay
 			};
 
 			FightStageState fightState = GetState<FightStageState>();
-			Debug.Log((StageStateType)fightState.type);
+			// Debug.Log((StageStateType)fightState.type);
 		}
 
 		public void UpdateState()

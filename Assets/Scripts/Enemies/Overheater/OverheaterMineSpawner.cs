@@ -30,12 +30,15 @@ namespace StarWielder.Gameplay.Enemies
 		private Vector3 m_rangeStartPosition;
 		private Vector3 m_rangeEndPosition;
 
+		public void ComputeRangePositions()
+		{
+			m_rangeStartPosition = transform.position + transform.up * m_minRange;
+			m_rangeEndPosition = transform.position + transform.up * m_maxRange;
+		}
+
 		[ContextMenu("Spawn Mine")]
 		public void SpawnMine()
 		{
-			m_rangeStartPosition = transform.position + transform.up * m_minRange;
-			m_openFieldRay = new Ray(m_rangeStartPosition, transform.up);
-
 			OverheaterMine mine = Instantiate(m_minePrefab, transform.position, Quaternion.identity);
 			Vector3 rndPosition = transform.position + transform.up * Random.Range(m_minRange, m_maxRange);
 			mine.Initialize(this, rndPosition);
@@ -46,16 +49,15 @@ namespace StarWielder.Gameplay.Enemies
 
 		#region MonoBehaviour
 
-
 		private void Awake()
 		{
 			m_rangeDistance = m_maxRange - m_minRange;
+			ComputeRangePositions();
 		}
 
 		private void OnValidate()
 		{
-			m_rangeStartPosition = transform.position + transform.up * m_minRange;
-			m_rangeEndPosition = transform.position + transform.up * m_maxRange;
+			ComputeRangePositions();
 		}
 
 		protected void OnDrawGizmos()
@@ -63,13 +65,6 @@ namespace StarWielder.Gameplay.Enemies
 			defaultGizmosColor = Gizmos.color;
 
 			Gizmos.color = m_gizmosColor;
-
-			if (m_rangeStartPosition == Vector3.zero)
-				m_rangeStartPosition = transform.position + transform.up * m_minRange;
-
-			if (m_rangeEndPosition == Vector3.zero)
-				m_rangeEndPosition = transform.position + transform.up * m_maxRange;
-
 			Gizmos.DrawLine(m_rangeStartPosition, m_rangeEndPosition);
 
 			Gizmos.color = defaultGizmosColor;
@@ -81,7 +76,6 @@ namespace StarWielder.Gameplay.Enemies
 
 		[Header("Open Field")]
 		[SerializeField] private ContactFilter2D m_contactFilter;
-		private Ray m_openFieldRay;
 
 		public bool CheckHasOpenField()
 		{

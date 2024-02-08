@@ -54,7 +54,7 @@ namespace StarWielder.Gameplay.Player
 			if (distance > m_this.settings.arrivalDistance)
 			{
 				float desiredSpeed = Mathf.Sqrt(2f * m_this.settings.acceleration * distance);
-				float finalSpeed = Mathf.Min(desiredSpeed, m_this.settings.maxSpeed);
+				float finalSpeed = Mathf.Max(desiredSpeed, m_this.settings.maxSpeed);
 				Vector3 velocity = direction.normalized * finalSpeed;
 
 				m_this.rigidbody.velocity = velocity;
