@@ -1,11 +1,13 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using PierreMizzi.Useful;
+using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
 
 namespace StarWielder.Gameplay.Player
 {
 	[RequireComponent(typeof(Animator))]
-	public class HealthFlower : MonoBehaviour
+	public class HealthFlower : MonoBehaviour, IStateMachine
 	{
 
 		private Star m_star;
@@ -112,6 +114,38 @@ namespace StarWielder.Gameplay.Player
 
 			HealthPollen pollen = Instantiate(m_healthPollenPrefab, transform.position, UtilsClass.RandomRotation2D());
 			pollen.transform.DOMove(transform.position + transform.up * 3f, 1.5f);
+		}
+
+		#endregion
+
+		#region StateMachine
+
+		public List<AState> states { get; set; }
+		public AState currentState { get; set; }
+		public void InitializeStates()
+		{
+			states = new List<AState>()
+			{
+				// MyState
+			};
+		}
+
+		public void UpdateState()
+		{
+			currentState?.Update();
+		}
+
+		public void ChangeState(int previousState, int nextState)
+		{
+			currentState?.Exit();
+
+			currentState = states.Find((AState newState) => newState.type == nextState);
+			if (currentState != null)
+				currentState.Enter(previousState);
+			else
+			{
+				Debug.LogError($"Couldn't find a new state of type : {nextState}. Going Inactive");
+			}
 		}
 
 		#endregion

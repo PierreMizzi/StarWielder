@@ -11,6 +11,7 @@ namespace StarWielder.Gameplay.Enemies
 	/// <summary>
 	/// Controls EnemySpawners. The spawning speed is increased over time for balancing reasons
 	/// </summary>
+	// TODO : This class is a temporary FightStageState
 	public class EnemyManager : StageStateManager
 	{
 
