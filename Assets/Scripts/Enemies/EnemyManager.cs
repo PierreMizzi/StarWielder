@@ -12,13 +12,13 @@ namespace StarWielder.Gameplay.Enemies
 	/// Controls EnemySpawners. The spawning speed is increased over time for balancing reasons
 	/// </summary>
 	// TODO : This class is a temporary FightStageState
-	public class EnemyManager : StageStateManager
+	public class EnemyManager : MonoBehaviour
 	{
 
 		#region Main
 
 		[Header("Main")]
-		[SerializeField] private GameChannel m_gameChannel;
+		private FightStageManager m_fightStageManager;
 
 		// TODO : Kinda weird
 		[SerializeField] private Ship m_ship;
@@ -27,12 +27,15 @@ namespace StarWielder.Gameplay.Enemies
 		private int m_spawnedEnemiesCount;
 		private int m_killedEnemiesCount;
 
-		private void CallbackStartFightStage(FightStageData data)
+		public void Initialize(FightStageManager fightStageManager)
+		{
+			m_fightStageManager = fightStageManager;
+		}
+
+		public void SetupStageData(FightStageData data)
 		{
 			m_spawnedEnemiesCount = data.enemiesCount;
 			m_killedEnemiesCount = data.enemiesCount;
-
-			StartSpawning();
 		}
 
 		[Obsolete]
@@ -56,28 +59,8 @@ namespace StarWielder.Gameplay.Enemies
 		private void Start()
 		{
 			InitializeSpawners();
-
-			if (m_gameChannel != null)
-			{
-				// TODO : Start called by LevelManager
-				m_gameChannel.onFightStageStart += CallbackStartFightStage;
-
-
-				// m_gameChannel.onStartGame += CallbackStartGame;
-				// m_gameChannel.onGameOver += CallbackGameOver;
-			}
 		}
 
-		private void OnDestroy()
-		{
-			if (m_gameChannel != null)
-			{
-				m_gameChannel.onFightStageStart -= CallbackStartFightStage;
-
-				// m_gameChannel.onStartGame -= CallbackStartGame;
-				// m_gameChannel.onGameOver -= CallbackGameOver;
-			}
-		}
 
 		#endregion
 
@@ -103,7 +86,7 @@ namespace StarWielder.Gameplay.Enemies
 				enemySpawners.Initialize(this);
 		}
 
-		private void StartSpawning()
+		public void StartSpawning()
 		{
 			if (m_spawningCoroutine == null)
 			{
@@ -176,7 +159,7 @@ namespace StarWielder.Gameplay.Enemies
 				m_killedEnemiesCount--;
 
 				if (m_killedEnemiesCount == 0)
-					m_gameChannel.onFightStageEnd.Invoke();
+					m_fightStageManager.CallbackAllEnemiesKilled();
 			}
 		}
 

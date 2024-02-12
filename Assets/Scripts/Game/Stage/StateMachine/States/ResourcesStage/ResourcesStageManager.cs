@@ -2,23 +2,18 @@ using UnityEngine;
 
 namespace StarWielder.Gameplay
 {
+
 	public class ResourcesStageManager : StageStateManager
 	{
 
-		#region MonoBehaviour
-
-		private void Update()
+		public override void StartStage()
 		{
-			if (Input.GetKeyDown(KeyCode.H))
-				SpawnHealthFlower();
+			m_asteroidSpawnerManager.InstantiateAsteroids();
 		}
 
-		#endregion
-
-
-
-
 		#region Asteroid Tempest
+
+		[SerializeField] private AsteroidSpawnerManager m_asteroidSpawnerManager;
 
 		#endregion
 
@@ -29,9 +24,9 @@ namespace StarWielder.Gameplay
 		private void SpawnHealthFlower()
 		{
 			// Instantiate();
-
 		}
 
 		#endregion
+
 	}
 }

@@ -1,24 +1,21 @@
-using System;
 using System.Collections.Generic;
-using PierreMizzi.Useful;
 using UnityEngine;
-using UnityEngine.Timeline;
 
 public class AsteroidSpawnerManager : MonoBehaviour
 {
 	[SerializeField] private AsteroidSpawningConfig m_currentConfig;
 
-	public void Start()
+	[ContextMenu("Debug Voronoi Placement")]
+	public void DebugVoronoiPlacement()
 	{
 		m_spawn = true;
-		SetVoronoiPlacement();
+		InstantiateAsteroids();
 	}
 
 	#region Asteroids
 
 	[HideInInspector]
 	[SerializeField] private List<Asteroid> m_asteroids = new List<Asteroid>();
-
 
 	private float m_tempRndAngle;
 	private Vector2 m_tempRndDirection;
@@ -50,34 +47,36 @@ public class AsteroidSpawnerManager : MonoBehaviour
 	[SerializeField] private Asteroid m_asteroidPrefab;
 	[SerializeField] private bool m_spawn = false;
 
-	[ContextMenu("SetVoronoiPlacement")]
-	public void SetVoronoiPlacement()
+	[ContextMenu("Instantiate Asteroids")]
+	public void InstantiateAsteroids()
 	{
+		Debug.Log("InstantiateAsteroids");
 		m_positions.Clear();
 
 		float indexX = 0;
 		float indexY = 0;
 		Vector3 pos = new Vector3();
 		Vector3 offset = new Vector3();
+
 		for (int x = 0; x < m_spawningConfig.lengthAmountCell; x++)
 		{
 			List<Vector3> column = new List<Vector3>();
 			pos.x = -m_currentConfig.cellSize * indexX;
+			pos.x += m_currentConfig.startingPosition.x;
 
 			for (int y = 0; y < m_spawningConfig.widthAmountCell; y++)
 			{
 				// Pos
 				pos.y = m_currentConfig.cellSize * indexY;
+				pos.y += m_currentConfig.startingPosition.y;
 
 				//Offset
 				offset = GetRandomOffset();
 				pos += offset;
 
-				if (IsSpawning() && m_spawn)
-				{
-					Asteroid asteroid = Instantiate(m_asteroidPrefab, pos, Quaternion.identity);
-					asteroid.Initialize(GetRandomizeVelocity());
-				}
+				if (IsSpawning()) // && m_spawn
+					InstantiateAsteroid(pos);
+
 				column.Add(new Vector3(pos.x, pos.y, 0));
 
 				indexY++;
@@ -108,6 +107,11 @@ public class AsteroidSpawnerManager : MonoBehaviour
 		return UnityEngine.Random.Range(0, 1f) < m_currentConfig.spawnPercentage;
 	}
 
+	public void InstantiateAsteroid(Vector3 pos)
+	{
+		Asteroid asteroid = Instantiate(m_asteroidPrefab, pos, Quaternion.identity);
+		asteroid.Initialize(GetRandomizeVelocity());
+	}
 
 	public void SpawnAsteroids()
 	{

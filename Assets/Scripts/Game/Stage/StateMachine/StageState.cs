@@ -14,6 +14,12 @@ namespace StarWielder.Gameplay
 
 		protected StageStateManager m_manager;
 
+		protected virtual void CallbackStageEnded()
+		{
+			Debug.Log("Stage ended !");
+			m_this.CallbackStageEnded();
+		}
+
 		// TODO : use StageStateManager -> FightStageManager (ex-EnemyManager)
 		//								-> ResourcesStagaManager
 

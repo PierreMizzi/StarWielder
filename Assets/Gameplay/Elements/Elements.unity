@@ -576,14 +576,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  m_minStrength: 1
-  m_maxStrength: 1.5
-  m_randomAngleRange: 15
   m_spawningConfig: {fileID: 11400000, guid: fa71809eeb38d524e97ecd1675096c3b, type: 2}
   m_asteroidPrefab: {fileID: 849473496}
   m_spawn: 0
   m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
-  m_gizmosSize: 0.1
+  m_gizmosSize: 0.34
 --- !u!114 &630601718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Asteroid
       objectReference: {fileID: 0}
+    - target: {fileID: 3279861093687427369, guid: 39abda97ff2589545ae9bc64c5844701, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3279861093687427370, guid: 39abda97ff2589545ae9bc64c5844701, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -713,17 +714,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3279861093687427371, guid: 39abda97ff2589545ae9bc64c5844701, type: 3}
-      propertyPath: m_startingVelocity.x
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3279861094918506008, guid: 39abda97ff2589545ae9bc64c5844701, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.34
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3279861094918506008, guid: 39abda97ff2589545ae9bc64c5844701, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.27
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39abda97ff2589545ae9bc64c5844701, type: 3}

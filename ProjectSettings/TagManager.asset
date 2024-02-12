@@ -13,11 +13,11 @@ TagManager:
   - Water
   - UI
   - EnemyShip
-  - Bound
+  - ArenaBounds
   - Enemies
   - EnemyGroup
   - EnemyBullets
-  - 
+  - Asteroids
   - Currency
   - Star
   - 

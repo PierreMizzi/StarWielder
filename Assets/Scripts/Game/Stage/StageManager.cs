@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using PierreMizzi.Useful.StateMachines;
 using StarWielder.Gameplay.Enemies;
 using UnityEngine;
@@ -16,6 +17,14 @@ using UnityEngine;
 		- Resources
 
 */
+
+// TODO : 🟩 Put the ResourceStage as first stage
+// TODO : 🟩 Start spawning asteroids when entering ResourcesStage
+// TODO : 🟥 Set-up AsteroidSpawnConfig to fit the game
+// TODO : 🟥 Tweak and try
+// TODO : 🟥 Detect Resource stage end ?
+
+// TODO : 🟩 No longer use channels between FightStageState and FightStageManager
 
 namespace StarWielder.Gameplay
 {
@@ -40,9 +49,9 @@ namespace StarWielder.Gameplay
 
 		[SerializeField] private List<StageStateManager> m_stageStateManagers = new List<StageStateManager>();
 
-		public StageStateManager GetStageManager<T>()
+		public T GetStageManager<T>() where T : StageStateManager
 		{
-			return m_stageStateManagers.Find((StageStateManager item) => item.GetType() == typeof(T));
+			return m_stageStateManagers.Find((StageStateManager item) => item.GetType() == typeof(T)) as T;
 		}
 
 		#endregion
@@ -52,8 +61,13 @@ namespace StarWielder.Gameplay
 		[ContextMenu("Awake")]
 		public void Awake()
 		{
-			BuildStageOrder();
 			InitializeStates();
+			BuildStageOrder();
+
+			if (m_startingStageType != StageStateType.None)
+				DebugSetStartingStage();
+
+			LogStageOrder();
 		}
 
 		private void Start()
@@ -78,6 +92,7 @@ namespace StarWielder.Gameplay
 		{
 			m_stages.Clear();
 
+			// Chelou but it works
 			List<int> availableStageIndex = new List<int>();
 
 			for (int i = 0; i < m_stagesAmount; i++)
@@ -92,14 +107,6 @@ namespace StarWielder.Gameplay
 			InsertStage(StageStateType.Resources, availableStageIndex);
 			InsertStage(StageStateType.Resources, availableStageIndex);
 
-			string stagesLog = "";
-			foreach (StageStateType stage in m_stages)
-			{
-				stagesLog += stage.ToString() + " -> ";
-			}
-
-			stagesLog = stagesLog.Remove(stagesLog.Length - 4, 4);
-			Debug.Log(stagesLog);
 
 		}
 
@@ -125,7 +132,7 @@ namespace StarWielder.Gameplay
 			ChangeState(currentStageType);
 		}
 
-		private void CallbackStageCompleted()
+		public void CallbackStageEnded()
 		{
 			m_currentStageIndex++;
 
@@ -151,9 +158,6 @@ namespace StarWielder.Gameplay
 				new FightStageState(this),
 				new ResourcesStageState(this),
 			};
-
-			// FightStageState fightState = GetState<FightStageState>();
-			// Debug.Log((StageStateType)fightState.type);
 		}
 
 		public void UpdateState()
@@ -195,9 +199,30 @@ namespace StarWielder.Gameplay
 			return null;
 		}
 
+		#endregion
 
+		#region Debug
 
+		[Header("Debug")]
+		[SerializeField] private StageStateType m_startingStageType = StageStateType.None;
 
+		private void DebugSetStartingStage()
+		{
+			Debug.Log($"Added starting stage : {m_startingStageType}");
+			m_stages.Insert(0, m_startingStageType);
+		}
+
+		private void LogStageOrder()
+		{
+			string stagesLog = "";
+			foreach (StageStateType stage in m_stages)
+			{
+				stagesLog += stage.ToString() + " -> ";
+			}
+
+			stagesLog = stagesLog.Remove(stagesLog.Length - 4, 4);
+			Debug.Log(stagesLog);
+		}
 
 		#endregion
 

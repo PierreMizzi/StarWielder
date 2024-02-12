@@ -4,6 +4,7 @@ using UnityEngine;
 public class AsteroidSpawningConfig : ScriptableObject
 {
 	[Header("Storm")]
+	public Vector3 startingPosition;
 	public float length = 10f;
 	public float width = 10f;
 
