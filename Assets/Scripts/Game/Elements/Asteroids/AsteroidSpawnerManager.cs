@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using PierreMizzi.Useful;
 using StarWielder.Gameplay.Player;
 using UnityEngine;
+using PierreMizzi.Useful.PoolingObjects;
+
 
 // TODO : 🟥 Binary Space Tree when spawning asteroids ???
 
@@ -29,6 +31,8 @@ public class AsteroidSpawnerManager : MonoBehaviour
 	[Header("Asteroids")]
 	[SerializeField] private AsteroidSpawningConfig m_currentConfig;
 	[SerializeField] private List<Asteroid> m_asteroidPrefabs = new List<Asteroid>();
+	[SerializeField] private PoolingChannel m_poolingChannel;
+
 
 	private Asteroid tempAsteroidTemplate;
 	private float tempScale;
@@ -72,13 +76,14 @@ public class AsteroidSpawnerManager : MonoBehaviour
 			indexX++;
 			indexY = 0;
 		}
-
 	}
 
 	public void SpawnAsteroid(Vector3 pos)
 	{
 		tempAsteroidTemplate = m_asteroidPrefabs.PickRandom();
-		Asteroid asteroid = Instantiate(tempAsteroidTemplate, pos, Quaternion.identity);
+		Asteroid asteroid = m_poolingChannel.onGetFromPool.Invoke(tempAsteroidTemplate.gameObject).GetComponent<Asteroid>();
+		asteroid.transform.position = pos;
+		asteroid.transform.rotation = Quaternion.identity;
 		tempScale = m_currentConfig.GetRandomScale();
 		asteroid.transform.localScale = new Vector3(tempScale, tempScale, 1);
 

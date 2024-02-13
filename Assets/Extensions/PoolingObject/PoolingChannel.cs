@@ -1,21 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
 namespace PierreMizzi.Useful.PoolingObjects
 {
 
-    // TODO : 🟩 Create a list of PoolConfigs
-    // TODO : 🟩 The key is the prefab, reference it
-    // TODO : 🟥 With key, set callbackOnPoolConfigs
-    // TODO : 🟩 With channel, pool objects that looks of type Key
-    // TODO : 🟩 With channel, release the pooled object
-
     // TODO : 🟧 EnemyGroups -> Difficult, lots of setup in Editor (cf LinkID : 10)
-    // TODO : 🟩 Overheater -> Difficult, same reason
-    // TODO : 🟩 OverheaterMine -> 
-    // TODO : 🟥 AsteroidsBigRound
-    // TODO : 🟥 AsteroidBigSquare
     // TODO : 🟥 HealthFlower
 
     public delegate GameObject GetFromPool(GameObject gameObject);

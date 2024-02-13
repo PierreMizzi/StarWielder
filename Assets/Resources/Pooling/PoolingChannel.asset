@@ -25,3 +25,11 @@ MonoBehaviour:
     prefab: {fileID: 1614948553425005042, guid: ba03d9fe4aa25b143b698a15daf90062, type: 3}
     defaultSize: 5
     maxSize: 10
+  - name: Asteroid_BigRound
+    prefab: {fileID: 2375413080427777762, guid: 23fb6c95c58b17648a66aec4ecbe0c11, type: 3}
+    defaultSize: 30
+    maxSize: 60
+  - name: Asteroid_BigSquare
+    prefab: {fileID: 749467379895572959, guid: cc800ee5ba6c03549b54d0a633f5bd32, type: 3}
+    defaultSize: 30
+    maxSize: 60

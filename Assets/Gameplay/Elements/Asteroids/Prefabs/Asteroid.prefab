@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f5b12bbc56a27408cfa3484faea5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_spriteRenderer: {fileID: 3279861094918506009}
   m_healthFlowerAnchors:
   - {fileID: 1683755787}
