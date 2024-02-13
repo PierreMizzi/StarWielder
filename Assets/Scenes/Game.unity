@@ -1352,12 +1352,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_bulletsContainer: {fileID: 806116049}
-  m_poolChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
-  m_bulletPoolConfig:
-    name: EnemyBullet
-    prefab: {fileID: 521183378832562512, guid: 0b96172bfd2e55b4b9547220a894ae9c, type: 3}
-    defaultSize: 20
-    maxSize: 30
   m_isDebugging: 1
   m_debugEnemySpawners:
   - {fileID: 103668390}

@@ -16,6 +16,11 @@ namespace PierreMizzi.Useful.PoolingObjects
             Subscribe();
         }
 
+        private void Start()
+        {
+            InitiliazePools();
+        }
+
         private void OnDestroy()
         {
             Unsubscribe();
@@ -25,7 +30,6 @@ namespace PierreMizzi.Useful.PoolingObjects
         {
             if (m_poolingChannel != null)
             {
-                m_poolingChannel.onCreatePool += CallbackCreateInPool;
                 m_poolingChannel.onGetFromPool += CallbackGetFromPool;
                 m_poolingChannel.onReleaseToPool += CallbackReleaseToPool;
             }
@@ -35,7 +39,6 @@ namespace PierreMizzi.Useful.PoolingObjects
         {
             if (m_poolingChannel != null)
             {
-                m_poolingChannel.onCreatePool -= CallbackCreateInPool;
                 m_poolingChannel.onGetFromPool -= CallbackGetFromPool;
                 m_poolingChannel.onReleaseToPool -= CallbackReleaseToPool;
             }
@@ -63,7 +66,7 @@ namespace PierreMizzi.Useful.PoolingObjects
                 return null;
         }
 
-        private void CallbackCreateInPool(PoolConfig config)
+        private void CreatePoolFromConfig(PoolConfig config)
         {
             if (!m_objectPools.ContainsKey(config.prefab.name))
             {
@@ -109,6 +112,14 @@ namespace PierreMizzi.Useful.PoolingObjects
 
         private Dictionary<string, ObjectPool<GameObject>> m_objectPools =
             new Dictionary<string, ObjectPool<GameObject>>();
+
+        private void InitiliazePools()
+        {
+            foreach (PoolConfig config in m_poolingChannel.pools)
+            {
+                CreatePoolFromConfig(config);
+            }
+        }
 
         private void ReleaseToPool(GameObject poolObject)
         {

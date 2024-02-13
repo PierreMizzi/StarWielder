@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2098b2dd760394997d96c4564f1753, type: 3}
   m_Name: PoolingChannel
   m_EditorClassIdentifier: 
+  pools:
+  - name: 
+    prefab: {fileID: 521183378832562512, guid: 0b96172bfd2e55b4b9547220a894ae9c, type: 3}
+    defaultSize: 20
+    maxSize: 20

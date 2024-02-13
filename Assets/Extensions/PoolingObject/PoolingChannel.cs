@@ -1,15 +1,30 @@
 using UnityEngine;
+using System.Collections.Generic;
+
 
 namespace PierreMizzi.Useful.PoolingObjects
 {
-    public delegate void CreatePool(PoolConfig config);
+
+    // TODO : 🟩 Create a list of PoolConfigs
+    // TODO : 🟩 The key is the prefab, reference it
+    // TODO : 🟥 With key, set callbackOnPoolConfigs
+    // TODO : 🟩 With channel, pool objects that looks of type Key
+    // TODO : 🟩 With channel, release the pooled object
+
+    // TODO : 🟥 EnemyGroups
+    // TODO : 🟥 Overheater
+    // TODO : 🟥 OverheaterMine
+    // TODO : 🟥 AsteroidsBigRound
+    // TODO : 🟥 AsteroidBigSquare
+    // TODO : 🟥 HealthFlower
+
     public delegate GameObject GetFromPool(GameObject gameObject);
     public delegate void ReleaseFromPool(GameObject gameObject);
 
     [CreateAssetMenu(fileName = "PoolingChannel", menuName = "Bitrost/PoolingChannel", order = 0)]
     public class PoolingChannel : ScriptableObject
     {
-        public CreatePool onCreatePool = null;
+        public List<PoolConfig> pools = new List<PoolConfig>();
 
         public GetFromPool onGetFromPool = null;
 
@@ -17,7 +32,6 @@ namespace PierreMizzi.Useful.PoolingObjects
 
         private void OnEnable()
         {
-            onCreatePool = (PoolConfig config) => { };
             onGetFromPool = (GameObject gameObject) =>
             {
                 return null;

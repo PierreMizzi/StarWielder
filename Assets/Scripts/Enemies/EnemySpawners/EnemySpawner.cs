@@ -28,9 +28,6 @@ namespace StarWielder.Gameplay.Enemies
 
 		public void SpawnEnemy()
 		{
-			// EnemyGroup randomGroupPrefab = UtilsClass.PickRandomInList(m_enemyGroupPrefabs);
-			// EnemyGroup newEnemyGroup = Instantiate(randomGroupPrefab, m_enemyGroupContainer);
-			// newEnemyGroup.Initialize(m_manager);
 
 			Enemy enemyPrefab = m_enemyPrefabs.PickRandom();
 			Enemy newEnemyGroup = Instantiate(enemyPrefab, m_enemyGroupContainer);
