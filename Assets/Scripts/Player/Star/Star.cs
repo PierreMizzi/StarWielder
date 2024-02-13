@@ -274,7 +274,7 @@ namespace StarWielder.Gameplay.Player
 
 		private void PlayBounceSound()
 		{
-			SoundManager.PlaySFX(UtilsClass.PickRandomInList(m_bounceSoundIDS));
+			SoundManager.PlayRandomSFX(m_bounceSoundIDS);
 		}
 
 		#endregion

@@ -4,14 +4,20 @@
 
 ### Additions
 
-- A Game is divided into stages :
-  - Fighting stage : Fights enemies to survive and earn currencies
-  - Resources stage : Heal and earn currencies
 - Added currency :
   - Looted when absorbing energy from enemy's star, they can be used to purchase upgrades and modifications.
+- A Game is now divided into stages :
+  - Fighting stage 
+    - Fights enemies to survive and earn currencies
+  - Resources stage
+    - A storm of asteroids is coming. Dodge them or mine them !
+    - Some asteroids holds flowers. Bloom it using the Sun to receive a small chunk of health
+  - Shop stage
+    - Improve your current ship statistics in exchange of some currency
+    - Buy modules to add strong side-effects to your Ship and Sun
 - New enemies :
   - Overheater : Locks in the Sun and drains its energy. After some time it overheats and is destroyed. Spawn small mines that gives energy to the Sun, but damages the ship.
-  - 
+  - public void MyFunction(){}
 
 ### Changes
 

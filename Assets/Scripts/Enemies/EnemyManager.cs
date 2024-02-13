@@ -11,7 +11,6 @@ namespace StarWielder.Gameplay.Enemies
 	/// <summary>
 	/// Controls EnemySpawners. The spawning speed is increased over time for balancing reasons
 	/// </summary>
-	// TODO : This class is a temporary FightStageState
 	public class EnemyManager : MonoBehaviour
 	{
 
@@ -127,7 +126,7 @@ namespace StarWielder.Gameplay.Enemies
 		private void SpawnEnemyGroup()
 		{
 			m_spawnedEnemiesCount--;
-			EnemySpawner spawner = UtilsClass.PickRandomInList(m_enemySpawners);
+			EnemySpawner spawner = m_enemySpawners.PickRandom();
 			spawner.SpawnEnemy();
 
 			if (m_spawnedEnemiesCount == 0)

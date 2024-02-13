@@ -13,14 +13,33 @@ public class AsteroidSpawningConfig : ScriptableObject
 	public float minOffsetDistance = 0;
 	public float maxOffsetDistance = 0;
 
-	public int lengthAmountCell;
-	public int widthAmountCell;
+	[HideInInspector] public int lengthAmountCell;
+	[HideInInspector] public int widthAmountCell;
 
 	[Header("Asteroids")]
 	public float spawnPercentage = 0.5f;
-	public float minStrength = 0.25f;
-	public float maxStrength = 0.25f;
-	public float randomAngleRange = 10;
+	public float minVelocityScalar = 1f;
+	public float maxVelocityScalar = 1.25f;
+	public float randomVelocityAngle = 10;
+
+	[Header("Visual settings")]
+	public Gradient tintGradient;
+	public float minScale = 0.5f;
+	public float maxScale = 1.5f;
+
+	public Color GetRandomColor()
+	{
+		float random = Random.Range(0f, 1f);
+		return tintGradient.Evaluate(random);
+	}
+
+	public float GetRandomScale()
+	{
+		return Random.Range(minScale, maxScale);
+	}
+
+	[Header("Health Flower")]
+	public int amountHealthFlower;
 
 	private void Awake()
 	{

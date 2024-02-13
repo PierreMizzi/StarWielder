@@ -18,13 +18,9 @@ using UnityEngine;
 
 */
 
-// TODO : 🟩 Put the ResourceStage as first stage
-// TODO : 🟩 Start spawning asteroids when entering ResourcesStage
-// TODO : 🟥 Set-up AsteroidSpawnConfig to fit the game
-// TODO : 🟥 Tweak and try
+// TODO : 🟧 Tweak and try
 // TODO : 🟥 Detect Resource stage end ?
 
-// TODO : 🟩 No longer use channels between FightStageState and FightStageManager
 
 namespace StarWielder.Gameplay
 {

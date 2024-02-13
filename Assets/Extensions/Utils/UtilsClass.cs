@@ -218,14 +218,6 @@ namespace PierreMizzi.Useful
             return value[value.Length - 1].ToString();
         }
 
-        public static T PickRandomInList<T>(List<T> list)
-        {
-            if (list.Count == 0)
-                return default(T);
-            else
-                return list[Random.Range(0, list.Count)];
-        }
-
         public static T PickRandom<T>(this List<T> list)
         {
             if (list.Count == 0)

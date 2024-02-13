@@ -8,7 +8,7 @@ namespace StarWielder.Gameplay
 
 		public override void StartStage()
 		{
-			m_asteroidSpawnerManager.InstantiateAsteroids();
+			m_asteroidSpawnerManager.CreateAsteroidStorm();
 		}
 
 		#region Asteroid Tempest

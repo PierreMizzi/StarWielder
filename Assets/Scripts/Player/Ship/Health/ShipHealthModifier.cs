@@ -3,8 +3,6 @@ using UnityEngine;
 
 namespace StarWielder.Gameplay.Player
 {
-
-	// TODO : HealthPollen
 	public class ShipHealthModifier : MonoBehaviour
 	{
 		[SerializeField] private float m_healthModification = 1;
