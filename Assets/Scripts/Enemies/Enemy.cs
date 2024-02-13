@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using PierreMizzi.Useful.PoolingObjects;
 
 namespace StarWielder.Gameplay.Enemies
 {
@@ -10,6 +11,8 @@ namespace StarWielder.Gameplay.Enemies
 		protected EnemyManager m_manager;
 		public EnemyManager manager => m_manager;
 
+		[SerializeField] private PoolingChannel m_poolingChannel;
+
 		public virtual void Initialize(EnemyManager manager)
 		{
 			m_manager = manager;
@@ -18,10 +21,12 @@ namespace StarWielder.Gameplay.Enemies
 		public virtual void Kill()
 		{
 			m_manager.RemoveSpawnedEnemy(this);
+			m_poolingChannel.onReleaseToPool.Invoke(gameObject);
 		}
 
 		protected virtual void Awake()
 		{
+			// TODO : 🟥 Replace this
 			m_area = GetComponent<Collider2D>();
 			m_animator = GetComponent<Animator>();
 		}

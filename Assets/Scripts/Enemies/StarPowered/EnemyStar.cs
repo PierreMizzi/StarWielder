@@ -19,7 +19,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		public void Initialize(EnemyGroup group)
 		{
-			m_group = group;
+			m_group = group; // Replaceable : Awake ?
 		}
 
 		public void Kill()

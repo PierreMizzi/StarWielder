@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: PoolingChannel
   m_EditorClassIdentifier: 
   pools:
-  - name: 
+  - name: EnemyBullet
     prefab: {fileID: 521183378832562512, guid: 0b96172bfd2e55b4b9547220a894ae9c, type: 3}
     defaultSize: 20
     maxSize: 20
+  - name: OverheaterMine
+    prefab: {fileID: 2831093600091185284, guid: 97c8fea8d32a1db4086061e972ae49ba, type: 3}
+    defaultSize: 20
+    maxSize: 40
+  - name: Overheater
+    prefab: {fileID: 1614948553425005042, guid: ba03d9fe4aa25b143b698a15daf90062, type: 3}
+    defaultSize: 5
+    maxSize: 10

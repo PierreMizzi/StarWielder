@@ -46,8 +46,6 @@ namespace StarWielder.Gameplay.Enemies
 			energyDrainSpeed = m_maxEnergy / m_energyDrainDuration;
 			energyCoolingSpeed = m_maxEnergy / m_energyCoolingDuration;
 
-			InitializeMineSpawners();
-
 			float rndDelay = Random.Range(m_minDelayBeforeSpawning, m_maxDelayBeforeSpawning);
 			DOVirtual.DelayedCall(rndDelay, StartSpawning);
 
@@ -61,8 +59,6 @@ namespace StarWielder.Gameplay.Enemies
 			StopBehaviour();
 
 			CreateCurrency();
-
-			Destroy(gameObject);
 		}
 
 		public override void StopBehaviour()
@@ -79,18 +75,11 @@ namespace StarWielder.Gameplay.Enemies
 		[Header("Mine")]
 
 		// TODO  : Pool Manager for EnemyBullet & Mine
-		[SerializeField] private Transform m_mineSpawnersContainer;
 		[SerializeField] private float m_minDelayBeforeSpawning = 1f;
 		[SerializeField] private float m_maxDelayBeforeSpawning = 2f;
-		private List<OverheaterMineSpawner> m_mineSpawners = new List<OverheaterMineSpawner>();
-		private List<OverheaterMineSpawner> m_availableMineSpawners = new List<OverheaterMineSpawner>();
+		[SerializeField] private List<OverheaterMineSpawner> m_mineSpawners = new List<OverheaterMineSpawner>();
 		[SerializeField] private CyclicTimer m_mineSpawningTimer;
-
-		private void InitializeMineSpawners()
-		{
-			foreach (Transform child in m_mineSpawnersContainer)
-				m_mineSpawners.Add(child.GetComponent<OverheaterMineSpawner>());
-		}
+		private List<OverheaterMineSpawner> m_availableMineSpawners = new List<OverheaterMineSpawner>();
 
 		public void StartSpawning()
 		{
@@ -133,12 +122,15 @@ namespace StarWielder.Gameplay.Enemies
 		public List<AState> states { get; set; }
 		public void InitializeStates()
 		{
-			states = new List<AState>()
+			if (states == null)
 			{
-				new OverheaterStateIdle(this),
-				new OverheaterStateOverheating(this),
-				new OverheaterStateCooling(this),
-			};
+				states = new List<AState>()
+				{
+					new OverheaterStateIdle(this),
+					new OverheaterStateOverheating(this),
+					new OverheaterStateCooling(this),
+				};
+			}
 
 			ChangeState(OverheaterStateType.Idle);
 		}

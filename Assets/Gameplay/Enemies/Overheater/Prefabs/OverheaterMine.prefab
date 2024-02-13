@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04fb6cea1ae963b4893bb1f677b7c31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_tweenDuration: 1
 --- !u!114 &3305945878230515566
 MonoBehaviour:

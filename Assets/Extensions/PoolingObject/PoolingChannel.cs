@@ -11,14 +11,15 @@ namespace PierreMizzi.Useful.PoolingObjects
     // TODO : 🟩 With channel, pool objects that looks of type Key
     // TODO : 🟩 With channel, release the pooled object
 
-    // TODO : 🟥 EnemyGroups
-    // TODO : 🟥 Overheater
-    // TODO : 🟥 OverheaterMine
+    // TODO : 🟧 EnemyGroups -> Difficult, lots of setup in Editor (cf LinkID : 10)
+    // TODO : 🟩 Overheater -> Difficult, same reason
+    // TODO : 🟩 OverheaterMine -> 
     // TODO : 🟥 AsteroidsBigRound
     // TODO : 🟥 AsteroidBigSquare
     // TODO : 🟥 HealthFlower
 
     public delegate GameObject GetFromPool(GameObject gameObject);
+
     public delegate void ReleaseFromPool(GameObject gameObject);
 
     [CreateAssetMenu(fileName = "PoolingChannel", menuName = "Bitrost/PoolingChannel", order = 0)]

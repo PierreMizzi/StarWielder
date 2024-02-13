@@ -20,12 +20,13 @@ namespace StarWielder.Gameplay.Enemies
 
 			Awake();
 
+			// TODO : 🟥 Set this in Editor (linkID : 10)
 			foreach (Transform child in transform)
 			{
 				if (child.TryGetComponent(out EnemyStar star))
 				{
 					star.Initialize(this);
-					m_enemyStars.Add(star);
+					m_enemyStars.Add(star); // Replaceable
 				}
 				else if (child.TryGetComponent(out EnemyTurret turret))
 				{
@@ -52,14 +53,6 @@ namespace StarWielder.Gameplay.Enemies
 
 		#endregion
 
-		#region MonoBehaviour
-
-		protected override void Awake()
-		{
-			base.Awake();
-		}
-
-		#endregion
 
 		#region Turrets
 

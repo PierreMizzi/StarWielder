@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using PierreMizzi.Useful.PoolingObjects;
 
 
 namespace StarWielder.Gameplay.Enemies
@@ -23,6 +24,7 @@ namespace StarWielder.Gameplay.Enemies
 		[SerializeField] private float m_minRange = 1f;
 		[SerializeField] private float m_maxRange = 2f;
 		[SerializeField] private OverheaterMine m_minePrefab;
+		[SerializeField] private PoolingChannel m_poolingChannel;
 
 		public bool hasMine { get; set; }
 
@@ -39,7 +41,9 @@ namespace StarWielder.Gameplay.Enemies
 		[ContextMenu("Spawn Mine")]
 		public void SpawnMine()
 		{
-			OverheaterMine mine = Instantiate(m_minePrefab, transform.position, Quaternion.identity);
+			OverheaterMine mine = m_poolingChannel.onGetFromPool.Invoke(m_minePrefab.gameObject).GetComponent<OverheaterMine>();
+			mine.transform.position = transform.position;
+			mine.transform.rotation = Quaternion.identity;
 			Vector3 rndPosition = transform.position + transform.up * Random.Range(m_minRange, m_maxRange);
 			mine.Initialize(this, rndPosition);
 			hasMine = true;

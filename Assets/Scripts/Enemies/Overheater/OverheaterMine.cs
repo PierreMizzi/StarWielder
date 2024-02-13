@@ -1,6 +1,8 @@
 using DG.Tweening;
 using StarWielder.Gameplay.Player;
 using UnityEngine;
+using PierreMizzi.Useful.PoolingObjects;
+
 
 namespace StarWielder.Gameplay.Enemies
 {
@@ -9,6 +11,8 @@ namespace StarWielder.Gameplay.Enemies
 	[RequireComponent(typeof(ShipHealthModifier))]
 	public class OverheaterMine : MonoBehaviour
 	{
+		[SerializeField] private PoolingChannel m_poolingChannel;
+
 		private OverheaterMineSpawner m_spawner;
 		private StarAbsorbable m_starAbsorbable;
 		private ShipHealthModifier m_healthModifier;
@@ -25,10 +29,13 @@ namespace StarWielder.Gameplay.Enemies
 		public void Kill()
 		{
 			m_spawner.hasMine = false;
-			Destroy(gameObject);
+
+			m_poolingChannel.onReleaseToPool.Invoke(gameObject);
 
 			m_spawningTween.Kill();
 		}
+
+		#region MonoBehaviour
 
 		private void Awake()
 		{
@@ -53,5 +60,8 @@ namespace StarWielder.Gameplay.Enemies
 			if (m_healthModifier != null)
 				m_healthModifier.onModify -= Kill;
 		}
+
+		#endregion
+
 	}
 }

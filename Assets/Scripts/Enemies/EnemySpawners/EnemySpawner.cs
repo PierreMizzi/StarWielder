@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PierreMizzi.Useful.PoolingObjects;
 using PierreMizzi.Useful;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace StarWielder.Gameplay.Enemies
 		#region Spawning
 
 		[Header("Spawning")]
+		[SerializeField] private PoolingChannel m_poolingChannel;
 		[SerializeField] protected Transform m_enemyGroupContainer;
 		[SerializeField] protected List<Enemy> m_enemyPrefabs;
 		[SerializeField] protected int m_validSpawnAttempts = 10;
@@ -30,11 +32,11 @@ namespace StarWielder.Gameplay.Enemies
 		{
 
 			Enemy enemyPrefab = m_enemyPrefabs.PickRandom();
-			Enemy newEnemyGroup = Instantiate(enemyPrefab, m_enemyGroupContainer);
-			newEnemyGroup.Initialize(m_manager);
-			m_manager.AddSpawnedEnemy(newEnemyGroup);
+			Enemy pooledEnemy = m_poolingChannel.onGetFromPool.Invoke(enemyPrefab.gameObject).GetComponent<Enemy>();
+			pooledEnemy.Initialize(m_manager);
+			m_manager.AddSpawnedEnemy(pooledEnemy);
 
-			StartCoroutine(CheckOverlapingCoroutine(newEnemyGroup));
+			StartCoroutine(CheckOverlapingCoroutine(pooledEnemy));
 		}
 
 		/// <summary>

@@ -388,6 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acda26e192a705f40a26042d2c64b2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_enemyGroupContainer: {fileID: 774954685}
   m_enemyPrefabs:
   - {fileID: 6468680779630972060, guid: ca3bbc80cd556014ca7439e387df3ad7, type: 3}
@@ -1354,7 +1355,7 @@ MonoBehaviour:
   m_bulletsContainer: {fileID: 806116049}
   m_isDebugging: 1
   m_debugEnemySpawners:
-  - {fileID: 103668390}
+  - {fileID: 1637411424}
 --- !u!4 &305180834
 Transform:
   m_ObjectHideFlags: 0
@@ -2451,6 +2452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acda26e192a705f40a26042d2c64b2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_enemyGroupContainer: {fileID: 774954685}
   m_enemyPrefabs:
   - {fileID: 3074720429936950026, guid: 4e988cea3d3ad794a9750c24834eeb70, type: 3}
@@ -7260,6 +7262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acda26e192a705f40a26042d2c64b2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_enemyGroupContainer: {fileID: 774954685}
   m_enemyPrefabs:
   - {fileID: 1614948553425005040, guid: ba03d9fe4aa25b143b698a15daf90062, type: 3}
@@ -7888,6 +7891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78176d5d3ff7f846bac8a3b9887b8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_enemyGroupContainer: {fileID: 774954685}
   m_enemyPrefabs:
   - {fileID: 6711836518891046202, guid: d89b20779fa440c4cafdcce725274863, type: 3}
