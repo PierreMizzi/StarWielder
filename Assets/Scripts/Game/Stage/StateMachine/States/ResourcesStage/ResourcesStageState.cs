@@ -11,7 +11,6 @@ namespace StarWielder.Gameplay
 			type = (int)StageStateType.Resources;
 			m_manager = m_this.GetStageManager<ResourcesStageManager>();
 			m_manager.onStageEnded += CallbackStageEnded;
-			Debug.Log(type + " : " + m_manager != null);
 		}
 
 		private new ResourcesStageManager m_manager;

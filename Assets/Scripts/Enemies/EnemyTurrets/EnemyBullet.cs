@@ -1,4 +1,5 @@
 using PierreMizzi.Useful;
+using PierreMizzi.Useful.PoolingObjects;
 using StarWielder.Gameplay.Player;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace StarWielder.Gameplay.Enemies
     public class EnemyBullet : MonoBehaviour
     {
         [Header("Main")]
+        [SerializeField] private PoolingChannel m_poolingChannel;
         [SerializeField] private LayerMask m_destroyLayerMask;
         [SerializeField] private float m_speed = 10f;
         private bool m_isMoving = true;
@@ -63,12 +65,16 @@ namespace StarWielder.Gameplay.Enemies
 
         private Animator m_animator = null;
 
+        // TODO : 🟥 When onRelease, resets correctly the animator
+        // -> currently = disabled , enabled, stays in Idle
+
         private const string k_triggerIsWall = "IsWall";
         private const string k_triggerIsShip = "IsShip";
 
         public void AnimEventDestroy()
         {
-            Destroy(gameObject);
+            m_poolingChannel.onReleaseToPool.Invoke(gameObject);
+            m_isMoving = true;
         }
 
         #endregion

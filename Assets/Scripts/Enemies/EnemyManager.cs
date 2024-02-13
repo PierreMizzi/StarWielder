@@ -4,6 +4,7 @@ using StarWielder.Gameplay.Player;
 using PierreMizzi.Useful;
 using UnityEngine;
 using System;
+using PierreMizzi.Useful.PoolingObjects;
 
 namespace StarWielder.Gameplay.Enemies
 {
@@ -58,8 +59,8 @@ namespace StarWielder.Gameplay.Enemies
 		private void Start()
 		{
 			InitializeSpawners();
+			m_poolChannel.onCreatePool.Invoke(m_bulletPoolConfig);
 		}
-
 
 		#endregion
 
@@ -168,8 +169,10 @@ namespace StarWielder.Gameplay.Enemies
 
 		[Header("Bullets")]
 		[SerializeField] private Transform m_bulletsContainer;
-
 		public Transform bulletsContainer => m_bulletsContainer;
+
+		[SerializeField] private PoolingChannel m_poolChannel;
+		[SerializeField] private PoolConfig m_bulletPoolConfig;
 
 		#endregion
 

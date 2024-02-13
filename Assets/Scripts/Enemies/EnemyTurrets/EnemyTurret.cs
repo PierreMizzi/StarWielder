@@ -1,5 +1,6 @@
 using System.Collections;
 using PierreMizzi.SoundManager;
+using PierreMizzi.Useful.PoolingObjects;
 using UnityEngine;
 
 namespace StarWielder.Gameplay.Enemies
@@ -17,7 +18,6 @@ namespace StarWielder.Gameplay.Enemies
 		private Transform m_bulletsContainer;
 
 		private bool m_isActive;
-
 
 		public void Initialize(EnemyGroup group)
 		{
@@ -85,7 +85,7 @@ namespace StarWielder.Gameplay.Enemies
 		[SerializeField] private float m_rateOfFire = 2f;
 
 		[SerializeField] private EnemyBullet m_bulletPrefab;
-
+		[SerializeField] private PoolingChannel m_poolingChannel;
 		private IEnumerator m_fireCoroutine;
 
 		private void StartFiring()
@@ -126,7 +126,8 @@ namespace StarWielder.Gameplay.Enemies
 		private void FireBullet()
 		{
 			SoundManager.PlaySFX(SoundDataID.TURRET_FIRE);
-			EnemyBullet bullet = Instantiate(m_bulletPrefab, m_bulletsContainer);
+			EnemyBullet bullet = m_poolingChannel.onGetFromPool.Invoke(m_bulletPrefab.gameObject).GetComponent<EnemyBullet>();
+			bullet.transform.parent = m_bulletsContainer;
 			bullet.transform.position = m_firePosition.position;
 			bullet.transform.up = m_canonAxisTransform.right;
 		}

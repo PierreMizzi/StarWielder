@@ -136,6 +136,7 @@ MonoBehaviour:
   m_maxDelayFiring: 4
   m_rateOfFire: 2.5
   m_bulletPrefab: {fileID: 521183378832562514, guid: 0b96172bfd2e55b4b9547220a894ae9c, type: 3}
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
 --- !u!95 &1759347117
 Animator:
   serializedVersion: 5

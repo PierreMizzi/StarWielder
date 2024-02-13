@@ -22,7 +22,7 @@ namespace StarWielder.Gameplay
 			m_manager = m_this.GetStageManager<FightStageManager>();
 
 			m_manager.onStageEnded += CallbackStageEnded;
-			Debug.Log(type + " : " + m_manager != null);
+			// Debug.Log(type + " : " + m_manager != null);
 		}
 
 		#region Behaviour

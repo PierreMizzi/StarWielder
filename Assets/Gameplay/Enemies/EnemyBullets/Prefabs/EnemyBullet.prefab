@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806b219d953800c48837ebebe6b9ce9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_destroyLayerMask:
     serializedVersion: 2
     m_Bits: 128
