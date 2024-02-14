@@ -3372,6 +3372,7 @@ MonoBehaviour:
   m_asteroidPrefabs:
   - {fileID: 2375413080427777772, guid: 23fb6c95c58b17648a66aec4ecbe0c11, type: 3}
   - {fileID: 749467379895572945, guid: cc800ee5ba6c03549b54d0a633f5bd32, type: 3}
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_healthFlowerPrefab: {fileID: 8402170077314124645, guid: 01ee882f778809c4db3a1193dcbeb02a, type: 3}
   m_livableRange: 4
   m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
