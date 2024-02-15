@@ -52,16 +52,9 @@ namespace StarWielder.Gameplay.Enemies
 
 		public override void Kill()
 		{
-			m_poolingChannel.onReleaseToPool(gameObject);
-
 			// Actions on EnemyTurrets
+			base.Kill();
 			DeactivateTurrets();
-
-			// Actions on EnemyStar
-
-			// Animations
-			// Reset automaticaly
-
 		}
 
 		#endregion
@@ -96,6 +89,7 @@ namespace StarWielder.Gameplay.Enemies
 		public void EnemyStarKilled(EnemyStar enemyStar)
 		{
 			healthPoint--;
+
 			if (healthPoint == 0)
 				Kill();
 		}

@@ -25,11 +25,6 @@ namespace StarWielder.Gameplay
 
 		[SerializeField] private EnemyManager m_enemyManager;
 
-		public void CallbackAllEnemiesKilled()
-		{
-			onStageEnded.Invoke();
-		}
-
 		#endregion
 
 	}

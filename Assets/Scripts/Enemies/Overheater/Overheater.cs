@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using PierreMizzi.Rendering;
 using PierreMizzi.Useful;
+using PierreMizzi.Useful.PoolingObjects;
 using PierreMizzi.Useful.StateMachines;
 using StarWielder.Gameplay.Player;
 using UnityEngine;
@@ -46,6 +47,8 @@ namespace StarWielder.Gameplay.Enemies
 			energyDrainSpeed = m_maxEnergy / m_energyDrainDuration;
 			energyCoolingSpeed = m_maxEnergy / m_energyCoolingDuration;
 
+			m_currentEnergy = 0;
+
 			float rndDelay = Random.Range(m_minDelayBeforeSpawning, m_maxDelayBeforeSpawning);
 			DOVirtual.DelayedCall(rndDelay, StartSpawning);
 
@@ -67,14 +70,12 @@ namespace StarWielder.Gameplay.Enemies
 			ChangeState(OverheaterStateType.Idle);
 		}
 
-
 		#endregion
 
 		#region Mine
 
 		[Header("Mine")]
 
-		// TODO  : Pool Manager for EnemyBullet & Mine
 		[SerializeField] private float m_minDelayBeforeSpawning = 1f;
 		[SerializeField] private float m_maxDelayBeforeSpawning = 2f;
 		[SerializeField] private List<OverheaterMineSpawner> m_mineSpawners = new List<OverheaterMineSpawner>();
@@ -218,7 +219,8 @@ namespace StarWielder.Gameplay.Enemies
 
 		private void CreateCurrency()
 		{
-			Currency currency = Instantiate(m_currencyPrefab, transform.position, Quaternion.identity);
+			Currency currency = m_poolingChannel.onGetFromPool.Invoke(m_currencyPrefab.gameObject).GetComponent<Currency>();
+			currency.transform.position = transform.position;
 			currency.Collect();
 		}
 

@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using PierreMizzi.Useful.PoolingObjects;
 
 namespace StarWielder.Gameplay
 {
@@ -18,6 +19,8 @@ namespace StarWielder.Gameplay
 		#region Collecting
 
 		[SerializeField] private GameChannel m_gameChannel;
+		[SerializeField] protected PoolingChannel m_poolingChannel;
+
 
 		[Header("Collecting")]
 		[SerializeField] private float m_collectingDelay = 1f;
@@ -61,7 +64,7 @@ namespace StarWielder.Gameplay
 		private void CallbackOnComplete()
 		{
 			m_gameChannel.onCollectCurrency.Invoke(1);
-			Destroy(gameObject);
+			m_poolingChannel.onReleaseToPool.Invoke(gameObject);
 		}
 
 		#endregion

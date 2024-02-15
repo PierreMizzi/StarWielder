@@ -3129,7 +3129,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_asteroidSpawnerManager: {fileID: 696516259}
-  m_asteroidWithHealthFlower: {fileID: 0}
 --- !u!4 &627803051
 Transform:
   m_ObjectHideFlags: 0
@@ -3367,6 +3366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa83192c65b1eb54583e56e5e151f5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_manager: {fileID: 627803050}
   m_currentConfig: {fileID: 11400000, guid: fa71809eeb38d524e97ecd1675096c3b, type: 2}
   m_asteroidPrefabs:
   - {fileID: 2375413080427777772, guid: 23fb6c95c58b17648a66aec4ecbe0c11, type: 3}
@@ -4880,7 +4880,7 @@ MonoBehaviour:
   - {fileID: 627803050}
   m_stagesAmount: 6
   m_fightStageSettings: {fileID: 11400000, guid: b651bb0de0d7ea14c97861def1a620b1, type: 2}
-  m_startingStageType: 0
+  m_startingStageType: 2
 --- !u!1 &1022546259
 GameObject:
   m_ObjectHideFlags: 0
@@ -7265,7 +7265,7 @@ MonoBehaviour:
   m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_enemyGroupContainer: {fileID: 774954685}
   m_enemyPrefabs:
-  - {fileID: 6468680779630972060, guid: ca3bbc80cd556014ca7439e387df3ad7, type: 3}
+  - {fileID: 1614948553425005040, guid: ba03d9fe4aa25b143b698a15daf90062, type: 3}
   m_validSpawnAttempts: 10
   m_displayVisualization: 0
   m_colorVisualization: {r: 1, g: 0, b: 0, a: 1}

@@ -19,7 +19,6 @@ using UnityEngine;
 */
 
 // TODO : 🟧 Tweak and try
-// TODO : 🟥 Detect Resource stage end ?
 
 
 namespace StarWielder.Gameplay

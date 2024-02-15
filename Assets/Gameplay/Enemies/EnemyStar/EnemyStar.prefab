@@ -66,6 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_starAbsorbable: {fileID: 8185016142299587741}
   m_animator: {fileID: 1126554816}
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_currencyPrefab: {fileID: 6358587482772539009, guid: 263495008f2fa344eb095a4e2846e9d3, type: 3}
 --- !u!114 &8185016142299587741
 MonoBehaviour:

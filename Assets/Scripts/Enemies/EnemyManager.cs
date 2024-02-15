@@ -152,13 +152,15 @@ namespace StarWielder.Gameplay.Enemies
 
 		public void RemoveSpawnedEnemy(Enemy enemy)
 		{
+			Debug.Log($"m_spawnedEnemies.Count : {m_spawnedEnemies.Count}");
 			if (m_spawnedEnemies.Contains(enemy))
 			{
 				m_spawnedEnemies.Remove(enemy);
 				m_killedEnemiesCount--;
 
+				Debug.Log($"m_killedEnemiesCount : {m_killedEnemiesCount}");
 				if (m_killedEnemiesCount == 0)
-					m_fightStageManager.CallbackAllEnemiesKilled();
+					m_fightStageManager.StopStage();
 			}
 		}
 

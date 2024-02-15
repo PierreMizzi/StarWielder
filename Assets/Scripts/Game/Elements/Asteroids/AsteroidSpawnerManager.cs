@@ -3,6 +3,7 @@ using PierreMizzi.Useful;
 using StarWielder.Gameplay.Player;
 using UnityEngine;
 using PierreMizzi.Useful.PoolingObjects;
+using StarWielder.Gameplay;
 
 
 // TODO : 🟥 Binary Space Tree when spawning asteroids ???
@@ -20,6 +21,8 @@ public class AsteroidSpawnerManager : MonoBehaviour
 		SpawnHealthFlowers();
 	}
 
+	[SerializeField] private ResourcesStageManager m_manager;
+
 	#region Voronoi Asteroids Spawning
 
 	[Header("Asteroids")]
@@ -27,13 +30,13 @@ public class AsteroidSpawnerManager : MonoBehaviour
 	[SerializeField] private List<Asteroid> m_asteroidPrefabs = new List<Asteroid>();
 	[SerializeField] private PoolingChannel m_poolingChannel;
 
+	private int m_asteroidCount;
 
 	private Asteroid tempAsteroidTemplate;
 	private float tempScale;
 
 	public void SpawnAsteroids()
 	{
-		Debug.Log("InstantiateAsteroids");
 		m_positions.Clear();
 		m_livableAsteroids.Clear();
 
@@ -81,10 +84,20 @@ public class AsteroidSpawnerManager : MonoBehaviour
 		tempScale = m_currentConfig.GetRandomScale();
 		asteroid.transform.localScale = new Vector3(tempScale, tempScale, 1);
 
-		asteroid.Initialize(GetRandomizeVelocity(), m_currentConfig.GetRandomColor());
+		asteroid.Initialize(this, GetRandomizeVelocity(), m_currentConfig.GetRandomColor());
+
+		m_asteroidCount++;
 
 		if (IsLivable(pos))
 			m_livableAsteroids.Add(asteroid);
+	}
+
+	public void ReduceAsteroidCount()
+	{
+		m_asteroidCount--;
+
+		if (m_asteroidCount == 0)
+			m_manager.StopStage();
 	}
 
 	public Vector3 GetRandomOffset()
@@ -97,7 +110,6 @@ public class AsteroidSpawnerManager : MonoBehaviour
 		};
 
 		float rndOffsetDistance = UnityEngine.Random.Range(m_currentConfig.minOffsetDistance, m_currentConfig.maxOffsetDistance);
-		// Debug.Log(rndOffsetDistance);
 		return rndOffset * rndOffsetDistance;
 	}
 
@@ -130,9 +142,6 @@ public class AsteroidSpawnerManager : MonoBehaviour
 	#endregion
 
 	#region Health Flower
-
-	// By percentage ?
-	// By defined amount ?
 
 	[Header("Health Flower")]
 	[SerializeField] private HealthFlower m_healthFlowerPrefab;

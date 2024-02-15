@@ -30,7 +30,6 @@ namespace StarWielder.Gameplay.Enemies
 
 		protected virtual void Awake()
 		{
-			// TODO : 🟥 Replace this
 			m_area = GetComponent<Collider2D>();
 			m_animator = GetComponent<Animator>();
 		}

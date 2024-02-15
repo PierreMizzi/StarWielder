@@ -3,6 +3,7 @@ using DG.Tweening;
 using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
+using PierreMizzi.Useful.PoolingObjects;
 
 namespace StarWielder.Gameplay.Player
 {
@@ -13,10 +14,14 @@ namespace StarWielder.Gameplay.Player
 		private Star m_star;
 		private Animator m_animator;
 
+		[SerializeField] protected PoolingChannel m_poolingChannel;
+
 		#region MonoBehaviour
 
 		private void Awake()
 		{
+			m_bloomingSpeed = 1f / m_bloomingTime;
+
 			m_animator = GetComponent<Animator>();
 			m_animator.SetFloat(k_floatMinShineStrength, m_minShineStrength);
 			m_animator.SetFloat(k_floatMaxShineStrength, m_maxShineStrength);
@@ -33,6 +38,12 @@ namespace StarWielder.Gameplay.Player
 			{
 				ManageBloomingProgress();
 				ManageShineStrength();
+			}
+
+			// TODO : 🟥 Make it better, version 2 !
+			if (transform.position.x > 15)
+			{
+				m_poolingChannel.onReleaseToPool.Invoke(gameObject);
 			}
 		}
 
@@ -66,7 +77,8 @@ namespace StarWielder.Gameplay.Player
 		#region Blooming
 
 		[Header("Blooming")]
-		[SerializeField] private float m_bloomingSpeed = 0.1f;
+		[SerializeField] private float m_bloomingTime = 0.5f;
+		private float m_bloomingSpeed = 0.0f;
 		private const string k_floatBloomingProgress = "BloomingProgress";
 
 		private float m_currentBloomingProgress;

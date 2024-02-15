@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48ff8b8f72eeb7429ac19edcdbe3d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_minShineStrength: 1.75
   m_maxShineStrength: 2.5
   m_bloomingSpeed: 0.15

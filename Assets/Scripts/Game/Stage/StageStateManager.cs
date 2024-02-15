@@ -10,5 +10,10 @@ namespace StarWielder.Gameplay
 
 		public virtual void StartStage() { }
 
+		public virtual void StopStage()
+		{
+			onStageEnded.Invoke();
+		}
+
 	}
 }

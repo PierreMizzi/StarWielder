@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using PierreMizzi.SoundManager;
 using StarWielder.Gameplay.Player;
 using UnityEngine;
+using PierreMizzi.Useful.PoolingObjects;
+
 
 namespace StarWielder.Gameplay.Enemies
 {
@@ -74,11 +76,13 @@ namespace StarWielder.Gameplay.Enemies
 		#region Currency
 
 		[Header("Currency")]
+		[SerializeField] protected PoolingChannel m_poolingChannel;
 		[SerializeField] private Currency m_currencyPrefab;
 
 		private void CreateCurrency()
 		{
-			Currency currency = Instantiate(m_currencyPrefab, transform.position, Quaternion.identity);
+			Currency currency = m_poolingChannel.onGetFromPool.Invoke(m_currencyPrefab.gameObject).GetComponent<Currency>();
+			currency.transform.position = transform.position;
 			currency.Collect();
 		}
 

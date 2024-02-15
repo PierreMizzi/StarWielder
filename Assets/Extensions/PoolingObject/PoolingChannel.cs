@@ -3,10 +3,6 @@ using System.Collections.Generic;
 
 namespace PierreMizzi.Useful.PoolingObjects
 {
-
-    // TODO : 🟥 HealthFlower
-    // TODO : 🟥 Currency
-
     public delegate GameObject GetFromPool(GameObject gameObject);
 
     public delegate void ReleaseFromPool(GameObject gameObject);

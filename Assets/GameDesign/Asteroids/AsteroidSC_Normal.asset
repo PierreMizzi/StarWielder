@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a9d6a4bf9b5e9f4cacab962ce9dacf2, type: 3}
-  m_Name: AsteroidSpawningConfig
+  m_Name: AsteroidSC_Normal
   m_EditorClassIdentifier: 
   startingPosition: {x: -14, y: -5, z: 0}
   length: 20

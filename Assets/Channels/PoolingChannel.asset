@@ -49,3 +49,7 @@ MonoBehaviour:
     prefab: {fileID: 521183378832562512, guid: 0b96172bfd2e55b4b9547220a894ae9c, type: 3}
     defaultSize: 20
     maxSize: 20
+  - name: Currency
+    prefab: {fileID: 6358587482772539008, guid: 263495008f2fa344eb095a4e2846e9d3, type: 3}
+    defaultSize: 20
+    maxSize: 40

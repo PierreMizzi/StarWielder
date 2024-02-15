@@ -9,9 +9,9 @@ public class Asteroid : MonoBehaviour
 	[SerializeField] private PoolingChannel m_poolingChannel;
 	[SerializeField] private SpriteRenderer m_spriteRenderer;
 
-
 	private Rigidbody2D m_rigidbody;
 
+	private AsteroidSpawnerManager m_manager;
 
 	private void Awake()
 	{
@@ -22,13 +22,22 @@ public class Asteroid : MonoBehaviour
 	{
 		// TODO : 🟥 Make it better, maybe ?
 		if (transform.position.x > 15)
-			m_poolingChannel.onReleaseToPool.Invoke(gameObject);
+		{
+			Kill();
+		}
 	}
 
-	public void Initialize(Vector3 direction, Color color)
+	public void Initialize(AsteroidSpawnerManager manager, Vector3 direction, Color color)
 	{
+		m_manager = manager;
 		m_rigidbody.velocity = direction;
 		m_spriteRenderer.color = color;
+	}
+
+	public void Kill()
+	{
+		m_manager.ReduceAsteroidCount();
+		m_poolingChannel.onReleaseToPool.Invoke(gameObject);
 	}
 
 	#region Health Flower
