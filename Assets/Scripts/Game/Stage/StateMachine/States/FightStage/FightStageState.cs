@@ -21,7 +21,7 @@ namespace StarWielder.Gameplay
 			type = (int)StageStateType.Fight;
 			m_manager = m_this.GetStageManager<FightStageManager>();
 
-			m_manager.onStageEnded += CallbackStageEnded;
+			m_manager.onStageEnded += m_this.CallbackStageEnded;
 			// Debug.Log(type + " : " + m_manager != null);
 		}
 

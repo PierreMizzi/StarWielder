@@ -1353,7 +1353,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_bulletsContainer: {fileID: 806116049}
-  m_isDebugging: 1
+  m_isDebugging: 0
   m_debugEnemySpawners:
   - {fileID: 1637411424}
 --- !u!4 &305180834
@@ -2455,7 +2455,6 @@ MonoBehaviour:
   m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_enemyGroupContainer: {fileID: 774954685}
   m_enemyPrefabs:
-  - {fileID: 3074720429936950026, guid: 4e988cea3d3ad794a9750c24834eeb70, type: 3}
   - {fileID: 6468680779630972060, guid: ca3bbc80cd556014ca7439e387df3ad7, type: 3}
   - {fileID: 7136870522080015994, guid: 38baf1cfbf0960543957947c9a5b21a0, type: 3}
   - {fileID: 1614948553425005040, guid: ba03d9fe4aa25b143b698a15daf90062, type: 3}
@@ -7266,7 +7265,7 @@ MonoBehaviour:
   m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_enemyGroupContainer: {fileID: 774954685}
   m_enemyPrefabs:
-  - {fileID: 1614948553425005040, guid: ba03d9fe4aa25b143b698a15daf90062, type: 3}
+  - {fileID: 6468680779630972060, guid: ca3bbc80cd556014ca7439e387df3ad7, type: 3}
   m_validSpawnAttempts: 10
   m_displayVisualization: 0
   m_colorVisualization: {r: 1, g: 0, b: 0, a: 1}
@@ -7896,8 +7895,6 @@ MonoBehaviour:
   m_enemyGroupContainer: {fileID: 774954685}
   m_enemyPrefabs:
   - {fileID: 6711836518891046202, guid: d89b20779fa440c4cafdcce725274863, type: 3}
-  - {fileID: 2574358894420875228, guid: 00680d2b402e2b54ea8cc98bcf6cea5b, type: 3}
-  - {fileID: 6981301223902254295, guid: 6a94ec730c205e44287d98a290f881f5, type: 3}
   m_validSpawnAttempts: 10
   m_displayVisualization: 0
   m_colorVisualization: {r: 0.5405445, g: 0, b: 1, a: 1}

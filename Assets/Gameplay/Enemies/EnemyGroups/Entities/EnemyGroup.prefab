@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba50366b9ede274cb1010c6ff7e81c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_enemies: []
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_overlapingFilter:
     useTriggers: 1
     useLayerMask: 1
@@ -61,7 +61,6 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  m_turrets: []
 --- !u!58 &3986235406279098
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -4,8 +4,8 @@ using System.Collections.Generic;
 namespace PierreMizzi.Useful.PoolingObjects
 {
 
-    // TODO : 🟧 EnemyGroups -> Difficult, lots of setup in Editor (cf LinkID : 10)
     // TODO : 🟥 HealthFlower
+    // TODO : 🟥 Currency
 
     public delegate GameObject GetFromPool(GameObject gameObject);
 

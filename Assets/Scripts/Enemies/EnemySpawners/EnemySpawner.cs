@@ -30,7 +30,6 @@ namespace StarWielder.Gameplay.Enemies
 
 		public void SpawnEnemy()
 		{
-
 			Enemy enemyPrefab = m_enemyPrefabs.PickRandom();
 			Enemy pooledEnemy = m_poolingChannel.onGetFromPool.Invoke(enemyPrefab.gameObject).GetComponent<Enemy>();
 			pooledEnemy.Initialize(m_manager);

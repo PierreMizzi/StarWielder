@@ -21,7 +21,6 @@ namespace StarWielder.Gameplay.Enemies
 
 		public void Initialize(EnemyGroup group)
 		{
-			Awake();
 			m_group = group;
 			m_bulletsContainer = m_group.manager.bulletsContainer;
 			m_shipTransform = m_group.manager.ship.transform;
@@ -42,11 +41,6 @@ namespace StarWielder.Gameplay.Enemies
 		#endregion
 
 		#region MonoBehaviour
-
-		private void Awake()
-		{
-			m_animator = GetComponent<Animator>();
-		}
 
 		private void Update()
 		{
@@ -136,7 +130,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		#region Animations
 
-		private Animator m_animator = null;
+		[SerializeField] private Animator m_animator = null;
 
 		private const string k_triggerLoad = "Load";
 

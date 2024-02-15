@@ -279,7 +279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5832544189220738643, guid: 966fec82c7a473d40bc683dbdc27957c, type: 3}
       propertyPath: m_Name
-      value: EnemyStar_2
+      value: EnemyStar_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 966fec82c7a473d40bc683dbdc27957c, type: 3}
@@ -299,7 +299,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5832544189220738642, guid: 966fec82c7a473d40bc683dbdc27957c, type: 3}
   m_PrefabInstance: {fileID: 3329650118848591864}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5105106710755571157
+--- !u!1001 &3420703603211729626
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -356,19 +356,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5832544189220738643, guid: 966fec82c7a473d40bc683dbdc27957c, type: 3}
       propertyPath: m_Name
-      value: EnemyStar_4
+      value: EnemyStar_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 966fec82c7a473d40bc683dbdc27957c, type: 3}
---- !u!4 &1596991748998505351 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5832544189220738642, guid: 966fec82c7a473d40bc683dbdc27957c, type: 3}
-  m_PrefabInstance: {fileID: 5105106710755571157}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1596991748998505353 stripped
+--- !u!114 &9190047781145816198 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5832544189220738652, guid: 966fec82c7a473d40bc683dbdc27957c, type: 3}
-  m_PrefabInstance: {fileID: 5105106710755571157}
+  m_PrefabInstance: {fileID: 3420703603211729626}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -376,12 +371,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a060c163985a15a47836686c23cf5d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &9190047781145816200 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5832544189220738642, guid: 966fec82c7a473d40bc683dbdc27957c, type: 3}
+  m_PrefabInstance: {fileID: 3420703603211729626}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5948054575629151705
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1596991748998505351}
+    m_TransformParent: {fileID: 9190047781145816200}
     m_Modifications:
     - target: {fileID: 3657648013440517034, guid: fb9d792e881341c4f85f93ebeb4a4326, type: 3}
       propertyPath: m_RootOrder
@@ -475,7 +475,7 @@ PrefabInstance:
     - target: {fileID: -8822274260329920338, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
       propertyPath: m_enemies.Array.data[2]
       value: 
-      objectReference: {fileID: 9134451430131491236}
+      objectReference: {fileID: 9190047781145816198}
     - target: {fileID: -8822274260329920338, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
       propertyPath: m_enemies.Array.data[3]
       value: 
@@ -483,11 +483,27 @@ PrefabInstance:
     - target: {fileID: -8822274260329920338, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
       propertyPath: m_enemies.Array.data[4]
       value: 
-      objectReference: {fileID: 1596991748998505353}
+      objectReference: {fileID: 9190047781145816198}
+    - target: {fileID: -8822274260329920338, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
+      propertyPath: m_enemyStars.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -8822274260329920338, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
       propertyPath: m_turrets.Array.data[0]
       value: 
       objectReference: {fileID: 3663209079712011309}
+    - target: {fileID: -8822274260329920338, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
+      propertyPath: m_enemyStars.Array.data[0]
+      value: 
+      objectReference: {fileID: 4278236551615485840}
+    - target: {fileID: -8822274260329920338, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
+      propertyPath: m_enemyStars.Array.data[1]
+      value: 
+      objectReference: {fileID: 9134451430131491236}
+    - target: {fileID: -8822274260329920338, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
+      propertyPath: m_enemyStars.Array.data[2]
+      value: 
+      objectReference: {fileID: 9190047781145816198}
     - target: {fileID: 3986235406279098, guid: aaf8e5a5b7ec81043a086e8c5057d3c2, type: 3}
       propertyPath: m_Radius
       value: 1.75

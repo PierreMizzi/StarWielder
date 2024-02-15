@@ -11,12 +11,14 @@ namespace StarWielder.Gameplay.Enemies
 		protected EnemyManager m_manager;
 		public EnemyManager manager => m_manager;
 
-		[SerializeField] private PoolingChannel m_poolingChannel;
+		[SerializeField] protected PoolingChannel m_poolingChannel;
 
 		public virtual void Initialize(EnemyManager manager)
 		{
 			m_manager = manager;
 		}
+
+		public virtual void StopBehaviour() { }
 
 		public virtual void Kill()
 		{
@@ -24,12 +26,16 @@ namespace StarWielder.Gameplay.Enemies
 			m_poolingChannel.onReleaseToPool.Invoke(gameObject);
 		}
 
+		#region MonoBehaviour
+
 		protected virtual void Awake()
 		{
 			// TODO : 🟥 Replace this
 			m_area = GetComponent<Collider2D>();
 			m_animator = GetComponent<Animator>();
 		}
+
+		#endregion
 
 		#region Area & Spawning
 
@@ -64,7 +70,6 @@ namespace StarWielder.Gameplay.Enemies
 
 		#endregion
 
-		public virtual void StopBehaviour() { }
 
 	}
 }

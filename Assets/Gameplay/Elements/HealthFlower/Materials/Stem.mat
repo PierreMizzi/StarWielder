@@ -36,7 +36,7 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Temperature: 0.487
+    - _Temperature: 0.33
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &5720385374390148838

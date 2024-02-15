@@ -13,11 +13,5 @@ namespace StarWielder.Gameplay
 		protected StageManager m_this;
 
 		protected StageStateManager m_manager;
-
-		protected virtual void CallbackStageEnded()
-		{
-			Debug.Log("Stage ended !");
-			m_this.CallbackStageEnded();
-		}
 	}
 }

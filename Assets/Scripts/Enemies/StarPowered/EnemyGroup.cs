@@ -12,7 +12,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		#region Main
 
-		private List<EnemyStar> m_enemyStars = new List<EnemyStar>();
+		private int healthPoint;
 
 		public override void Initialize(EnemyManager manager)
 		{
@@ -20,19 +20,21 @@ namespace StarWielder.Gameplay.Enemies
 
 			Awake();
 
-			// TODO : 🟥 Set this in Editor (linkID : 10)
+			healthPoint = m_enemyStars.Count;
+
+			// TODO : 🟥 Just do it once
 			foreach (Transform child in transform)
 			{
-				if (child.TryGetComponent(out EnemyStar star))
-				{
-					star.Initialize(this);
-					m_enemyStars.Add(star); // Replaceable
-				}
-				else if (child.TryGetComponent(out EnemyTurret turret))
+				if (child.TryGetComponent(out EnemyTurret turret))
 				{
 					turret.Initialize(this);
 					m_turrets.Add(turret);
 				}
+			}
+
+			foreach (EnemyStar star in m_enemyStars)
+			{
+				star.Initialize(this);
 			}
 		}
 
@@ -42,17 +44,27 @@ namespace StarWielder.Gameplay.Enemies
 			DeactivateTurrets();
 		}
 
-		public void EnemyStarDestroyed(EnemyStar enemyStar)
-		{
-			if (m_enemyStars.Contains(enemyStar))
-				m_enemyStars.Remove(enemyStar);
 
-			if (m_enemyStars.Count == 0)
-				Destroy(gameObject);
-		}
 
 		#endregion
 
+		#region Enemy
+
+		public override void Kill()
+		{
+			m_poolingChannel.onReleaseToPool(gameObject);
+
+			// Actions on EnemyTurrets
+			DeactivateTurrets();
+
+			// Actions on EnemyStar
+
+			// Animations
+			// Reset automaticaly
+
+		}
+
+		#endregion
 
 		#region Turrets
 
@@ -68,6 +80,24 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			foreach (EnemyTurret turret in m_turrets)
 				turret.Deactivate();
+		}
+
+		#endregion
+
+		#region EnemyStar
+
+		[SerializeField] private List<EnemyStar> m_enemyStars = new List<EnemyStar>();
+
+		public void EnemyStarAppear(int index)
+		{
+			m_enemyStars[index].Appear();
+		}
+
+		public void EnemyStarKilled(EnemyStar enemyStar)
+		{
+			healthPoint--;
+			if (healthPoint == 0)
+				Kill();
 		}
 
 		#endregion

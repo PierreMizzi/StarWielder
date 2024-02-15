@@ -7,12 +7,6 @@ using PierreMizzi.Useful.PoolingObjects;
 
 // TODO : 🟥 Binary Space Tree when spawning asteroids ???
 
-// TODO : 🟩 Spawn HealthFlower
-// TODO : 🟩 Randomized asteroids visualy
-//				- Color
-//				- Sprite
-//				- Shape ? (BSP ?)
-
 // TODO : 🟥 Make asteroids interactable
 // 				- Minable
 //				- Hurts ship

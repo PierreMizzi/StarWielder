@@ -10,7 +10,7 @@ namespace StarWielder.Gameplay
 		{
 			type = (int)StageStateType.Resources;
 			m_manager = m_this.GetStageManager<ResourcesStageManager>();
-			m_manager.onStageEnded += CallbackStageEnded;
+			m_manager.onStageEnded += m_this.CallbackStageEnded;
 		}
 
 		private new ResourcesStageManager m_manager;
@@ -18,7 +18,6 @@ namespace StarWielder.Gameplay
 		protected override void DefaultEnter()
 		{
 			base.DefaultEnter();
-			Debug.Log("Ton fils ?");
 			m_manager.StartStage();
 		}
 

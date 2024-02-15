@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-[ExecuteInEditor]
+[ExecuteInEditMode]
 public class Stem : MonoBehaviour
 {
 
@@ -11,7 +11,7 @@ public class Stem : MonoBehaviour
 
 	private float m_percentPerPoint;
 
-	[SerializeField] private Trail m_trail;
+	[SerializeField] private LineRenderer m_line;
 
 	[SerializeField] private float m_maxLength;
 
@@ -33,15 +33,15 @@ public class Stem : MonoBehaviour
 
 	private void ComputeFollowing()
 	{
-		Vector3 localTargetPos = transform.Inverse(m_target.position);
-		Vector3 rootToTarget = m_target.transform.position.normalized;
-		rootToTarget *= m_maxLength;
+		// Vector3 localTargetPos = transform.InverseT(m_target.position);
+		// Vector3 rootToTarget = m_target.transform.position.normalized;
+		// rootToTarget *= m_maxLength;
 
-		Vector3 point;
-		for (int i = 0; i < m_amountPoints; i++)
-		{
-			m_trail.points[i] = rootToTarget * (i * m_percentPerPoint);
-		}
+		// Vector3 point;
+		// for (int i = 0; i < m_amountPoints; i++)
+		// {
+		// 	m_line.SetPositions[i] = rootToTarget * (i * m_percentPerPoint);
+		// }
 
 	}
 

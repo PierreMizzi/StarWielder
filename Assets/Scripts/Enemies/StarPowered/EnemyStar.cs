@@ -22,14 +22,26 @@ namespace StarWielder.Gameplay.Enemies
 			m_group = group; // Replaceable : Awake ?
 		}
 
+		public void Appear()
+		{
+			m_animator.SetTrigger(k_triggerAppear);
+		}
+
 		public void Kill()
 		{
 			SoundManager.PlayRandomSFX(m_destroyedSoundIDs);
-			m_group.EnemyStarDestroyed(this);
+			m_group.EnemyStarKilled(this);
 			CreateCurrency();
-
-			Destroy(gameObject);
+			m_animator.SetTrigger(k_triggerKill);
 		}
+
+		#region Animation
+
+		[SerializeField] private Animator m_animator;
+		private const string k_triggerAppear = "Appear";
+		private const string k_triggerKill = "Kill";
+
+		#endregion
 
 		#region MonoBehaviour
 
