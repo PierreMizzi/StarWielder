@@ -14,14 +14,14 @@ TagManager:
   - UI
   - EnemyShip
   - ArenaBounds
-  - Enemies
+  - EnemyStar
   - EnemyGroup
   - EnemyBullets
   - Asteroids
   - Currency
   - Star
-  - 
-  - 
+  - Ship
+  - HealthPollen
   - 
   - 
   - 
@@ -50,6 +50,9 @@ TagManager:
     locked: 0
   - name: EnemyTurret
     uniqueID: 4067615783
+    locked: 0
+  - name: Elements
+    uniqueID: 3075635253
     locked: 0
   - name: EnemyBullet
     uniqueID: 1425251661

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace PierreMizzi.Useful.PoolingObjects
 {
+
+    // TODO : 🟥 Released objects are put back into their container
+
     public delegate void GameObjectDelegate(GameObject value);
 
     public class PoolingManager : MonoBehaviour

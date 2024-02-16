@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3305945878230515566}
   - component: {fileID: 6075794540802135995}
   - component: {fileID: 9101162268200462018}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OverheaterMine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

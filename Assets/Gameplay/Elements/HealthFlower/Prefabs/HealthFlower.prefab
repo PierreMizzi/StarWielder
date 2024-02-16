@@ -102,9 +102,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingLayerID: -1219332043
+  m_SortingLayer: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.32941177}
   m_FlipX: 0
@@ -184,10 +184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48ff8b8f72eeb7429ac19edcdbe3d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_minShineStrength: 1.75
   m_maxShineStrength: 2.5
-  m_bloomingSpeed: 0.15
+  m_bloomingTime: 0.5
   m_healthPollenPrefab: {fileID: 3398693817910911581, guid: 65ea817f8eb5fcc42b6d238dbc992b16, type: 3}
 --- !u!1 &8402170078060116423
 GameObject:
@@ -261,7 +260,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

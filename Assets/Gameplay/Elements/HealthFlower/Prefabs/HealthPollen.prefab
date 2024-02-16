@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3398693817910911582}
   - component: {fileID: 3398693817910911581}
   - component: {fileID: 2161478774386411671}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HealthPollen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcbbf9cf2650daf4eb119281cfc66adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_healthModification: 15
+  m_healthModification: 10
 --- !u!114 &3398693817910911581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,9 +147,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1219332043
+  m_SortingLayer: 4
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 1, g: 0.8097559, b: 0.25, a: 1}
   m_FlipX: 0

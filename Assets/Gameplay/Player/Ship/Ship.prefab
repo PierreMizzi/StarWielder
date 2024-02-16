@@ -437,7 +437,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 1.2}
-  m_SizeDelta: {x: 6.3117, y: 3.289}
+  m_SizeDelta: {x: 3.0243, y: 1.1029}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &937559505
 MeshRenderer:
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937559502}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
@@ -501,7 +501,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2,6
+  m_text: 2,6<size=50%>s</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 590cbf01c82ebcb42958dd4903ee759c, type: 2}
   m_sharedMaterial: {fileID: 1095984224273993756, guid: 590cbf01c82ebcb42958dd4903ee759c, type: 2}
@@ -528,8 +528,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10.02
-  m_fontSizeBase: 10.02
+  m_fontSize: 7
+  m_fontSizeBase: 7
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -904,7 +904,7 @@ GameObject:
   - component: {fileID: 6232630159491153296}
   - component: {fileID: 6232630159491153295}
   - component: {fileID: 5485153804168517879}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -948,16 +948,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerChannel: {fileID: 11400000, guid: 1ebce8acce4141b4382229e40c13a0d8, type: 2}
   m_gameChannel: {fileID: 11400000, guid: 7fa2ee207c87f4e42827ce90cc2e7f70, type: 2}
-  m_cameraChannel: {fileID: 11400000, guid: 2f76be3b47611b4449681c2076c5d98a, type: 2}
   m_settings: {fileID: 11400000, guid: f2fdd4d4da12e69428ea00f032edbdc8, type: 2}
   m_initialState: 2
   m_star: {fileID: 0}
   m_starAnchor: {fileID: 444499413}
   m_countdownLabel: {fileID: 937559504}
   m_countdownTransformOffset: {x: 0, y: 1.2, z: 0}
-  m_damageLayerMask:
-    serializedVersion: 2
-    m_Bits: 1024
+  m_boxCollider: {fileID: 6232630159491153295}
 --- !u!114 &6232630160101611033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -970,9 +967,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5355f93b7a9684e469604ca2db97616d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_settings: {fileID: 11400000, guid: f2fdd4d4da12e69428ea00f032edbdc8, type: 2}
+  m_settings: {fileID: 11400000, guid: 15a4c765d0a6ae742a14552be33dbdf5, type: 2}
+  m_arenaManager: {fileID: 0}
   m_locomotionActionReference: {fileID: 6453035000741663485, guid: 4d039b37c618d774e9ca8551914c073f, type: 3}
   m_mousePositionActionReference: {fileID: -6649237964926807637, guid: 4d039b37c618d774e9ca8551914c073f, type: 3}
+  m_locomotionActionValue: {x: 0, y: 0, z: 0}
   m_orientationMagnitude: 2
   m_dashStar: {fileID: 0}
   m_dashActionReference: {fileID: 8131866781512616076, guid: 4d039b37c618d774e9ca8551914c073f, type: 3}

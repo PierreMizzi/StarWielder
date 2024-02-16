@@ -22,6 +22,9 @@ public class AsteroidSpawningConfig : ScriptableObject
 	public float maxVelocityScalar = 1.25f;
 	public float randomVelocityAngle = 10;
 
+	[Header("Minerals")]
+
+
 	[Header("Visual settings")]
 	public Gradient tintGradient;
 	public float minScale = 0.5f;

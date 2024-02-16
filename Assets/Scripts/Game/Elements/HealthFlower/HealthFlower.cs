@@ -4,8 +4,9 @@ using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
 using PierreMizzi.Useful.PoolingObjects;
+using StarWielder.Gameplay.Player;
 
-namespace StarWielder.Gameplay.Player
+namespace StarWielder.Gameplay.Elements
 {
 	[RequireComponent(typeof(Animator))]
 	public class HealthFlower : MonoBehaviour, IStateMachine
@@ -13,8 +14,6 @@ namespace StarWielder.Gameplay.Player
 
 		private Star m_star;
 		private Animator m_animator;
-
-		[SerializeField] protected PoolingChannel m_poolingChannel;
 
 		#region MonoBehaviour
 
@@ -38,12 +37,6 @@ namespace StarWielder.Gameplay.Player
 			{
 				ManageBloomingProgress();
 				ManageShineStrength();
-			}
-
-			// TODO : 🟥 Make it better, version 2 !
-			if (transform.position.x > 15)
-			{
-				m_poolingChannel.onReleaseToPool.Invoke(gameObject);
 			}
 		}
 
