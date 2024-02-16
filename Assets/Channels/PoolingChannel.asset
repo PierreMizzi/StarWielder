@@ -61,3 +61,7 @@ MonoBehaviour:
     prefab: {fileID: 8402170077314124646, guid: 01ee882f778809c4db3a1193dcbeb02a, type: 3}
     defaultSize: 2
     maxSize: 5
+  - name: HealthPollen
+    prefab: {fileID: 3398693817910911580, guid: 65ea817f8eb5fcc42b6d238dbc992b16, type: 3}
+    defaultSize: 2
+    maxSize: 5

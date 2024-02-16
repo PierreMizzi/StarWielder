@@ -17,12 +17,9 @@ namespace PierreMizzi.Useful.PoolingObjects
         private void Awake()
         {
             Subscribe();
-        }
-
-        private void Start()
-        {
             InitiliazePools();
         }
+
 
         private void OnDestroy()
         {
