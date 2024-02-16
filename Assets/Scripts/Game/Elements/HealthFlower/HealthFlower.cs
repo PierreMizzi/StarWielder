@@ -3,7 +3,6 @@ using DG.Tweening;
 using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
-using PierreMizzi.Useful.PoolingObjects;
 using StarWielder.Gameplay.Player;
 
 namespace StarWielder.Gameplay.Elements
