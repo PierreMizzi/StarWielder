@@ -29,13 +29,14 @@ namespace StarWielder.Gameplay.Elements
 			m_animator.SetFloat(k_floatMaxShineStrength, m_maxShineStrength);
 		}
 
-		private void Start()
+		private void OnEnable()
 		{
 			m_star = GameObject.FindGameObjectWithTag("Star").GetComponent<Star>();
 
 			m_stem.SetStarTransform(m_star.transform);
 
 			m_currentPollen = m_poolingChannel.onGetFromPool.Invoke(m_pollenPrefab.gameObject).GetComponent<HealthPollen>();
+			m_currentPollen.gameObject.SetActive(true);
 			m_currentPollen.transform.parent = m_stem.pollenContainer;
 			m_currentPollen.transform.localPosition = Vector3.zero;
 			m_currentPollen.transform.localRotation = Quaternion.identity;

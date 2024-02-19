@@ -12,7 +12,6 @@ namespace StarWielder.Gameplay
 			m_asteroidSpawnerManager.CreateAsteroidStorm();
 		}
 
-
 		#region Asteroid Tempest
 
 		[SerializeField] private AsteroidSpawnerManager m_asteroidSpawnerManager;

@@ -4877,7 +4877,8 @@ MonoBehaviour:
   - {fileID: 627803050}
   m_stagesAmount: 6
   m_fightStageSettings: {fileID: 11400000, guid: b651bb0de0d7ea14c97861def1a620b1, type: 2}
-  m_startingStageType: 0
+  m_useCustomStageOrder: 1
+  m_customStageOrder: 0200000002000000
 --- !u!1 &1022546259
 GameObject:
   m_ObjectHideFlags: 0
@@ -7387,11 +7388,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc301b98448f8c458f8f6d3bb8565f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &1709517720 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 6232630159491153295, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
-  m_PrefabInstance: {fileID: 6232630159491153293}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1724614290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9047,14 +9043,6 @@ PrefabInstance:
       propertyPath: m_star
       value: 
       objectReference: {fileID: 267292437}
-    - target: {fileID: 6232630160101611032, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
-      propertyPath: m_settings
-      value: 
-      objectReference: {fileID: 11400000, guid: f2fdd4d4da12e69428ea00f032edbdc8, type: 2}
-    - target: {fileID: 6232630160101611032, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
-      propertyPath: m_boxCollider
-      value: 
-      objectReference: {fileID: 1709517720}
     - target: {fileID: 6232630160101611033, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
       propertyPath: m_dashStar
       value: 

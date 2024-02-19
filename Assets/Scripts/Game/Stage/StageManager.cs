@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using PierreMizzi.Useful.StateMachines;
 using StarWielder.Gameplay.Enemies;
 using UnityEngine;
@@ -17,8 +15,6 @@ using UnityEngine;
 		- Resources
 
 */
-
-// TODO : 🟧 Tweak and try
 
 
 namespace StarWielder.Gameplay
@@ -57,10 +53,11 @@ namespace StarWielder.Gameplay
 		public void Awake()
 		{
 			InitializeStates();
-			BuildStageOrder();
 
-			if (m_startingStageType != StageStateType.None)
-				DebugSetStartingStage();
+			if (m_useCustomStageOrder)
+				BuildCustomStageOrder();
+			else
+				BuildStageOrder();
 
 			LogStageOrder();
 		}
@@ -101,8 +98,6 @@ namespace StarWielder.Gameplay
 			// Add Resource stage
 			InsertStage(StageStateType.Resources, availableStageIndex);
 			InsertStage(StageStateType.Resources, availableStageIndex);
-
-
 		}
 
 		private void InsertStage(StageStateType stageType, List<int> availableStageIndex)
@@ -132,7 +127,7 @@ namespace StarWielder.Gameplay
 			Debug.Log("ICI !");
 			m_currentStageIndex++;
 
-			if (m_currentStageIndex < m_stages.Count - 1)
+			if (m_currentStageIndex <= m_stages.Count - 1)
 				StartStage();
 			else
 				Debug.Log("Game finished !");
@@ -200,12 +195,15 @@ namespace StarWielder.Gameplay
 		#region Debug
 
 		[Header("Debug")]
-		[SerializeField] private StageStateType m_startingStageType = StageStateType.None;
+		[SerializeField] private bool m_useCustomStageOrder = false;
+		[SerializeField] private List<StageStateType> m_customStageOrder = new List<StageStateType>();
 
-		private void DebugSetStartingStage()
+		private void BuildCustomStageOrder()
 		{
-			Debug.Log($"Added starting stage : {m_startingStageType}");
-			m_stages.Insert(0, m_startingStageType);
+			m_stages.Clear();
+
+			for (int i = 0; i < m_customStageOrder.Count; i++)
+				m_stages.Add(m_customStageOrder[i]);
 		}
 
 		private void LogStageOrder()

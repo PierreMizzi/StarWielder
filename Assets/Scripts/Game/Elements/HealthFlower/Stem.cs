@@ -1,7 +1,5 @@
 using UnityEngine;
-using System;
 
-[ExecuteInEditMode]
 public class Stem : MonoBehaviour
 {
 
@@ -18,7 +16,9 @@ public class Stem : MonoBehaviour
 
 	private void Awake()
 	{
-		m_line.material = new Material(m_line.material);
+		if (m_line.material.GetInstanceID() == 23772)
+			m_line.material = new Material(m_line.material);
+
 		m_currentTargetPosition = m_restingTargetPosition;
 	}
 
@@ -68,6 +68,7 @@ public class Stem : MonoBehaviour
 	[SerializeField] private Vector3 m_restingTargetPosition;
 	[SerializeField] private float m_restingTreshold = 0.33f;
 	private Vector3 m_targetPosition;
+	private Vector3 m_targetDirection;
 	private Vector3 m_currentTargetPosition;
 	private Transform m_starTransform;
 
@@ -79,6 +80,7 @@ public class Stem : MonoBehaviour
 	private void ComputeFollowing()
 	{
 		m_targetPosition = transform.InverseTransformPoint(m_starTransform.position);
+		m_targetDirection = (m_starTransform.position - transform.position).normalized;
 
 		float magnitude = m_targetPosition.magnitude;
 
@@ -87,7 +89,7 @@ public class Stem : MonoBehaviour
 		else
 			m_targetPosition *= m_normalMagnitude;
 
-		if (Vector3.Dot(transform.up, m_targetPosition) < m_restingTreshold)
+		if (Vector3.Dot(transform.up, m_targetDirection) < m_restingTreshold)
 			m_targetPosition = m_restingTargetPosition;
 
 		m_currentTargetPosition = Vector3.Lerp(m_currentTargetPosition, m_targetPosition, Time.deltaTime * m_followingSpeed);
@@ -132,7 +134,7 @@ public class Stem : MonoBehaviour
 		m_lastPosition = m_line.GetPosition(m_line.positionCount - 1);
 		m_sndLastPosition = m_line.GetPosition(m_line.positionCount - 2);
 
-		m_pollenContainer.position = m_lastPosition;
+		m_pollenContainer.localPosition = m_lastPosition;
 		m_pollenContainer.up = (m_lastPosition - m_sndLastPosition).normalized;
 	}
 
