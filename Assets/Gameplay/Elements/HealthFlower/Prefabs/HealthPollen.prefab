@@ -60,8 +60,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e2385de7041a5408603516bee706f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_poolingChannel: {fileID: 0}
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
+  m_renderer: {fileID: 3398693818395889101}
   m_rotationSpeed: 10
+  m_detachDistance: 0.5
+  m_detachDuration: 1
 --- !u!58 &2161478774386411671
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -89,7 +92,7 @@ GameObject:
   - component: {fileID: 3398693818395889100}
   - component: {fileID: 3398693818395889101}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +133,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 78846ecab5c61e4409173eb98de63622, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -151,12 +154,12 @@ SpriteRenderer:
   m_SortingLayerID: -1219332043
   m_SortingLayer: 4
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 999722fa7d2b6c54d9660a149f05a519, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 02600aa56ce0c2842aff4c117cb3eecb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.13, y: 2.07}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

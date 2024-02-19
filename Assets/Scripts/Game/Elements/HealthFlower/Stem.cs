@@ -5,8 +5,6 @@ using System;
 public class Stem : MonoBehaviour
 {
 
-	[SerializeField] private Transform m_target;
-
 	[SerializeField] private int m_amountPoints = 2;
 
 	private float m_percentPerPoint;
@@ -20,9 +18,8 @@ public class Stem : MonoBehaviour
 
 	private void Awake()
 	{
-		Debug.Log("Awake");
 		m_line.material = new Material(m_line.material);
-		m_line.material.name = "TonFils";
+		m_currentTargetPosition = m_restingTargetPosition;
 	}
 
 	private void OnEnable()
@@ -39,13 +36,16 @@ public class Stem : MonoBehaviour
 
 	private void Update()
 	{
-		ComputeFollowing();
-		UpdatePollenContainer();
+		if (m_starTransform != null)
+		{
+			ComputeFollowing();
+			UpdatePollenContainer();
+		}
 	}
 
 	#endregion
 
-	#region Shine Strength
+	#region Temperature
 
 	/*
 		A conversion is needed between ShineStrength and Temperature
@@ -54,39 +54,52 @@ public class Stem : MonoBehaviour
 		m_temperatureControl = smoothlezrep
 	*/
 
-	[SerializeField] private AnimationCurve m_temperatureControl;
-
 	public void SetTemperature(float temperature)
 	{
-		m_line.material.SetFloat("_Temperature", m_temperatureControl.Evaluate(temperature));
+		m_line.material.SetFloat("_Temperature", temperature);
 	}
 
 	#endregion
 
 	#region Following
 
+	[Header("Following")]
+	[SerializeField] private float m_followingSpeed = 0.1f;
+	[SerializeField] private Vector3 m_restingTargetPosition;
+	[SerializeField] private float m_restingTreshold = 0.33f;
+	private Vector3 m_targetPosition;
+	private Vector3 m_currentTargetPosition;
+	private Transform m_starTransform;
+
+	public void SetStarTransform(Transform starTransform)
+	{
+		m_starTransform = starTransform;
+	}
+
 	private void ComputeFollowing()
 	{
-		Vector3 localTargetPos = transform.InverseTransformPoint(m_target.position);
+		m_targetPosition = transform.InverseTransformPoint(m_starTransform.position);
 
-		if (Vector3.Dot(transform.up, localTargetPos) < 0.33)
-			return;
+		float magnitude = m_targetPosition.magnitude;
 
-		float magnitude = localTargetPos.magnitude;
+		if (magnitude > m_maxMagnitude)
+			m_targetPosition = m_targetPosition.normalized * m_maxMagnitude;
+		else
+			m_targetPosition *= m_normalMagnitude;
+
+		if (Vector3.Dot(transform.up, m_targetPosition) < m_restingTreshold)
+			m_targetPosition = m_restingTargetPosition;
+
+		m_currentTargetPosition = Vector3.Lerp(m_currentTargetPosition, m_targetPosition, Time.deltaTime * m_followingSpeed);
+
 		Vector3 interpolatedPosition;
 		Vector3 upAxisPosition;
 		Vector3 upAxisToInterpolated;
 		float rigidity;
 
-		if (magnitude > m_maxMagnitude)
-			localTargetPos = localTargetPos.normalized * m_maxMagnitude;
-		else
-			localTargetPos *= m_normalMagnitude;
-
-
 		for (int i = 0; i < m_amountPoints; i++)
 		{
-			interpolatedPosition = localTargetPos * (i * m_percentPerPoint);
+			interpolatedPosition = m_currentTargetPosition * (i * m_percentPerPoint);
 			upAxisPosition = new Vector3(0, interpolatedPosition.y, 0);
 			upAxisToInterpolated = interpolatedPosition - upAxisPosition;
 

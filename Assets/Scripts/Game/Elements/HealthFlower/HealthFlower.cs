@@ -22,6 +22,7 @@ namespace StarWielder.Gameplay.Elements
 		private void Awake()
 		{
 			m_bloomingSpeed = 1f / m_bloomingTime;
+			m_hasBloomed = false;
 
 			m_animator = GetComponent<Animator>();
 			m_animator.SetFloat(k_floatMinShineStrength, m_minShineStrength);
@@ -32,18 +33,20 @@ namespace StarWielder.Gameplay.Elements
 		{
 			m_star = GameObject.FindGameObjectWithTag("Star").GetComponent<Star>();
 
-			m_pollen = m_poolingChannel.onGetFromPool.Invoke(m_healthPollenPrefab.gameObject).GetComponent<HealthPollen>();
-			m_pollen.transform.parent = m_stem.pollenContainer;
-			m_pollen.transform.localPosition = Vector3.zero;
-			m_pollen.transform.localRotation = Quaternion.identity;
+			m_stem.SetStarTransform(m_star.transform);
+
+			m_currentPollen = m_poolingChannel.onGetFromPool.Invoke(m_pollenPrefab.gameObject).GetComponent<HealthPollen>();
+			m_currentPollen.transform.parent = m_stem.pollenContainer;
+			m_currentPollen.transform.localPosition = Vector3.zero;
+			m_currentPollen.transform.localRotation = Quaternion.identity;
 		}
 
 		private void Update()
 		{
 			if (m_star != null && !m_hasBloomed)
 			{
-				//ManageBloomingProgress();
-				ManageShineStrength();
+				ManageBloomingProgress();
+				ManageTemperature();
 			}
 		}
 
@@ -59,26 +62,29 @@ namespace StarWielder.Gameplay.Elements
 		private const string k_floatMaxShineStrength = "MaxShineStrength";
 		[SerializeField] private float m_currentShineStrength;
 
-		private void ManageShineStrength()
+		private float m_temperature;
+
+		[SerializeField] private AnimationCurve m_temparatureSmoothing;
+
+		private void ManageTemperature()
 		{
 			// Shine Strength
 			m_currentShineStrength = m_star.GetShineStrength(transform);
 			m_animator.SetFloat(k_floatShineStrength, m_currentShineStrength);
 
-			m_stem.SetTemperature(GetTemperature());
+			m_temperature = GetTemperature();
+			m_stem.SetTemperature(m_temperature);
+			m_currentPollen.SetTemperature(m_temperature);
 		}
 
 		private float GetTemperature()
 		{
-			// Mais unclamped !
-			// return UtilsClass.Remap(m_currentShineStrength, m_maxShineStrength, m_minShineStrength, 1, 0);
-
 			if (m_currentShineStrength > m_maxShineStrength)
 				return 1;
 			else if (m_currentShineStrength < m_minShineStrength)
 				return 0;
 			else
-				return (m_currentShineStrength - m_minShineStrength) / (m_maxShineStrength - m_minShineStrength);
+				return m_temparatureSmoothing.Evaluate((m_currentShineStrength - m_minShineStrength) / (m_maxShineStrength - m_minShineStrength));
 		}
 
 
@@ -131,8 +137,8 @@ namespace StarWielder.Gameplay.Elements
 		#region Health Pollen
 
 		[Header("Health Pollen")]
-		[SerializeField] private HealthPollen m_healthPollenPrefab;
-		private HealthPollen m_pollen;
+		[SerializeField] private HealthPollen m_pollenPrefab;
+		private HealthPollen m_currentPollen;
 
 		private bool m_hasBloomed = false;
 
@@ -143,8 +149,7 @@ namespace StarWielder.Gameplay.Elements
 			m_currentShineStrength = (m_minShineStrength + m_maxShineStrength) / 2f;
 			m_animator.SetFloat(k_floatShineStrength, m_currentShineStrength);
 
-			// HealthPollen pollen = Instantiate(m_healthPollenPrefab, transform.position, UtilsClass.RandomRotation2D());
-			// pollen.transform.DOMove(transform.position + transform.up * 3f, 1.5f);
+			m_currentPollen.Bloom();
 		}
 
 		#endregion

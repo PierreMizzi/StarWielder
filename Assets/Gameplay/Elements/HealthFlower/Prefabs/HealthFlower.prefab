@@ -275,8 +275,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489051439}
-  m_LocalRotation: {x: -0, y: -0, z: 0.5179207, w: 0.85542864}
-  m_LocalPosition: {x: -0.15902413, y: 0.22285664, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.51792085, w: 0.8554286}
+  m_LocalPosition: {x: -0.2168511, y: 0.30389538, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -331,35 +331,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4c2d2d6fdf51a4fa62c018ebcb6bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_target: {fileID: 0}
   m_amountPoints: 10
   m_line: {fileID: 1830037966}
-  m_maxMagnitude: 0.33
+  m_maxMagnitude: 0.45
   m_normalMagnitude: 0.2
-  m_temperatureControl:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 3.039795
-      outSlope: 3.039795
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.053296257
-    - serializedVersion: 3
-      time: 1.00177
-      value: 1
-      inSlope: 2.9407284
-      outSlope: 2.9407284
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.04817137
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_followingSpeed: 3
+  m_restingTargetPosition: {x: -0.2168511, y: 0.30389538, z: 0}
+  m_restingTreshold: 0.15
   m_rigidityCurve:
     serializedVersion: 2
     m_Curve:
@@ -428,15 +406,15 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: -0.0002181401, y: 0.024761848, z: 0}
-  - {x: -0.0017451209, y: 0.049523696, z: 0}
-  - {x: -0.0058897827, y: 0.074285544, z: 0}
-  - {x: -0.013960967, y: 0.09904739, z: 0}
-  - {x: -0.02726751, y: 0.12380924, z: 0}
-  - {x: -0.04711826, y: 0.14857109, z: 0}
-  - {x: -0.074822046, y: 0.17333293, z: 0}
-  - {x: -0.111687735, y: 0.19809479, z: 0}
-  - {x: -0.15902413, y: 0.22285664, z: 0}
+  - {x: -0.00029746376, y: 0.033766154, z: 0}
+  - {x: -0.00237971, y: 0.06753231, z: 0}
+  - {x: -0.008031522, y: 0.10129847, z: 0}
+  - {x: -0.01903768, y: 0.13506462, z: 0}
+  - {x: -0.037182968, y: 0.16883077, z: 0}
+  - {x: -0.064252175, y: 0.20259693, z: 0}
+  - {x: -0.10203006, y: 0.23636307, z: 0}
+  - {x: -0.15230145, y: 0.27012923, z: 0}
+  - {x: -0.2168511, y: 0.30389538, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -564,6 +542,30 @@ MonoBehaviour:
   m_minShineStrength: 1.75
   m_maxShineStrength: 2.5
   m_currentShineStrength: 0
+  m_temparatureSmoothing:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.9564517
+      outSlope: 2.9564517
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.050736498
+    - serializedVersion: 3
+      time: 0.99835205
+      value: 1
+      inSlope: 2.9957237
+      outSlope: 2.9957237
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.054087665
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   m_bloomingTime: 0.5
   m_stem: {fileID: 1830037968}
-  m_healthPollenPrefab: {fileID: 3398693817910911581, guid: 65ea817f8eb5fcc42b6d238dbc992b16, type: 3}
+  m_pollenPrefab: {fileID: 3398693817910911581, guid: 65ea817f8eb5fcc42b6d238dbc992b16, type: 3}
