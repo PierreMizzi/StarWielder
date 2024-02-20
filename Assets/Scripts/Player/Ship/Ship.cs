@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using PierreMizzi.SoundManager;
-using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
-using StarWielder.Gameplay.Enemies;
 using TMPro;
 using UnityEngine;
 
@@ -122,11 +120,6 @@ namespace StarWielder.Gameplay.Player
 
 		}
 
-		private void LateUpdate()
-		{
-			UpdateCountdownTransform();
-		}
-
 		private void OnDestroy()
 		{
 			if (m_gameChannel != null)
@@ -194,35 +187,6 @@ namespace StarWielder.Gameplay.Player
 
 		#endregion
 
-		#region Countdown
-
-		/*
-			Countdown before all emergency energy has been consumed.
-			Only visible when Star is not docked
-		*/
-
-		[Header("Countdown")]
-		[SerializeField] private TextMeshPro m_countdownLabel;
-		[SerializeField] private Vector3 m_countdownTransformOffset;
-		private float m_countdown;
-
-		[Obsolete]
-		private void ComputeCountdown()
-		{
-			m_countdown = m_emergencyEnergy / m_settings.emergencyEnergyDepleatRate;
-			m_countdownLabel.text = String.Format("{0:0.0}", m_countdown) + "<size=50%>s</size>";
-			m_animator.SetFloat(k_floatCountdown, m_countdown);
-		}
-
-		[Obsolete]
-		private void UpdateCountdownTransform()
-		{
-			m_countdownLabel.transform.position = transform.position + m_countdownTransformOffset;
-			m_countdownLabel.transform.rotation = Quaternion.identity;
-		}
-
-		#endregion
-
 		#region Health
 
 		[Header("Health")]
@@ -266,8 +230,6 @@ namespace StarWielder.Gameplay.Player
 		public const string k_boolHasEnergy = "HasEnergy";
 		public const string k_boolIsDashing = "IsDashing";
 
-		public const string k_floatCountdown = "Countdown";
-		public const string k_boolDisplayCountdown = "DisplayCountdown";
 
 		public void SetIsDashing(bool isDashing)
 		{

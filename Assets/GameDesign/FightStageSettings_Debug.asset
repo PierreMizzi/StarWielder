@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: FightStageSettings_Debug
   m_EditorClassIdentifier: 
   m_datas:
-  - enemiesCount: 3
+  - beginningEnemiesCount: 2
+    stageEnemiesCount: 2
     minSpawnDelay: 4
     maxSpawnDelay: 5.5
-  - enemiesCount: 1
+  - beginningEnemiesCount: 2
+    stageEnemiesCount: 2
     minSpawnDelay: 4
     maxSpawnDelay: 5.5
-  - enemiesCount: 1
+  - beginningEnemiesCount: 2
+    stageEnemiesCount: 2
     minSpawnDelay: 4
     maxSpawnDelay: 5.5
-  - enemiesCount: 1
+  - beginningEnemiesCount: 2
+    stageEnemiesCount: 2
     minSpawnDelay: 4
     maxSpawnDelay: 5.5

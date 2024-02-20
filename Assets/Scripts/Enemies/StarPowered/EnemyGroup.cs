@@ -44,8 +44,6 @@ namespace StarWielder.Gameplay.Enemies
 			DeactivateTurrets();
 		}
 
-
-
 		#endregion
 
 		#region Enemy
@@ -79,7 +77,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		#region EnemyStar
 
-		[SerializeField] private List<EnemyStar> m_enemyStars = new List<EnemyStar>();
+		[SerializeField] protected List<EnemyStar> m_enemyStars = new List<EnemyStar>();
 
 		public void EnemyStarAppear(int index)
 		{

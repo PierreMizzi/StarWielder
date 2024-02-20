@@ -45,6 +45,10 @@ MonoBehaviour:
     prefab: {fileID: 8295865577534566061, guid: d89b20779fa440c4cafdcce725274863, type: 3}
     defaultSize: 5
     maxSize: 10
+  - name: Enemy_AngleBounce
+    prefab: {fileID: 989696584289270859, guid: 00680d2b402e2b54ea8cc98bcf6cea5b, type: 3}
+    defaultSize: 2
+    maxSize: 5
   - name: EnemyBullet
     prefab: {fileID: 521183378832562512, guid: 0b96172bfd2e55b4b9547220a894ae9c, type: 3}
     defaultSize: 20

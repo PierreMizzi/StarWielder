@@ -35,8 +35,6 @@ namespace StarWielder.Gameplay.Player
 			ComputeCorners();
 		}
 
-
-
 		private void Update()
 		{
 			ReadMousePositionInputs();

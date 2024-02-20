@@ -32,6 +32,7 @@ namespace StarWielder.Gameplay.Player
 
 		#region Combo
 
+		[Obsolete]
 		public IntDelegate onRefreshStarCombo;
 
 		#endregion
@@ -50,6 +51,7 @@ namespace StarWielder.Gameplay.Player
 			onRefreshShipHealth = (float normalizedHealth) => { };
 
 			onRefreshStarCombo = (int combo) => { };
+
 		}
 	}
 }

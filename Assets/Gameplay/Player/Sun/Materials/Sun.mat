@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShipSun
+  m_Name: Sun
   m_Shader: {fileID: -6465566751694194690, guid: f179d2553d3f14647ae5397845e69abb, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []

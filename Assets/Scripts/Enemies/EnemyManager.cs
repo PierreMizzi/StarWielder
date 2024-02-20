@@ -4,7 +4,6 @@ using StarWielder.Gameplay.Player;
 using PierreMizzi.Useful;
 using UnityEngine;
 using System;
-using PierreMizzi.Useful.PoolingObjects;
 
 namespace StarWielder.Gameplay.Enemies
 {
@@ -34,8 +33,11 @@ namespace StarWielder.Gameplay.Enemies
 
 		public void SetupStageData(FightStageData data)
 		{
-			m_spawnedEnemiesCount = data.enemiesCount;
-			m_killedEnemiesCount = data.enemiesCount;
+			m_spawnedEnemiesCount = data.stageEnemiesCount + data.beginningEnemiesCount;
+			m_killedEnemiesCount = m_spawnedEnemiesCount;
+
+			if (data.beginningEnemiesCount > 0)
+				SpawnEnemyGroup(data.beginningEnemiesCount);
 		}
 
 		[Obsolete]
@@ -45,7 +47,8 @@ namespace StarWielder.Gameplay.Enemies
 			StartSpawning();
 		}
 
-		[Obsolete]
+
+		// TODO : 🟥 Fix this ! Link it with StageManager
 		private void CallbackGameOver(GameOverReason reason)
 		{
 			SpawnedEnemiesStopBehaviour();
@@ -107,11 +110,12 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			while (true)
 			{
-				SpawnEnemyGroup();
-
 				m_spawnTimer += Time.deltaTime;
 				m_spawnFrequency = GetRandomSpawnDelay();
+
 				yield return new WaitForSeconds(m_spawnFrequency);
+
+				SpawnEnemyGroup();
 			}
 		}
 
@@ -122,7 +126,6 @@ namespace StarWielder.Gameplay.Enemies
 			return UnityEngine.Random.Range(min, max);
 		}
 
-		[ContextMenu("SpawnEnemyGroup")]
 		private void SpawnEnemyGroup()
 		{
 			m_spawnedEnemiesCount--;
@@ -131,6 +134,13 @@ namespace StarWielder.Gameplay.Enemies
 
 			if (m_spawnedEnemiesCount == 0)
 				StopSpawning();
+		}
+
+		private void SpawnEnemyGroup(int count)
+		{
+			Debug.Log("Here");
+			for (int i = 0; i < count; i++)
+				SpawnEnemyGroup();
 		}
 
 		#endregion
@@ -152,13 +162,11 @@ namespace StarWielder.Gameplay.Enemies
 
 		public void RemoveSpawnedEnemy(Enemy enemy)
 		{
-			Debug.Log($"m_spawnedEnemies.Count : {m_spawnedEnemies.Count}");
 			if (m_spawnedEnemies.Contains(enemy))
 			{
 				m_spawnedEnemies.Remove(enemy);
 				m_killedEnemiesCount--;
 
-				Debug.Log($"m_killedEnemiesCount : {m_killedEnemiesCount}");
 				if (m_killedEnemiesCount == 0)
 					m_fightStageManager.StopStage();
 			}

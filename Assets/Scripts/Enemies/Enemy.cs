@@ -12,6 +12,7 @@ namespace StarWielder.Gameplay.Enemies
 		public EnemyManager manager => m_manager;
 
 		[SerializeField] protected PoolingChannel m_poolingChannel;
+		[SerializeField] protected GameChannel m_gameChannel;
 
 		public virtual void Initialize(EnemyManager manager)
 		{
@@ -24,6 +25,7 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			m_manager.RemoveSpawnedEnemy(this);
 			m_poolingChannel.onReleaseToPool.Invoke(gameObject);
+			m_gameChannel.onComboIncrement.Invoke();
 		}
 
 		#region MonoBehaviour

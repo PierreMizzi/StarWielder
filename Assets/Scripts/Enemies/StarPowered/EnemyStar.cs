@@ -3,6 +3,7 @@ using PierreMizzi.SoundManager;
 using StarWielder.Gameplay.Player;
 using UnityEngine;
 using PierreMizzi.Useful.PoolingObjects;
+using System;
 
 
 namespace StarWielder.Gameplay.Enemies
@@ -86,8 +87,20 @@ namespace StarWielder.Gameplay.Enemies
 			currency.Collect();
 		}
 
+
+
 		#endregion
 
+		#region Beam
+
+		[SerializeField] private LineRenderer m_beam;
+		public void SetBeamConnection()
+		{
+			m_beam.SetPosition(0, Vector3.zero);
+			m_beam.SetPosition(1, transform.InverseTransformPoint(transform.parent.position));
+		}
+
+		#endregion
 
 	}
 }

@@ -16,6 +16,10 @@ namespace StarWielder.Gameplay
 		public FloatDelegate onRefreshTimer;
 		public FloatDelegate onSetHighestEnergy;
 
+		// Combo
+		public Action onComboIncrement;
+		public Action onComboBreak;
+
 		// Stage
 
 
@@ -35,6 +39,10 @@ namespace StarWielder.Gameplay
 			// Score
 			onRefreshTimer = (float time) => { };
 			onSetHighestEnergy = (float highestEnergy) => { };
+
+			// Combo
+			onComboIncrement = () => { };
+			onComboBreak = () => { };
 
 			// Currency
 			onCollectCurrency = (int amount) => { };

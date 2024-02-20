@@ -20,6 +20,7 @@ namespace StarWielder.Gameplay.Player
 			SoundManager.PlaySFX(SoundDataID.SHIP_POWER_DOWN);
 			m_this.controller.enabled = false;
 			m_this.animator.SetBool(Ship.k_boolHasEnergy, false);
+			m_this.gameChannel.onComboBreak.Invoke();
 		}
 
 		public override void Update()
