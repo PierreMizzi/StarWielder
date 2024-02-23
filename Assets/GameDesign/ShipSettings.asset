@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569e19f919d13584c9d47ed127071644, type: 3}
   m_Name: ShipSettings
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 100
   maxEmergencyEnergy: 10
   emergencyEnergyDepleatRate: 2
   emergencyEnergyDuration: 5

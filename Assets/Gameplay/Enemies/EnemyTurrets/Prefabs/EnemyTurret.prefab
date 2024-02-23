@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1425251661
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0d794f47372a9c043bca5ce087fa12f3, type: 3}
   m_Color: {r: 1, g: 0, b: 0.18629885, a: 1}
@@ -132,8 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_canonAxisTransform: {fileID: 891677636491832963}
   m_firePosition: {fileID: 7922640100181106128}
-  m_minDelayFiring: 2
-  m_maxDelayFiring: 4
+  m_minDelayFiring: 1
+  m_maxDelayFiring: 1
   m_rateOfFire: 2.5
   m_bulletPrefab: {fileID: 521183378832562514, guid: 0b96172bfd2e55b4b9547220a894ae9c, type: 3}
   m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}

@@ -124,10 +124,9 @@ namespace StarWielder.Gameplay
 
 		public void CallbackStageEnded()
 		{
-			Debug.Log("ICI !");
 			m_currentStageIndex++;
 
-			if (m_currentStageIndex <= m_stages.Count - 1)
+			if (m_currentStageIndex < m_stages.Count)
 				StartStage();
 			else
 				Debug.Log("Game finished !");

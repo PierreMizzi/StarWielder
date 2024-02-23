@@ -138,7 +138,6 @@ namespace StarWielder.Gameplay.Enemies
 
 		private void SpawnEnemyGroup(int count)
 		{
-			Debug.Log("Here");
 			for (int i = 0; i < count; i++)
 				SpawnEnemyGroup();
 		}

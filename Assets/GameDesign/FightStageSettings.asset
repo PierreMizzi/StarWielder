@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f49d46507d313f348a18c6a7ed9d2653, type: 3}
-  m_Name: FightStageSettings_Debug
+  m_Name: FightStageSettings
   m_EditorClassIdentifier: 
   m_datas:
   - beginningEnemiesCount: 2
     stageEnemiesCount: 6
     minSpawnDelay: 4
     maxSpawnDelay: 5.5
-  - beginningEnemiesCount: 3
-    stageEnemiesCount: 8
-    minSpawnDelay: 4
-    maxSpawnDelay: 5.5
   - beginningEnemiesCount: 4
     stageEnemiesCount: 11
     minSpawnDelay: 2
     maxSpawnDelay: 3
+  - beginningEnemiesCount: 2
+    stageEnemiesCount: 2
+    minSpawnDelay: 4
+    maxSpawnDelay: 5.5
   - beginningEnemiesCount: 2
     stageEnemiesCount: 2
     minSpawnDelay: 4

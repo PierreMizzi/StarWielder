@@ -1353,7 +1353,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_bulletsContainer: {fileID: 806116049}
-  m_isDebugging: 1
+  m_isDebugging: 0
   m_debugEnemySpawners:
   - {fileID: 1765331074}
 --- !u!4 &305180834
@@ -4843,7 +4843,7 @@ MonoBehaviour:
   m_stagesAmount: 6
   m_fightStageSettings: {fileID: 11400000, guid: b651bb0de0d7ea14c97861def1a620b1, type: 2}
   m_useCustomStageOrder: 0
-  m_customStageOrder: 0200000002000000
+  m_customStageOrder: 0100000001000000
 --- !u!1 &1022546259
 GameObject:
   m_ObjectHideFlags: 0
@@ -8964,17 +8964,21 @@ PrefabInstance:
       propertyPath: m_ship
       value: 
       objectReference: {fileID: 1709517717}
+    - target: {fileID: 3153189582022618723, guid: c741c91ed74e40e44945eb3cc91e1195, type: 3}
+      propertyPath: m_settings
+      value: 
+      objectReference: {fileID: 11400000, guid: b24ab3511ccb22948a65f9213767a89e, type: 2}
     - target: {fileID: 3153189582022618724, guid: c741c91ed74e40e44945eb3cc91e1195, type: 3}
       propertyPath: m_RootOrder
       value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3153189582022618724, guid: c741c91ed74e40e44945eb3cc91e1195, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4.83
       objectReference: {fileID: 0}
     - target: {fileID: 3153189582022618724, guid: c741c91ed74e40e44945eb3cc91e1195, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.33
       objectReference: {fileID: 0}
     - target: {fileID: 3153189582022618724, guid: c741c91ed74e40e44945eb3cc91e1195, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9085,6 +9089,10 @@ PrefabInstance:
       propertyPath: m_star
       value: 
       objectReference: {fileID: 267292437}
+    - target: {fileID: 6232630160101611032, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
+      propertyPath: m_settings
+      value: 
+      objectReference: {fileID: 11400000, guid: f2fdd4d4da12e69428ea00f032edbdc8, type: 2}
     - target: {fileID: 6232630160101611033, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
       propertyPath: m_dashStar
       value: 
