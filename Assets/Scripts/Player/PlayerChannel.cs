@@ -32,8 +32,21 @@ namespace StarWielder.Gameplay.Player
 
 		#region Combo
 
-		[Obsolete]
-		public IntDelegate onRefreshStarCombo;
+		private int m_currentCombo;
+		public int currentCombo
+		{
+			get
+			{
+				return m_currentCombo;
+			}
+			set
+			{
+				m_currentCombo = Mathf.Max(0, value);
+			}
+		}
+
+		public Action onComboIncrement;
+		public Action onComboBreak;
 
 		#endregion
 
@@ -50,7 +63,8 @@ namespace StarWielder.Gameplay.Player
 
 			onRefreshShipHealth = (float normalizedHealth) => { };
 
-			onRefreshStarCombo = (int combo) => { };
+			onComboIncrement = () => { m_currentCombo++; };
+			onComboBreak = () => { m_currentCombo = 0; };
 
 		}
 	}

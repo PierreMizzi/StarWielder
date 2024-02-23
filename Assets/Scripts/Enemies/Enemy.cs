@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PierreMizzi.Useful.PoolingObjects;
+using StarWielder.Gameplay.Player;
 
 namespace StarWielder.Gameplay.Enemies
 {
@@ -12,7 +13,7 @@ namespace StarWielder.Gameplay.Enemies
 		public EnemyManager manager => m_manager;
 
 		[SerializeField] protected PoolingChannel m_poolingChannel;
-		[SerializeField] protected GameChannel m_gameChannel;
+		[SerializeField] protected PlayerChannel m_playerChannel;
 
 		public virtual void Initialize(EnemyManager manager)
 		{
@@ -25,7 +26,7 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			m_manager.RemoveSpawnedEnemy(this);
 			m_poolingChannel.onReleaseToPool.Invoke(gameObject);
-			m_gameChannel.onComboIncrement.Invoke();
+			m_playerChannel.onComboIncrement.Invoke();
 		}
 
 		#region MonoBehaviour

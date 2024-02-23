@@ -13,12 +13,14 @@ namespace StarWielder.Gameplay.Enemies
 	/// </summary>
 	public class EnemyStar : MonoBehaviour
 	{
+		[SerializeField] private PlayerChannel m_playerChannel;
 
 		private EnemyGroup m_group;
 
 		private List<string> m_destroyedSoundIDs = new List<string>();
 
 		[SerializeField] private StarAbsorbable m_starAbsorbable;
+
 
 		public void Initialize(EnemyGroup group)
 		{
@@ -34,7 +36,7 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			SoundManager.PlayRandomSFX(m_destroyedSoundIDs);
 			m_group.EnemyStarKilled(this);
-			CreateCurrency();
+			CreateCurrencies();
 			m_animator.SetTrigger(k_triggerKill);
 		}
 
@@ -80,14 +82,18 @@ namespace StarWielder.Gameplay.Enemies
 		[SerializeField] protected PoolingChannel m_poolingChannel;
 		[SerializeField] private Currency m_currencyPrefab;
 
+		private void CreateCurrencies()
+		{
+			for (int i = 0; i < m_playerChannel.currentCombo; i++)
+				CreateCurrency();
+		}
+
 		private void CreateCurrency()
 		{
 			Currency currency = m_poolingChannel.onGetFromPool.Invoke(m_currencyPrefab.gameObject).GetComponent<Currency>();
 			currency.transform.position = transform.position;
 			currency.Collect();
 		}
-
-
 
 		#endregion
 

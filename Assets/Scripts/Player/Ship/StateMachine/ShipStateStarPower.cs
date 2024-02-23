@@ -18,7 +18,6 @@ namespace StarWielder.Gameplay.Player
 			base.DefaultEnter();
 			m_this.controller.enabled = true;
 			m_this.animator.SetBool(Ship.k_boolHasEnergy, true);
-			m_this.gameChannel.onComboBreak.Invoke();
 		}
 
 		public override void Update()

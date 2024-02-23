@@ -23,6 +23,7 @@ namespace StarWielder.Gameplay.Player
 			DockStar();
 			SoundManager.PlaySFX(SoundDataID.STAR_DOCKING);
 			m_this.mouseClickAction.action.performed += CallbackMouseClick;
+			m_this.playerChannel.onComboBreak.Invoke();
 		}
 
 		public override void Exit()
@@ -39,8 +40,6 @@ namespace StarWielder.Gameplay.Player
 
 		private void DockStar()
 		{
-			m_this.currentCombo = 1;
-			m_this.playerChannel.onRefreshStarCombo.Invoke(m_this.currentCombo);
 
 			// Starts the game if it's the first time, no effect otherwiser
 			// Check callback in GameManager.cs

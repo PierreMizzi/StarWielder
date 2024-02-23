@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using PierreMizzi.SoundManager;
-using PierreMizzi.Useful;
 using PierreMizzi.Useful.StateMachines;
-using StarWielder.Gameplay.Enemies;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -225,18 +222,6 @@ namespace StarWielder.Gameplay.Player
 				playerChannel.onRefreshStarEnergy.Invoke(m_currentEnergy);
 			}
 		}
-		private float m_highestEnergy;
-
-		private int m_currentCombo = 1;
-		public int currentCombo { get { return m_currentCombo; } set { m_currentCombo = value; } }
-
-		private float ComputeComboBonusEnergy(float gainedEnergy)
-		{
-			if (m_currentCombo == 1)
-				return 0;
-			else
-				return gainedEnergy * m_currentCombo * m_settings.comboBonusEnergyRatio;
-		}
 
 		private void CheckEnergy()
 		{
@@ -279,13 +264,15 @@ namespace StarWielder.Gameplay.Player
 
 		#endregion
 
-		#region EnemyStar
+		#region StarAbsorbable
 
 		[Header("EnemyStar")]
 		[SerializeField] private LayerMask m_enemyLayer;
 
 		private void AbsorbEnergy(StarAbsorbable absorbable)
 		{
+			// TODO : 🟥 Use this again 
+			PlayEnemyStarPitch();
 			absorbable.onAbsorb.Invoke();
 
 			// Energy
@@ -294,31 +281,6 @@ namespace StarWielder.Gameplay.Player
 
 			// Animation
 			m_animator.SetTrigger(k_triggerAbsorb);
-		}
-
-		[Obsolete]
-		private void AbsorbEnergy(Collider2D other)
-		{
-			if (other.gameObject.TryGetComponent(out EnemyStar enemyStar))
-			{
-				PlayStarComboSFX();
-				m_currentCombo += 1;
-				m_playerChannel.onRefreshStarCombo.Invoke(m_currentCombo);
-
-				// m_currentEnergy += enemyStar.energy + ComputeComboBonusEnergy(enemyStar.energy);
-				m_playerChannel.onAbsorbEnemyStar.Invoke(m_currentEnergy);
-				SetVelocityFromEnergy();
-
-				m_animator.SetTrigger(k_triggerAbsorb);
-
-				if (m_currentEnergy > m_highestEnergy)
-				{
-					m_gameChannel.onSetHighestEnergy.Invoke(m_currentEnergy);
-					m_highestEnergy = m_currentEnergy;
-				}
-
-				enemyStar.Kill();
-			}
 		}
 
 		#region Audio
@@ -330,9 +292,9 @@ namespace StarWielder.Gameplay.Player
 		/// <summary>
 		/// The higher the combo, the higher the pitch when absorbing an EnemyStar
 		/// </summary>
-		private void PlayStarComboSFX()
+		private void PlayEnemyStarPitch()
 		{
-			float pitch = k_basePitchValue + m_currentCombo * m_settings.pitchShift;
+			float pitch = k_basePitchValue + m_playerChannel.currentCombo * m_settings.pitchShift;
 			pitch = Mathf.Clamp(pitch, 0, m_settings.maxPitch);
 			m_soundSource.audioMixerGroup.audioMixer.SetFloat(k_pitchParameterName, pitch);
 			m_soundSource.Play();

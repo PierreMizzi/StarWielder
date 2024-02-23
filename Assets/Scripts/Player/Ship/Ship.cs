@@ -21,6 +21,7 @@ namespace StarWielder.Gameplay.Player
 		[SerializeField] private PlayerChannel m_playerChannel = null;
 		[SerializeField] private GameChannel m_gameChannel = null;
 
+		public PlayerChannel playerChannel => m_playerChannel;
 		public GameChannel gameChannel => m_gameChannel;
 
 		#endregion

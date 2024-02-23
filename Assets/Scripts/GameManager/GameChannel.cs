@@ -13,12 +13,13 @@ namespace StarWielder.Gameplay
 		public Action onStartGame;
 
 		// Score
+		[Obsolete]
 		public FloatDelegate onRefreshTimer;
+
+		[Obsolete]
 		public FloatDelegate onSetHighestEnergy;
 
-		// Combo
-		public Action onComboIncrement;
-		public Action onComboBreak;
+
 
 		// Stage
 
@@ -40,9 +41,7 @@ namespace StarWielder.Gameplay
 			onRefreshTimer = (float time) => { };
 			onSetHighestEnergy = (float highestEnergy) => { };
 
-			// Combo
-			onComboIncrement = () => { };
-			onComboBreak = () => { };
+
 
 			// Currency
 			onCollectCurrency = (int amount) => { };

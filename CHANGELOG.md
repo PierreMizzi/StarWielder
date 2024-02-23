@@ -21,6 +21,8 @@
 
 ### Changes
 
+- New Combo System
+  - Whenever you kill an enemy, your combo increment by 1. Combo score influences the amount of currency you earn. Combo score resets when the emergency energy of the ship is fully depleated or regenerated. 
 - Changed the "playing" space of the game. There is now a unreachable space at the bottom. Impacts spawning of enemies
 - Ship can grab the Sun without recalling him
 - In-game UI has been adjusted
