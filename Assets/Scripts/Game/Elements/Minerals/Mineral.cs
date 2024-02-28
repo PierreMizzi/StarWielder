@@ -3,10 +3,10 @@ using PierreMizzi.Useful.PoolingObjects;
 using System;
 
 
-// TODO : 🟥 Put mineral in pooling system
-// TODO : 🟥 Generate random minerals on random asteroids
-// TODO : 🟥 Interact with the sun to smelt
-// TODO : 🟥 Generate droplets of mineral
+//  : 🟥 Put mineral in pooling system
+//  : 🟥 Generate random minerals on random asteroids
+//  : 🟥 Interact with the sun to smelt
+//  : 🟥 Generate droplets of mineral
 
 public class Mineral : MonoBehaviour
 {

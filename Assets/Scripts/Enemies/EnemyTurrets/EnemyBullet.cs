@@ -66,7 +66,6 @@ namespace StarWielder.Gameplay.Enemies
         private Animator m_animator = null;
 
         // TODO : 🟥 When onRelease, resets correctly the trail
-
         private const string k_triggerIsWall = "IsWall";
         private const string k_triggerIsShip = "IsShip";
 
