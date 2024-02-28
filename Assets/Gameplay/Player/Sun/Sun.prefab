@@ -340,7 +340,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerChannel: {fileID: 11400000, guid: 1ebce8acce4141b4382229e40c13a0d8, type: 2}
   m_gameChannel: {fileID: 11400000, guid: 7fa2ee207c87f4e42827ce90cc2e7f70, type: 2}
-  m_settings: {fileID: 11400000, guid: cb6c8a45a378a724c95fa2ea094a3b29, type: 2}
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
+  m_settings: {fileID: 11400000, guid: b24ab3511ccb22948a65f9213767a89e, type: 2}
   m_mouseClickAction: {fileID: 3150000551938037181, guid: 4d039b37c618d774e9ca8551914c073f, type: 3}
   m_initialState: 3
   m_ship: {fileID: 0}
@@ -363,6 +364,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   m_soundSource: {fileID: 1689705774}
+  m_sunBounceParticlePrefab: {fileID: 4132298226803400682, guid: a46cb77f8fd742d46a34662a328f19d0, type: 3}
 --- !u!50 &267292435
 Rigidbody2D:
   serializedVersion: 4

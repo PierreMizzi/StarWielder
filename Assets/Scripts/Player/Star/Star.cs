@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using PierreMizzi.SoundManager;
+using PierreMizzi.Useful.PoolingObjects;
 using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,6 +19,7 @@ namespace StarWielder.Gameplay.Player
 		[Header("Channels")]
 		[SerializeField] public PlayerChannel m_playerChannel;
 		[SerializeField] private GameChannel m_gameChannel;
+		[SerializeField] private PoolingChannel m_poolingChannel;
 
 		public PlayerChannel playerChannel => m_playerChannel;
 		public GameChannel gameChannel => m_gameChannel;
@@ -134,6 +136,7 @@ namespace StarWielder.Gameplay.Player
 		private void OnCollisionEnter2D(Collision2D other)
 		{
 			PlayBounceSound();
+			SpawnSunBounceParticle(other);
 
 			onCollisionEnter2D.Invoke(other);
 		}
@@ -317,6 +320,23 @@ namespace StarWielder.Gameplay.Player
 		public float GetShineStrength(Transform other)
 		{
 			return Vector3.Distance(transform.position, other.position);
+		}
+
+		#endregion
+
+		#region Bounce Particle
+
+		[Header("Bounce Particle")]
+
+		[SerializeField] private GameObject m_sunBounceParticlePrefab;
+
+		private void SpawnSunBounceParticle(Collision2D other)
+		{
+			GameObject ps = m_poolingChannel.onGetFromPool.Invoke(m_sunBounceParticlePrefab);
+
+			ContactPoint2D contact = other.GetContact(0);
+			ps.transform.position = contact.point;
+			ps.transform.up = contact.normal;
 		}
 
 		#endregion

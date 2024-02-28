@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4132298226803400685}
   - component: {fileID: 4132298226803400684}
   - component: {fileID: 4132298226803400683}
+  - component: {fileID: 1364835502}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: SunBounceParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +44,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4871,3 +4872,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1364835502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4132298226803400682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b34fbcadc582be48a7b9e2fd8ba6c0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}

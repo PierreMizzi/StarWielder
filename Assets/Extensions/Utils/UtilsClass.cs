@@ -140,17 +140,6 @@ namespace PierreMizzi.Useful
 
         #endregion
 
-        public static void FillListFromType<T>(Transform container, List<T> list)
-        {
-            foreach (Transform child in container)
-            {
-                if (child.TryGetComponent(out T element))
-                {
-                    if (child.gameObject.activeInHierarchy && !list.Contains(element))
-                        list.Add(element);
-                }
-            }
-        }
 
         public static void WriteFile(byte[] data, string localURL)
         {
@@ -218,6 +207,18 @@ namespace PierreMizzi.Useful
             return value[value.Length - 1].ToString();
         }
 
+        public static void FillListFromType<T>(Transform container, List<T> list)
+        {
+            foreach (Transform child in container)
+            {
+                if (child.TryGetComponent(out T element))
+                {
+                    if (child.gameObject.activeInHierarchy && !list.Contains(element))
+                        list.Add(element);
+                }
+            }
+        }
+
         public static T PickRandom<T>(this List<T> list)
         {
             if (list.Count == 0)
@@ -225,6 +226,8 @@ namespace PierreMizzi.Useful
             else
                 return list[Random.Range(0, list.Count)];
         }
+
+        #region Position
 
         // Vector3 because Input.mousePosition also is ... don't ask me why
         public static Vector3 MiddleScreenPosition
@@ -262,6 +265,19 @@ namespace PierreMizzi.Useful
             );
         }
 
+        public static Vector3 RandomInBound(Bounds bounds)
+        {
+            Vector3 position = new Vector3();
+            position.x = Random.Range(-bounds.extents.x, bounds.extents.x);
+            position.y = Random.Range(-bounds.extents.y, bounds.extents.y);
+            position.z = Random.Range(-bounds.extents.z, bounds.extents.z);
+            return position;
+        }
+
+        #endregion
+
+        #region Rotation
+
         public static Quaternion RandomRotation()
         {
             return Quaternion.Euler(
@@ -280,14 +296,6 @@ namespace PierreMizzi.Useful
             );
         }
 
-        public static Vector3 RandomInBound(Bounds bounds)
-        {
-            Vector3 position = new Vector3();
-            position.x = Random.Range(-bounds.extents.x, bounds.extents.x);
-            position.y = Random.Range(-bounds.extents.y, bounds.extents.y);
-            position.z = Random.Range(-bounds.extents.z, bounds.extents.z);
-            return position;
-        }
 
         public static float RandomAngle()
         {
@@ -302,6 +310,18 @@ namespace PierreMizzi.Useful
                 Random.Range(minRotation.z, maxRotation.z)
             );
         }
+
+        /// <summary>
+        /// Given a direction in 2D space, returns the rotation as a quaternion
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
+        public static Quaternion RotationFromVector2D(Vector2 vector)
+        {
+            return Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg - 90f));
+        }
+
+        #endregion
 
         #region Visual
 
