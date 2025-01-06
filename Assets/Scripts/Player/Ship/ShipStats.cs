@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class ShipStats
 {
-	public ShipStats(PlayerSettings settings)
+	public ShipStats(Ship ship)
 	{
-		this.maxHealth = settings.maxHealth;
-		this.maxEmergencyEnergy = settings.maxEmergencyEnergy;
-		this.speed = settings.speed;
-		this.dashCooldownDuration = settings.dashCooldownDuration;
+		this.maxHealth = ship.settings.maxHealth;
+		// 🟥 : Fix maxEmergencyEnergy stats
+		this.maxEmergencyEnergy = ship.CurrentEnergyConsumptionMode.maxEmergencyEnergy;
+		this.speed = ship.settings.speed;
+		this.dashCooldownDuration = ship.settings.dashCooldownDuration;
 	}
 
 	public float maxHealth;

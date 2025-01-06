@@ -1,5 +1,6 @@
 using UnityEngine;
 using StarWielder.Gameplay.Elements;
+using StarWielder.Gameplay.Player;
 
 namespace StarWielder.Gameplay
 {
@@ -9,6 +10,7 @@ namespace StarWielder.Gameplay
 
 		public override void StartStage()
 		{
+			m_playerChannel.onSetEnergyConsumptionMode.Invoke(Ship.EnergyConsumptionMode.Low);
 			m_asteroidSpawnerManager.CreateAsteroidStorm();
 		}
 

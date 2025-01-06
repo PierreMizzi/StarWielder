@@ -29,7 +29,8 @@ namespace StarWielder.Gameplay.Player
 		#region Main
 
 		[Header("Main")]
-		[SerializeField] private PlayerSettings m_settings;
+		[SerializeField] private ShipSettings m_settings;
+		public ShipSettings settings => m_settings;
 
 		private ShipStats m_stats;
 		public ShipStats stats { get { return m_stats; } }
@@ -92,7 +93,8 @@ namespace StarWielder.Gameplay.Player
 
 		private void Awake()
 		{
-			m_stats = new ShipStats(m_settings);
+			SetEnergyConsumptionMode(EnergyConsumptionMode.Fight);
+			m_stats = new ShipStats(this);
 			m_currentHealth = m_stats.maxHealth;
 
 			m_controller = GetComponent<ShipController>();
@@ -105,6 +107,9 @@ namespace StarWielder.Gameplay.Player
 		{
 			if (m_gameChannel != null)
 				m_gameChannel.onGameOver += CallbackGameOver;
+
+			if (m_playerChannel != null)
+				m_playerChannel.onSetEnergyConsumptionMode += SetEnergyConsumptionMode;
 		}
 
 		private void Update()
@@ -125,6 +130,9 @@ namespace StarWielder.Gameplay.Player
 		{
 			if (m_gameChannel != null)
 				m_gameChannel.onGameOver -= CallbackGameOver;
+
+			if (m_playerChannel != null)
+				m_playerChannel.onSetEnergyConsumptionMode += SetEnergyConsumptionMode;
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)
@@ -134,9 +142,9 @@ namespace StarWielder.Gameplay.Player
 
 		#endregion
 
-		#region Star
+		#region Sun
 
-		[Header("Star")]
+		[Header("Sun")]
 		[SerializeField] private Star m_star;
 
 		/// <summary>
@@ -152,6 +160,39 @@ namespace StarWielder.Gameplay.Player
 
 		#region Energy
 
+		/*
+				Energy Consumption Mode
+		*/
+
+		public enum EnergyConsumptionMode
+		{
+			None,
+			Low,
+			Fight,
+		}
+
+		[SerializeField] ShipEnergyConsumptionSettings m_currentEnergyConsumptionMode;
+		public ShipEnergyConsumptionSettings CurrentEnergyConsumptionMode => m_currentEnergyConsumptionMode;
+
+		public void SetEnergyConsumptionMode(EnergyConsumptionMode energyConsumptionMode)
+		{
+			switch (energyConsumptionMode)
+			{
+				case EnergyConsumptionMode.Low:
+					m_currentEnergyConsumptionMode = m_settings.energyLowMode;
+					break;
+				case EnergyConsumptionMode.Fight:
+					m_currentEnergyConsumptionMode = m_settings.energyFightMode;
+					break;
+			}
+		}
+
+		public delegate void EnergyConsumptionModeDelegate(EnergyConsumptionMode mode);
+
+		/*
+				Emergency Energy
+		*/
+
 		public float normalizedEmergencyEnergy
 		{
 			get
@@ -159,6 +200,7 @@ namespace StarWielder.Gameplay.Player
 				return m_emergencyEnergy / m_stats.maxEmergencyEnergy;
 			}
 		}
+
 		private float m_emergencyEnergy;
 		public float emergencyEnergy
 		{
@@ -172,7 +214,7 @@ namespace StarWielder.Gameplay.Player
 
 		public void DepleateEmergencyEnergy()
 		{
-			emergencyEnergy -= m_settings.emergencyEnergyDepleatRate * Time.deltaTime;
+			emergencyEnergy -= m_currentEnergyConsumptionMode.emergencyEnergyDepleatRate * Time.deltaTime;
 		}
 
 		public float GetMaxTransferableEnergy(float starEnergy)

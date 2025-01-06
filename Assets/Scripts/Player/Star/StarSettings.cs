@@ -13,7 +13,7 @@ namespace StarWielder.Gameplay.Player
 		[Header("Speed")]
 		public float baseSpeed;
 
-		[Tooltip("Scalar value paired with Star's energy. The higher the energy, the faster the Sun")]
+		[Tooltip("TBD ! Scalar value paired with Star's energy. The higher the energy, the faster the Sun")]
 		public float speedFromEnergyRatio = 0.1f;
 
 		[Tooltip("Scalar value paired with Star's velocity. The higher the velocity, the stronger the squish")]
@@ -32,6 +32,7 @@ namespace StarWielder.Gameplay.Player
 
 		[Tooltip("Star's energy depleate speed when docked to the hip")]
 		public float dockedEnergyDepleateSpeed = 2.5f;
+		[Tooltip("TBD")]
 		public float comboBonusEnergyRatio = 0.33f;
 
 		[Header("Transfer")]

@@ -1273,72 +1273,6 @@ MonoBehaviour:
   m_enemySpawners:
   - {fileID: 563632012}
   - {fileID: 1811697120}
-  m_minSpawnDelayCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 3
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 60
-      value: 3
-      inSlope: -0
-      outSlope: -0.0019230439
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    - serializedVersion: 3
-      time: 450
-      value: 2.2500129
-      inSlope: -0.0019230439
-      outSlope: 0
-      tangentMode: 5
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_maxSpawnDelayCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 5
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 60
-      value: 5
-      inSlope: -0
-      outSlope: -0.006617686
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    - serializedVersion: 3
-      time: 400
-      value: 2.749987
-      inSlope: -0.006617686
-      outSlope: 0
-      tangentMode: 5
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   m_bulletsContainer: {fileID: 806116049}
   m_isDebugging: 0
   m_debugEnemySpawners:
@@ -3124,6 +3058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aaf3576d3133a54cb30daa3ee78ebd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playerChannel: {fileID: 11400000, guid: 1ebce8acce4141b4382229e40c13a0d8, type: 2}
   m_asteroidSpawnerManager: {fileID: 696516259}
 --- !u!4 &627803051
 Transform:
@@ -4105,6 +4040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237c3e220690d694397c7a9755e2fe95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playerChannel: {fileID: 11400000, guid: 1ebce8acce4141b4382229e40c13a0d8, type: 2}
   m_enemyManager: {fileID: 305180833}
 --- !u!1 &873932975
 GameObject:
@@ -4786,13 +4722,9 @@ MonoBehaviour:
   m_stageStateManagers:
   - {fileID: 863277910}
   - {fileID: 627803050}
-  m_stagesAmount: 6
   m_stagesOrder:
   - {fileID: 11400000, guid: b651bb0de0d7ea14c97861def1a620b1, type: 2}
   - {fileID: 11400000, guid: 5e44025f9270a9f4f8cd9649bcea6a2a, type: 2}
-  m_fightStageSettings: {fileID: 11400000, guid: b651bb0de0d7ea14c97861def1a620b1, type: 2}
-  m_useCustomStageOrder: 1
-  m_customStageOrder: 010000000100000002000000
 --- !u!1 &1022546259
 GameObject:
   m_ObjectHideFlags: 0

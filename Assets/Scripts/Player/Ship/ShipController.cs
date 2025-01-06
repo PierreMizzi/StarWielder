@@ -15,7 +15,7 @@ namespace StarWielder.Gameplay.Player
 
 		#region Main
 
-		[SerializeField] private PlayerSettings m_settings = null;
+		[SerializeField] private ShipSettings m_settings = null;
 		private Ship m_ship;
 		private Camera m_camera;
 

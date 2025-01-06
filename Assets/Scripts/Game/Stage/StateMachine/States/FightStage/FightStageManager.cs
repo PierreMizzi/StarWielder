@@ -1,4 +1,5 @@
 using StarWielder.Gameplay.Enemies;
+using StarWielder.Gameplay.Player;
 using UnityEngine;
 
 namespace StarWielder.Gameplay
@@ -8,6 +9,7 @@ namespace StarWielder.Gameplay
 
 		public virtual void StartStage(FightStageSettings settings)
 		{
+			m_playerChannel.onSetEnergyConsumptionMode.Invoke(Ship.EnergyConsumptionMode.Fight);
 			m_enemyManager.SetupStageSettings(settings);
 			m_enemyManager.StartStage();
 		}

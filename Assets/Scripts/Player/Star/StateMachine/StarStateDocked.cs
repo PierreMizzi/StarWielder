@@ -35,7 +35,13 @@ namespace StarWielder.Gameplay.Player
 		public override void Update()
 		{
 			base.Update();
-			m_this.currentEnergy -= m_this.settings.dockedEnergyDepleateSpeed * Time.deltaTime;
+
+			if(m_this.ship == null || m_this.ship.CurrentEnergyConsumptionMode == null)
+			{
+				return;
+			} 
+
+			m_this.currentEnergy -= m_this.ship.CurrentEnergyConsumptionMode.dockedEnergyDepleateSpeed * Time.deltaTime;
 		}
 
 		private void DockStar()

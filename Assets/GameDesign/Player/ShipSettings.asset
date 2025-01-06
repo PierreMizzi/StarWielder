@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 569e19f919d13584c9d47ed127071644, type: 3}
-  m_Name: ShipSettings_Debug
+  m_Name: ShipSettings
   m_EditorClassIdentifier: 
-  maxHealth: 150
-  maxEmergencyEnergy: 10
-  emergencyEnergyDepleatRate: 2
-  emergencyEnergyDuration: 5
+  maxHealth: 100
+  energyFightMode: {fileID: 11400000, guid: 8e85c8f393bbec445981676134b91c70, type: 2}
+  energyLowMode: {fileID: 11400000, guid: 0318a7198e0e8ec46a8a752521c9a345, type: 2}
   speed: 6.5
   friction: 6
   dashDistance: 3
