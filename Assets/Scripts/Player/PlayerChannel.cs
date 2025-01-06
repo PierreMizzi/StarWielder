@@ -4,7 +4,7 @@ using UnityEngine;
 namespace StarWielder.Gameplay.Player
 {
 
-	[CreateAssetMenu(fileName = "PlayerChannel", menuName = "ScriptableObjects/Channels/PlayerChannel", order = 1)]
+	[CreateAssetMenu(fileName = "PlayerChannel", menuName = "StarWielder/Channels/PlayerChannel", order = 1)]
 	public class PlayerChannel : ScriptableObject
 	{
 		#region Energy

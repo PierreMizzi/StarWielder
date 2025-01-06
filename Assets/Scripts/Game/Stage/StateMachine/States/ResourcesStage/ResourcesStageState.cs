@@ -13,15 +13,13 @@ namespace StarWielder.Gameplay
 			m_manager.onStageEnded += m_this.CallbackStageEnded;
 		}
 
-		private new ResourcesStageManager m_manager;
+ 		private new ResourcesStageManager m_manager;
 
-		protected override void DefaultEnter()
+		public override void Enter(StageSettings settings)
 		{
-			base.DefaultEnter();
+			base.Enter(settings);
 			m_manager.StartStage();
 		}
-
-
 
 	}
 }

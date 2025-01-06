@@ -1,4 +1,5 @@
 using PierreMizzi.Useful.StateMachines;
+using UnityEditor;
 using UnityEngine;
 
 namespace StarWielder.Gameplay
@@ -8,6 +9,11 @@ namespace StarWielder.Gameplay
 		public StageState(IStateMachine stateMachine) : base(stateMachine)
 		{
 			m_this = m_stateMachine.gameObject.GetComponent<StageManager>();
+		}
+
+		public virtual void Enter(StageSettings settings)
+		{
+
 		}
 
 		protected StageManager m_this;

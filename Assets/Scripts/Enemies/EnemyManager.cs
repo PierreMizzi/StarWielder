@@ -9,7 +9,7 @@ namespace StarWielder.Gameplay.Enemies
 {
 
 	/// <summary>
-	/// Controls EnemySpawners. The spawning speed is increased over time for balancing reasons
+	/// Controls EnemySpawners
 	/// </summary>
 	public class EnemyManager : MonoBehaviour
 	{
@@ -18,6 +18,8 @@ namespace StarWielder.Gameplay.Enemies
 
 		[Header("Main")]
 		private FightStageManager m_fightStageManager;
+
+		private FightStageSettings m_currentSettings;
 
 		// TODO : Kinda weird
 		[SerializeField] private Ship m_ship;
@@ -31,20 +33,23 @@ namespace StarWielder.Gameplay.Enemies
 			m_fightStageManager = fightStageManager;
 		}
 
-		public void SetupStageData(FightStageData data)
+		public void SetupStageSettings(FightStageSettings settings)
 		{
-			m_spawnedEnemiesCount = data.stageEnemiesCount + data.beginningEnemiesCount;
-			m_killedEnemiesCount = m_spawnedEnemiesCount;
+			m_currentSettings = settings;
 
-			if (data.beginningEnemiesCount > 0)
-				SpawnEnemyGroup(data.beginningEnemiesCount);
+			m_spawnedEnemiesCount = m_currentSettings.stageEnemiesCount + m_currentSettings.beginningEnemiesCount;
+			m_killedEnemiesCount = m_spawnedEnemiesCount;
 		}
 
-		[Obsolete]
-		private void CallbackStartGame()
+		public void StartStage()
 		{
-			Debug.Log("CallbackStartGame : " + gameObject.GetInstanceID());
-			StartSpawning();
+			if (m_currentSettings.beginningEnemiesCount > 0)
+				SpawnEnemyGroup(m_currentSettings.beginningEnemiesCount);
+
+			if (m_spawnedEnemiesCount < 0)
+			{
+				StartSpawning();
+			}
 		}
 
 
@@ -70,10 +75,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		[Header("Spawning")]
 		[SerializeField] private List<EnemySpawner> m_enemySpawners = null;
-		[SerializeField] private AnimationCurve m_minSpawnDelayCurve;
-		[SerializeField] private AnimationCurve m_maxSpawnDelayCurve;
 
-		private float m_spawnTimer;
 		private float m_spawnFrequency;
 
 		private IEnumerator m_spawningCoroutine;
@@ -110,7 +112,6 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			while (true)
 			{
-				m_spawnTimer += Time.deltaTime;
 				m_spawnFrequency = GetRandomSpawnDelay();
 
 				yield return new WaitForSeconds(m_spawnFrequency);
@@ -121,9 +122,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		private float GetRandomSpawnDelay()
 		{
-			float min = m_minSpawnDelayCurve.Evaluate(m_spawnTimer);
-			float max = m_minSpawnDelayCurve.Evaluate(m_spawnTimer);
-			return UnityEngine.Random.Range(min, max);
+			return UnityEngine.Random.Range(m_currentSettings.minSpawnDelay, m_currentSettings.maxSpawnDelay);
 		}
 
 		private void SpawnEnemyGroup()

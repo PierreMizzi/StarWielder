@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PierreMizzi.Extensions.CursorManagement
 {
 
-	[CreateAssetMenu(fileName = "CursorChannel", menuName = "Channels/CursorChannel", order = 0)]
+	[CreateAssetMenu(fileName = "CursorChannel", menuName = "Extensions/CursorChannel", order = 0)]
 	public class CursorChannel : ScriptableObject
 	{
 

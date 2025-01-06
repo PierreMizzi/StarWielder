@@ -4,7 +4,7 @@ using UnityEngine;
 namespace StarWielder.Gameplay
 {
 
-	[CreateAssetMenu(fileName = "GameChannel", menuName = "ScriptableObjects/Channels/GameChannel", order = 0)]
+	[CreateAssetMenu(fileName = "GameChannel", menuName = "StarWielder/Channels/GameChannel", order = 0)]
 	public class GameChannel : ScriptableObject
 	{
 

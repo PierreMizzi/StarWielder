@@ -11,8 +11,6 @@ using UnityEngine;
 namespace StarWielder.Gameplay
 {
 
-	public delegate void FightStageDelegate(FightStageData data);
-
 	public class FightStageState : StageState
 	{
 
@@ -29,15 +27,11 @@ namespace StarWielder.Gameplay
 
 		private new FightStageManager m_manager;
 
-		private int fightStageIndex = 0;
+        public override void Enter(StageSettings settings)
+        {
+            base.Enter(settings);
+			m_manager.StartStage((FightStageSettings)settings);
 
-		protected override void DefaultEnter()
-		{
-			base.DefaultEnter();
-			FightStageData data = (FightStageData)m_this.fightStageSettings.datas[fightStageIndex].Clone();
-			m_manager.StartStage(data);
-
-			fightStageIndex++;
 		}
 
 		#endregion

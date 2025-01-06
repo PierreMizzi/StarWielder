@@ -6,7 +6,7 @@ namespace StarWielder.Gameplay.Player
 	/// <summary>
 	/// All gameplay & movement related settings for the Player
 	/// </summary>
-	[CreateAssetMenu(fileName = "StarSettings", menuName = "ScriptableObjects/StarSettings", order = 1)]
+	[CreateAssetMenu(fileName = "StarSettings", menuName = "StarWielder/Player/StarSettings", order = 1)]
 	public class StarSettings : ScriptableObject
 	{
 

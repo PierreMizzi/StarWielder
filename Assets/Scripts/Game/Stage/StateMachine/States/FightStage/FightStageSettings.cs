@@ -3,15 +3,20 @@ using UnityEngine;
 
 namespace StarWielder.Gameplay
 {
-	[CreateAssetMenu(fileName = "FightStageSettings", menuName = "StarWielder/FightStageSettings", order = 0)]
-	public class FightStageSettings : ScriptableObject
+	[CreateAssetMenu(fileName = "FightStageSettings", menuName = "StarWielder/StageSettings/Fight", order = 0)]
+	public class FightStageSettings : StageSettings
 	{
-		[Multiline(5)]
-		[SerializeField] private string note;
 
-		[SerializeField] private List<FightStageData> m_datas = new List<FightStageData>();
+		public FightStageSettings()
+		{
+			m_type = StageStateType.Fight;
+		}
 
-		public List<FightStageData> datas { get { return m_datas; } }
+		[Header("Settings")]
+		public int beginningEnemiesCount = 2;
+		public int stageEnemiesCount = 6;
+		public float minSpawnDelay = 4f;
+		public float maxSpawnDelay = 5.5f;
 
 	}
 }

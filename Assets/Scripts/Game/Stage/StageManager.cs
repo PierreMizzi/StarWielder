@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PierreMizzi.Useful.StateMachines;
 using StarWielder.Gameplay.Enemies;
@@ -65,13 +66,6 @@ namespace StarWielder.Gameplay
 		{
 			InitializeStageStateManagers();
 			InitializeStates();
-
-			if (m_useCustomStageOrder)
-				BuildCustomStageOrder();
-			else
-				BuildStageOrder();
-
-			LogStageOrder();
 		}
 
 		private void Start()
@@ -88,57 +82,25 @@ namespace StarWielder.Gameplay
 		#region Stage Building
 
 		[Header("Stage Building")]
-		[SerializeField] private int m_stagesAmount = 6;
-
-		private List<StageStateType> m_stages = new List<StageStateType>();
-
-		private void BuildStageOrder()
-		{
-			m_stages.Clear();
-
-			// Chelou but it works
-			List<int> availableStageIndex = new List<int>();
-
-			for (int i = 0; i < m_stagesAmount; i++)
-			{
-				m_stages.Add(StageStateType.Fight);
-
-				if (i != 0 && i != m_stagesAmount - 1)
-					availableStageIndex.Add(i);
-			}
-
-			// Add Resource stage
-			InsertStage(StageStateType.Resources, availableStageIndex);
-			InsertStage(StageStateType.Resources, availableStageIndex);
-		}
-
-		private void InsertStage(StageStateType stageType, List<int> availableStageIndex)
-		{
-			int rndResourceStageIndex = UnityEngine.Random.Range(0, availableStageIndex.Count);
-			rndResourceStageIndex = availableStageIndex[rndResourceStageIndex];
-			availableStageIndex.Remove(rndResourceStageIndex);
-			m_stages[rndResourceStageIndex] = stageType;
-		}
-
+		
 		#endregion
 
 		#region Stage Succession
 
 		private int m_currentStageIndex = 0;
-		[SerializeField] private FightStageSettings m_fightStageSettings;
-		public FightStageSettings fightStageSettings { get { return m_fightStageSettings; } }
+		[SerializeField] private List<StageSettings> m_stagesOrder = new List<StageSettings>();
 
 		private void StartStage()
 		{
-			StageStateType currentStageType = m_stages[m_currentStageIndex];
-			ChangeState(currentStageType);
+			StageSettings currentStageSettings = m_stagesOrder[m_currentStageIndex];
+			ChangeState(currentStageSettings);
 		}
 
 		public void CallbackStageEnded()
 		{
 			m_currentStageIndex++;
 
-			if (m_currentStageIndex < m_stages.Count)
+			if (m_currentStageIndex < m_stagesOrder.Count)
 				StartStage();
 			else
 				Debug.Log("Game finished !");
@@ -150,7 +112,6 @@ namespace StarWielder.Gameplay
 		#region State Machine
 
 		public List<AState> states { get; set; } = new List<AState>();
-		public Dictionary<int, AState> newStates { get; set; } = new Dictionary<int, AState>();
 		public AState currentState { get; set; }
 
 		public void InitializeStates()
@@ -166,14 +127,26 @@ namespace StarWielder.Gameplay
 		{
 			currentState?.Update();
 		}
-
-		public void ChangeState(StageStateType nextState, StageStateType previousState = StageStateType.None)
+		
+		public void ChangeState(StageSettings nextStageSettings, StageStateType previousState = StageStateType.None)
 		{
-			ChangeState((int)previousState, (int)nextState);
+			currentState?.Exit();
+
+			currentState = states.Find((AState newState) => newState.type == (int)nextStageSettings.Type);
+			if (currentState != null)
+			{
+				StageState casted = (StageState)currentState;
+				casted.Enter(nextStageSettings);
+			}
+			else
+			{
+				Debug.LogError($"Couldn't find a new state of type : {nextStageSettings.Type}. Going Inactive");
+			}
 		}
 
 		public void ChangeState(int previousState, int nextState)
 		{
+			throw new NotImplementedException();
 			currentState?.Exit();
 
 			currentState = states.Find((AState newState) => newState.type == nextState);
@@ -185,7 +158,7 @@ namespace StarWielder.Gameplay
 			}
 		}
 
-		public StageState StageStateFromType(StageStateType type)
+        public StageState StageStateFromType(StageStateType type)
 		{
 			return (StageState)states.Find((AState state) => state.type == (int)type);
 		}
@@ -199,34 +172,6 @@ namespace StarWielder.Gameplay
 			}
 
 			return null;
-		}
-
-		#endregion
-
-		#region Debug
-
-		[Header("Debug")]
-		[SerializeField] private bool m_useCustomStageOrder = false;
-		[SerializeField] private List<StageStateType> m_customStageOrder = new List<StageStateType>();
-
-		private void BuildCustomStageOrder()
-		{
-			m_stages.Clear();
-
-			for (int i = 0; i < m_customStageOrder.Count; i++)
-				m_stages.Add(m_customStageOrder[i]);
-		}
-
-		private void LogStageOrder()
-		{
-			string stagesLog = "";
-			foreach (StageStateType stage in m_stages)
-			{
-				stagesLog += stage.ToString() + " -> ";
-			}
-
-			stagesLog = stagesLog.Remove(stagesLog.Length - 4, 4);
-			Debug.Log(stagesLog);
 		}
 
 		#endregion

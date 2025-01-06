@@ -4,7 +4,7 @@
 
 ### Changes
 
-- 
+- Changed how stages are orderer and tuned
 - Upgraded Game Engine
 
 ### Bug Fix

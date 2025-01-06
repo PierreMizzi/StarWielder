@@ -4787,9 +4787,12 @@ MonoBehaviour:
   - {fileID: 863277910}
   - {fileID: 627803050}
   m_stagesAmount: 6
+  m_stagesOrder:
+  - {fileID: 11400000, guid: b651bb0de0d7ea14c97861def1a620b1, type: 2}
+  - {fileID: 11400000, guid: 5e44025f9270a9f4f8cd9649bcea6a2a, type: 2}
   m_fightStageSettings: {fileID: 11400000, guid: b651bb0de0d7ea14c97861def1a620b1, type: 2}
-  m_useCustomStageOrder: 0
-  m_customStageOrder: 0100000001000000
+  m_useCustomStageOrder: 1
+  m_customStageOrder: 010000000100000002000000
 --- !u!1 &1022546259
 GameObject:
   m_ObjectHideFlags: 0
@@ -6222,7 +6225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1350959517}
   m_Layer: 0
-  m_Name: ----------UI----------
+  m_Name: ----UI----------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7385,7 +7388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1641961614}
   m_Layer: 0
-  m_Name: ------ENVIRONMENT------
+  m_Name: ----ENVIRONMENT--
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8559,7 +8562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1994297861}
   m_Layer: 0
-  m_Name: ------MANAGER------
+  m_Name: ----MANAGER------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9520,14 +9523,14 @@ SceneRoots:
   - {fileID: 1482672300}
   - {fileID: 1427578237}
   - {fileID: 1994297861}
-  - {fileID: 305180834}
-  - {fileID: 390296380}
   - {fileID: 404824217}
+  - {fileID: 696516260}
+  - {fileID: 2012494110}
+  - {fileID: 390296380}
+  - {fileID: 305180834}
   - {fileID: 769447664}
   - {fileID: 205263422}
   - {fileID: 1022066250}
-  - {fileID: 2012494110}
-  - {fileID: 696516260}
   - {fileID: 1350959517}
   - {fileID: 1452353543}
   - {fileID: 1548569614}

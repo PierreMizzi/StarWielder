@@ -6,11 +6,12 @@ namespace StarWielder.Gameplay
 	public class FightStageManager : StageStateManager
 	{
 
-		public virtual void StartStage(FightStageData data)
+		public virtual void StartStage(FightStageSettings settings)
 		{
-			m_enemyManager.SetupStageData(data);
-			m_enemyManager.StartSpawning();
+			m_enemyManager.SetupStageSettings(settings);
+			m_enemyManager.StartStage();
 		}
+
 
 		#region MonoBehaviour
 
