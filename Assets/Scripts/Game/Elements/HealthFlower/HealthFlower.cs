@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using DG.Tweening;
-using PierreMizzi.Useful;
 using PierreMizzi.Useful.PoolingObjects;
 using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
@@ -9,10 +7,10 @@ using StarWielder.Gameplay.Player;
 namespace StarWielder.Gameplay.Elements
 {
 	[RequireComponent(typeof(Animator))]
-	public class HealthFlower : MonoBehaviour, IStateMachine
+	public class HealthFlower : MonoBehaviour
 	{
 
-		private Star m_star;
+		private Star m_sun;
 		private Animator m_animator;
 
 		[SerializeField] private PoolingChannel m_poolingChannel;
@@ -31,9 +29,9 @@ namespace StarWielder.Gameplay.Elements
 
 		private void OnEnable()
 		{
-			m_star = GameObject.FindGameObjectWithTag("Star").GetComponent<Star>();
+			m_sun = GameObject.FindGameObjectWithTag("Star").GetComponent<Star>();
 
-			m_stem.SetStarTransform(m_star.transform);
+			m_stem.SetStarTransform(m_sun.transform);
 
 			m_currentPollen = m_poolingChannel.onGetFromPool.Invoke(m_pollenPrefab.gameObject).GetComponent<HealthPollen>();
 			m_currentPollen.gameObject.SetActive(true);
@@ -44,7 +42,7 @@ namespace StarWielder.Gameplay.Elements
 
 		private void Update()
 		{
-			if (m_star != null && !m_hasBloomed)
+			if (m_sun != null && !m_hasBloomed)
 			{
 				ManageBloomingProgress();
 				ManageTemperature();
@@ -70,7 +68,7 @@ namespace StarWielder.Gameplay.Elements
 		private void ManageTemperature()
 		{
 			// Shine Strength
-			m_currentShineStrength = m_star.GetShineStrength(transform);
+			m_currentShineStrength = m_sun.GetShineStrength(transform);
 			m_animator.SetFloat(k_floatShineStrength, m_currentShineStrength);
 
 			m_temperature = GetTemperature();
@@ -117,7 +115,7 @@ namespace StarWielder.Gameplay.Elements
 
 		private bool CheckIsFacingFlower()
 		{
-			m_flowerToStarDirection = (m_star.transform.position - transform.position).normalized;
+			m_flowerToStarDirection = (m_sun.transform.position - transform.position).normalized;
 			return Vector3.Dot(m_flowerToStarDirection, transform.up) > 0;
 		}
 
@@ -131,7 +129,7 @@ namespace StarWielder.Gameplay.Elements
 		#region Stem
 		[Header("Stem")]
 
-		[SerializeField] private Stem m_stem;
+		[SerializeField] private HealthFlowerStem m_stem;
 
 		#endregion
 
@@ -154,42 +152,9 @@ namespace StarWielder.Gameplay.Elements
 		}
 
 		#endregion
-
-		#region StateMachine
-
-		public List<AState> states { get; set; }
-		public AState currentState { get; set; }
-		public void InitializeStates()
-		{
-			states = new List<AState>()
-			{
-				// MyState
-			};
-		}
-
-		public void UpdateState()
-		{
-			currentState?.Update();
-		}
-
-		public void ChangeState(int previousState, int nextState)
-		{
-			currentState?.Exit();
-
-			currentState = states.Find((AState newState) => newState.type == nextState);
-			if (currentState != null)
-				currentState.Enter(previousState);
-			else
-			{
-				Debug.LogError($"Couldn't find a new state of type : {nextState}. Going Inactive");
-			}
-		}
-
-		#endregion
-
+		
 		#region Debug
 
-		[Header("Debug")]
 		Color defaultGizmosColor;
 
 		protected void OnDrawGizmos()

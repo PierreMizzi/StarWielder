@@ -2,8 +2,9 @@ using System;
 using UnityEngine;
 using PierreMizzi.Useful.PoolingObjects;
 using DG.Tweening;
+using StarWielder.Gameplay.Player;
 
-namespace StarWielder.Gameplay.Player
+namespace StarWielder.Gameplay.Elements
 {
 	[RequireComponent(typeof(ShipHealthModifier))]
 	public class HealthPollen : MonoBehaviour
