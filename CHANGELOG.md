@@ -1,5 +1,15 @@
 # Changelog 
 
+## Version 0.7.0 - 06/01/2025
+
+### Changes
+
+- 
+- Upgraded Game Engine
+
+### Bug Fix
+
+
 ## Version 0.6.0
 
 ### Additions
@@ -17,7 +27,6 @@
     - Buy modules to add strong side-effects to your Ship and Sun
 - New enemies :
   - Overheater : Locks in the Sun and drains its energy. After some time it overheats and is destroyed. Spawn small mines that gives energy to the Sun, but damages the ship.
-  - public void MyFunction(){}
 
 ### Changes
 

@@ -40,6 +40,17 @@ namespace StarWielder.Gameplay
 
 		[SerializeField] private List<StageStateManager> m_stageStateManagers = new List<StageStateManager>();
 
+		private void InitializeStageStateManagers()
+		{
+			foreach (Transform child in transform)
+			{
+				if (child.TryGetComponent(out StageStateManager stateManager))
+				{
+					m_stageStateManagers.Add(stateManager);
+				}
+			}
+		}
+
 		public T GetStageManager<T>() where T : StageStateManager
 		{
 			return m_stageStateManagers.Find((StageStateManager item) => item.GetType() == typeof(T)) as T;
@@ -52,6 +63,7 @@ namespace StarWielder.Gameplay
 		[ContextMenu("Awake")]
 		public void Awake()
 		{
+			InitializeStageStateManagers();
 			InitializeStates();
 
 			if (m_useCustomStageOrder)

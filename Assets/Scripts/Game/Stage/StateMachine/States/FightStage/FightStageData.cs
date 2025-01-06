@@ -1,10 +1,12 @@
 using System;
+using UnityEngine;
 
 namespace StarWielder.Gameplay
 {
 	[Serializable]
 	public class FightStageData : ICloneable
 	{
+		[SerializeField] private string note = "Fight Stage Data";
 		public int beginningEnemiesCount;
 		public int stageEnemiesCount;
 		public float minSpawnDelay;
