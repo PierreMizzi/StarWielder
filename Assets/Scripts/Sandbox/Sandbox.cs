@@ -4,7 +4,6 @@ using UnityEngine;
 /// <summary>
 /// Here we try, we experiment and sometimes fail
 /// </summary>
-[ExecuteInEditMode]
 public class Sandbox : MonoBehaviour
 {
 
@@ -106,13 +105,37 @@ public class Sandbox : MonoBehaviour
 	#endregion
 
 	#region Asteroid
-	[SerializeField][Range(0, 6.28f)] private float m_angle;
-	[SerializeField] private Vector2 m_vector = Vector2.right;
+	// [SerializeField][Range(0, 6.28f)] private float m_angle;
+	// [SerializeField] private Vector2 m_vector = Vector2.right;
 
-	private void Update()
+	// private void Update()
+	// {
+	// 	m_vector = new Vector2(Mathf.Cos(m_angle), Mathf.Sin(m_angle));
+	// 	transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(m_vector.y, m_vector.x) * Mathf.Rad2Deg - 90f));
+	// }
+
+	#endregion
+
+	#region Mystery
+
+	private void Awake()
 	{
-		m_vector = new Vector2(Mathf.Cos(m_angle), Mathf.Sin(m_angle));
-		transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(m_vector.y, m_vector.x) * Mathf.Rad2Deg - 90f));
+		Debug.Log("Ton Fils" + gameObject.name);
+	}
+
+	private void Start()
+	{
+		Debug.Log("Ton Fils" + gameObject.name);
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		Debug.Log($"{ name } collided with {other.gameObject.name}");
+	}
+
+	private void OnTriggerStay2D(Collider2D other) {
+		Debug.Log($"{name} stay with {other.gameObject.name}");
+
 	}
 
 	#endregion

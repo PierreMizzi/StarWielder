@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters;
 using PierreMizzi.SoundManager;
 using PierreMizzi.Useful.PoolingObjects;
 using PierreMizzi.Useful.StateMachines;

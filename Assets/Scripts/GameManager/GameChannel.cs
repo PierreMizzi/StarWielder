@@ -27,6 +27,9 @@ namespace StarWielder.Gameplay
 		// Currency
 		public IntDelegate onCollectCurrency;
 
+		// Mineral Nugget
+		public IntDelegate onCollectMineralNugget;
+
 		// Game Over
 		public GameOverDelegate onGameOver;
 		public GameOverScreenDelegate onGameOverScreen;
@@ -45,6 +48,9 @@ namespace StarWielder.Gameplay
 
 			// Currency
 			onCollectCurrency = (int amount) => { };
+
+			// Mineral
+			onCollectMineralNugget = (int amount) => { };
 
 			// Stage
 

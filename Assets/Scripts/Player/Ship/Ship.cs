@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using PierreMizzi.SoundManager;
 using PierreMizzi.Useful.StateMachines;
-using TMPro;
 using UnityEngine;
 
 namespace StarWielder.Gameplay.Player

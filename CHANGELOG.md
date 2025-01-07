@@ -2,12 +2,17 @@
 
 ## Version 0.7.0 - 06/01/2025
 
+### Additions
+
+- Minerals on Asteroids can now be smelted using the Sun's energy
+  - Smelted minerals creates nuggets that the player can collect.
+
 ### Changes
 
 - Changed how stages are orderer and tuned
 - Upgraded Game Engine
 
-### Bug Fix
+### Bug **Fix**
 
 
 ## Version 0.6.0
@@ -22,9 +27,6 @@
   - Resources stage
     - A storm of asteroids is coming. Dodge them or mine them !
     - Some asteroids holds flowers. Bloom it using the Sun to receive a small chunk of health
-  - Shop stage
-    - Improve your current ship statistics in exchange of some currency
-    - Buy modules to add strong side-effects to your Ship and Sun
 - New enemies :
   - Overheater : Locks in the Sun and drains its energy. After some time it overheats and is destroyed. Spawn small mines that gives energy to the Sun, but damages the ship.
 

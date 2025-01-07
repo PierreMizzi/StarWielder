@@ -57,10 +57,6 @@ MonoBehaviour:
     prefab: {fileID: 6358587482772539008, guid: 263495008f2fa344eb095a4e2846e9d3, type: 3}
     defaultSize: 20
     maxSize: 40
-  - name: Mineral_Nitra
-    prefab: {fileID: 8456252191967710104, guid: 940752acb21e8f942bbbf9ca3400c0a7, type: 3}
-    defaultSize: 20
-    maxSize: 40
   - name: HealthFlower
     prefab: {fileID: 8402170077314124646, guid: 01ee882f778809c4db3a1193dcbeb02a, type: 3}
     defaultSize: 2
@@ -73,3 +69,11 @@ MonoBehaviour:
     prefab: {fileID: 4132298226803400682, guid: a46cb77f8fd742d46a34662a328f19d0, type: 3}
     defaultSize: 10
     maxSize: 20
+  - name: Mineral_Nitra
+    prefab: {fileID: 8456252191967710104, guid: 940752acb21e8f942bbbf9ca3400c0a7, type: 3}
+    defaultSize: 20
+    maxSize: 40
+  - name: MineralNugget
+    prefab: {fileID: 2102556651638170784, guid: cf61f651fe1b49f4fbfab5630bbe9c07, type: 3}
+    defaultSize: 20
+    maxSize: 100

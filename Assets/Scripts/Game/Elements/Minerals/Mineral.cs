@@ -1,18 +1,15 @@
 using UnityEngine;
 using PierreMizzi.Useful.PoolingObjects;
-using System;
 using StarWielder.Gameplay.Player;
-using System.Linq;
 
 
 // 🟩 : Put mineral in pooling system
 // 🟩 : Generate random minerals on random asteroids
-// 🟧 : Interact with the sun to smelt
+// 🟩 : Interact with the sun to smelt
 // 🟥 : Generate droplets of mineral
 
 namespace StarWielder.Gameplay.Elements
 {
-	[ExecuteInEditMode]
 	public class Mineral : MonoBehaviour
 	{
 
@@ -28,11 +25,13 @@ namespace StarWielder.Gameplay.Elements
 
 		#region MonoBehaviour
 
-		private void OnEnable()
+		private void Awake()
 		{
 			m_sun = GameObject.FindGameObjectWithTag("Star").GetComponent<Star>();
 			m_currentDurability = m_totalDurability;
 			ComputeSmeltingMaxDistance();
+
+			InitializeNuggetCreation();
 		}
 
 		private void OnValidate()
@@ -42,10 +41,11 @@ namespace StarWielder.Gameplay.Elements
 
 		private void Update()
 		{
-			if (m_currentDurability < 0)
+			if (m_currentDurability > 0)
 			{
 				m_currentDurability -= SmeltingSpeedFromDistance() * Time.deltaTime;
 				m_normalizedDurability = m_currentDurability / m_totalDurability;
+				ManageNuggetCreation();
 
 				if (m_currentDurability <= 0)
 				{
@@ -56,7 +56,7 @@ namespace StarWielder.Gameplay.Elements
 
         #endregion
 
-        #region Smelting
+		#region Smelting
 
         [Header("Smelting")]
 		[SerializeField] private float m_totalDurability;
@@ -76,9 +76,84 @@ namespace StarWielder.Gameplay.Elements
 
 		#region Mineral Nuggets
 
+		[Header("Mineral Nuggets")]
 		[SerializeField] private PoolingChannel m_poolingChannel;
+		[SerializeField] private MineralNugget m_mineralNuggetPrefab;
+		[SerializeField] private int m_nuggetTotalCount;
 
-		
+		[Header("Projection")]
+		[SerializeField] private float m_projectMinDistance;
+		[SerializeField] private float m_projectionMaxDistance;
+
+		[Header("Scale")]
+		[SerializeField] private float m_nuggetMinScale;
+		[SerializeField] private float m_nuggetMaxScale;
+
+		private float m_nuggetTotalCountFraction;
+        private double m_nuggetCreationFraction;
+
+        private void InitializeNuggetCreation()
+		{
+			m_nuggetTotalCountFraction = 1.0f / (m_nuggetTotalCount + 1);
+			m_nuggetCreationFraction = 1.0 - m_nuggetTotalCountFraction;
+		}
+
+		private void ManageNuggetCreation()
+		{
+			if (m_normalizedDurability <= m_nuggetCreationFraction)
+			{
+				m_nuggetCreationFraction -= m_nuggetTotalCountFraction;
+				CreateNugget();
+			}
+		}
+
+		private void CreateNugget()
+		{
+			if (m_poolingChannel == null)
+			{
+				return;
+			}
+
+			GameObject pooledObject = m_poolingChannel.onGetFromPool.Invoke(m_mineralNuggetPrefab.gameObject);
+
+			if (pooledObject != null && pooledObject.TryGetComponent(out MineralNugget nugget))
+			{
+				nugget.transform.position = transform.position;
+				nugget.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0, 360f));
+				nugget.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
+
+				Vector3 projectionPosition = GetRandomProjectionPosition(nugget.transform.position);
+				Vector3 projectionRotation = GetRandomProjectionRotation(nugget.transform.rotation.eulerAngles);
+				Vector3 projectionScale = GetRandomScale();
+
+				nugget.Project(projectionPosition, projectionRotation, projectionScale);
+			}
+		}
+
+		private Vector3 GetRandomProjectionPosition(Vector3 initialPosition)
+		{
+			float randomAngle = Random.Range(0.0f, Mathf.PI * 2f);
+			Vector3 randomDirection = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle), 0f);
+			float randomDistance = Random.Range(m_projectMinDistance, m_projectionMaxDistance);
+			return initialPosition + randomDirection * randomDistance; 
+		}
+
+		private Vector3 GetRandomProjectionRotation(Vector3 initialRotation)
+		{
+			if (Random.value > 0.5f)
+				initialRotation.z += Random.Range(0f, 359f);
+			else
+				initialRotation.z -= Random.Range(0f, 359f);
+
+			return initialRotation;
+		}
+
+		private Vector3 GetRandomScale()
+		{
+			float randomScale = Random.Range(m_nuggetMinScale, m_nuggetMaxScale);
+			return new Vector3(randomScale, randomScale, 1f);
+		}
+
 
 		#endregion
 
@@ -87,12 +162,12 @@ namespace StarWielder.Gameplay.Elements
 		Color defaultGizmosColor;
 		float m_smeltingMaxDistance;
 
-		private void ComputeSmeltingMaxDistance()
+
+        private void ComputeSmeltingMaxDistance()
 		{
 			if (m_smeltingSpeedCurve.keys.Length > 0)
 			{
 				m_smeltingMaxDistance = m_smeltingSpeedCurve.keys[m_smeltingSpeedCurve.keys.Length - 1].time;
-				Debug.Log("m_maxSmeltingDistance");
 			}
 		}
 
@@ -102,6 +177,10 @@ namespace StarWielder.Gameplay.Elements
 
 			Gizmos.color = Color.red;
 			Gizmos.DrawWireSphere(transform.position, m_smeltingMaxDistance);
+
+			Gizmos.color = Color.green;
+			Gizmos.DrawWireSphere(transform.position, m_projectMinDistance);
+			Gizmos.DrawWireSphere(transform.position, m_projectionMaxDistance);
 
 			Gizmos.color = defaultGizmosColor;
 		}
