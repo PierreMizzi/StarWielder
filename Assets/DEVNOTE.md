@@ -7,8 +7,12 @@ The goal is to survive the longest.
 
 ---
 
-### Controls 
+### Controls
 
 - **ZQSD** : Move Ship
 - **Right Mouse Click** : Launch / Recall the Star
 - **Space** : Dash
+
+### Shortcuts
+
+- **N** : Clear the current stage and launches next one (WIP)

@@ -15,11 +15,18 @@ namespace StarWielder.Gameplay
 
  		private new ResourcesStageManager m_manager;
 
-		public override void Enter(StageSettings settings)
-		{
-			base.Enter(settings);
+        public override void Enter(StageSettings settings)
+        {
+            base.Enter(settings);
+			// m_manager.StartStage((ResourcesStageSettings)settings);
 			m_manager.StartStage();
 		}
 
-	}
+		// 🟥 : Implement clear ResourcesStage and Manager for debug purposes
+        public override void Clear()
+        {
+            base.Clear();
+        }
+
+    }
 }

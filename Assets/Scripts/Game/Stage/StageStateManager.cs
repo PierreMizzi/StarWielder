@@ -11,10 +11,16 @@ namespace StarWielder.Gameplay
 
 		public Action onStageEnded;
 
-		public virtual void StartStage() { }
+		protected bool m_isActive;
+
+		public virtual void StartStage()
+		{ 
+			m_isActive = true;
+		}
 
 		public virtual void StopStage()
 		{
+			m_isActive = false;
 			onStageEnded.Invoke();
 		}
 

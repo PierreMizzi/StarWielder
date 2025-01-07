@@ -78,6 +78,8 @@ namespace StarWielder.Gameplay.Elements
 
 		[SerializeField] private PoolingChannel m_poolingChannel;
 
+		
+
 		#endregion
 
 		#region Debug

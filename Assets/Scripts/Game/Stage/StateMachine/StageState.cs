@@ -11,10 +11,9 @@ namespace StarWielder.Gameplay
 			m_this = m_stateMachine.gameObject.GetComponent<StageManager>();
 		}
 
-		public virtual void Enter(StageSettings settings)
-		{
+		public virtual void Enter(StageSettings settings) { }
 
-		}
+		public virtual void Clear() {}
 
 		protected StageManager m_this;
 

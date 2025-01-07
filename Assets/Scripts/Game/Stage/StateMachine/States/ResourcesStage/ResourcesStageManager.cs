@@ -10,6 +10,7 @@ namespace StarWielder.Gameplay
 
 		public override void StartStage()
 		{
+			base.StartStage();
 			m_playerChannel.onSetEnergyConsumptionMode.Invoke(Ship.EnergyConsumptionMode.Low);
 			m_asteroidSpawnerManager.CreateAsteroidStorm();
 		}

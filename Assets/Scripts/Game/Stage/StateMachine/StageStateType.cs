@@ -6,5 +6,6 @@ namespace StarWielder.Gameplay
 		Fight,
 		Resources,
 		Shop,
+		Idle,
 	}
 }

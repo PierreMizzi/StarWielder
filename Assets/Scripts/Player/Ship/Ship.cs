@@ -169,21 +169,25 @@ namespace StarWielder.Gameplay.Player
 			None,
 			Low,
 			Fight,
+			Infinite,
 		}
 
-		[SerializeField] ShipEnergyConsumptionSettings m_currentEnergyConsumptionMode;
-		public ShipEnergyConsumptionSettings CurrentEnergyConsumptionMode => m_currentEnergyConsumptionMode;
+		private ShipEnergyConsumptionSettings m_currentEnergyConsumptionSettings;
+		public ShipEnergyConsumptionSettings CurrentEnergyConsumptionSettings => m_currentEnergyConsumptionSettings;
 
 		public void SetEnergyConsumptionMode(EnergyConsumptionMode energyConsumptionMode)
 		{
-			switch (energyConsumptionMode)
+			if (m_settings == null)
+				return;
+
+			ShipEnergyConsumptionSettings energySettings = m_settings.energyConsumptionSettings.Find(setting => setting.mode == energyConsumptionMode);
+
+			if (energySettings != null)
+				m_currentEnergyConsumptionSettings = energySettings;
+			else
 			{
-				case EnergyConsumptionMode.Low:
-					m_currentEnergyConsumptionMode = m_settings.energyLowMode;
-					break;
-				case EnergyConsumptionMode.Fight:
-					m_currentEnergyConsumptionMode = m_settings.energyFightMode;
-					break;
+				m_currentEnergyConsumptionSettings = m_settings.defaultEnergyConsumptionSettings;
+				Debug.Log($"Couldn't find an energy consumption settings with : { energyConsumptionMode }");
 			}
 		}
 
@@ -214,7 +218,7 @@ namespace StarWielder.Gameplay.Player
 
 		public void DepleateEmergencyEnergy()
 		{
-			emergencyEnergy -= m_currentEnergyConsumptionMode.emergencyEnergyDepleatRate * Time.deltaTime;
+			emergencyEnergy -= m_currentEnergyConsumptionSettings.emergencyEnergyDepleatRate * Time.deltaTime;
 		}
 
 		public float GetMaxTransferableEnergy(float starEnergy)

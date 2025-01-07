@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace StarWielder.Gameplay.Player
@@ -15,8 +16,8 @@ namespace StarWielder.Gameplay.Player
 
 		[Header("Energy")]
 
-		public ShipEnergyConsumptionSettings energyFightMode;
-		public ShipEnergyConsumptionSettings energyLowMode;
+		public List<ShipEnergyConsumptionSettings> energyConsumptionSettings;
+		public ShipEnergyConsumptionSettings defaultEnergyConsumptionSettings;
 
 		[Header("Speed")]
 		public float speed = 6.5f;

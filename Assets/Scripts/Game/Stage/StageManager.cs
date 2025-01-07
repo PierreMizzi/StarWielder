@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using PierreMizzi.Useful.StateMachines;
 using StarWielder.Gameplay.Enemies;
 using UnityEngine;
+using StarWielder.Gameplay;
+
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 /*
 
@@ -39,7 +45,7 @@ namespace StarWielder.Gameplay
 
 		#region Stage State Manager
 
-		[SerializeField] private List<StageStateManager> m_stageStateManagers = new List<StageStateManager>();
+		private List<StageStateManager> m_stageStateManagers = new List<StageStateManager>();
 
 		private void InitializeStageStateManagers()
 		{
@@ -77,12 +83,14 @@ namespace StarWielder.Gameplay
 			}
 		}
 
-		#endregion
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.N))
+			{
+				NextStage();
+			}
+		}
 
-		#region Stage Building
-
-		[Header("Stage Building")]
-		
 		#endregion
 
 		#region Stage Succession
@@ -106,6 +114,12 @@ namespace StarWielder.Gameplay
 				Debug.Log("Game finished !");
 		}
 
+		public void NextStage()
+		{
+			((StageState)currentState)?.Clear();
+			CallbackStageEnded();
+		}
+
 
 		#endregion
 
@@ -120,6 +134,7 @@ namespace StarWielder.Gameplay
 			{
 				new FightStageState(this),
 				new ResourcesStageState(this),
+				new IdleStageState(this),
 			};
 		}
 
@@ -127,7 +142,7 @@ namespace StarWielder.Gameplay
 		{
 			currentState?.Update();
 		}
-		
+
 		public void ChangeState(StageSettings nextStageSettings, StageStateType previousState = StageStateType.None)
 		{
 			currentState?.Exit();
@@ -158,7 +173,7 @@ namespace StarWielder.Gameplay
 			}
 		}
 
-        public StageState StageStateFromType(StageStateType type)
+		public StageState StageStateFromType(StageStateType type)
 		{
 			return (StageState)states.Find((AState state) => state.type == (int)type);
 		}
@@ -176,5 +191,37 @@ namespace StarWielder.Gameplay
 
 		#endregion
 
+		#region Stage Building
+
+		// [Header("Stage Building")]
+
+		#endregion
+
 	}
 }
+
+#if UNITY_EDITOR
+
+[CustomEditor(typeof(StageManager))]
+public class StageManagerEditor : Editor
+{
+	private StageManager m_target;
+
+	private void OnEnable()
+	{
+		m_target = (StageManager)target;
+	}
+
+	public override void OnInspectorGUI()
+	{
+		base.OnInspectorGUI();
+
+		if (GUILayout.Button("Next Stage"))
+		{
+			m_target?.NextStage();
+		}
+
+	}
+}
+
+#endif

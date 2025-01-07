@@ -6,8 +6,7 @@ public class ShipStats
 	public ShipStats(Ship ship)
 	{
 		this.maxHealth = ship.settings.maxHealth;
-		// 🟥 : Fix maxEmergencyEnergy stats
-		this.maxEmergencyEnergy = ship.CurrentEnergyConsumptionMode.maxEmergencyEnergy;
+		this.maxEmergencyEnergy = ship.CurrentEnergyConsumptionSettings.maxEmergencyEnergy;
 		this.speed = ship.settings.speed;
 		this.dashCooldownDuration = ship.settings.dashCooldownDuration;
 	}
