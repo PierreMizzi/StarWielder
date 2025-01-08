@@ -665,7 +665,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3348931213499276320}
-  - component: {fileID: 8644989933478055488}
+  - component: {fileID: 456379783021046172}
+  - component: {fileID: 513015671200346979}
   m_Layer: 14
   m_Name: MineralCollector
   m_TagString: Untagged
@@ -682,14 +683,28 @@ Transform:
   m_GameObject: {fileID: 194432463136529027}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: 0}
+  m_LocalPosition: {x: -1.222, y: -0.028, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8949491961435618964}
   m_Father: {fileID: 6232630160101611035}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &8644989933478055488
-BoxCollider2D:
+--- !u!114 &456379783021046172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194432463136529027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437446e5616dc134b9da47d3a63faad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_collectionPoint: {fileID: 8949491961435618964}
+--- !u!60 &513015671200346979
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -730,9 +745,13 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.63}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.8617015, y: 0.21049741}
+      - {x: 0.22689337, y: 0.56644964}
+      - {x: 0.22741884, y: -0.6373952}
+      - {x: 0.8647206, y: -0.15763412}
+  m_UseDelaunayMesh: 0
 --- !u!1 &2343704471466632462
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,6 +867,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2735564645311560204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8949491961435618964}
+  m_Layer: 14
+  m_Name: CollectionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8949491961435618964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2735564645311560204}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.16, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3348931213499276320}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3699475565793921427
 GameObject:
   m_ObjectHideFlags: 0

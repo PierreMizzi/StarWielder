@@ -118,6 +118,8 @@ namespace StarWielder.Gameplay.Elements
 
 			if (pooledObject != null && pooledObject.TryGetComponent(out MineralNugget nugget))
 			{
+				nugget.Initialize();
+
 				nugget.transform.position = transform.position;
 				nugget.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0, 360f));
 				nugget.transform.localScale = new Vector3(0.25f, 0.25f, 1f);

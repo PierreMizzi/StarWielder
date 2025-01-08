@@ -42,9 +42,9 @@ namespace StarWielder.Gameplay
 			MatchScreenWidth(m_edgeTop);
 			PositionScreenTop(m_edgeTop);
 
-			// Bot
-			MatchScreenWidth(m_edgeBot);
-			PositionScreenBot(m_edgeBot);
+			// // Bot
+			// MatchScreenWidth(m_edgeBot);
+			// PositionScreenBot(m_edgeBot);
 		}
 
 		private void ComputeArenaBounds()

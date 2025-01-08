@@ -46,7 +46,7 @@ namespace StarWielder.Gameplay.Enemies
 			if (m_currentSettings.beginningEnemiesCount > 0)
 				SpawnEnemyGroup(m_currentSettings.beginningEnemiesCount);
 
-			if (m_spawnedEnemiesCount < 0)
+			if (m_spawnedEnemiesCount <= 0)
 			{
 				StartSpawning();
 			}
@@ -63,7 +63,7 @@ namespace StarWielder.Gameplay.Enemies
 		#endregion
 
 		#region MonoBehaviour
-
+//　彼が最悪の事態を覚悟していれ
 		private void Start()
 		{
 			InitializeSpawners();

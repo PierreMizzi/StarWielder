@@ -144,13 +144,19 @@ namespace StarWielder.Gameplay.Player
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
+			if (other.gameObject.TryGetComponent(out SunDestroyable destroyable))
+			{
+				destroyable.onSunDestroyed?.Invoke();
+			}
+			else if (other.gameObject.TryGetComponent(out StarAbsorbable absorbable))
+			{
+				AbsorbEnergy(absorbable);
+			}
+
 			if (isOnShip)
 				return;
 
 			onTriggerEnter2D.Invoke(other);
-
-			if (other.gameObject.TryGetComponent(out StarAbsorbable absorbable))
-				AbsorbEnergy(absorbable);
 		}
 
 		#endregion
@@ -168,7 +174,9 @@ namespace StarWielder.Gameplay.Player
 		{
 			isOnShip = false;
 			transform.SetParent(null);
-			m_circleCollider.enabled = true;
+			// m_circleCollider.enabled = true;
+			m_circleCollider.excludeLayers = m_freeExcludedLayers;
+
 			m_playerChannel.onStarFree.Invoke();
 		}
 
@@ -178,7 +186,8 @@ namespace StarWielder.Gameplay.Player
 
 			m_rigidbody.velocity = Vector2.zero;
 
-			m_circleCollider.enabled = false;
+			// m_circleCollider.enabled = false;
+			m_circleCollider.excludeLayers = m_dockedExcludedLayers;
 
 			transform.SetParent(ship.starAnchor);
 			transform.localPosition = Vector2.zero;
@@ -239,6 +248,8 @@ namespace StarWielder.Gameplay.Player
 
 		[Header("Physics")]
 		[SerializeField] private ContactFilter2D m_obstacleFilter;
+		[SerializeField] private LayerMask m_dockedExcludedLayers;
+		[SerializeField] private LayerMask m_freeExcludedLayers;
 		private Rigidbody2D m_rigidbody;
 
 		public ContactFilter2D obstacleFilter => m_obstacleFilter;

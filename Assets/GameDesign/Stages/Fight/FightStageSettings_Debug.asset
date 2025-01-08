@@ -15,6 +15,6 @@ MonoBehaviour:
   note: Simple Difficulty, just to get started
   m_type: 1
   beginningEnemiesCount: 2
-  stageEnemiesCount: 0
+  stageEnemiesCount: 10
   minSpawnDelay: 4
   maxSpawnDelay: 5.5
