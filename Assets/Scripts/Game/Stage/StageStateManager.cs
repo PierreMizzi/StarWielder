@@ -24,5 +24,10 @@ namespace StarWielder.Gameplay
 			onStageEnded.Invoke();
 		}
 
+		public virtual void CallbackGameOver() 
+		{
+			m_isActive = false;
+		}
+
 	}
 }

@@ -31,7 +31,12 @@ namespace StarWielder.Gameplay
 			m_manager.StartStage((FightStageSettings)settings);
 		}
 
-        // 🟥 : Implement clear ResourcesStage and Manager for debug purposes
+        public override void CallbackGameOver()
+        {
+			m_manager.CallbackGameOver();
+		}
+
+        // 🟥 : Implement FightStageState Clear() and Manager for debug purposes
         public override void Clear()
         {
             base.Clear();

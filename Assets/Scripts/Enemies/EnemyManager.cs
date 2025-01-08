@@ -14,7 +14,7 @@ namespace StarWielder.Gameplay.Enemies
 	public class EnemyManager : MonoBehaviour
 	{
 
-		#region Main
+		#region Behaviour
 
 		[Header("Main")]
 		private FightStageManager m_fightStageManager;
@@ -44,17 +44,15 @@ namespace StarWielder.Gameplay.Enemies
 		public void StartStage()
 		{
 			if (m_currentSettings.beginningEnemiesCount > 0)
-				SpawnEnemyGroup(m_currentSettings.beginningEnemiesCount);
+				SpawnEnemyGroups(m_currentSettings.beginningEnemiesCount);
 
-			if (m_spawnedEnemiesCount <= 0)
+			if (m_currentSettings.stageEnemiesCount > 0)
 			{
 				StartSpawning();
 			}
 		}
 
-
-		// TODO : 🟥 Fix this ! Link it with StageManager
-		private void CallbackGameOver(GameOverReason reason)
+		public void CallbackGameOver()
 		{
 			SpawnedEnemiesStopBehaviour();
 			StopSpawning();
@@ -135,7 +133,7 @@ namespace StarWielder.Gameplay.Enemies
 				StopSpawning();
 		}
 
-		private void SpawnEnemyGroup(int count)
+		private void SpawnEnemyGroups(int count)
 		{
 			for (int i = 0; i < count; i++)
 				SpawnEnemyGroup();

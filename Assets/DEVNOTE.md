@@ -21,17 +21,22 @@ The goal is to survive the longest.
 
 ### Ship
 	
-- **ShipSettings** : Assets/GameDesign/Player
-- **EnergyConsumptionSettings** : Assets/GameDesign/Player
+- **[ShipSettings](../Assets/Scripts/Player/Ship/Settings/ShipSettings.cs)** : Assets/GameDesign/Player
+- **[ShipEnergyConsumptionSettings](../Assets/Scripts/Player/Ship/Settings/ShipEnergyConsumptionSettings.cs)** : Assets/GameDesign/Player
 
 ### Sun
-- **SunSettings** : Assets/GameDesign/Player
+- **[Sun](../Assets/Scripts/Player/Star/StarSettings.cs)** : Assets/GameDesign/Player
 
 ### FightStage
-- **FightStageSettings** : Assets/GameDesign/Stages/Fight
+- **[FightStageSettings](../Assets/Scripts/Game/Stage/StateMachine/States/FightStage/FightStageSettings.cs)** : Assets/GameDesign/Stages/Fight
 
 ### ResourcesStage
-- **ResourcesStageSettings** : Assets/GameDesign/Stages/Resources
+- **[ResourcesStageSettings](../Assets/Scripts/Game/Stage/StateMachine/States/ResourcesStage/ResourcesStageSettings.cs)** : Assets/GameDesign/Stages/Resources
 
 ### Mineral
 - **Mineral** (Prefab) : Assets/Gameplay/Elements/Mineral/Prefabs
+
+### Enemies
+
+- **[Overheater](../Assets/Scripts/Enemies/Overheater/Overheater.cs)** (Prefab) : Assets/Gameplay/Enemies/Overheater/Prefabs/Overheater.prefab
+  

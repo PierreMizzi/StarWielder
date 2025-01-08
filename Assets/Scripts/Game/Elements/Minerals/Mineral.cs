@@ -2,11 +2,7 @@ using UnityEngine;
 using PierreMizzi.Useful.PoolingObjects;
 using StarWielder.Gameplay.Player;
 
-
-// 🟩 : Put mineral in pooling system
-// 🟩 : Generate random minerals on random asteroids
-// 🟩 : Interact with the sun to smelt
-// 🟥 : Generate droplets of mineral
+// 🟥 : Put all Mineral and MineralNugget settings inside a ScriptableObject
 
 namespace StarWielder.Gameplay.Elements
 {

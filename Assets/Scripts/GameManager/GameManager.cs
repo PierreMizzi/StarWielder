@@ -17,7 +17,7 @@ namespace StarWielder.Gameplay
 		[SerializeField] private GameChannel m_gameChannel;
 		[SerializeField] private CursorChannel m_cursorChannel;
 
-		private bool m_hasGameStarted;
+		private static bool m_hasGameStarted;
 
 		private void CallbackOnFirstDocking()
 		{

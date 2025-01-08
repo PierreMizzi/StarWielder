@@ -32,13 +32,17 @@ namespace StarWielder.Gameplay
 
 		#region Main
 
-		[SerializeField] private EnemyManager m_enemyManager;
 		[SerializeField] private GameChannel m_gameChannel;
 		public GameChannel gameChannel { get { return m_gameChannel; } }
 
 		private void CallbackStartGame()
 		{
 			StartStage();
+		}
+
+		private void CallbackGameOver(GameOverReason reason)
+		{
+			((StageState)currentState).CallbackGameOver();
 		}
 
 		#endregion
@@ -79,15 +83,26 @@ namespace StarWielder.Gameplay
 			if (m_gameChannel != null)
 			{
 				m_gameChannel.onStartGame += CallbackStartGame;
-				// m_gameChannel.onGameOver += CallbackGameOver;
+				m_gameChannel.onGameOver += CallbackGameOver;
 			}
 		}
 
-		private void Update()
+
+
+        private void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.N))
 			{
 				NextStage();
+			}
+		}
+
+		private void OnDestroy()
+		{
+			if (m_gameChannel != null)
+			{
+				m_gameChannel.onStartGame -= CallbackStartGame;
+				m_gameChannel.onGameOver -= CallbackGameOver;
 			}
 		}
 
@@ -159,19 +174,8 @@ namespace StarWielder.Gameplay
 			}
 		}
 
-		public void ChangeState(int previousState, int nextState)
-		{
-			throw new NotImplementedException();
-			currentState?.Exit();
+		public void ChangeState(int previousState, int nextState) { }
 
-			currentState = states.Find((AState newState) => newState.type == nextState);
-			if (currentState != null)
-				currentState.Enter(previousState);
-			else
-			{
-				Debug.LogError($"Couldn't find a new state of type : {nextState}. Going Inactive");
-			}
-		}
 
 		public StageState StageStateFromType(StageStateType type)
 		{

@@ -13,7 +13,8 @@ namespace StarWielder.Gameplay
 
 		public virtual void Enter(StageSettings settings) { }
 
-		public virtual void Clear() {}
+		public virtual void Clear() { }
+		public virtual void CallbackGameOver() {}
 
 		protected StageManager m_this;
 

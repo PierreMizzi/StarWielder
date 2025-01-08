@@ -36,6 +36,7 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			m_isActive = false;
 			StopFiring();
+			CancelBullet();
 		}
 
 		#endregion
@@ -117,6 +118,11 @@ namespace StarWielder.Gameplay.Enemies
 			m_animator.SetTrigger(k_triggerLoad);
 		}
 
+		private void CancelBullet()
+		{
+			m_animator.SetTrigger(k_triggerCancel);
+		}
+
 		private void FireBullet()
 		{
 			SoundManager.PlaySFX(SoundDataID.TURRET_FIRE);
@@ -133,7 +139,11 @@ namespace StarWielder.Gameplay.Enemies
 		[SerializeField] private Animator m_animator = null;
 
 		private const string k_triggerLoad = "Load";
+		private const string k_triggerCancel = "Cancel";
 
+		/// <summary>
+		/// Animation Callback called at the end of "Load" animation
+		/// </summary>
 		public void AnimEventFireBullet()
 		{
 			FireBullet();

@@ -115,9 +115,6 @@ namespace StarWielder.Gameplay.Player
 
 		private void Start()
 		{
-			if (m_gameChannel.onGameOver != null)
-				m_gameChannel.onGameOver += CallbackGameOver;
-
 			m_gameChannel.onSetHighestEnergy.Invoke(m_currentEnergy);
 		}
 
@@ -126,12 +123,6 @@ namespace StarWielder.Gameplay.Player
 			UpdateState();
 			CheckEnergy();
 			ManageScaleFromVelocity();
-		}
-
-		private void OnDestroy()
-		{
-			if (m_gameChannel.onGameOver != null)
-				m_gameChannel.onGameOver -= CallbackGameOver;
 		}
 
 		private void OnCollisionEnter2D(Collision2D other)
@@ -236,10 +227,16 @@ namespace StarWielder.Gameplay.Player
 			}
 		}
 
+		public bool m_isDead = false;
+
 		private void CheckEnergy()
 		{
-			if (m_currentEnergy <= 0f)
+			if (m_currentEnergy <= 0f && m_isDead == false)
+			{
+				m_isDead = true;
+				ChangeState(StarStateType.Idle);
 				gameChannel.onGameOver.Invoke(GameOverReason.StarDied);
+			}
 		}
 
 		#endregion

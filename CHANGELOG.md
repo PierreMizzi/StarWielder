@@ -1,16 +1,19 @@
 # Changelog 
 
-## Version 0.7.0 - 06/01/2025
+## Version 0.7.0 - 07/01/2025
 
 ### Additions
 
 - Minerals on Asteroids can now be smelted using the Sun's energy
   - Smelted minerals creates nuggets that the player can collect.
+  - Nuggets are destroyed by the Sun
 
 ### Changes
 
+- Sun can absorb energy while being docked
 - Changed how stages are orderer and tuned
 - Upgraded Game Engine
+
 
 ### Bug **Fix**
 
