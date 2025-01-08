@@ -71,17 +71,18 @@ namespace StarWielder.Gameplay.Enemies
 			float rndDelay = UnityEngine.Random.Range(m_minDelayBeforeSpawning, m_maxDelayBeforeSpawning);
 			DOVirtual.DelayedCall(rndDelay, StartSpawning);
 
-			AppearEnemyStar();
+			PopulateEnemyStars();
 
 			InitializeStates();
 		}
 
 		public override void Kill()
 		{
+			FreeEnemyStars();
+
 			base.Kill();
 
 			StopBehaviour();
-
 			CreateCurrency();
 		}
 
@@ -95,14 +96,27 @@ namespace StarWielder.Gameplay.Enemies
 
 		#region EnemyStars
 
-		[SerializeField] private List<EnemyStar> m_enemyStars = new List<EnemyStar>();
+		[Header("Enemy Stars")]
+		[SerializeField] private EnemyStar m_enemyStarPrefab;
+		[SerializeField] public List<Transform> m_enemyStarAnchors = new List<Transform>();
 
-		private void AppearEnemyStar()
+		private List<EnemyStar> m_enemyStars = new List<EnemyStar>();
+
+		private void PopulateEnemyStars()
 		{
-			foreach (EnemyStar star in m_enemyStars)
+			foreach (Transform anchor in m_enemyStarAnchors)
 			{
-				star.QuickAppear();
-				star.SetUninteractable();
+				GameObject objectPooled = m_poolingChannel.onGetFromPool.Invoke(m_enemyStarPrefab.gameObject);
+
+				if (objectPooled != null && objectPooled.TryGetComponent(out EnemyStar star))
+				{
+					star.QuickAppear();
+					star.SetUninteractable();
+					star.transform.SetParent(anchor);
+					star.transform.localPosition = Vector3.zero;
+
+					m_enemyStars.Add(star); 
+				}
 			}
 		}
 
@@ -113,6 +127,7 @@ namespace StarWielder.Gameplay.Enemies
 				star.transform.parent = null;
 				star.SetInteractable();
 			}
+			m_enemyStars.Clear();
 		}
 
 		#endregion

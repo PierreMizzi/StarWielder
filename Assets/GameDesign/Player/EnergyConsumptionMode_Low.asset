@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 1
   dockedEnergyDepleateSpeed: 0.5
-  maxEmergencyEnergy: 10
-  emergencyEnergyDepleatRate: 1
+  maxEmergencyEnergy: 5
+  emergencyEnergyDepleatRate: 0.5
   emergencyEnergyDuration: 10

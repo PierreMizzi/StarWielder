@@ -77,3 +77,7 @@ MonoBehaviour:
     prefab: {fileID: 2102556651638170784, guid: cf61f651fe1b49f4fbfab5630bbe9c07, type: 3}
     defaultSize: 20
     maxSize: 100
+  - name: EnemyStar
+    prefab: {fileID: 5832544189220738643, guid: 966fec82c7a473d40bc683dbdc27957c, type: 3}
+    defaultSize: 10
+    maxSize: 30
