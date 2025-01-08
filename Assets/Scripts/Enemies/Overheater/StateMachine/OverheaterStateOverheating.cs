@@ -20,7 +20,10 @@ namespace StarWielder.Gameplay.Enemies
 
 			m_this.SetHasStar(true);
 
-			m_this.star.transform.position = m_this.transform.position;
+			m_this.star.ChangeState(StarStateType.Locked);
+			m_this.star.transform.SetParent(m_this.Core.transform);
+			m_this.star.transform.localPosition = Vector3.zero;
+			
 			m_this.star.mouseClickAction.action.performed += CallbackMouseClickAction;
 		}
 
@@ -33,6 +36,8 @@ namespace StarWielder.Gameplay.Enemies
 
 			// Overheater
 			m_this.currentEnergy += m_this.energyDrainSpeed * Time.deltaTime;
+
+			m_this.Shake(m_this.currentEnergyNormalized);
 
 			if (m_this.currentEnergy >= m_this.maxEnergy)
 			{
@@ -51,6 +56,7 @@ namespace StarWielder.Gameplay.Enemies
 		private void CallbackMouseClickAction(InputAction.CallbackContext context)
 		{
 			m_this.star.mouseClickAction.action.performed -= CallbackMouseClickAction;
+			m_this.star.transform.SetParent(null);
 			m_this.star = null;
 			m_this.SetHasStar(false);
 

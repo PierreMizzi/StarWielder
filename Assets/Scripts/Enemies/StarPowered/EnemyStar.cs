@@ -21,10 +21,13 @@ namespace StarWielder.Gameplay.Enemies
 
 		[SerializeField] private StarAbsorbable m_starAbsorbable;
 
+		private CircleCollider2D m_collider;
+
 
 		public void Initialize(EnemyGroup group)
 		{
 			m_group = group; // Replaceable : Awake ?
+			m_collider = GetComponent<CircleCollider2D>();
 		}
 
 		public void Appear()
@@ -35,15 +38,46 @@ namespace StarWielder.Gameplay.Enemies
 		public void Kill()
 		{
 			SoundManager.PlayRandomSFX(m_destroyedSoundIDs);
-			m_group.EnemyStarKilled(this);
+			m_group?.EnemyStarKilled(this);
 			CreateCurrencies();
 			m_animator.SetTrigger(k_triggerKill);
+		}
+
+		public void QuickAppear()
+		{
+			m_animator.SetTrigger(k_triggerQuickAppear);
+		}
+
+		/// <summary>
+		/// Callback inside animation clips
+		/// - Appeared
+		/// </summary>
+		public void SetInteractable()
+		{
+			if (m_collider == null)
+				m_collider = GetComponent<CircleCollider2D>();
+
+			m_collider.enabled = true;
+		}
+
+		/// <summary>
+		/// Callback inside animation clips
+		/// - Kill
+		/// - Hidden
+		/// </summary>
+		public void SetUninteractable()
+		{
+			if (m_collider == null)
+				m_collider = GetComponent<CircleCollider2D>();
+
+			m_collider.enabled = false;
 		}
 
 		#region Animation
 
 		[SerializeField] private Animator m_animator;
 		private const string k_triggerAppear = "Appear";
+		private const string k_triggerQuickAppear = "QuickAppear";
 		private const string k_triggerKill = "Kill";
 
 		#endregion

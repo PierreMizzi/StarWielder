@@ -63,15 +63,14 @@ namespace StarWielder.Gameplay.Enemies
 			ComputeRangePositions();
 		}
 
-		protected void OnDrawGizmos()
+		private void Update()
 		{
-			defaultGizmosColor = Gizmos.color;
-
-			Gizmos.color = m_gizmosColor;
-			Gizmos.DrawLine(m_rangeStartPosition, m_rangeEndPosition);
-
-			Gizmos.color = defaultGizmosColor;
+			if (Application.isPlaying == false)
+			{
+				ComputeRangePositions();
+			}
 		}
+
 
 		#endregion
 
@@ -101,6 +100,16 @@ namespace StarWielder.Gameplay.Enemies
 		[SerializeField] private Color m_gizmosColor;
 		Color defaultGizmosColor;
 
+		protected void OnDrawGizmos()
+		{
+			defaultGizmosColor = Gizmos.color;
+
+			Gizmos.color = m_gizmosColor;
+			Gizmos.DrawSphere(transform.position, 0.1f);
+			Gizmos.DrawLine(m_rangeStartPosition, m_rangeEndPosition);
+
+			Gizmos.color = defaultGizmosColor;
+		}
 
 		#endregion
 

@@ -16,7 +16,9 @@ namespace StarWielder.Gameplay.Enemies
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			if (UtilsClass.CheckLayer(m_starLayerMask.value, other.gameObject.layer))
-				m_overheater.CallbackTriggerEnterStar(other.GetComponent<Star>());
+			{
+				m_overheater?.CallbackTriggerEnterStar(other.GetComponent<Star>());
+			}
 
 		}
 

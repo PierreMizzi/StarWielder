@@ -10,6 +10,7 @@
 
 ### Changes
 
+- Reworked Overheater to be more easily understandable and less punishing 
 - Sun can absorb energy while being docked
 - Changed how stages are orderer and tuned
 - Upgraded Game Engine

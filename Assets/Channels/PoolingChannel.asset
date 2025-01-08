@@ -26,7 +26,7 @@ MonoBehaviour:
     defaultSize: 30
     maxSize: 60
   - name: Overheater
-    prefab: {fileID: 1614948553425005042, guid: ba03d9fe4aa25b143b698a15daf90062, type: 3}
+    prefab: {fileID: 3085164937149268610, guid: ba03d9fe4aa25b143b698a15daf90062, type: 3}
     defaultSize: 5
     maxSize: 10
   - name: OverheaterMine

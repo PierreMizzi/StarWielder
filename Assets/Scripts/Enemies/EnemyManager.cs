@@ -67,6 +67,13 @@ namespace StarWielder.Gameplay.Enemies
 			InitializeSpawners();
 		}
 
+		private void Update()
+		{
+			#if UNITY_EDITOR
+				SpawnEnemyKeyboardShortcut();
+			#endif
+		}
+
 		#endregion
 
 		#region Spawning
@@ -189,6 +196,21 @@ namespace StarWielder.Gameplay.Enemies
 		private void SetDebugging()
 		{
 			m_enemySpawners = new List<EnemySpawner>(m_debugEnemySpawners);
+		}
+
+
+		// 🟥 : Instiante enemy with Keyboard shotcuts
+		private void SpawnEnemyKeyboardShortcut()
+		{
+			if (Input.GetKeyDown(KeyCode.Alpha1))
+			{
+				Debug.Log("Bite ?");
+			}
+		}
+
+		private void InstantiateEnemy(Type enemyType)
+		{
+			
 		}
 
 		#endregion

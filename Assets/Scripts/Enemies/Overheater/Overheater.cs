@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using PierreMizzi.Rendering;
@@ -12,9 +13,24 @@ namespace StarWielder.Gameplay.Enemies
 	public class Overheater : Enemy, IStateMachine
 	{
 
-		#region MonoBehaviour
+		#region Behaviour
 
-		[SerializeField] private float m_rotationSpeed = 10f;
+		[SerializeField] private OverheaterCore m_core;
+		public OverheaterCore Core => m_core;
+		[SerializeField] private float m_rotationSpeed;
+		public float rotationSpeed => m_rotationSpeed;
+
+		public Star star { get; set; }
+
+		public void CallbackTriggerEnterStar(Star star)
+		{
+			this.star = star;
+			ChangeState(OverheaterStateType.Overheating);
+		}
+
+		#endregion
+
+		#region MonoBehaviour
 
 		private void Start()
 		{
@@ -24,8 +40,9 @@ namespace StarWielder.Gameplay.Enemies
 
 		private void Update()
 		{
-			// transform.rotation *= Quaternion.Euler(Vector3.forward * m_rotationSpeed * Time.deltaTime);
+			transform.rotation *= Quaternion.Euler(Vector3.forward * m_rotationSpeed * Time.deltaTime);
 			UpdateState();
+			Shake(m_testValue);
 		}
 
 		private void OnDestroy()
@@ -44,13 +61,17 @@ namespace StarWielder.Gameplay.Enemies
 
 			Awake();
 
+			m_originPosition = transform.position;
+
 			energyDrainSpeed = m_maxEnergy / m_energyDrainDuration;
 			energyCoolingSpeed = m_maxEnergy / m_energyCoolingDuration;
 
 			m_currentEnergy = 0;
 
-			float rndDelay = Random.Range(m_minDelayBeforeSpawning, m_maxDelayBeforeSpawning);
+			float rndDelay = UnityEngine.Random.Range(m_minDelayBeforeSpawning, m_maxDelayBeforeSpawning);
 			DOVirtual.DelayedCall(rndDelay, StartSpawning);
+
+			AppearEnemyStar();
 
 			InitializeStates();
 		}
@@ -68,6 +89,30 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			StopSpawning();
 			ChangeState(OverheaterStateType.Idle);
+		}
+
+		#endregion
+
+		#region EnemyStars
+
+		[SerializeField] private List<EnemyStar> m_enemyStars = new List<EnemyStar>();
+
+		private void AppearEnemyStar()
+		{
+			foreach (EnemyStar star in m_enemyStars)
+			{
+				star.QuickAppear();
+				star.SetUninteractable();
+			}
+		}
+
+		private void FreeEnemyStars()
+		{
+			foreach (EnemyStar star in m_enemyStars)
+			{
+				star.transform.parent = null;
+				star.SetInteractable();
+			}
 		}
 
 		#endregion
@@ -161,19 +206,12 @@ namespace StarWielder.Gameplay.Enemies
 
 		#endregion
 
-		#region Overheating
+		#region Energy Management
 
-		[Header("Overheating")]
+		[Header("Energy")]
 		[SerializeField] private float m_maxEnergy;
-		[SerializeField] private float m_energyDrainDuration;
-		[SerializeField] private float m_energyCoolingDuration;
-		[SerializeField] private MaterialPropertyBlockModifier m_materialPropertyBlock;
-
-		public float energyDrainSpeed { get; private set; }
-		public float energyCoolingSpeed { get; private set; }
 		public float maxEnergy => m_maxEnergy;
 
-		public Star star { get; set; }
 		private float m_currentEnergy;
 
 		public float currentEnergy
@@ -185,30 +223,65 @@ namespace StarWielder.Gameplay.Enemies
 				m_animator.SetFloat(k_floatEnergyNormalized, currentEnergyNormalized);
 			}
 		}
-
 		public float currentEnergyNormalized
 		{
 			get { return m_currentEnergy / m_maxEnergy; }
 		}
 
-		public void CallbackTriggerEnterStar(Star star)
+		[Header("Energ Draining")]
+		[SerializeField] private float m_energyDrainDuration;
+		public float energyDrainSpeed { get; private set; }
+
+		[Header("Energy Cooling")]
+		[SerializeField] private float m_energyCoolingDuration;
+		public float energyCoolingSpeed { get; private set; }
+
+		#endregion
+
+		#region Shaking
+
+		[Header("Shaking")]
+		[SerializeField] private AnimationCurve m_vibratoCurve;
+		[SerializeField] private AnimationCurve m_shakeCurve;
+
+		private float m_currentVibrato;
+		private float m_vibrato;
+		private float m_currentShake;
+
+		private float rndAngle;
+		private Vector3 rndOffset;
+
+		private Vector3 m_originPosition;
+
+		public void Shake(float progress)
 		{
-			this.star = star;
-			star.ChangeState(StarStateType.Locked);
+			m_currentVibrato = m_vibratoCurve.Evaluate(progress);
+			m_currentShake = m_shakeCurve.Evaluate(progress);
 
-			ChangeState(OverheaterStateType.Overheating);
+			m_vibrato += Time.deltaTime;
+
+			if (m_vibrato >= m_currentVibrato)
+			{
+				m_vibrato = 0;
+				rndAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+				rndOffset = new Vector3(Mathf.Cos(rndAngle), Mathf.Sin(rndAngle));
+				transform.position = m_originPosition + rndOffset * m_currentShake;
+			}
 		}
-
+		
 		#endregion
 
 		#region Animations
 
 		private const string k_floatEnergyNormalized = "EnergyNormalized";
+
+		[Obsolete]
 		private const string k_boolHasStar = "HasStar";
 
+		[Obsolete]
 		public void SetHasStar(bool hasStar)
 		{
-			m_animator.SetBool(k_boolHasStar, hasStar);
+			// m_animator.SetBool(k_boolHasStar, hasStar);
 		}
 
 		#endregion
@@ -217,12 +290,19 @@ namespace StarWielder.Gameplay.Enemies
 
 		[SerializeField] private Currency m_currencyPrefab;
 
-		private void CreateCurrency()
+        private void CreateCurrency()
 		{
 			Currency currency = m_poolingChannel.onGetFromPool.Invoke(m_currencyPrefab.gameObject).GetComponent<Currency>();
 			currency.transform.position = transform.position;
 			currency.Collect();
 		}
+
+		#endregion
+
+		#region Debug
+
+		[Header("Debug")]
+		[SerializeField, Range(0f, 1f)] private float m_testValue;
 
 		#endregion
 
