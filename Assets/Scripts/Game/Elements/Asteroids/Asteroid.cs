@@ -23,8 +23,7 @@ namespace StarWielder.Gameplay.Elements
 
 		private void Update()
 		{
-			// TODO : 🟥 Make it better, maybe ?
-			if (transform.position.x > 15)
+			if (transform.position.x > m_manager.currentConfig.boundLimits)
 			{
 				Kill();
 			}

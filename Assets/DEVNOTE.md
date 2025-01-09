@@ -32,6 +32,7 @@ The goal is to survive the longest.
 
 ### ResourcesStage
 - **[ResourcesStageSettings](../Assets/Scripts/Game/Stage/StateMachine/States/ResourcesStage/ResourcesStageSettings.cs)** : Assets/GameDesign/Stages/Resources
+- **[AsteroidSpawningConfig](../Assets/Scripts/Game/Elements/Asteroids/AsteroidSpawningConfig.cs)** : Assets/GameDesign/Asteroids/AsteroidSC_Normal.asset
 
 ### Mineral
 - **Mineral** (Prefab) : Assets/Gameplay/Elements/Mineral/Prefabs

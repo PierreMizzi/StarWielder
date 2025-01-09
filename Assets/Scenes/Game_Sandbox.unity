@@ -3275,7 +3275,7 @@ GameObject:
   - component: {fileID: 696516260}
   - component: {fileID: 696516259}
   m_Layer: 0
-  m_Name: AsteroidSpawnerManager
+  m_Name: AsteroidStormManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3299,10 +3299,10 @@ MonoBehaviour:
   m_asteroidPrefabs:
   - {fileID: 2375413080427777772, guid: 23fb6c95c58b17648a66aec4ecbe0c11, type: 3}
   - {fileID: 749467379895572945, guid: cc800ee5ba6c03549b54d0a633f5bd32, type: 3}
-  m_minerals:
+  m_mineralPrefabs:
   - {fileID: 8456252191967710110, guid: 940752acb21e8f942bbbf9ca3400c0a7, type: 3}
   m_healthFlowerPrefab: {fileID: 8402170077314124645, guid: 01ee882f778809c4db3a1193dcbeb02a, type: 3}
-  m_livableRange: 4
+  m_twinStarsprefab: {fileID: 3882981655871959968, guid: e82672d7972421f4681f3d1ae5ce2cd0, type: 3}
   m_gizmosColor: {r: 1, g: 1, b: 1, a: 1}
   m_gizmosSize: 0.34
 --- !u!4 &696516260
@@ -4709,9 +4709,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gameChannel: {fileID: 11400000, guid: 7fa2ee207c87f4e42827ce90cc2e7f70, type: 2}
   m_stagesOrder:
-  - {fileID: 11400000, guid: b651bb0de0d7ea14c97861def1a620b1, type: 2}
-  - {fileID: 11400000, guid: 5e44025f9270a9f4f8cd9649bcea6a2a, type: 2}
   - {fileID: 11400000, guid: 4f69c00b300552a49885238078762ed5, type: 2}
+  - {fileID: 11400000, guid: 5e44025f9270a9f4f8cd9649bcea6a2a, type: 2}
+  - {fileID: 11400000, guid: b651bb0de0d7ea14c97861def1a620b1, type: 2}
 --- !u!1 &1022546259
 GameObject:
   m_ObjectHideFlags: 0

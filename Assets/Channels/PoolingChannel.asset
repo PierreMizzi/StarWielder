@@ -81,3 +81,7 @@ MonoBehaviour:
     prefab: {fileID: 5832544189220738643, guid: 966fec82c7a473d40bc683dbdc27957c, type: 3}
     defaultSize: 10
     maxSize: 30
+  - name: TwinStars
+    prefab: {fileID: 5670462325288713454, guid: e82672d7972421f4681f3d1ae5ce2cd0, type: 3}
+    defaultSize: 10
+    maxSize: 20

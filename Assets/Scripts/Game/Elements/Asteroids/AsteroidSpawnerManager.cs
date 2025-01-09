@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using PierreMizzi.Useful;
 using UnityEngine;
 using PierreMizzi.Useful.PoolingObjects;
+using System;
+
+using Random = UnityEngine.Random;
 
 
 // TODO : 🟥 Binary Space Tree when spawning asteroids ???
@@ -19,37 +22,28 @@ namespace StarWielder.Gameplay.Elements
 
 		public void CreateAsteroidStorm()
 		{
+			CreateSpots();
+
 			SpawnAsteroids();
 			SpawnHealthFlowers();
 			SpawnMinerals();
+
+			SpawnTwinStars();
 		}
 
 		[SerializeField] private ResourcesStageManager m_manager;
 		[SerializeField] private PoolingChannel m_poolingChannel;
 
+		[SerializeField] private AsteroidStormSettings m_currentConfig;
+		public AsteroidStormSettings currentConfig => m_currentConfig;
 
 		#region Voronoi Position Spawning
 
-		
-			
-		#endregion
+		public List<AsteroidStormSpot> m_spots = new List<AsteroidStormSpot>();
 
-		#region Voronoi Asteroids Spawning
-
-		[Header("Asteroids")]
-		[SerializeField] private AsteroidSpawningConfig m_currentConfig;
-		[SerializeField] private List<Asteroid> m_asteroidPrefabs = new List<Asteroid>();
-		private List<Asteroid> m_asteroids = new List<Asteroid>();
-		private int m_asteroidCount;
-
-		private Asteroid tempAsteroidTemplate;
-		private float tempScale;
-
-		public void SpawnAsteroids()
+		private void CreateSpots()
 		{
-			m_positions.Clear();
-			m_livableAsteroids.Clear();
-			m_asteroids.Clear();
+			m_spots.Clear();
 
 			float indexX = 0;
 			float indexY = 0;
@@ -58,7 +52,6 @@ namespace StarWielder.Gameplay.Elements
 
 			for (int x = 0; x < m_currentConfig.lengthAmountCell; x++)
 			{
-				List<Vector3> column = new List<Vector3>();
 				pos.x = -m_currentConfig.cellSize * indexX;
 				pos.x += m_currentConfig.startingPosition.x;
 
@@ -72,17 +65,44 @@ namespace StarWielder.Gameplay.Elements
 					offset = GetRandomOffset();
 					pos += offset;
 
-					if (IsSpawning()) // && m_spawn
-						SpawnAsteroid(pos);
-
-					column.Add(new Vector3(pos.x, pos.y, 0));
+					m_spots.Add(new AsteroidStormSpot(new Vector3(pos.x, pos.y, 0)));
 
 					indexY++;
 				}
 				// Add a row
-				m_positions.Add(column);
 				indexX++;
 				indexY = 0;
+			}
+		}
+
+		public List<AsteroidStormSpot> GetAvailableSpots()
+		{
+			return m_spots.FindAll(item => item.isTaken == false);
+		}
+		
+		#endregion
+
+		#region Asteroids
+
+		[Header("Asteroids")]
+		[SerializeField] private List<Asteroid> m_asteroidPrefabs = new List<Asteroid>();
+		private List<Asteroid> m_asteroids = new List<Asteroid>();
+		private int m_asteroidCount;
+
+		private Asteroid tempAsteroidTemplate;
+		private float tempScale;
+
+		public void SpawnAsteroids()
+		{
+			List<AsteroidStormSpot> spots = GetAvailableSpots();
+
+			foreach (AsteroidStormSpot spot in spots)
+			{
+				if (CheckSpawnChance(m_currentConfig.asteroidSpawnChance))
+				{
+					SpawnAsteroid(spot.position);
+					spot.isTaken = true;
+				}
 			}
 		}
 
@@ -99,7 +119,7 @@ namespace StarWielder.Gameplay.Elements
 			asteroid.transform.localScale = new Vector3(tempScale, tempScale, 1);
 
 			// Initialize
-			asteroid.Initialize(this, GetRandomizeVelocity(), m_currentConfig.GetRandomColor());
+			asteroid.Initialize(this, GetRandomizeVelocity(), m_currentConfig.GetMineralRandomColor());
 
 			m_asteroidCount++;
 			m_asteroids.Add(asteroid);
@@ -129,41 +149,43 @@ namespace StarWielder.Gameplay.Elements
 			return rndOffset * rndOffsetDistance;
 		}
 
-		public bool IsSpawning()
+		public bool CheckSpawnChance(float spawnChance)
 		{
-			return Random.Range(0, 1f) < m_currentConfig.spawnPercentage;
+			return Random.Range(0, 1f) < spawnChance;
 		}
 
 		#endregion
 
 		#region Mineral Generation
 
-		[SerializeField] private List<Mineral> m_minerals = new List<Mineral>();
+		[SerializeField] private List<Mineral> m_mineralPrefabs = new List<Mineral>();
 
 		private void SpawnMinerals()
 		{
 			List<Asteroid> m_copiedAsteroids = new List<Asteroid>(m_asteroids);
 
-			int randomAsteroidCount = (int)((float)m_copiedAsteroids.Count * 0.33f);
-
+			int length = m_asteroids.Count;
 			Asteroid asteroid;
 			Transform anchor;
 			GameObject mineralPrefab;
-			Debug.Log(randomAsteroidCount);
-			for (int i = 0; i < randomAsteroidCount; i++)
+
+			for (int i = 0; i < length; i++)
 			{
-				asteroid = m_copiedAsteroids.PickRandom();
-				m_copiedAsteroids.Remove(asteroid);
+				if (CheckSpawnChance(m_currentConfig.mineralSpawnChance))
+				{
+					asteroid = m_copiedAsteroids.PickRandom();
+					m_copiedAsteroids.Remove(asteroid);
 
-				anchor = asteroid.mineralAnchors.PickRandom();
+					anchor = asteroid.mineralAnchors.PickRandom();
 
-				mineralPrefab = m_minerals.PickRandom().gameObject;
-				Mineral mineral = m_poolingChannel.onGetFromPool.Invoke(mineralPrefab).GetComponent<Mineral>();
-				mineral.transform.parent = anchor;
-				mineral.transform.localPosition = Vector3.zero;
-				mineral.transform.localRotation = Quaternion.identity;
+					mineralPrefab = m_mineralPrefabs.PickRandom().gameObject;
+					Mineral mineral = m_poolingChannel.onGetFromPool.Invoke(mineralPrefab).GetComponent<Mineral>();
+					mineral.transform.parent = anchor;
+					mineral.transform.localPosition = Vector3.zero;
+					mineral.transform.localRotation = Quaternion.identity;
 
-				asteroid.mineral = mineral;
+					asteroid.mineral = mineral;
+				}
 			}
 		}
 
@@ -178,13 +200,13 @@ namespace StarWielder.Gameplay.Elements
 
 		public Vector3 GetRandomizeVelocity()
 		{
-			m_tempRndAngle = Random.Range(-m_currentConfig.randomVelocityAngle, m_currentConfig.randomVelocityAngle);
+			m_tempRndAngle = Random.Range(-m_currentConfig.asteroidRndVelocityAngle, m_currentConfig.asteroidRndVelocityAngle);
 			m_tempRndDirection = new Vector2
 			{
 				x = Mathf.Cos(m_tempRndAngle * Mathf.Deg2Rad),
 				y = Mathf.Sin(m_tempRndAngle * Mathf.Deg2Rad)
 			};
-			m_tempRndStrength = Random.Range(m_currentConfig.minVelocityScalar, m_currentConfig.maxVelocityScalar);
+			m_tempRndStrength = Random.Range(m_currentConfig.asteroidMinVelocity, m_currentConfig.asteroidMaxVelocity);
 
 			return m_tempRndDirection * m_tempRndStrength;
 		}
@@ -195,12 +217,11 @@ namespace StarWielder.Gameplay.Elements
 
 		[Header("Health Flower")]
 		[SerializeField] private HealthFlower m_healthFlowerPrefab;
-		[SerializeField] private float m_livableRange = 4;
 		private List<Asteroid> m_livableAsteroids = new List<Asteroid>();
 
 		private bool IsLivable(Vector3 pos)
 		{
-			return -m_livableRange < pos.y && pos.y < m_livableRange;
+			return -m_currentConfig.healthFlowerLivableRange < pos.y && pos.y < m_currentConfig.healthFlowerLivableRange;
 		}
 
 		private void SpawnHealthFlowers()
@@ -209,7 +230,7 @@ namespace StarWielder.Gameplay.Elements
 			Transform anchor;
 			HealthFlower healthFlower;
 
-			for (int i = 0; i < m_currentConfig.amountHealthFlower; i++)
+			for (int i = 0; i < m_currentConfig.healthFlowerAmount; i++)
 			{
 				asteroid = m_livableAsteroids.PickRandom();
 				m_livableAsteroids.Remove(asteroid);
@@ -227,6 +248,48 @@ namespace StarWielder.Gameplay.Elements
 
 		#endregion
 
+		#region Twin Stars
+
+		[SerializeField] private TwinStars m_twinStarsprefab;
+
+		private void SpawnTwinStars()
+		{
+			List<AsteroidStormSpot> spots = GetAvailableSpots();
+
+			// int rndTwinStarsCount = 
+			// 🟥 : DO THIS !
+
+			foreach (AsteroidStormSpot spot in spots)
+			{
+				if (CheckSpawnChance(m_currentConfig.twinStarsSpawnChance))
+				{
+					SpawnTwinStars(spot.position);
+					spot.isTaken = true;
+				}
+			}
+		}
+
+		private void SpawnTwinStars(Vector3 position)
+		{
+			// Pool
+			GameObject pooledObject = m_poolingChannel.onGetFromPool.Invoke(m_twinStarsprefab.gameObject);
+
+			if (pooledObject == null)
+			{
+				return;
+			}
+
+			if (pooledObject.TryGetComponent(out TwinStars twinStars))
+			{
+				twinStars.transform.position = position;
+				twinStars.transform.rotation = Quaternion.identity;
+
+				twinStars.Initialize(this, GetRandomizeVelocity());
+			}
+		}
+
+		#endregion
+
 		#region Debug
 
 		[Header("Debug")]
@@ -235,7 +298,7 @@ namespace StarWielder.Gameplay.Elements
 		private List<List<Vector3>> m_positions = new List<List<Vector3>>();
 		Color defaultGizmosColor;
 
-		protected void OnDrawGizmos()
+        protected void OnDrawGizmos()
 		{
 			defaultGizmosColor = Gizmos.color;
 			Gizmos.color = m_gizmosColor;
