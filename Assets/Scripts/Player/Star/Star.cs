@@ -38,7 +38,10 @@ namespace StarWielder.Gameplay.Player
 
 		private void CallbackGameOver(GameOverReason reason)
 		{
-			ChangeState(StarStateType.Idle);
+			if (reason == GameOverReason.ShipDestroyed)
+			{
+				ChangeState(StarStateType.Idle);
+			}
 		}
 
 		#endregion
@@ -60,6 +63,7 @@ namespace StarWielder.Gameplay.Player
 				new StarStateReturning(this),
 				new StarStateTransfering(this),
 				new StarStateLocked(this),
+				new StarStateDying(this),
 			};
 
 			ChangeState(m_initialState);
@@ -86,6 +90,11 @@ namespace StarWielder.Gameplay.Player
 		public void UpdateState()
 		{
 			currentState?.Update();
+		}
+
+		private bool IsState(StarStateType nextState)
+		{
+			return (StarStateType)currentState.type == nextState;
 		}
 
 		#endregion
@@ -116,6 +125,11 @@ namespace StarWielder.Gameplay.Player
 		private void Start()
 		{
 			m_gameChannel.onSetHighestEnergy.Invoke(m_currentEnergy);
+
+			if (m_gameChannel != null)
+			{
+				m_gameChannel.onGameOver += CallbackGameOver;
+			}
 		}
 
 		protected void Update()
@@ -227,14 +241,11 @@ namespace StarWielder.Gameplay.Player
 			}
 		}
 
-		public bool m_isDead = false;
-
 		private void CheckEnergy()
 		{
-			if (m_currentEnergy <= 0f && m_isDead == false)
+			if (m_currentEnergy <= 0f && IsState(StarStateType.Dying) == false)
 			{
-				m_isDead = true;
-				ChangeState(StarStateType.Idle);
+				ChangeState(StarStateType.Dying);
 				gameChannel.onGameOver.Invoke(GameOverReason.StarDied);
 			}
 		}

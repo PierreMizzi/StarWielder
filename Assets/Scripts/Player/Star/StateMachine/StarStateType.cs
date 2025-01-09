@@ -9,5 +9,6 @@ namespace StarWielder.Gameplay.Player
 		Returning,
 		Transfer,
 		Locked,
+		Dying,
 	}
 }

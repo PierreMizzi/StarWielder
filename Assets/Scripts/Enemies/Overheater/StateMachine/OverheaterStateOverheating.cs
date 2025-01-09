@@ -38,6 +38,7 @@ namespace StarWielder.Gameplay.Enemies
 			m_this.currentEnergy += m_this.energyDrainSpeed * Time.deltaTime;
 
 			m_this.Shake(m_this.currentEnergyNormalized);
+			m_this.SetHeatProgress(m_this.currentEnergyNormalized);
 
 			if (m_this.currentEnergy >= m_this.maxEnergy)
 			{

@@ -6,5 +6,6 @@ namespace StarWielder.Gameplay.Enemies
 		Idle,
 		Overheating,
 		Cooling,
+		Active,
 	}
 }

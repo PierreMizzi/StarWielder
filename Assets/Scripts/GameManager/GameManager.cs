@@ -53,7 +53,7 @@ namespace StarWielder.Gameplay
 		{
 			DOTween.KillAll();
 			SoundManager.PlaySFX(SoundDataID.REPLAY_BUTTON_PLAY);
-			SceneManager.LoadScene("Game");
+			SceneManager.LoadScene("Game_Sandbox");
 		}
 
 		#region MonoBehaviour

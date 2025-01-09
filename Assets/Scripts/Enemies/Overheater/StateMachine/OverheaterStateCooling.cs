@@ -20,6 +20,8 @@ namespace StarWielder.Gameplay.Enemies
 
 			m_this.currentEnergy -= m_this.energyCoolingSpeed * Time.deltaTime;
 
+			m_this.SetHeatProgress(m_this.currentEnergyNormalized);
+
 			if (m_this.currentEnergy <= 0)
 			{
 				ChangeState((int)OverheaterStateType.Idle);

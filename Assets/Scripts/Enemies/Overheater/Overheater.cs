@@ -40,9 +40,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		private void Update()
 		{
-			transform.rotation *= Quaternion.Euler(Vector3.forward * m_rotationSpeed * Time.deltaTime);
 			UpdateState();
-			Shake(m_testValue);
 		}
 
 		private void OnDestroy()
@@ -74,6 +72,7 @@ namespace StarWielder.Gameplay.Enemies
 			PopulateEnemyStars();
 
 			InitializeStates();
+			ChangeState(OverheaterStateType.Active);
 		}
 
 		public override void Kill()
@@ -190,10 +189,9 @@ namespace StarWielder.Gameplay.Enemies
 					new OverheaterStateIdle(this),
 					new OverheaterStateOverheating(this),
 					new OverheaterStateCooling(this),
+					new OverheaterStateActive(this),
 				};
 			}
-
-			ChangeState(OverheaterStateType.Idle);
 		}
 
 		public void UpdateState()
@@ -293,10 +291,17 @@ namespace StarWielder.Gameplay.Enemies
 		[Obsolete]
 		private const string k_boolHasStar = "HasStar";
 
+		private const string k_floatHeatProgress = "Progress";
+
 		[Obsolete]
 		public void SetHasStar(bool hasStar)
 		{
-			// m_animator.SetBool(k_boolHasStar, hasStar);
+			m_animator.SetBool(k_boolHasStar, hasStar);
+		}
+
+		public void SetHeatProgress(float progress)
+		{
+			m_animator.SetFloat(k_floatHeatProgress, progress);
 		}
 
 		#endregion

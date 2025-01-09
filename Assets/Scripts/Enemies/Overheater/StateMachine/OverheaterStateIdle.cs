@@ -12,10 +12,10 @@ namespace StarWielder.Gameplay.Enemies
 			type = (int)OverheaterStateType.Idle;
 		}
 
-        public override void Update()
+        protected override void DefaultEnter()
         {
-            base.Update();
-			m_this.transform.rotation *= Quaternion.Euler(Vector3.forward * m_this.rotationSpeed * Time.deltaTime);
+            base.DefaultEnter();
+			m_this.SetHeatProgress(0);
 		}
 
 	}
