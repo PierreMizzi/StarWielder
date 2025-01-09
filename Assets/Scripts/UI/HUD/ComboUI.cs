@@ -1,7 +1,9 @@
 using System;
+using DG.Tweening;
 using PierreMizzi.Useful;
 using StarWielder.Gameplay.Player;
 using TMPro;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,14 +20,29 @@ namespace StarWielder.UI
 
 		[SerializeField] private TextMeshProUGUI m_comboLabel;
 
+		[SerializeField] private ShakeTweenSettings m_shakeSettings;
+
+		private const string k_multiplyText = "<size=50%>x</size>";
+
 		private void CallbackComboBreak()
 		{
 			m_comboLabel.text = "";
 		}
 
-		private void CallbackComboIncrement()
+		[ContextMenu("Call CallbackComboIncrement")]
+		public void CallbackComboIncrement()
 		{
-			m_comboLabel.text = m_playerChannel.currentCombo.ToString();
+			m_comboLabel.text = k_multiplyText + m_playerChannel.currentCombo.ToString();
+
+			m_comboLabel.transform.DOShakePosition(
+				m_shakeSettings.duration,
+			 	m_shakeSettings.strength,
+				m_shakeSettings.vibrato,
+				m_shakeSettings.randomness,
+				m_shakeSettings.snapping,
+				m_shakeSettings.fadeOut,
+				m_shakeSettings.randomnessMode
+			);
 		}
 
 		#endregion
@@ -70,7 +87,7 @@ namespace StarWielder.UI
 		[SerializeField] private float m_noiseAmplitude = 0.05f;
 		[SerializeField] private float m_noiseFrequency = 15f;
 
-		private float m_normalizedCombo => m_playerChannel.currentCombo / (float)m_maxCombo;
+		private float m_normalizedCombo => (float)(m_playerChannel.currentCombo - 1) / (float)m_maxCombo;
 		private float m_fillAmount = 0;
 		private float m_noiseSeed;
 		private float m_noiseValue;

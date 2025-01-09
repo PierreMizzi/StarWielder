@@ -43,14 +43,16 @@ namespace StarWielder.Gameplay
 			PositionScreenTop(m_edgeTop);
 
 			// // Bot
-			// MatchScreenWidth(m_edgeBot);
-			// PositionScreenBot(m_edgeBot);
+			MatchScreenWidth(m_edgeBot);
+			// Bot side position is set manualy in the sceen
 		}
 
 		private void ComputeArenaBounds()
 		{
 			topRightCorner = new Vector2(m_cameraExtents.x, m_cameraExtents.y);
-			botLeftCorner = new Vector2(-m_cameraExtents.x, -m_cameraExtents.y * m_botEmptySpace);
+			
+			float edgeBotUpperSide = m_edgeBot.transform.position.y + (m_baseSize / 2f);
+			botLeftCorner = new Vector2(-m_cameraExtents.x, edgeBotUpperSide);
 		}
 
 		private void MatchScreenWidth(ArenaEdge bound)
@@ -78,11 +80,7 @@ namespace StarWielder.Gameplay
 			bound.transform.position = new Vector3(0, m_cameraExtents.y + m_baseSize / 2f, 0);
 		}
 
-		private void PositionScreenBot(ArenaEdge bound)
-		{
-			float botYPos = -(m_cameraExtents.y * m_botEmptySpace + m_baseSize / 2f);
-			bound.transform.position = new Vector3(0, botYPos, 0);
-		}
+
 
 	}
 }

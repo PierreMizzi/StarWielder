@@ -231,7 +231,7 @@ MonoBehaviour:
   - {fileID: 7771359423378900703}
   - {fileID: 559339300369069513}
   m_mineSpawningTimer: {fileID: 9036132199334960710}
-  m_maxEnergy: 30
+  m_maxEnergy: 6
   m_energyDrainDuration: 2
   m_energyCoolingDuration: 10
   m_vibratoCurve:

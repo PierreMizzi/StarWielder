@@ -90,7 +90,10 @@ namespace StarWielder.Gameplay.Player
 
 		private void CallbackMouseClick(InputAction.CallbackContext context)
 		{
-			ChangeState((int)StarStateType.Free);
+			if (GameManager.HasGameStarted == true)
+			{
+				ChangeState((int)StarStateType.Free);
+			}
 		}
 
 		private void KillTransfer()

@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb8a3e5d234f05246a682ee9d4e5b34d, type: 3}
-  m_Name: EnergyConsumptionMode_Fight
+  m_Script: {fileID: 11500000, guid: 338074621df71ac4aac0934c0f4ffc9a, type: 3}
+  m_Name: ComboUIShakeSettings
   m_EditorClassIdentifier: 
-  mode: 2
-  dockedEnergyDepleateSpeed: 2.5
-  maxEmergencyEnergy: 6
-  emergencyEnergyDepleatRate: 1.2
-  emergencyEnergyDuration: 5
+  m_duration: 1
+  m_strength: {x: 60, y: 60, z: 1}
+  m_vibrato: 60
+  m_randomness: 70
+  m_snapping: 0
+  m_fadeOut: 1
+  m_randomnessMode: 0

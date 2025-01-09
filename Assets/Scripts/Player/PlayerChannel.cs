@@ -50,6 +50,12 @@ namespace StarWielder.Gameplay.Player
 		public Action onComboIncrement;
 		public Action onComboBreak;
 
+		[ContextMenu("Call IncrementCombo")]
+		public void IncrementCombo()
+		{
+			onComboIncrement.Invoke();
+		}
+
 		#endregion
 
 		public void OnEnable()

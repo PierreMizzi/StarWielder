@@ -10,6 +10,8 @@ using PierreMizzi.Useful.PoolingObjects;
 // 				- Minable
 //				- Hurts ship
 
+// Wanna add suns as well with asteroids
+
 namespace StarWielder.Gameplay.Elements
 {
 	public class AsteroidSpawnerManager : MonoBehaviour
@@ -25,6 +27,12 @@ namespace StarWielder.Gameplay.Elements
 		[SerializeField] private ResourcesStageManager m_manager;
 		[SerializeField] private PoolingChannel m_poolingChannel;
 
+
+		#region Voronoi Position Spawning
+
+		
+			
+		#endregion
 
 		#region Voronoi Asteroids Spawning
 
