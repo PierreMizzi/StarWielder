@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
-using PierreMizzi.Rendering;
 using PierreMizzi.Useful;
-using PierreMizzi.Useful.PoolingObjects;
 using PierreMizzi.Useful.StateMachines;
 using StarWielder.Gameplay.Player;
 using UnityEngine;
@@ -59,8 +57,6 @@ namespace StarWielder.Gameplay.Enemies
 
 			Awake();
 
-			m_originPosition = transform.position;
-
 			energyDrainSpeed = m_maxEnergy / m_energyDrainDuration;
 			energyCoolingSpeed = m_maxEnergy / m_energyCoolingDuration;
 
@@ -75,7 +71,13 @@ namespace StarWielder.Gameplay.Enemies
 			ChangeState(OverheaterStateType.Active);
 		}
 
-		public override void Kill()
+        public override void SetPositionAndRotation(Vector3 position, Quaternion rotation)
+        {
+            base.SetPositionAndRotation(position, rotation);
+			m_originPosition = position;
+        }
+
+        public override void Kill()
 		{
 			FreeEnemyStars();
 

@@ -20,9 +20,7 @@ namespace StarWielder.Gameplay.Enemies
 		protected override void SetEnemyTransform(Enemy newEnemy)
 		{
 			Vector3 position = GetRandomPosition();
-
-			newEnemy.transform.position = position;
-			newEnemy.transform.rotation = GetRandomRotation(position);
+			newEnemy.SetPositionAndRotation(position, GetRandomRotation(position));
 		}
 
 		#endregion

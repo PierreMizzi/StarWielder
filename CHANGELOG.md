@@ -7,6 +7,7 @@
 - Minerals on Asteroids can now be smelted using the Sun's energy
   - Smelted minerals creates nuggets that the player can collect.
   - Nuggets are destroyed by the Sun
+- Twin Stars orbiting on each other can now spawn, they provide a small amount of energy during the AsteroidStorm
 
 ### Changes
 

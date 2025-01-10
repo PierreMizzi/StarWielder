@@ -20,6 +20,12 @@ namespace StarWielder.Gameplay.Elements
 	public class AsteroidSpawnerManager : MonoBehaviour
 	{
 
+		[SerializeField] private ResourcesStageManager m_manager;
+		[SerializeField] private PoolingChannel m_poolingChannel;
+
+		[SerializeField] private AsteroidStormSettings m_currentConfig;
+		public AsteroidStormSettings currentConfig => m_currentConfig;
+
 		public void CreateAsteroidStorm()
 		{
 			CreateSpots();
@@ -30,12 +36,6 @@ namespace StarWielder.Gameplay.Elements
 
 			SpawnTwinStars();
 		}
-
-		[SerializeField] private ResourcesStageManager m_manager;
-		[SerializeField] private PoolingChannel m_poolingChannel;
-
-		[SerializeField] private AsteroidStormSettings m_currentConfig;
-		public AsteroidStormSettings currentConfig => m_currentConfig;
 
 		#region Voronoi Position Spawning
 
@@ -256,17 +256,17 @@ namespace StarWielder.Gameplay.Elements
 		{
 			List<AsteroidStormSpot> spots = GetAvailableSpots();
 
-			// int rndTwinStarsCount = 
-			// 🟥 : DO THIS !
+			int rndTwinStarsCount = Random.Range(m_currentConfig.twinStarsMinAmount, m_currentConfig.twinStarsMaxAmount + 1);
+			AsteroidStormSpot spot;
 
-			foreach (AsteroidStormSpot spot in spots)
+			for (int i = 0; i < rndTwinStarsCount; i++)
 			{
-				if (CheckSpawnChance(m_currentConfig.twinStarsSpawnChance))
-				{
-					SpawnTwinStars(spot.position);
-					spot.isTaken = true;
-				}
+				spot = spots.PickRandom();
+				SpawnTwinStars(spot.position);
+				spot.isTaken = true;
+				spots.Remove(spot);
 			}
+
 		}
 
 		private void SpawnTwinStars(Vector3 position)

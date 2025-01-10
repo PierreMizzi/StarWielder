@@ -174,20 +174,12 @@ namespace StarWielder.Gameplay.Player
 		private ShipEnergyConsumptionSettings m_currentEnergyConsumptionSettings;
 		public ShipEnergyConsumptionSettings CurrentEnergyConsumptionSettings => m_currentEnergyConsumptionSettings;
 
-		public void SetEnergyConsumptionMode(EnergyConsumptionMode energyConsumptionMode)
+		public void SetEnergyConsumptionMode(EnergyConsumptionMode mode)
 		{
 			if (m_settings == null)
 				return;
 
-			ShipEnergyConsumptionSettings energySettings = m_settings.energyConsumptionSettings.Find(setting => setting.mode == energyConsumptionMode);
-
-			if (energySettings != null)
-				m_currentEnergyConsumptionSettings = energySettings;
-			else
-			{
-				m_currentEnergyConsumptionSettings = m_settings.defaultEnergyConsumptionSettings;
-				Debug.Log($"Couldn't find an energy consumption settings with : { energyConsumptionMode }");
-			}
+			m_currentEnergyConsumptionSettings = m_settings.GetEnergyConsumptionSettingsFromMode(mode);
 		}
 
 		public delegate void EnergyConsumptionModeDelegate(EnergyConsumptionMode mode);

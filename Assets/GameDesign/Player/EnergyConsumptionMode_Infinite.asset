@@ -17,3 +17,5 @@ MonoBehaviour:
   maxEmergencyEnergy: 100
   emergencyEnergyDepleatRate: 0.001
   emergencyEnergyDuration: 99999.99
+  labelName: INFINITE
+  labelColor: {r: 1, g: 1, b: 1, a: 1}

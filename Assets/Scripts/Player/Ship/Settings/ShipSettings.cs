@@ -19,6 +19,18 @@ namespace StarWielder.Gameplay.Player
 		public List<ShipEnergyConsumptionSettings> energyConsumptionSettings;
 		public ShipEnergyConsumptionSettings defaultEnergyConsumptionSettings;
 
+		public ShipEnergyConsumptionSettings GetEnergyConsumptionSettingsFromMode(Ship.EnergyConsumptionMode mode)
+		{
+			ShipEnergyConsumptionSettings energySettings = energyConsumptionSettings.Find(setting => setting.mode == mode);
+
+			if (energySettings != null)
+				return energySettings;
+			else
+			{
+				return defaultEnergyConsumptionSettings;
+			}
+		}
+
 		[Header("Speed")]
 		public float speed = 6.5f;
 		public float friction = 6f;

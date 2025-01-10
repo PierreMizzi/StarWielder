@@ -6,37 +6,50 @@ namespace StarWielder.Gameplay.Elements
 {
 
 	[RequireComponent(typeof(Rigidbody2D))]
-	public class Asteroid : MonoBehaviour
+	public class Asteroid : MonoBehaviour, IAsteroidStormElement
 	{
 
 		[SerializeField] private PoolingChannel m_poolingChannel;
 		[SerializeField] private SpriteRenderer m_spriteRenderer;
 
-		private Rigidbody2D m_rigidbody;
-
 		private AsteroidSpawnerManager m_manager;
-
-		private void Awake()
-		{
-			m_rigidbody = GetComponent<Rigidbody2D>();
-		}
-
-		private void Update()
-		{
-			if (transform.position.x > m_manager.currentConfig.boundLimits)
-			{
-				Kill();
-			}
-		}
 
 		public void Initialize(AsteroidSpawnerManager manager, Vector3 direction, Color color)
 		{
 			m_manager = manager;
-			m_rigidbody.velocity = direction;
+			rigidbody2D.velocity = direction;
 			m_spriteRenderer.color = color;
 		}
 
-		public void Kill()
+		private void Awake()
+		{
+			rigidbody2D = GetComponent<Rigidbody2D>();
+		}
+
+		private void Update()
+		{
+			if (CheckOutOfBounds())
+			{
+				DestroyOutOfBounds();
+			}
+		}
+
+		#region IAsteroidStormElement
+
+		public AsteroidSpawnerManager manager { get; set; }
+		public new Rigidbody2D rigidbody2D { get; set; }
+
+		public bool CheckOutOfBounds()
+		{
+			if (manager == null)
+			{
+				return false;
+			}
+
+			return transform.position.x > manager.currentConfig.boundLimits;
+		}
+
+		public void DestroyOutOfBounds()
 		{
 			m_manager.ReduceAsteroidCount();
 			m_poolingChannel.onReleaseToPool.Invoke(gameObject);
@@ -54,6 +67,8 @@ namespace StarWielder.Gameplay.Elements
 			}
 		}
 
+		#endregion
+
 		#region Health Flower
 
 		[Header("Health Flower")]
@@ -69,9 +84,12 @@ namespace StarWielder.Gameplay.Elements
 		[SerializeField] private List<Transform> m_mineralAnchors = new List<Transform>();
 		public List<Transform> mineralAnchors { get { return m_mineralAnchors; } }
 
-		[HideInInspector] public Mineral mineral;
+
+        [HideInInspector] public Mineral mineral;
 
 		#endregion
+
+
 
 	}
 }

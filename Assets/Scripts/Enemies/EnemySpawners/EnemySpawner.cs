@@ -47,7 +47,6 @@ namespace StarWielder.Gameplay.Enemies
 			for (int i = 0; i <= m_validSpawnAttempts; i++)
 			{
 				SetEnemyTransform(newEnemy);
-
 				// Wait a small amount of time for the physics engine to move the BoxColldier (EnemyGroup.m_area)
 				yield return new WaitForSeconds(0.01f);
 
@@ -71,8 +70,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		protected virtual void SetEnemyTransform(Enemy newEnemy)
 		{
-			newEnemy.transform.position = GetRandomPosition();
-			newEnemy.transform.rotation = GetRandomRotation();
+			newEnemy.SetPositionAndRotation(GetRandomPosition(), GetRandomRotation());
 		}
 
 		protected virtual Vector3 GetRandomPosition() { return Vector3.zero; }

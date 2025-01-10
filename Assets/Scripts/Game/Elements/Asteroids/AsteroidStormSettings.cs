@@ -50,10 +50,8 @@ public class AsteroidStormSettings : ScriptableObject
 	public float healthFlowerLivableRange = 4;
 
 	[Header("Twin Stars")]
-	public float twinStarsSpawnChance = 0.5f;
-
-	public int m_twinStarsMinCount = 2;
-	public int m_twinStarsMaxCount = 5;
+	public int twinStarsMinAmount = 2;
+	public int twinStarsMaxAmount = 5;
 
 	private void Awake()
 	{

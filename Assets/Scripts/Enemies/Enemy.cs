@@ -54,6 +54,12 @@ namespace StarWielder.Gameplay.Enemies
 			return resultsLength > 0;
 		}
 
+		public virtual void SetPositionAndRotation(Vector3 position, Quaternion rotation)
+		{
+			transform.position = position;
+			transform.rotation = rotation;
+		}
+
 		#endregion
 
 		#region Animations

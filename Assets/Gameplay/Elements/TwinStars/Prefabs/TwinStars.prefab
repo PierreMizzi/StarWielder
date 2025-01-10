@@ -111,10 +111,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pointA: {fileID: 5735832209281902945}
   m_pointB: {fileID: 3042064151410333692}
-  m_orbitSpeed: 1
+  m_orbitSpeed: 0.5
   m_orbitHorizontalLength: 0.5
   m_orbitVerticalLength: 1
-  m_rotationSpeed: 10
+  m_rotationSpeed: 6
   m_poolingChannel: {fileID: 11400000, guid: ca30097c5fa622f40b9a6605b9d4d0b4, type: 2}
   m_enemyStarPrefab: {fileID: 5832544189220738652, guid: 966fec82c7a473d40bc683dbdc27957c, type: 3}
 --- !u!50 &4451066428230334966

@@ -22,6 +22,11 @@ public class ShipEnergyConsumptionSettings : ScriptableObject
 	[Tooltip("NO INFLUENCE ! Calculated from maxEmergencyEnergy & emergencyEnergyDepleatRate")]
 	public float emergencyEnergyDuration;
 
+	[Header("UI")]
+	[Header("Fight Mode")]
+	public string labelName = "FIGHT";
+	public Color labelColor = Color.red;
+
 	private void OnValidate()
 	{
 		emergencyEnergyDuration = maxEmergencyEnergy / emergencyEnergyDepleatRate;

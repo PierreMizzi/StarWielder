@@ -17,3 +17,5 @@ MonoBehaviour:
   maxEmergencyEnergy: 5
   emergencyEnergyDepleatRate: 0.5
   emergencyEnergyDuration: 10
+  labelName: CRUISE
+  labelColor: {r: 0.5686275, g: 0.8588236, b: 0.40784317, a: 1}
