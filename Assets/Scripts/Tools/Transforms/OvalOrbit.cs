@@ -39,7 +39,7 @@ namespace StarWielder.Tools
 		[SerializeField] protected float m_orbitSpeed = 1;
 
 		[SerializeField] protected float m_orbitHorizontalLength = 1f;
-		[SerializeField] protected float m_orbitVerticalLength = 2f;
+		[SerializeField] protected float m_orbitVerticalLength = 1f;
 
 		protected float m_orbitTime = 0;
 		protected Vector3 m_tmpPosition;
@@ -62,7 +62,6 @@ namespace StarWielder.Tools
 
 		[Header("Rotation")]
 		[SerializeField] private float m_rotationSpeed = 10f;
-
 
 		#endregion
 

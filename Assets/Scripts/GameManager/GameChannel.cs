@@ -19,10 +19,9 @@ namespace StarWielder.Gameplay
 		[Obsolete]
 		public FloatDelegate onSetHighestEnergy;
 
-
-
-		// Stage
-
+		// Shop
+		public Action onEnterEnergyStation = () => { };
+		public Action onLeaveEnergyStation = () => { };
 
 		// Currency
 		public IntDelegate onCollectCurrency;
