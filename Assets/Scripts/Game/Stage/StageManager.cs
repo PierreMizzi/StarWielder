@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
 using PierreMizzi.Useful.StateMachines;
-using StarWielder.Gameplay.Enemies;
 using UnityEngine;
 using StarWielder.Gameplay;
-
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -20,7 +17,6 @@ using UnityEditor;
 		- Fight
 		- Shop
 		- Resources
-
 */
 
 
@@ -87,8 +83,6 @@ namespace StarWielder.Gameplay
 			}
 		}
 
-
-
         private void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.N))
@@ -150,6 +144,7 @@ namespace StarWielder.Gameplay
 				new FightStageState(this),
 				new ResourcesStageState(this),
 				new IdleStageState(this),
+				new ShopStageState(this),
 			};
 		}
 

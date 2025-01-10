@@ -1,3 +1,4 @@
+using System;
 using PierreMizzi.Useful;
 using StarWielder.Gameplay.Player;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 namespace StarWielder.Gameplay.Enemies
 {
 
+	[Obsolete]
 	public class OverheaterCore : MonoBehaviour
 	{
 		[SerializeField] private Overheater m_overheater;

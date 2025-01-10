@@ -1,5 +1,7 @@
 using UnityEngine;
 using PierreMizzi.Useful.StateMachines;
+using StarWielder.Gameplay.Player;
+using System;
 
 namespace StarWielder.Gameplay.Enemies
 {
@@ -10,6 +12,16 @@ namespace StarWielder.Gameplay.Enemies
 			: base(stateMachine)
 		{
 			type = (int)OverheaterStateType.Cooling;
+		}
+
+		protected override void DefaultEnter()
+		{
+			base.DefaultEnter();
+
+			if (m_this.SunSocket != null)
+			{
+				m_this.SunSocket.onSocket += CallbackSocket;
+			}
 		}
 
 		public override void Update()
@@ -26,6 +38,21 @@ namespace StarWielder.Gameplay.Enemies
 			{
 				ChangeState((int)OverheaterStateType.Idle);
 			}
+		}
+
+		public override void Exit()
+		{
+			base.Exit();
+			if (m_this.SunSocket != null)
+			{
+				m_this.SunSocket.onSocket -= CallbackSocket;
+			}
+		}
+
+		private void CallbackSocket(Star sun)
+		{
+			m_this.sun = sun;
+			ChangeState((int)OverheaterStateType.Overheating);
 		}
 
 	}

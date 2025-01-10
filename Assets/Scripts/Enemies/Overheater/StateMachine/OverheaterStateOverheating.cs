@@ -2,6 +2,7 @@ using UnityEngine;
 using PierreMizzi.Useful.StateMachines;
 using UnityEngine.InputSystem;
 using StarWielder.Gameplay.Player;
+using System;
 
 namespace StarWielder.Gameplay.Enemies
 {
@@ -20,19 +21,26 @@ namespace StarWielder.Gameplay.Enemies
 
 			m_this.SetHasStar(true);
 
-			m_this.star.ChangeState(StarStateType.Locked);
-			m_this.star.transform.SetParent(m_this.Core.transform);
-			m_this.star.transform.localPosition = Vector3.zero;
-			
-			m_this.star.mouseClickAction.action.performed += CallbackMouseClickAction;
+			// m_this.star.ChangeState(StarStateType.Locked);
+			// m_this.star.transform.SetParent(m_this.Core.transform);
+			// m_this.star.transform.localPosition = Vector3.zero;
+
+			// m_this.star.mouseClickAction.action.performed += CallbackMouseClickAction;
+
+			if (m_this.SunSocket != null)
+			{
+				m_this.SunSocket.onUnsocket += CallbackUnsocket;
+			}
 		}
 
-		public override void Update()
+
+
+        public override void Update()
 		{
 			base.Update();
 
 			// Star
-			m_this.star.currentEnergy -= m_this.energyDrainSpeed * Time.deltaTime;
+			m_this.sun.currentEnergy -= m_this.energyDrainSpeed * Time.deltaTime;
 
 			// Overheater
 			m_this.currentEnergy += m_this.energyDrainSpeed * Time.deltaTime;
@@ -42,7 +50,7 @@ namespace StarWielder.Gameplay.Enemies
 
 			if (m_this.currentEnergy >= m_this.maxEnergy)
 			{
-				m_this.star.ChangeState(StarStateType.Free);
+				m_this.sun.ChangeState(StarStateType.Free);
 				m_this.Kill();
 			}
 		}
@@ -50,18 +58,20 @@ namespace StarWielder.Gameplay.Enemies
 		public override void Exit()
 		{
 			base.Exit();
-			if (m_this.star != null)
-				m_this.star.mouseClickAction.action.performed -= CallbackMouseClickAction;
+			if (m_this.SunSocket != null)
+			{
+				m_this.SunSocket.onUnsocket -= CallbackUnsocket;
+			}
 		}
 
-		private void CallbackMouseClickAction(InputAction.CallbackContext context)
+		private void CallbackUnsocket(Star sun)
 		{
-			m_this.star.mouseClickAction.action.performed -= CallbackMouseClickAction;
-			m_this.star.transform.SetParent(null);
-			m_this.star = null;
+			m_this.sun.transform.SetParent(null);
+			m_this.sun = null;
 			m_this.SetHasStar(false);
 
 			ChangeState((int)OverheaterStateType.Cooling);
 		}
+
 	}
 }

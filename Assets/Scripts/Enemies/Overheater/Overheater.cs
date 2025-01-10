@@ -8,46 +8,10 @@ using UnityEngine;
 
 namespace StarWielder.Gameplay.Enemies
 {
+
+	// Overheater
 	public class Overheater : Enemy, IStateMachine
 	{
-
-		#region Behaviour
-
-		[SerializeField] private OverheaterCore m_core;
-		public OverheaterCore Core => m_core;
-		[SerializeField] private float m_rotationSpeed;
-		public float rotationSpeed => m_rotationSpeed;
-
-		public Star star { get; set; }
-
-		public void CallbackTriggerEnterStar(Star star)
-		{
-			this.star = star;
-			ChangeState(OverheaterStateType.Overheating);
-		}
-
-		#endregion
-
-		#region MonoBehaviour
-
-		private void Start()
-		{
-			if (m_mineSpawningTimer != null)
-				m_mineSpawningTimer.onCycleCompleted += SpawnMine;
-		}
-
-		private void Update()
-		{
-			UpdateState();
-		}
-
-		private void OnDestroy()
-		{
-			if (m_mineSpawningTimer != null)
-				m_mineSpawningTimer.onCycleCompleted -= SpawnMine;
-		}
-
-		#endregion
 
 		#region Enemy
 
@@ -71,13 +35,13 @@ namespace StarWielder.Gameplay.Enemies
 			ChangeState(OverheaterStateType.Active);
 		}
 
-        public override void SetPositionAndRotation(Vector3 position, Quaternion rotation)
-        {
-            base.SetPositionAndRotation(position, rotation);
+		public override void SetPositionAndRotation(Vector3 position, Quaternion rotation)
+		{
+			base.SetPositionAndRotation(position, rotation);
 			m_originPosition = position;
-        }
+		}
 
-        public override void Kill()
+		public override void Kill()
 		{
 			FreeEnemyStars();
 
@@ -91,6 +55,45 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			StopSpawning();
 			ChangeState(OverheaterStateType.Idle);
+		}
+
+		#endregion
+
+		#region Behaviour
+		
+		[SerializeField] private SunSocket m_sunSocket;
+		public SunSocket SunSocket => m_sunSocket;
+
+		[SerializeField] private float m_rotationSpeed;
+		public float rotationSpeed => m_rotationSpeed;
+
+		public Star sun { get; set; }
+
+		public void CallbackTriggerEnterStar(Star star)
+		{
+			this.sun = star;
+			ChangeState(OverheaterStateType.Overheating);
+		}
+
+		#endregion
+
+		#region MonoBehaviour
+
+		private void Start()
+		{
+			if (m_mineSpawningTimer != null)
+				m_mineSpawningTimer.onCycleCompleted += SpawnMine;
+		}
+
+		private void Update()
+		{
+			UpdateState();
+		}
+
+		private void OnDestroy()
+		{
+			if (m_mineSpawningTimer != null)
+				m_mineSpawningTimer.onCycleCompleted -= SpawnMine;
 		}
 
 		#endregion
