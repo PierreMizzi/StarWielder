@@ -6,37 +6,20 @@ namespace StarWielder.UI
 	using StarWielder.Gameplay.Player;
 	using TMPro;
 	using UnityEngine;
+	using UnityEngine.EventSystems;
 	using UnityEngine.UI;
 
-	public class EnergyStationUI : MonoBehaviour, IDisplayHideAnimator
+	public class EnergyStationUI : MonoBehaviour, IDisplayHideAnimator, ICancelHandler
 	{
 		#region Behaviour
 
 		[SerializeField] private GameChannel m_gameChannel;
 		[SerializeField] private PlayerChannel m_playerChannel;
 
-		private void Initialize()
-		{
-			m_slider.value = 0;
-		}
+		[SerializeField] private EnergyStationSettings m_settings;
 
-		#endregion
-
-		#region MonoBehaviour
-
-		private void Awake()
-		{
-			animator = GetComponent<Animator>();
-		}
-
-		private void Start()
-		{
-			if (m_gameChannel != null)
-			{
-				m_gameChannel.onEnterEnergyStation += CallbackEnterEnergyStation;
-				m_gameChannel.onLeaveEnergyStation += CallbackLeaveEnergyStation;
-			}
-		}
+		private float m_coinValue;
+		private float m_energyValue;
 
 		private void CallbackEnterEnergyStation()
 		{
@@ -50,6 +33,49 @@ namespace StarWielder.UI
 
 		#endregion
 
+		#region MonoBehaviour
+
+		private void Awake()
+		{
+			animator = GetComponent<Animator>();
+			if (m_slider != null)
+			{
+				m_slider.onValueChanged.AddListener(CallbackSliderValueChanged);
+			}
+		}
+
+		private void Start()
+		{
+			if (m_gameChannel != null)
+			{
+				m_gameChannel.onEnterEnergyStation += CallbackEnterEnergyStation;
+				m_gameChannel.onLeaveEnergyStation += CallbackLeaveEnergyStation;
+			}
+
+			if (animator == null)
+			{
+				animator = GetComponent<Animator>();
+			}
+
+			m_slider.value = 0;
+		}
+
+		private void OnDestroy()
+		{
+			if (m_gameChannel != null)
+			{
+				m_gameChannel.onEnterEnergyStation -= CallbackEnterEnergyStation;
+				m_gameChannel.onLeaveEnergyStation -= CallbackLeaveEnergyStation;
+			}
+
+			if (m_slider != null)
+			{
+				m_slider.onValueChanged.RemoveListener(CallbackSliderValueChanged);
+			}
+		}
+
+		#endregion
+
 		#region Coin To Energy UI
 
 		[Header("Coin To Energy UI")]
@@ -57,23 +83,63 @@ namespace StarWielder.UI
 		[SerializeField] private TextMeshProUGUI m_energyText;
 		[SerializeField] private Slider m_slider;
 
+
+		/// <summary>
+		/// Linked to "Slider" UI "OnValueChanged"'s callback
+		/// </summary>
+		public void CallbackSliderValueChanged(float value)
+		{
+			if (m_settings == null)
+			{
+				return;
+			}
+
+			m_coinValue = Mathf.Round(m_settings.SpentCoin.Evaluate(value));
+			m_coinText.text = m_coinValue.ToString();
+
+			m_energyValue = Mathf.Round(m_settings.ReceivedEnergy.Evaluate(value));
+			m_energyText.text = m_energyValue.ToString();
+		}
+
 		#endregion
 
 		#region Confirmation buttons
 
-		
+		public void CallbackConfirmButton()
+		{
+			IDisplayHide.Hide();
+		}
+
+		public void CallbackCancelButton()
+		{
+			IDisplayHide.Hide();
+		}
 
 		#endregion
 
 		#region IDisplayHideAnimator
 
+		public IDisplayHideAnimator IDisplayHide
+		{
+			get
+			{
+				return this;
+			}
+		}
+
+
 		public Animator animator { get; set; }
 
-		void IDisplayHideAnimator.Hide()
+		#endregion
+
+		#region ICancelHandler
+
+		public void OnCancel(BaseEventData eventData)
 		{
-			Debug.Log("My own hide !");
+			IDisplayHide.Hide();
 		}
 
 		#endregion
+
 	}
 }

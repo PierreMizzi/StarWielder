@@ -953,7 +953,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -961,6 +961,27 @@ TextureImporter:
       bones: []
       spriteID: 6ed7a31c2eb297e469504308c16e147c
       internalID: 401274590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CyberpunkUI_1
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 387
+        width: 48
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 8, y: 0, z: 3, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c4847fac8573754ab9c2344b2db448d
+      internalID: -1747414564
       vertices: []
       indices: 
       edges: []
@@ -991,6 +1012,7 @@ TextureImporter:
       CyberArrow: 401274590
       CyberCash: 623715619
       CyberpunkUI_0: 1571440639
+      CyberpunkUI_1: -1747414564
       CyberpunkUI_16: 8013544444269992262
       CyberpunkUI_17: 481662186367862308
       CyberpunkUI_18: -1843072945584303231
