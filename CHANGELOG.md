@@ -1,4 +1,4 @@
-# Changelog 
+# Changelog
 
 ## Version 0.7.0 - 07/01/2025
 
@@ -9,7 +9,7 @@
   - Nuggets are destroyed by the Sun
 - Twin Stars orbiting on each other can now spawn, they provide a small amount of energy during the AsteroidStorm
 - Added a ShopStage
-  - Spend coins to give energy to your sun
+  - Spend coins at the EnergyStation to give energy to your sun
 
 ### Changes
 
