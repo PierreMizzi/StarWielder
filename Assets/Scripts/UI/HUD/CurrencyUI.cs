@@ -35,7 +35,7 @@ namespace StarWielder.Gameplay
 
 			if (m_gameChannel != null)
 			{
-				m_gameChannel.onCollectCurrency += CallbackCollectCurrency;
+				m_gameChannel.onIncrementCurrency += CallbackCollectCurrency;
 			}
 		}
 
@@ -43,7 +43,7 @@ namespace StarWielder.Gameplay
 		{
 			if (m_gameChannel != null)
 			{
-				m_gameChannel.onCollectCurrency -= CallbackCollectCurrency;
+				m_gameChannel.onIncrementCurrency -= CallbackCollectCurrency;
 			}
 		}
 

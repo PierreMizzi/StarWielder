@@ -17,7 +17,7 @@ public class MineralNuggetUI : MonoBehaviour
 
 		if (m_gameChannel != null)
 		{
-			m_gameChannel.onCollectMineralNugget += CallbackCollectMineralNugget;
+			m_gameChannel.onIncrementMineralNugget += CallbackCollectMineralNugget;
 		}
 	}
 
@@ -25,7 +25,7 @@ public class MineralNuggetUI : MonoBehaviour
 	{
 		if (m_gameChannel != null)
 		{
-			m_gameChannel.onCollectMineralNugget -= CallbackCollectMineralNugget;
+			m_gameChannel.onIncrementMineralNugget -= CallbackCollectMineralNugget;
 		}
 	}
 

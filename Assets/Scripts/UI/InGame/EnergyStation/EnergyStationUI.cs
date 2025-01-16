@@ -18,8 +18,8 @@ namespace StarWielder.UI
 
 		[SerializeField] private EnergyStationSettings m_settings;
 
-		private float m_coinValue;
-		private float m_energyValue;
+		private int m_coinValue;
+		private int m_energyValue;
 
 		private void CallbackEnterEnergyStation()
 		{
@@ -94,20 +94,23 @@ namespace StarWielder.UI
 				return;
 			}
 
-			m_coinValue = Mathf.Round(m_settings.SpentCoin.Evaluate(value));
+			m_coinValue = Mathf.CeilToInt(m_settings.SpentCoin.Evaluate(value));
 			m_coinText.text = m_coinValue.ToString();
 
-			m_energyValue = Mathf.Round(m_settings.ReceivedEnergy.Evaluate(value));
+			m_energyValue = Mathf.CeilToInt(m_settings.ReceivedEnergy.Evaluate(value));
 			m_energyText.text = m_energyValue.ToString();
 		}
 
 		#endregion
 
-		#region Confirmation buttons
+		#region Buttons
 
 		public void CallbackConfirmButton()
 		{
 			IDisplayHide.Hide();
+
+			m_gameChannel.onDecrementCurrency.Invoke(m_coinValue);
+			m_gameChannel.onIncrementMineralNugget.Invoke(m_coinValue);
 		}
 
 		public void CallbackCancelButton()

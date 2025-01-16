@@ -54,7 +54,7 @@ public class MineralNugget : MonoBehaviour
 
     private void CollectComplete()
     {
-		m_gameChannel?.onCollectMineralNugget.Invoke(1);
+		m_gameChannel?.onIncrementMineralNugget.Invoke(1);
 		ReleaseToPool();
 	}
 

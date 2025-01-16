@@ -24,10 +24,14 @@ namespace StarWielder.Gameplay
 		public Action onLeaveEnergyStation = () => { };
 
 		// Currency
-		public IntDelegate onCollectCurrency;
+		public int currencyCurrentAmount;
+		public IntDelegate onIncrementCurrency;
+		public IntDelegate onDecrementCurrency;
 
 		// Mineral Nugget
-		public IntDelegate onCollectMineralNugget;
+		public int mineralNuggetCurrentAmount;
+		public IntDelegate onIncrementMineralNugget;
+		public IntDelegate onDecrementMineralNugget;
 
 		// Game Over
 		public GameOverDelegate onGameOver;
@@ -43,13 +47,13 @@ namespace StarWielder.Gameplay
 			onRefreshTimer = (float time) => { };
 			onSetHighestEnergy = (float highestEnergy) => { };
 
-
-
 			// Currency
-			onCollectCurrency = (int amount) => { };
+			onIncrementCurrency = IncrementCurrency;
+			onDecrementCurrency = DecrementCurrency;
 
 			// Mineral
-			onCollectMineralNugget = (int amount) => { };
+			onIncrementMineralNugget = IncrementMineralNugget;
+			onDecrementMineralNugget = DecrementMineralNugget;
 
 			// Stage
 
@@ -57,6 +61,28 @@ namespace StarWielder.Gameplay
 			onGameOver = (GameOverReason reason) => { };
 			onGameOverScreen = (GameOverData data) => { };
 			onReplay = () => { };
+		}
+
+		public void IncrementCurrency(int amount)
+		{
+			currencyCurrentAmount += amount;
+		}
+
+		public void DecrementCurrency(int amount)
+		{
+			currencyCurrentAmount -= amount;
+			currencyCurrentAmount = Math.Max(currencyCurrentAmount, 0);
+		}
+
+		public void IncrementMineralNugget(int amount)
+		{
+			mineralNuggetCurrentAmount += amount;
+		}
+
+		public void DecrementMineralNugget(int amount)
+		{
+			mineralNuggetCurrentAmount -= amount;
+			mineralNuggetCurrentAmount = Math.Max(currencyCurrentAmount, 0);
 		}
 
 	}

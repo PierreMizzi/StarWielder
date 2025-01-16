@@ -63,7 +63,7 @@ namespace StarWielder.Gameplay
 
 		private void CallbackOnComplete()
 		{
-			m_gameChannel.onCollectCurrency.Invoke(1);
+			m_gameChannel.onIncrementCurrency.Invoke(1);
 			m_poolingChannel.onReleaseToPool.Invoke(gameObject);
 		}
 
