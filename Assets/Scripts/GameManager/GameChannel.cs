@@ -23,6 +23,9 @@ namespace StarWielder.Gameplay
 		public Action onEnterEnergyStation = () => { };
 		public Action onLeaveEnergyStation = () => { };
 
+		// Energy
+		public FloatDelegate onSunIncrementEnergy;
+
 		// Currency
 		public int currencyCurrentAmount;
 		public IntDelegate onIncrementCurrency;
@@ -72,6 +75,11 @@ namespace StarWielder.Gameplay
 		{
 			currencyCurrentAmount -= amount;
 			currencyCurrentAmount = Math.Max(currencyCurrentAmount, 0);
+		}
+
+		public bool HasEnoughCurrency(float neededCurrency)
+		{
+			return neededCurrency < currencyCurrentAmount;
 		}
 
 		public void IncrementMineralNugget(int amount)

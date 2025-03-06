@@ -69,7 +69,5 @@ namespace StarWielder.Gameplay.Player
 			if (other.gameObject == m_this.ship.gameObject)
 				ChangeState((int)StarStateType.Transfer);
 		}
-
-
 	}
 }

@@ -15,7 +15,6 @@ namespace StarWielder.Gameplay
 		[SerializeField] private Camera m_camera;
 
 		[SerializeField] private TextMeshProUGUI m_currencyLabel;
-		private int m_totalCurrency;
 
 		[ContextMenu("Test")]
 		public void Test()
@@ -25,8 +24,7 @@ namespace StarWielder.Gameplay
 
 		private IEnumerator Start()
 		{
-			m_totalCurrency = 0;
-			m_currencyLabel.text = m_totalCurrency.ToString();
+			CallbackUpdateCurrency();
 
 			yield return new WaitForSeconds(1f);
 			worldPosition = m_camera.ScreenToWorldPoint(m_rectTransform.position);
@@ -35,7 +33,8 @@ namespace StarWielder.Gameplay
 
 			if (m_gameChannel != null)
 			{
-				m_gameChannel.onIncrementCurrency += CallbackCollectCurrency;
+				m_gameChannel.onIncrementCurrency += CallbackUpdateCurrency;
+				m_gameChannel.onDecrementCurrency += CallbackUpdateCurrency;
 			}
 		}
 
@@ -43,14 +42,14 @@ namespace StarWielder.Gameplay
 		{
 			if (m_gameChannel != null)
 			{
-				m_gameChannel.onIncrementCurrency -= CallbackCollectCurrency;
+				m_gameChannel.onIncrementCurrency -= CallbackUpdateCurrency;
+				m_gameChannel.onDecrementCurrency -= CallbackUpdateCurrency;
 			}
 		}
 
-		private void CallbackCollectCurrency(int amount)
+		private void CallbackUpdateCurrency(int amount = 0)
 		{
-			m_totalCurrency += amount;
-			m_currencyLabel.text = m_totalCurrency.ToString();
+			m_currencyLabel.text = m_gameChannel.currencyCurrentAmount.ToString();
 		}
 	}
 }

@@ -107,10 +107,13 @@ namespace StarWielder.UI
 
 		public void CallbackConfirmButton()
 		{
-			IDisplayHide.Hide();
+			if (m_gameChannel.HasEnoughCurrency(m_coinValue))
+			{
+				m_gameChannel.onDecrementCurrency.Invoke(m_coinValue);
+				m_gameChannel.onSunIncrementEnergy.Invoke(m_energyValue);
 
-			m_gameChannel.onDecrementCurrency.Invoke(m_coinValue);
-			m_gameChannel.onIncrementMineralNugget.Invoke(m_coinValue);
+				IDisplayHide.Hide();
+			}
 		}
 
 		public void CallbackCancelButton()

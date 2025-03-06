@@ -128,6 +128,8 @@ namespace StarWielder.Gameplay.Player
 
 			if (m_gameChannel != null)
 			{
+				m_gameChannel.onSunIncrementEnergy += CallbackIncrementEnergy;
+
 				m_gameChannel.onGameOver += CallbackGameOver;
 			}
 		}
@@ -162,6 +164,16 @@ namespace StarWielder.Gameplay.Player
 				return;
 
 			onTriggerEnter2D.Invoke(other);
+		}
+
+        void OnDestroy()
+        {
+			if (m_gameChannel != null)
+			{
+				m_gameChannel.onSunIncrementEnergy -= CallbackIncrementEnergy;
+
+				m_gameChannel.onGameOver -= CallbackGameOver;
+			}
 		}
 
 		#endregion
@@ -248,6 +260,11 @@ namespace StarWielder.Gameplay.Player
 				ChangeState(StarStateType.Dying);
 				gameChannel.onGameOver.Invoke(GameOverReason.StarDied);
 			}
+		}
+
+		private void CallbackIncrementEnergy(float addedEnergy)
+		{
+			m_currentEnergy += addedEnergy;
 		}
 
 		#endregion
