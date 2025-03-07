@@ -1,13 +1,14 @@
+using System;
+using PierreMizzi.Useful.UI;
+using StarWielder.Gameplay;
+using StarWielder.Gameplay.Player;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
 namespace StarWielder.UI
 {
-	using System;
-	using PierreMizzi.Useful.UI;
-	using StarWielder.Gameplay;
-	using StarWielder.Gameplay.Player;
-	using TMPro;
-	using UnityEngine;
-	using UnityEngine.EventSystems;
-	using UnityEngine.UI;
 
 	public class EnergyStationUI : MonoBehaviour, IDisplayHideAnimator, ICancelHandler
 	{
