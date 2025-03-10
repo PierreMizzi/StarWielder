@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace StarWielder.Gameplay.Player
@@ -9,38 +11,91 @@ namespace StarWielder.Gameplay.Player
 	public class DashStar : MonoBehaviour
 	{
 
-		#region MonoBehaviour
+		#region Behaviour
 
-		private void Awake()
+		private Ship m_ship;
+		private DashStarManager m_dashStarManager;
+
+		[SerializeField] private bool m_canUse = true;
+		public bool canUse => m_canUse ;
+
+		private float m_dashCooldownTime = 0;
+
+		public void Initialize(Ship ship, DashStarManager dashStarManager)
+        {
+			Awake();
+			m_ship = ship;
+			m_dashStarManager = dashStarManager;
+		}
+
+		[ContextMenu("Use")]
+        public void Use()
+		{
+			_animator.SetTrigger(k_triggerUse);
+			m_isFollowing = false;
+			m_canUse = false;
+			StartCoroutine(DashCooldownIEnumerator());
+		}
+
+		private IEnumerator DashCooldownIEnumerator()
+		{
+			m_dashCooldownTime = 0f;
+			while (m_dashCooldownTime < m_ship.stats.dashCooldownDuration)
+			{
+				m_dashCooldownTime += Time.deltaTime;
+				yield return null;
+			}
+			Recharge();
+		}
+
+		public void Recharge()
+		{
+			_animator.SetTrigger(k_triggerRecharge);
+			m_canUse = true;
+		}
+
+
+
+        #endregion
+
+        #region MonoBehaviour
+
+        private void Awake()
 		{
 			_animator = GetComponent<Animator>();
 		}
 
-		private void Update()
+		private void LateUpdate()
 		{
 			Follow();
 		}
 
 		#endregion
 
-		#region Follow
+		#region Anchor
 
 		[Header("Follow")]
-		[SerializeField] private Transform m_followTransform = null;
 		[SerializeField] private float m_followSpeed = 0.2f;
 		private Vector3 m_velocity;
+		
+		[SerializeField] private DashStarAnchor m_ownAnchor;
+		[SerializeField] private DashStarAnchor m_nextAnchor;
+		public DashStarAnchor nextAnchor => m_nextAnchor;
 
 		private bool m_isFollowing = true;
 
 		private void Follow()
 		{
-			if (m_followTransform != null && m_isFollowing)
-				transform.position = Vector3.SmoothDamp(transform.position, m_followTransform.position, ref m_velocity, m_followSpeed);
+			if (m_ownAnchor != null && m_isFollowing)
+			{
+				transform.position = Vector3.SmoothDamp(transform.position, m_ownAnchor.transform.position, ref m_velocity, m_followSpeed);
+			}
 		}
 
-		public void AnimEventFollow()
+		public void SetAnchor(DashStarAnchor ownAnchor)
 		{
-			m_isFollowing = true;
+			m_ownAnchor = ownAnchor;
+			m_nextAnchor.Set(m_ship.transform, transform);
 		}
 
 		#endregion
@@ -52,20 +107,15 @@ namespace StarWielder.Gameplay.Player
 		private const string k_triggerUse = "Use";
 		private const string k_triggerRecharge = "Recharge";
 
-		public void Use()
+		public void AnimEventFollow()
 		{
-			_animator.SetTrigger(k_triggerUse);
-			m_isFollowing = false;
-		}
-
-		public void Recharge()
-		{
-			_animator.SetTrigger(k_triggerRecharge);
+			m_isFollowing = true;
 		}
 
 
-		#endregion
+
+        #endregion
 
 
-	}
+    }
 }

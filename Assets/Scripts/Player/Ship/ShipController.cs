@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 using PierreMizzi.SoundManager;
+using System;
 
 namespace StarWielder.Gameplay.Player
 {
@@ -40,8 +41,15 @@ namespace StarWielder.Gameplay.Player
 			ReadMousePositionInputs();
 			Rotate();
 
-			if (m_canDash && m_dashActionReference.action.IsPressed())
-				Dash();
+			if (m_dashActionReference.action.IsPressed() && m_isDashing == false)
+			{
+				DashStar dashStar = m_dashStarManager.GetUsableDashStar();
+				if(dashStar != null)
+				{
+					Dash();
+					dashStar.Use();
+				}
+			} 
 
 			if (!m_isDashing)
 			{
@@ -140,13 +148,15 @@ namespace StarWielder.Gameplay.Player
 		#region Dash
 
 		[Header("Dash")]
-		[SerializeField] private DashStar m_dashStar;
+		
+		[SerializeField] private DashStarManager m_dashStarManager;
 		[SerializeField] private InputActionReference m_dashActionReference;
 
-		private float m_dashCooldownTime;
-
 		private bool m_isDashing = false;
+
+		[Obsolete]
 		private bool m_canDash = true;
+
 
 		private void Dash()
 		{
@@ -157,9 +167,6 @@ namespace StarWielder.Gameplay.Player
 				dashDirection = m_locomotionActionValue;
 			Vector3 endPosition = transform.position + dashDirection * m_settings.dashDistance;
 
-			m_canDash = false;
-			m_dashCooldownTime = 0f;
-
 			m_isDashing = true;
 			m_ship.SetIsDashing(m_isDashing);
 
@@ -167,7 +174,6 @@ namespace StarWielder.Gameplay.Player
 					 .SetEase(Ease.OutSine)
 					 .OnComplete(OnCompleteDash);
 
-			m_dashStar.Use();
 			SoundManager.PlaySFX(SoundDataID.SHIP_DASH);
 		}
 
@@ -175,19 +181,6 @@ namespace StarWielder.Gameplay.Player
 		{
 			m_isDashing = false;
 			m_ship.SetIsDashing(m_isDashing);
-			StartCoroutine(DashCooldownIEnumerator());
-		}
-
-		private IEnumerator DashCooldownIEnumerator()
-		{
-			while (m_dashCooldownTime <= m_ship.stats.dashCooldownDuration)
-			{
-				m_dashCooldownTime += Time.deltaTime;
-				yield return null;
-			}
-
-			m_canDash = true;
-			m_dashStar.Recharge();
 		}
 
 		#endregion

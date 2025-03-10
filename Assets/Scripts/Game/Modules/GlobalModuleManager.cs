@@ -2,6 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+	Which module is happening where ?
+
+	TwinDashStar :
+		- DashStarManager.cs, Ship.prefab component
+*/
+
 namespace StarWielder.Gameplay.Modules
 {
 	/// <summary>
@@ -16,7 +24,7 @@ namespace StarWielder.Gameplay.Modules
 		[Header("Behaviour")]
 		[SerializeField] private ModuleChannel m_moduleChannel;
 
-		private void CallbackEnableModule(ModuleType type)
+		private void CallbackEnableModuleType(ModuleType type)
 		{
 			if (type != ModuleType.None && m_modules.TryGetValue(type, out BaseModule module))
 			{
@@ -24,7 +32,7 @@ namespace StarWielder.Gameplay.Modules
 			}
 		}
 
-		private void CallbackDisableModule(ModuleType type)
+		private void CallbackDisableModuleType(ModuleType type)
 		{
 			if (type != ModuleType.None && m_modules.TryGetValue(type, out BaseModule module))
 			{
@@ -40,8 +48,8 @@ namespace StarWielder.Gameplay.Modules
 		{
 			if (m_moduleChannel != null)
 			{
-				m_moduleChannel.onEnableModule += CallbackEnableModule;
-				m_moduleChannel.onDisableModule += CallbackDisableModule;
+				m_moduleChannel.onEnableModuleType += CallbackEnableModuleType;
+				m_moduleChannel.onDisableModuleType += CallbackDisableModuleType;
 			}
 
 			StoreModules();
@@ -51,8 +59,8 @@ namespace StarWielder.Gameplay.Modules
         {
 			if (m_moduleChannel != null)
 			{
-				m_moduleChannel.onEnableModule -= CallbackEnableModule;
-				m_moduleChannel.onDisableModule -= CallbackDisableModule;
+				m_moduleChannel.onEnableModuleType -= CallbackEnableModuleType;
+				m_moduleChannel.onDisableModuleType -= CallbackDisableModuleType;
 			}
 		}
 

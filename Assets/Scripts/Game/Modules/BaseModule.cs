@@ -8,17 +8,19 @@ namespace StarWielder.Gameplay.Modules
 	/// </summary>
 	public class BaseModule : MonoBehaviour
 	{
+		[SerializeField] private ModuleChannel m_moduleChannel;
 		[SerializeField] private ModuleType m_type;
 		public ModuleType type => m_type;
 		[SerializeField] private bool m_isEnabled;
 		public bool isEnabled => m_isEnabled;
 
-		public void Enable()
+		public virtual void Enable()
 		{
 			m_isEnabled = true;
+			m_moduleChannel.onEnableModule?.Invoke(this);
 		}
 
-		public void Disable()
+		public virtual void Disable()
 		{
 			m_isEnabled = false;
 		}

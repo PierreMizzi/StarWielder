@@ -3,18 +3,21 @@ using UnityEngine;
 namespace StarWielder.Gameplay.Modules
 {
 
-	public delegate void ModuleDelegate(ModuleType type);
+	public delegate void ModuleTypeDelegate(ModuleType type);
+	public delegate void ModuleDelegate(BaseModule module);
 
 	[CreateAssetMenu(fileName = "ModuleChannel", menuName = "StarWielder/ModuleChannel", order = 0)]
 	public class ModuleChannel : ScriptableObject
 	{
+		public ModuleTypeDelegate onEnableModuleType;
 		public ModuleDelegate onEnableModule;
-		public ModuleDelegate onDisableModule;
+		public ModuleTypeDelegate onDisableModuleType;
 
 		private void OnEnable()
 		{
-			onEnableModule = (ModuleType type) => {};
-			onDisableModule = (ModuleType type) => { };
+			onEnableModuleType = (ModuleType type) => {};
+			onEnableModule = (BaseModule module)=> {};
+			onDisableModuleType = (ModuleType type) => { };
 		}
 
 		#region Debug
@@ -24,15 +27,19 @@ namespace StarWielder.Gameplay.Modules
 		[ContextMenu("Call EnableModule")]
 		public void EnableModule()
 		{
-			onEnableModule?.Invoke(m_type);
+			onEnableModuleType?.Invoke(m_type);
 		}
 
 		[ContextMenu("Call DisableModule")]
 		public void DisableModule()
 		{
-			onDisableModule?.Invoke(m_type);
+			onDisableModuleType?.Invoke(m_type);
 		}
 
+		#endregion
+	
+		#region Name
+			
 		#endregion
 	}
 }

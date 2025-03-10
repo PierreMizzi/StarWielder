@@ -277,5 +277,9 @@ namespace StarWielder.Gameplay.Player
 
 		#endregion
 
+		#region Modules
+			
+		#endregion
+
 	}
 }
