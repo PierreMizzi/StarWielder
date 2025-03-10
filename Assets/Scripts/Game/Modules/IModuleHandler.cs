@@ -8,18 +8,29 @@ namespace StarWielder.Gameplay.Modules
 	/// 
 	/// </summary>
 	public interface IModuleHandler
-	{
+	{	
 
+		public ModuleChannel ModuleChannel { get; }
+		// public BaseModuleSettings Settings { get; }
+		// public bool IsEnabled { get; set; }
+		
+		public void SubscribeModuleHandler()
+		{
+			if (ModuleChannel != null)
+			{
+				ModuleChannel.onEnableModule += CallbackEnableModule;
+			}
+		}
 
-		public void InitializeModuleHandler();
+		public void UnsubscribeModuleHandler()
+		{
+			if (ModuleChannel != null)
+			{
+				ModuleChannel.onDisableModule -= CallbackEnableModule;
+			}
+		}
+
 		public void CallbackEnableModule(BaseModule module);
-		// public void CallbackResetAllModules();
-
-		#region Implementation
-
-		// [SerializeField] private ModuleChannel m_moduleChannel;
-			
-		#endregion
 
 	}
 }

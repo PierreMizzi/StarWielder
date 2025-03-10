@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
 using StarWielder.Gameplay;
+using System;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -22,6 +24,8 @@ using UnityEditor;
 
 namespace StarWielder.Gameplay
 {
+
+	public delegate void ChangeStageStateDelegate(StageStateType type);
 
 	public class StageManager : MonoBehaviour, IStateMachine
 	{
@@ -162,6 +166,7 @@ namespace StarWielder.Gameplay
 			{
 				StageState casted = (StageState)currentState;
 				casted.Enter(nextStageSettings);
+				m_gameChannel.onChangeStageState.Invoke(nextStageSettings.Type);
 			}
 			else
 			{
@@ -169,6 +174,7 @@ namespace StarWielder.Gameplay
 			}
 		}
 
+		[Obsolete]
 		public void ChangeState(int previousState, int nextState) { }
 
 

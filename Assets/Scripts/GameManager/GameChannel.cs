@@ -12,6 +12,10 @@ namespace StarWielder.Gameplay
 		public Action onFirstDocking;
 		public Action onStartGame;
 
+		// Stage
+		public ChangeStageStateDelegate onChangeStageState;
+		[HideInInspector] public StageStateType currentStagetype;
+
 		// Score
 		[Obsolete]
 		public FloatDelegate onRefreshTimer;
@@ -45,6 +49,8 @@ namespace StarWielder.Gameplay
 		{
 			// Title Screen
 			onStartGame = () => { };
+
+			onChangeStageState = (StageStateType type) => { currentStagetype = type;};
 
 			// Score
 			onRefreshTimer = (float time) => { };

@@ -12,12 +12,14 @@ namespace StarWielder.Gameplay.Modules
 		public ModuleTypeDelegate onEnableModuleType;
 		public ModuleDelegate onEnableModule;
 		public ModuleTypeDelegate onDisableModuleType;
+		public ModuleDelegate onDisableModule;
 
 		private void OnEnable()
 		{
-			onEnableModuleType = (ModuleType type) => {};
-			onEnableModule = (BaseModule module)=> {};
+			onEnableModuleType = (ModuleType type) => { };
+			onEnableModule = (BaseModule module) => { };
 			onDisableModuleType = (ModuleType type) => { };
+			onDisableModule = (BaseModule module) => { };
 		}
 
 		#region Debug
@@ -37,9 +39,9 @@ namespace StarWielder.Gameplay.Modules
 		}
 
 		#endregion
-	
+
 		#region Name
-			
+
 		#endregion
 	}
 }

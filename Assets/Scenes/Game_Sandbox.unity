@@ -3741,6 +3741,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a14bbab7ba6a8449636ba4973bd28b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1155306932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1155306933}
+  - component: {fileID: 1155306934}
+  m_Layer: 0
+  m_Name: EconomicModeModule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1155306933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155306932}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1812174818}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1155306934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155306932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08583b5ba3831c0479e770e5df1c898d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_moduleChannel: {fileID: 11400000, guid: 2eb9a1798178a2f4b960caee326ac98b, type: 2}
+  m_settings: {fileID: 11400000, guid: feb14f37923e1db4395ac8a92b23969d, type: 2}
+  m_type: 2
+  m_isEnabled: 0
+  m_ship: {fileID: 1709517717}
+  m_gameChannel: {fileID: 11400000, guid: 7fa2ee207c87f4e42827ce90cc2e7f70, type: 2}
+  m_playerChannel: {fileID: 11400000, guid: 1ebce8acce4141b4382229e40c13a0d8, type: 2}
+  m_immobileTime: 0
 --- !u!224 &1164772878 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4263210824925364382, guid: 3fc227770a2a4a14dbbd1b0e3671c0ea, type: 3}
@@ -4419,9 +4471,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1478910489}
-  - component: {fileID: 1478910490}
   m_Layer: 0
-  m_Name: TwinStarModule
+  m_Name: TwinDashStarModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4442,21 +4493,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1812174818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1478910490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478910488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f550651b21ef40244af8999a8b2f84fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_moduleChannel: {fileID: 11400000, guid: 2eb9a1798178a2f4b960caee326ac98b, type: 2}
-  m_type: 1
-  m_isEnabled: 0
 --- !u!1 &1482672299
 GameObject:
   m_ObjectHideFlags: 0
@@ -5319,6 +5355,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1478910489}
+  - {fileID: 1155306933}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1858291211

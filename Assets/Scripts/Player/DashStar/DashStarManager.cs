@@ -10,21 +10,18 @@ namespace StarWielder.Gameplay.Player
 	{
 
 		[SerializeField] private Ship m_ship;
-
+ 
 		#region MonoBehaviour
 
 		private void Start()
 		{
-			InitializeModuleHandler();
+			(this as IModuleHandler).SubscribeModuleHandler();
 			InitializeDashStars();
 		}
 
 		private void OnDestroy()
 		{
-			if (m_moduleChannel != null)
-			{
-				m_moduleChannel.onEnableModule -= CallbackEnableModule;
-			}
+			(this as IModuleHandler).UnsubscribeModuleHandler();
 		}
 
 		#endregion
@@ -32,17 +29,11 @@ namespace StarWielder.Gameplay.Player
 		#region IModuleHandler
 
 		[SerializeField] private ModuleChannel m_moduleChannel;
-		public void InitializeModuleHandler()
-		{
-			if (m_moduleChannel != null)
-			{
-				m_moduleChannel.onEnableModule += CallbackEnableModule;
-			}
-		}
+		public ModuleChannel ModuleChannel => m_moduleChannel;
 
 		public void CallbackEnableModule(BaseModule module)
 		{
-			switch (module.type)
+			switch (module.Type)
 			{
 				case ModuleType.TwinDashStar:
 					CreateDashStar();

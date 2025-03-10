@@ -68,6 +68,8 @@ namespace StarWielder.Gameplay.Player
 				}
 
 				transform.position += m_velocity * m_ship.stats.speed * Time.deltaTime * m_velocityCoef;
+
+				ManageIsImmobile();
 			}
 		}
 
@@ -120,6 +122,8 @@ namespace StarWielder.Gameplay.Player
 		private Vector3 m_velocity;
 		private float m_velocityCoef;
 
+		private bool m_isImmobile = true;
+
 		// Rotation
 		private Vector2 m_mousePositionActionValue;
 		private Vector2 m_screenSpacePosition;
@@ -143,6 +147,27 @@ namespace StarWielder.Gameplay.Player
 			m_mousePositionActionValue = m_mousePositionActionReference.action.ReadValue<Vector2>();
 		}
 
+		public void ManageIsImmobile()
+		{
+			if(m_velocityCoef <= 0.05f)
+			{
+				if (m_isImmobile == false)
+				{
+					m_isImmobile = true;
+					m_ship.playerChannel.onIsImmobile.Invoke(m_isImmobile);
+				}
+			}
+			else
+			{
+				if (m_isImmobile == true)
+				{
+					m_isImmobile = false;
+					m_ship.playerChannel.onIsImmobile.Invoke(m_isImmobile);
+				}
+			}
+
+		}
+
 		#endregion
 
 		#region Dash
@@ -153,10 +178,6 @@ namespace StarWielder.Gameplay.Player
 		[SerializeField] private InputActionReference m_dashActionReference;
 
 		private bool m_isDashing = false;
-
-		[Obsolete]
-		private bool m_canDash = true;
-
 
 		private void Dash()
 		{

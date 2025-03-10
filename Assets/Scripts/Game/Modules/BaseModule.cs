@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 namespace StarWielder.Gameplay.Modules
@@ -8,16 +7,17 @@ namespace StarWielder.Gameplay.Modules
 	/// </summary>
 	public class BaseModule : MonoBehaviour
 	{
-		[SerializeField] private ModuleChannel m_moduleChannel;
-		[SerializeField] private ModuleType m_type;
-		public ModuleType type => m_type;
-		[SerializeField] private bool m_isEnabled;
-		public bool isEnabled => m_isEnabled;
+		[SerializeField] protected ModuleChannel m_moduleChannel;
+		[SerializeField] protected BaseModuleSettings m_settings;
+		[SerializeField] protected ModuleType m_type;
+		public ModuleType Type => m_type;
+		[SerializeField] protected bool m_isEnabled;
+		public bool IsEnabled => m_isEnabled;
 
 		public virtual void Enable()
 		{
 			m_isEnabled = true;
-			m_moduleChannel.onEnableModule?.Invoke(this);
+			
 		}
 
 		public virtual void Disable()

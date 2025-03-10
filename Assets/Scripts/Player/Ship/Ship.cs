@@ -169,6 +169,7 @@ namespace StarWielder.Gameplay.Player
 			Low,
 			Fight,
 			Infinite,
+			Eco,
 		}
 
 		private ShipEnergyConsumptionSettings m_currentEnergyConsumptionSettings;

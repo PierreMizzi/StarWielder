@@ -58,6 +58,12 @@ namespace StarWielder.Gameplay.Player
 
 		#endregion
 
+		#region Controller
+
+		public BoolDelegate onIsImmobile;
+
+		#endregion
+
 		public void OnEnable()
 		{
 			onAbsorbEnemyStar = (float energy) => { };
@@ -71,11 +77,15 @@ namespace StarWielder.Gameplay.Player
 
 			onRefreshEmergencyEnergy = (float energy) => { };
 
+			// Health
 			onRefreshShipHealth = (float normalizedHealth) => { };
 
+			// Combo
 			onComboIncrement = () => { m_currentCombo++; };
 			onComboBreak = () => { m_currentCombo = 0; };
 
+			// Controller
+			onIsImmobile = (bool value) => { };
 		}
 	}
 }

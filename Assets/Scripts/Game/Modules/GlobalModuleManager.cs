@@ -79,9 +79,9 @@ namespace StarWielder.Gameplay.Modules
 			{
 				if(child.TryGetComponent(out BaseModule module))
 				{
-					if (m_modules.ContainsKey(module.type) == false)
+					if (m_modules.ContainsKey(module.Type) == false)
 					{
-						m_modules.Add(module.type, module);
+						m_modules.Add(module.Type, module);
 					}
 				}
 			}
