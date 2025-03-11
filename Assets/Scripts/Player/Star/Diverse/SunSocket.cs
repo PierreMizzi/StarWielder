@@ -76,7 +76,6 @@ namespace StarWielder.Gameplay.Player
 
 			if (UtilsClass.CheckLayer(m_starLayerMask.value, other.gameObject.layer))
 			{
-				// m_overheater?.CallbackTriggerEnterStar(other.GetComponent<Star>());
 				if (other.TryGetComponent(out Star sun))
 				{
 					Socket(sun);

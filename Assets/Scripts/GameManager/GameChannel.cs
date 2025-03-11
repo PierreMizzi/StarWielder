@@ -27,6 +27,9 @@ namespace StarWielder.Gameplay
 		public Action onEnterEnergyStation = () => { };
 		public Action onLeaveEnergyStation = () => { };
 
+		public Action onEnterSpaceShop = () => { };
+		public Action onLeaveSpaceShop = () => { };
+
 		// Energy
 		public FloatDelegate onSunIncrementEnergy;
 

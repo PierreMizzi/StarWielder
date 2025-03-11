@@ -14,6 +14,14 @@ namespace StarWielder.Gameplay.Modules
 		protected bool m_isEnabled;
 		public bool IsEnabled => m_isEnabled;
 
+		public bool IsBuyable
+		{
+			get
+			{
+				return !m_isEnabled;
+			}
+		}
+
 		public virtual void Enable()
 		{
 			m_isEnabled = true;
