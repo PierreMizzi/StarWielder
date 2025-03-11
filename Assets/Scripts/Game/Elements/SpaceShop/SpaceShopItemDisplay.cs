@@ -1,6 +1,7 @@
 using System;
 using StarWielder.Gameplay.Player;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace StarWielder.Gameplay.Elements
 {
@@ -37,10 +38,37 @@ namespace StarWielder.Gameplay.Elements
 
 		#endregion
 
+		#region Orbiter
+		[SerializeField] private Orbiter m_orbiter;
+		[SerializeField] private Vector2 m_orbiterMinMaxAngleTop;
+		[SerializeField] private Vector2 m_orbiterMinMaxAngleBot;
+
+		public void RandomizeOrbit()
+		{
+			bool topOrBot = Random.Range(0, 2) == 0;
+			float rndAngle;
+
+			if (topOrBot)
+			{
+				rndAngle = Mathf.Lerp(m_orbiterMinMaxAngleTop.x, m_orbiterMinMaxAngleTop.y, Random.Range(0, 1f));
+				m_orbiter.SetTime(rndAngle);
+				m_orbiter.isClockwise = true;
+			}		
+			else
+			{
+				rndAngle = Mathf.Lerp(m_orbiterMinMaxAngleBot.x, m_orbiterMinMaxAngleBot.y, Random.Range(0, 1f));
+				m_orbiter.SetTime(rndAngle);
+				m_orbiter.isClockwise = false;
+			}
+		}
+			
+		#endregion
+
 		#region MonoBehaviour
 
 		private void Start()
 		{
+			// RandomizeOrbit();
 			if (name != null)
 			{
 				m_sunSocket.onSocket += CallbackSocket;
@@ -65,7 +93,7 @@ namespace StarWielder.Gameplay.Elements
 
 		private void CallbackSocket(Star sun)
 		{
-			
+
 		}
 
 		private void CallbackUnsocket(Star sun)

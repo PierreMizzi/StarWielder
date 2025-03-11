@@ -38,16 +38,15 @@ namespace StarWielder.Tools
 
 		[SerializeField] protected float m_orbitSpeed = 1;
 
-		[SerializeField] protected float m_orbitHorizontalLength = 1f;
-		[SerializeField] protected float m_orbitVerticalLength = 1f;
+		[SerializeField] protected float m_radius = 1f;
 
 		protected float m_orbitTime = 0;
 		protected Vector3 m_tmpPosition;
 
 		protected virtual void UpdatePointPosition(Transform point, float time)
 		{
-			m_tmpPosition.x = Mathf.Cos(time) * m_orbitHorizontalLength;
-			m_tmpPosition.y = Mathf.Sin(time) * m_orbitVerticalLength;
+			m_tmpPosition.x = Mathf.Cos(time) * m_radius;
+			m_tmpPosition.y = Mathf.Sin(time) * m_radius;
 			point.localPosition = m_tmpPosition;
 		}
 

@@ -33,10 +33,27 @@ namespace StarWielder.Gameplay.Elements
 				module = buyableModules[i];
 				itemDisplay = m_itemDisplays[i];
 
-				
+
 			}
 		}
 
+		public void RandomizeItemDisplay()
+		{
+			foreach (SpaceShopItemDisplay itemDisplay in m_itemDisplays)
+			{
+				itemDisplay.RandomizeOrbit();
+			}
+		}
+
+		#endregion
+
+		#region MonoBehaviour
+
+		private void Start()
+		{
+			RandomizeItemDisplay();
+		}
+			
 		#endregion
 
 		#region Module

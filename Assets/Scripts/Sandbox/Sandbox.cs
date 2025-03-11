@@ -118,26 +118,31 @@ public class Sandbox : MonoBehaviour
 
 	#region Mystery
 
-	private void Awake()
-	{
-		Debug.Log("Ton Fils" + gameObject.name);
-	}
+	// private void Awake()
+	// {
+	// 	Debug.Log("Ton Fils" + gameObject.name);
+	// }
 
-	private void Start()
-	{
-		Debug.Log("Ton Fils" + gameObject.name);
-	}
+	// private void Start()
+	// {
+	// 	Debug.Log("Ton Fils" + gameObject.name);
+	// }
 
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		Debug.Log($"{ name } collided with {other.gameObject.name}");
-	}
+	// private void OnTriggerEnter2D(Collider2D other)
+	// {
+	// 	Debug.Log($"{ name } collided with {other.gameObject.name}");
+	// }
 
-	private void OnTriggerStay2D(Collider2D other) {
-		Debug.Log($"{name} stay with {other.gameObject.name}");
+	// private void OnTriggerStay2D(Collider2D other) {
+	// 	Debug.Log($"{name} stay with {other.gameObject.name}");
 
-	}
+	// }
 
+	#endregion
+
+	#region Orbiter Time
+
+		
 	#endregion
 
 }
