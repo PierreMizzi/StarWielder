@@ -53,6 +53,7 @@ namespace StarWielder.Gameplay.Modules
 			}
 
 			StoreModules();
+			m_moduleChannel.moduleManager = this;
 		}
 
         private void OnDestroy()
@@ -72,6 +73,8 @@ namespace StarWielder.Gameplay.Modules
 		[SerializeField] private Transform m_modulesContainer;
 
 		private Dictionary<ModuleType, BaseModule> m_modules = new Dictionary<ModuleType, BaseModule>();
+
+		public Dictionary<ModuleType, BaseModule> Modules => m_modules;
 
 		private void StoreModules()
 		{

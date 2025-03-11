@@ -3788,11 +3788,8 @@ MonoBehaviour:
   m_moduleChannel: {fileID: 11400000, guid: 2eb9a1798178a2f4b960caee326ac98b, type: 2}
   m_settings: {fileID: 11400000, guid: feb14f37923e1db4395ac8a92b23969d, type: 2}
   m_type: 2
-  m_isEnabled: 0
-  m_ship: {fileID: 1709517717}
   m_gameChannel: {fileID: 11400000, guid: 7fa2ee207c87f4e42827ce90cc2e7f70, type: 2}
   m_playerChannel: {fileID: 11400000, guid: 1ebce8acce4141b4382229e40c13a0d8, type: 2}
-  m_immobileTime: 0
 --- !u!224 &1164772878 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4263210824925364382, guid: 3fc227770a2a4a14dbbd1b0e3671c0ea, type: 3}
@@ -4471,6 +4468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1478910489}
+  - component: {fileID: 1478910490}
   m_Layer: 0
   m_Name: TwinDashStarModule
   m_TagString: Untagged
@@ -4493,6 +4491,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1812174818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1478910490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478910488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e48ee7417f58f6489de82814ccec6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_moduleChannel: {fileID: 11400000, guid: 2eb9a1798178a2f4b960caee326ac98b, type: 2}
+  m_settings: {fileID: 0}
+  m_type: 1
+  m_dashStarManager: {fileID: 1709517720}
 --- !u!1 &1482672299
 GameObject:
   m_ObjectHideFlags: 0
@@ -4966,6 +4980,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ecc301b98448f8c458f8f6d3bb8565f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1709517720 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3525043612915668554, guid: 8fd7a1b3374354945af1c0898ee71a56, type: 3}
+  m_PrefabInstance: {fileID: 6232630159491153293}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 917922c9ec4eeaa48bd4ab6871aaa9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1724614290
@@ -7081,7 +7106,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 615506299082973876, guid: 1b24ea9af62f7a445a187e2d69613db1, type: 3}
       propertyPath: m_Name
-      value: EnergStation
+      value: EnergyStation
       objectReference: {fileID: 0}
     - target: {fileID: 6362503720386287612, guid: 1b24ea9af62f7a445a187e2d69613db1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7150,7 +7175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3153189582022618724, guid: c741c91ed74e40e44945eb3cc91e1195, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.83
+      value: 8.02
       objectReference: {fileID: 0}
     - target: {fileID: 3153189582022618724, guid: c741c91ed74e40e44945eb3cc91e1195, type: 3}
       propertyPath: m_LocalPosition.y

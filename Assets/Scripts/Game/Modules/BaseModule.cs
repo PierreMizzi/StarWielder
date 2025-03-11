@@ -11,13 +11,12 @@ namespace StarWielder.Gameplay.Modules
 		[SerializeField] protected BaseModuleSettings m_settings;
 		[SerializeField] protected ModuleType m_type;
 		public ModuleType Type => m_type;
-		[SerializeField] protected bool m_isEnabled;
+		protected bool m_isEnabled;
 		public bool IsEnabled => m_isEnabled;
 
 		public virtual void Enable()
 		{
 			m_isEnabled = true;
-			
 		}
 
 		public virtual void Disable()

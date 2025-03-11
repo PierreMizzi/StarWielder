@@ -7,5 +7,7 @@ namespace StarWielder.Gameplay.Modules
 	{
 		[SerializeField] private float m_immobileDelay = 1.0f;
 		public float ImmobileDelay => m_immobileDelay;
+
+		[SerializeField] private ShipEnergyConsumptionSettings m_energyConsumptionSettings;
 	}
 }

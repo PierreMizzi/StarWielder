@@ -105,10 +105,15 @@ namespace StarWielder.Gameplay.Player
 		private void Start()
 		{
 			if (m_gameChannel != null)
+			{
 				m_gameChannel.onGameOver += CallbackGameOver;
+			}
 
 			if (m_playerChannel != null)
+			{
 				m_playerChannel.onSetEnergyConsumptionMode += SetEnergyConsumptionMode;
+				m_playerChannel.onSetAppropriateEnergyConsumptionMode += SetAppropriateEnergyConsumptionMode;
+			}
 		}
 
 		private void Update()
@@ -131,7 +136,10 @@ namespace StarWielder.Gameplay.Player
 				m_gameChannel.onGameOver -= CallbackGameOver;
 
 			if (m_playerChannel != null)
-				m_playerChannel.onSetEnergyConsumptionMode += SetEnergyConsumptionMode;
+			{
+				m_playerChannel.onSetEnergyConsumptionMode -= SetEnergyConsumptionMode;
+				m_playerChannel.onSetAppropriateEnergyConsumptionMode -= SetAppropriateEnergyConsumptionMode;
+			}
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)
@@ -175,13 +183,7 @@ namespace StarWielder.Gameplay.Player
 		private ShipEnergyConsumptionSettings m_currentEnergyConsumptionSettings;
 		public ShipEnergyConsumptionSettings CurrentEnergyConsumptionSettings => m_currentEnergyConsumptionSettings;
 
-		public void SetEnergyConsumptionMode(EnergyConsumptionMode mode)
-		{
-			if (m_settings == null)
-				return;
 
-			m_currentEnergyConsumptionSettings = m_settings.GetEnergyConsumptionSettingsFromMode(mode);
-		}
 
 		public delegate void EnergyConsumptionModeDelegate(EnergyConsumptionMode mode);
 
@@ -206,6 +208,43 @@ namespace StarWielder.Gameplay.Player
 				m_emergencyEnergy = Mathf.Clamp(value, 0f, m_stats.maxEmergencyEnergy);
 				m_playerChannel.onRefreshEmergencyEnergy.Invoke(normalizedEmergencyEnergy);
 			}
+		}
+
+		public void SetEnergyConsumptionMode(EnergyConsumptionMode mode)
+		{
+			if (m_settings == null)
+				return;
+
+			m_currentEnergyConsumptionSettings = m_settings.GetEnergyConsumptionSettingsFromMode(mode);
+		}
+
+		public void SetAppropriateEnergyConsumptionMode()
+		{
+			if (m_settings == null || m_playerChannel == null)
+				return;
+			
+			switch (m_gameChannel.currentStagetype)
+			{
+				case StageStateType.Fight:
+					m_playerChannel.onSetEnergyConsumptionMode.Invoke(EnergyConsumptionMode.Fight);
+					break;
+
+				case StageStateType.Resources:
+					m_playerChannel.onSetEnergyConsumptionMode.Invoke(EnergyConsumptionMode.Low);
+					break;
+
+				case StageStateType.Shop:
+					m_playerChannel.onSetEnergyConsumptionMode.Invoke(EnergyConsumptionMode.Infinite);
+					break;
+
+				case StageStateType.Idle:
+					m_playerChannel.onSetEnergyConsumptionMode.Invoke(EnergyConsumptionMode.Infinite);
+					break;
+
+				default:
+					break;
+			}
+
 		}
 
 		public void DepleateEmergencyEnergy()

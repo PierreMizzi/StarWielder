@@ -17,6 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8e85c8f393bbec445981676134b91c70, type: 2}
   - {fileID: 11400000, guid: fd1e2b4394b18a94cbce0d7a8339eee0, type: 2}
   - {fileID: 11400000, guid: 0318a7198e0e8ec46a8a752521c9a345, type: 2}
+  - {fileID: 11400000, guid: 20d2d1f97bab21046b81d6ec0778e93f, type: 2}
   defaultEnergyConsumptionSettings: {fileID: 11400000, guid: 0318a7198e0e8ec46a8a752521c9a345, type: 2}
   speed: 6.5
   friction: 6

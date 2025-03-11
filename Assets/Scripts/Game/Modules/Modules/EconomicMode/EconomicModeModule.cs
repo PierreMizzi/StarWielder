@@ -6,34 +6,22 @@ using UnityEngine;
 namespace StarWielder.Gameplay.Modules
 {
 
-	// Note : Should only enter after a given time
-	// Note : Should only enter while in Fight Stage
-	public class EconomicModeModule : BaseModule //MonoBehaviour, IModuleHandler
+	public class EconomicModeModule : BaseModule
 	{
-
-
-		#region BaseModule
-
-		public override void Enable()
-		{
-			base.Enable();
-		}
-
-		public override void Disable()
-		{
-			base.Disable();
-		}
-
-		#endregion
 
 		#region Behaviour
 		
 		[Header("Behaviour")]
-		[SerializeField] private Ship m_ship;
 		[SerializeField] private GameChannel m_gameChannel;
 		[SerializeField] private PlayerChannel m_playerChannel;
 
 		public EconomicModeModuleSettings settings => m_settings as EconomicModeModuleSettings;
+
+        public override void Disable()
+        {
+            base.Disable();
+			m_playerChannel.onSetAppropriateEnergyConsumptionMode.Invoke();
+		}
 
 		#endregion
 
@@ -42,20 +30,25 @@ namespace StarWielder.Gameplay.Modules
 		public IEnumerator m_immobileCoroutine;
 		private float m_immobileTime;
 
-		private void CallbackIsImmobile(bool value)
+		private void CallbackIsImmobile(bool isImmobile)
 		{
+			if (m_isEnabled == false)
+			{
+				return;
+			}
+
 			if (m_gameChannel.currentStagetype != StageStateType.Fight)
 			{
 				return;
 			}
 
-			if (value)
+			if (isImmobile)
 			{
 				StartImmobileCoroutine();
 			}
 			else
 			{
-				m_ship.SetEnergyConsumptionMode(Ship.EnergyConsumptionMode.Fight);
+				m_playerChannel.onSetAppropriateEnergyConsumptionMode.Invoke();
 				StopImmobileCoroutine();
 			}
 		}
@@ -86,7 +79,7 @@ namespace StarWielder.Gameplay.Modules
 				yield return null;
 			}
 
-			m_ship.SetEnergyConsumptionMode(Ship.EnergyConsumptionMode.Eco);
+			m_playerChannel.onSetEnergyConsumptionMode(Ship.EnergyConsumptionMode.Eco);
 			StopImmobileCoroutine();
 		}
 
@@ -98,9 +91,7 @@ namespace StarWielder.Gameplay.Modules
 		{
 			if (m_playerChannel != null)
 				m_playerChannel.onIsImmobile += CallbackIsImmobile;
-
 		}
-
 
         private void OnDestroy()
 		{

@@ -6,9 +6,11 @@ namespace StarWielder.Gameplay.Modules
 	public delegate void ModuleTypeDelegate(ModuleType type);
 	public delegate void ModuleDelegate(BaseModule module);
 
-	[CreateAssetMenu(fileName = "ModuleChannel", menuName = "StarWielder/ModuleChannel", order = 0)]
+	[CreateAssetMenu(fileName = "ModuleChannel", menuName = "StarWielder/Channels/ModuleChannel", order = 0)]
 	public class ModuleChannel : ScriptableObject
 	{
+		[HideInInspector] public GlobalModuleManager moduleManager;
+
 		public ModuleTypeDelegate onEnableModuleType;
 		public ModuleDelegate onEnableModule;
 		public ModuleTypeDelegate onDisableModuleType;
@@ -17,28 +19,8 @@ namespace StarWielder.Gameplay.Modules
 		private void OnEnable()
 		{
 			onEnableModuleType = (ModuleType type) => { };
-			onEnableModule = (BaseModule module) => { };
 			onDisableModuleType = (ModuleType type) => { };
-			onDisableModule = (BaseModule module) => { };
 		}
-
-		#region Debug
-
-		[SerializeField] private ModuleType m_type;
-
-		[ContextMenu("Call EnableModule")]
-		public void EnableModule()
-		{
-			onEnableModuleType?.Invoke(m_type);
-		}
-
-		[ContextMenu("Call DisableModule")]
-		public void DisableModule()
-		{
-			onDisableModuleType?.Invoke(m_type);
-		}
-
-		#endregion
 
 		#region Name
 

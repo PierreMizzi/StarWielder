@@ -17,6 +17,7 @@ namespace StarWielder.Gameplay.Player
 		public Action onStopEnergyTransfer;
 
 		public Ship.EnergyConsumptionModeDelegate onSetEnergyConsumptionMode;
+		public Action onSetAppropriateEnergyConsumptionMode;
 
 		#endregion
 
@@ -66,6 +67,7 @@ namespace StarWielder.Gameplay.Player
 
 		public void OnEnable()
 		{
+			// Energy
 			onAbsorbEnemyStar = (float energy) => { };
 			onRefreshStarEnergy = (float energy) => { };
 			onStarDocked = () => { };
@@ -74,6 +76,7 @@ namespace StarWielder.Gameplay.Player
 			onStopEnergyTransfer = () => { };
 
 			onSetEnergyConsumptionMode = (Ship.EnergyConsumptionMode mode) => { };
+			onSetAppropriateEnergyConsumptionMode = () => { };
 
 			onRefreshEmergencyEnergy = (float energy) => { };
 

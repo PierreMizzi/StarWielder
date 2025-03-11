@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using StarWielder.Gameplay.Modules;
 using UnityEngine;
 
 namespace StarWielder.Gameplay.Player
 {
-	public class DashStarManager : MonoBehaviour, IModuleHandler
+	public class DashStarManager : MonoBehaviour
 	{
 
 		[SerializeField] private Ship m_ship;
@@ -15,43 +12,7 @@ namespace StarWielder.Gameplay.Player
 
 		private void Start()
 		{
-			(this as IModuleHandler).SubscribeModuleHandler();
 			InitializeDashStars();
-		}
-
-		private void OnDestroy()
-		{
-			(this as IModuleHandler).UnsubscribeModuleHandler();
-		}
-
-		#endregion
-
-		#region IModuleHandler
-
-		[SerializeField] private ModuleChannel m_moduleChannel;
-		public ModuleChannel ModuleChannel => m_moduleChannel;
-
-		public void CallbackEnableModule(BaseModule module)
-		{
-			switch (module.Type)
-			{
-				case ModuleType.TwinDashStar:
-					CreateDashStar();
-					break;
-
-				default:
-					break;
-			}
-		}
-
-		private void CreateDashStar()
-		{
-			DashStar lastDashStar = m_dashStars[m_dashStars.Count - 1];
-			DashStar newDashStar = Instantiate(m_dashStarPrefab);
-			newDashStar.Initialize(m_ship, this);
-			newDashStar.transform.position = lastDashStar.nextAnchor.transform.position;
-			newDashStar.SetAnchor(lastDashStar.nextAnchor);
-			m_dashStars.Add(newDashStar);
 		}
 
 		#endregion
@@ -140,6 +101,32 @@ namespace StarWielder.Gameplay.Player
 			}
 		}
 
+
+		#endregion
+
+		#region Module - Twin Dash Star
+
+		public void CreateDashStar()
+		{
+			DashStar lastDashStar = m_dashStars[m_dashStars.Count - 1];
+			DashStar newDashStar = Instantiate(m_dashStarPrefab);
+			newDashStar.Initialize(m_ship, this);
+			newDashStar.transform.position = lastDashStar.nextAnchor.transform.position;
+			newDashStar.SetAnchor(lastDashStar.nextAnchor);
+			m_dashStars.Add(newDashStar);
+		}
+
+		public void DeleteDashStar()
+		{
+			if (m_dashStars.Count == 1)
+			{
+				return;
+			}
+
+			DashStar dashStar = m_dashStars[m_dashStars.Count-1];
+			m_dashStars.Remove(dashStar);
+			Destroy(dashStar.gameObject);
+		}
 
 		#endregion
 	}
