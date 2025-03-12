@@ -1,4 +1,5 @@
 using System;
+using PierreMizzi.Rendering;
 using StarWielder.Gameplay.Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -53,7 +54,12 @@ namespace StarWielder.Gameplay.Elements
 			}
 		}
 
-		private void OnDestroy()
+        protected void LateUpdate()
+        {
+            UpdateOrbitSprite();
+        }
+
+        private void OnDestroy()
 		{
 			if (name != null)
 			{
@@ -65,12 +71,15 @@ namespace StarWielder.Gameplay.Elements
 		#endregion
 
 		#region Orbiter
+
+		[Header("Orbiter")]
 		[SerializeField] private Orbiter m_orbiter;
 		[SerializeField] private Vector2 m_orbiterMinMaxAngleTop;
 		[SerializeField] private Vector2 m_orbiterMinMaxAngleBot;
 
 		public void RandomizeOrbit()
 		{
+			m_orbitSprite.transform.position = m_orbiter.center.position;
 			bool topOrBot = Random.Range(0, 2) == 0;
 			float rndAngle;
 
@@ -79,6 +88,8 @@ namespace StarWielder.Gameplay.Elements
 				rndAngle = Mathf.Lerp(m_orbiterMinMaxAngleTop.x, m_orbiterMinMaxAngleTop.y, Random.Range(0, 1f));
 				m_orbiter.isClockwise = true;
 				m_orbiter.SetTime(rndAngle);
+
+				m_orbitSprite.SetProperty("_IsClockwise", 0);
 			}
 			else
 			{
@@ -86,14 +97,27 @@ namespace StarWielder.Gameplay.Elements
 				m_orbiter.isClockwise = false;
 				m_orbiter.SetTime(rndAngle);
 				m_orbiter.UpdatePosition();
+
+				m_orbitSprite.SetProperty("_IsClockwise", 1);
 			}
 		}
 
 		#endregion
 
+		#region OrbitSprite
+
+		[SerializeField] private MaterialPropertyBlockModifier m_orbitSprite;
+
+		private void UpdateOrbitSprite()
+		{
+			m_orbitSprite.transform.right = -(m_orbiter.center.position - m_orbiter.transform.position).normalized;
+		}
+			
+		#endregion
 
 		#region Sun Socket
 
+		[Header("Sun Socket")]
 		[SerializeField] private SunSocket m_sunSocket;
 		[SerializeField] private SpriteRenderer m_sunSocketSpriteRenderer;
 
