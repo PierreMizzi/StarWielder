@@ -4,8 +4,10 @@ using UnityEngine;
 namespace StarWielder.Gameplay.Modules
 {
 
-	public class TwinDashStarModule : BaseModule 
+	public class TwinDashStarModule : BaseModule
 	{
+
+        [Header("Behaviour")]
 		[SerializeField] private DashStarManager m_dashStarManager;
 
         public override void Enable()

@@ -17,19 +17,19 @@ namespace StarWielder.UI
 		[SerializeField] private GameChannel m_gameChannel;
 		[SerializeField] private PlayerChannel m_playerChannel;
 
-	[SerializeField] private EnergyStationSettings m_settings;
+		[SerializeField] private EnergyStationSettings m_settings;
 
 		private int m_coinValue;
 		private int m_energyValue;
 
 		private void CallbackEnterEnergyStation()
 		{
-			((IDisplayHideAnimator)this).Display();
+			(this as IDisplayHideAnimator).Display();
 		}
 
 		private void CallbackLeaveEnergyStation()
 		{
-			((IDisplayHideAnimator)this).Hide();
+			(this as IDisplayHideAnimator).Hide();
 		}
 
 		#endregion

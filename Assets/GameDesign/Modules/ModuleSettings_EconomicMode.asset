@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141bc5a3908d8ae41bd50ec76543d7c6, type: 3}
   m_Name: ModuleSettings_EconomicMode
   m_EditorClassIdentifier: 
+  m_type: 2
+  m_shopItem:
+    name: Start-Stop System
+    description: After staying immobile for a brief moment, energy consumption of
+      the Ship drastically reduces.
+    price: 10
+    sprite: {fileID: -467114729, guid: 74e2d37886f9fa341af09ff8f23db102, type: 3}
+    moduleType: 2
   m_immobileDelay: 2.5
   m_energyConsumptionSettings: {fileID: 11400000, guid: 20d2d1f97bab21046b81d6ec0778e93f, type: 2}

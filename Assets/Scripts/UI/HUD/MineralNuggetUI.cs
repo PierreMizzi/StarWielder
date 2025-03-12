@@ -8,16 +8,14 @@ public class MineralNuggetUI : MonoBehaviour
 	[SerializeField] private GameChannel m_gameChannel;
 	[SerializeField] private TextMeshProUGUI m_mineralNuggetLabel;
 
-	private int m_totalMineralNuggets;
-
 	private void Start()
 	{
-		m_totalMineralNuggets = 0;
-		m_mineralNuggetLabel.text = m_totalMineralNuggets.ToString();
+		m_mineralNuggetLabel.text = "0";
 
 		if (m_gameChannel != null)
 		{
-			m_gameChannel.onIncrementMineralNugget += CallbackCollectMineralNugget;
+			m_gameChannel.onIncrementMineralNugget += RefreshText;
+			m_gameChannel.onDecrementMineralNugget += RefreshText;
 		}
 	}
 
@@ -25,13 +23,13 @@ public class MineralNuggetUI : MonoBehaviour
 	{
 		if (m_gameChannel != null)
 		{
-			m_gameChannel.onIncrementMineralNugget -= CallbackCollectMineralNugget;
+			m_gameChannel.onIncrementMineralNugget -= RefreshText;
+			m_gameChannel.onDecrementMineralNugget -= RefreshText;
 		}
 	}
 
-	private void CallbackCollectMineralNugget(int amount)
+	private void RefreshText(int amount)
 	{
-		m_totalMineralNuggets += amount;
-		m_mineralNuggetLabel.text = m_totalMineralNuggets.ToString();
+		m_mineralNuggetLabel.text = m_gameChannel.mineralNuggetCurrentAmount.ToString();
 	}
 }

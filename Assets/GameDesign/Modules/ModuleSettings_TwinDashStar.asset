@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc83f264f34bfe4084f9f64c43788ce, type: 3}
+  m_Name: ModuleSettings_TwinDashStar
+  m_EditorClassIdentifier: 
+  m_type: 1
+  m_shopItem:
+    name: Twin Dash Star
+    description: Another Dash Star follows your ship and allows you to dash twice
+      more
+    price: 10
+    sprite: {fileID: 111374669, guid: 74e2d37886f9fa341af09ff8f23db102, type: 3}
+    moduleType: 1

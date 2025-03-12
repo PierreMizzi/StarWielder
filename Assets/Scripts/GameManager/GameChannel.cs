@@ -1,4 +1,5 @@
 using System;
+using StarWielder.Gameplay.Elements;
 using UnityEngine;
 
 namespace StarWielder.Gameplay
@@ -27,8 +28,8 @@ namespace StarWielder.Gameplay
 		public Action onEnterEnergyStation = () => { };
 		public Action onLeaveEnergyStation = () => { };
 
-		public Action onEnterSpaceShop = () => { };
-		public Action onLeaveSpaceShop = () => { };
+		public ShopItemDisplayDelegate onSocketedShopItemDisplay = (ShopItemDisplay itemDisplay) => { };
+		public ShopItemDisplayDelegate onUnsocketedShopItemDisplay = (ShopItemDisplay itemDisplay) => { };
 
 		// Energy
 		public FloatDelegate onSunIncrementEnergy;
@@ -86,9 +87,9 @@ namespace StarWielder.Gameplay
 			currencyCurrentAmount = Math.Max(currencyCurrentAmount, 0);
 		}
 
-		public bool HasEnoughCurrency(float neededCurrency)
+		public bool HasEnoughCurrency(float neededAmount)
 		{
-			return neededCurrency < currencyCurrentAmount;
+			return neededAmount < currencyCurrentAmount;
 		}
 
 		public void IncrementMineralNugget(int amount)
@@ -99,7 +100,12 @@ namespace StarWielder.Gameplay
 		public void DecrementMineralNugget(int amount)
 		{
 			mineralNuggetCurrentAmount -= amount;
-			mineralNuggetCurrentAmount = Math.Max(currencyCurrentAmount, 0);
+			mineralNuggetCurrentAmount = Math.Max(mineralNuggetCurrentAmount, 0);
+		}
+
+		public bool HasEnoughMineralNugget(float neededAmount)
+		{
+			return neededAmount < mineralNuggetCurrentAmount;
 		}
 
 	}

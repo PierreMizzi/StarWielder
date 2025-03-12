@@ -40,20 +40,26 @@ namespace StarWielder.Gameplay.Modules
 			}
 		}
 
-		#endregion
+        #endregion
 
-		#region MonoBehaviour
+        #region MonoBehaviour
 
-		private void Start()
+        private void Awake()
+        {
+			StoreModules();
+			if (m_moduleChannel != null)
+			{
+				m_moduleChannel.moduleManager = this;
+			}
+		}
+
+        private void Start()
 		{
 			if (m_moduleChannel != null)
 			{
 				m_moduleChannel.onEnableModuleType += CallbackEnableModuleType;
 				m_moduleChannel.onDisableModuleType += CallbackDisableModuleType;
 			}
-
-			StoreModules();
-			m_moduleChannel.moduleManager = this;
 		}
 
         private void OnDestroy()

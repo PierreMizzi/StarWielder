@@ -12,9 +12,7 @@ namespace StarWielder.Gameplay.Modules
 		[HideInInspector] public GlobalModuleManager moduleManager;
 
 		public ModuleTypeDelegate onEnableModuleType;
-		public ModuleDelegate onEnableModule;
 		public ModuleTypeDelegate onDisableModuleType;
-		public ModuleDelegate onDisableModule;
 
 		private void OnEnable()
 		{

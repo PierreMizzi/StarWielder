@@ -9,8 +9,21 @@ namespace StarWielder.Gameplay.Modules
 	{
 		[SerializeField] protected ModuleChannel m_moduleChannel;
 		[SerializeField] protected BaseModuleSettings m_settings;
-		[SerializeField] protected ModuleType m_type;
-		public ModuleType Type => m_type;
+		public BaseModuleSettings Settings => m_settings;
+		public ModuleType Type
+		{
+			get
+			{
+				if (m_settings == null)
+				{
+					return ModuleType.None;
+				}
+				else
+				{
+					return Settings.Type;
+				}
+			}
+		}
 		protected bool m_isEnabled;
 		public bool IsEnabled => m_isEnabled;
 

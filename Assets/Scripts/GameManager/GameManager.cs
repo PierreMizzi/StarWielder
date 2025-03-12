@@ -58,7 +58,7 @@ namespace StarWielder.Gameplay
 
 		#region MonoBehaviour
 
-		private void Start()
+		private IEnumerator Start()
 		{
 			InitializeSoundManager();
 			SetLowCutoff();
@@ -75,6 +75,17 @@ namespace StarWielder.Gameplay
 				m_gameChannel.onFirstDocking += CallbackOnFirstDocking;
 				m_gameChannel.onGameOver += CallbackGameOver;
 				m_gameChannel.onReplay += CallbackReplay;
+			}
+			yield return null;
+			yield return new WaitForSeconds(1f);
+
+			if (m_gameChannel != null)
+			{
+				m_gameChannel.currencyCurrentAmount = 0;
+				m_gameChannel.mineralNuggetCurrentAmount = 0;
+
+				m_gameChannel.onIncrementCurrency?.Invoke(100);
+				m_gameChannel.onIncrementMineralNugget?.Invoke(100);
 			}
 		}
 
