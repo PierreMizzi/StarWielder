@@ -3202,11 +3202,11 @@ PrefabInstance:
       objectReference: {fileID: 690929491}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: radius
-      value: 15
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_angle
-      value: 40
+      value: 328.04053
       objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_center
@@ -3218,11 +3218,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: isClockwise
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
+      propertyPath: m_testAngle
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_orbitDuration
-      value: 60
+      value: 2400
       objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: useRandomTimeAtStart
@@ -3230,11 +3234,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5819685383125079885, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.960666
+      value: 9.590029
       objectReference: {fileID: 0}
     - target: {fileID: 5819685383125079885, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.431813
+      value: -8.847069
       objectReference: {fileID: 0}
     - target: {fileID: 5819685383125079885, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3270,19 +3274,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6544545369943019326, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_orbiterMinMaxAngleBot.x
-      value: 40
+      value: 319
       objectReference: {fileID: 0}
     - target: {fileID: 6544545369943019326, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_orbiterMinMaxAngleBot.y
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 6544545369943019326, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
-      propertyPath: m_orbiterMinMaxAngleTop.x
-      value: -6
+      value: 328
       objectReference: {fileID: 0}
     - target: {fileID: 6544545369943019326, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_orbiterMinMaxAngleTop.y
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3651,11 +3651,11 @@ PrefabInstance:
       objectReference: {fileID: 690929491}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: radius
-      value: 13
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_angle
-      value: 55
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_center
@@ -3670,8 +3670,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
+      propertyPath: m_testAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_orbitDuration
-      value: 60
+      value: 2400
       objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: useRandomTimeAtStart
@@ -3679,11 +3683,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5819685383125079885, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.92649364
+      value: 8.387829
       objectReference: {fileID: 0}
     - target: {fileID: 5819685383125079885, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.438976
+      value: -0.35792685
       objectReference: {fileID: 0}
     - target: {fileID: 5819685383125079885, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3719,19 +3723,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6544545369943019326, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_orbiterMinMaxAngleBot.x
-      value: 55
+      value: 305
       objectReference: {fileID: 0}
     - target: {fileID: 6544545369943019326, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_orbiterMinMaxAngleBot.y
-      value: 79
-      objectReference: {fileID: 0}
-    - target: {fileID: 6544545369943019326, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
-      propertyPath: m_orbiterMinMaxAngleTop.x
-      value: -6
+      value: 318
       objectReference: {fileID: 0}
     - target: {fileID: 6544545369943019326, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_orbiterMinMaxAngleTop.y
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7738,7 +7738,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3537514021830975229, guid: 88b6b1175c7d1ba4684bd6ae25c43a1d, type: 3}
       propertyPath: m_Name
-      value: SpaceStation
+      value: EnergStation
       objectReference: {fileID: 0}
     - target: {fileID: 8287117401609007976, guid: 88b6b1175c7d1ba4684bd6ae25c43a1d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8030,7 +8030,8 @@ MonoBehaviour:
   selfControlled: 1
   useRandomTimeAtStart: 1
   isClockwise: 0
-  m_orbitDuration: 0
+  m_orbitDuration: 0.1
+  m_testAngle: 0
   m_angle: 0
 --- !u!114 &7428327171500143475
 MonoBehaviour:
@@ -8279,6 +8280,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2525197119828712033, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525197119828712033, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525197119828712033, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.21
+      objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: speed
       value: 0.1
@@ -8293,7 +8306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_angle
-      value: 85
+      value: 285
       objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_center
@@ -8305,15 +8318,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: isClockwise
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
+      propertyPath: m_testAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060550931355326768, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
+      propertyPath: m_orbitDuration
+      value: 2400
       objectReference: {fileID: 0}
     - target: {fileID: 5819685383125079885, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.6009192
+      value: -3.77099
       objectReference: {fileID: 0}
     - target: {fileID: 5819685383125079885, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.409435
+      value: -9.086769
       objectReference: {fileID: 0}
     - target: {fileID: 5819685383125079885, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8349,19 +8370,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6544545369943019326, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_orbiterMinMaxAngleBot.x
-      value: 85
+      value: 270
       objectReference: {fileID: 0}
     - target: {fileID: 6544545369943019326, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_orbiterMinMaxAngleBot.y
-      value: 95
-      objectReference: {fileID: 0}
-    - target: {fileID: 6544545369943019326, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
-      propertyPath: m_orbiterMinMaxAngleTop.x
-      value: -6
+      value: 285
       objectReference: {fileID: 0}
     - target: {fileID: 6544545369943019326, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_orbiterMinMaxAngleTop.y
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

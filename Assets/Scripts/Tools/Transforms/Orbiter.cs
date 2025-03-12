@@ -28,7 +28,14 @@ public class Orbiter : MonoBehaviour
 		get { return isClockwise ? -1 : 1; }
 	}
 
-	protected virtual void UpdatePointPosition(float time)
+	public virtual void UpdatePosition()
+	{
+		m_position.x = Mathf.Cos(m_time * direction) * radius;
+		m_position.y = Mathf.Sin(m_time * direction) * radius;
+		transform.position = center.position + m_position;
+	}
+
+	public virtual void UpdatePosition(float time)
 	{
 		m_position.x = Mathf.Cos(time * direction) * radius;
 		m_position.y = Mathf.Sin(time * direction) * radius;
@@ -41,7 +48,7 @@ public class Orbiter : MonoBehaviour
 	/// <param name="degrees">On Trigonometry Circle</param>
 	public virtual void SetTime(float degrees)
 	{
-		m_time = m_angle * Mathf.Deg2Rad;
+		m_time = degrees * Mathf.Deg2Rad;
 	}
 
 	protected virtual void SetRandomTime()
@@ -58,6 +65,7 @@ public class Orbiter : MonoBehaviour
 
 	private void Start()
 	{
+		m_testAngle = false;
 		m_speed = MathF.PI * 2F / m_orbitDuration;
 
 		if (useRandomTimeAtStart)
@@ -68,6 +76,7 @@ public class Orbiter : MonoBehaviour
 
 	private void Update()
 	{
+
 		if (center == null)
 		{
 			return;
@@ -76,21 +85,31 @@ public class Orbiter : MonoBehaviour
 		if (selfControlled)
 		{
 			m_time += Time.deltaTime * m_speed;
-			UpdatePointPosition(m_time);
+			UpdatePosition(m_time);
 		}
 	}
 
-	#endregion
+    private void OnValidate()
+    {
+		if (center == null || m_testAngle == false)
+		{
+			return;
+		}
+		TestAngle();
+	}
 
-	#region Debug
-	[Header("Debug")]
-	[SerializeField, Range(-360f, 360f)] private float m_angle;
+    #endregion
+
+    #region Debug
+    [Header("Debug")]
+	[SerializeField] private bool m_testAngle;
+	[SerializeField, Range(0, 360f)] private float m_angle;
 
 	[ContextMenu("Call Test Angle")]
 	public void TestAngle()
 	{
 		SetTime(m_angle);
-		UpdatePointPosition(m_time);
+		UpdatePosition(m_time);
 	}
 		
 	#endregion

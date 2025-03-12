@@ -256,7 +256,7 @@ namespace PierreMizzi.Useful
 			}
 
 			System.Random rnd = new System.Random();
-			list.OrderBy((item) => rnd.Next()).ToList();
+			list = list.OrderBy((item) => rnd.Next()).ToList();
 			return list.GetRange(0, count);
 		}
 

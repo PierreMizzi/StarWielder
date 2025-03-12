@@ -16,13 +16,15 @@ namespace StarWielder.Gameplay.Elements
 		*/
 		#region Behaviour
 
+		[SerializeField] private int m_amount;
+
 		[SerializeField] private ModuleChannel m_moduleChannel;
 
 		[SerializeField] private List<SpaceShopItemDisplay> m_itemDisplays;
 
 		public void GenerateShopContent()
 		{
-			List<BaseModule> buyableModules = GetBuyableModules();
+			List<BaseModule> buyableModules = GetBuyableModules(m_amount);
 
 			BaseModule module;
 			SpaceShopItemDisplay itemDisplay;
@@ -32,15 +34,19 @@ namespace StarWielder.Gameplay.Elements
 				// m_itemDisplays
 				module = buyableModules[i];
 				itemDisplay = m_itemDisplays[i];
-
-
 			}
 		}
 
 		public void RandomizeItemDisplay()
 		{
-			foreach (SpaceShopItemDisplay itemDisplay in m_itemDisplays)
+			List<Sprite> planetSprites = m_planetSprites.PickRandom(3);
+			SpaceShopItemDisplay itemDisplay;
+
+			for (int i = 0; i < m_itemDisplays.Count; i++)
 			{
+				itemDisplay = m_itemDisplays[i];
+				itemDisplay.SetSprite(planetSprites[i]);
+				itemDisplay.RandomizeScale();
 				itemDisplay.RandomizeOrbit();
 			}
 		}
@@ -58,15 +64,21 @@ namespace StarWielder.Gameplay.Elements
 
 		#region Module
 
-		public List<BaseModule> GetBuyableModules()
+		public List<BaseModule> GetBuyableModules(int amount)
 		{
 			List<BaseModule> buyableModules = (from module in m_moduleChannel.moduleManager.Modules 
 											  where module.Value.IsBuyable select module.Value).ToList();
 
-			return buyableModules.PickRandom(2, true);
+			return buyableModules.PickRandom(amount, true);
 		}
+			
+		#endregion
 
+		#region Sprites
 
+		[Header("Sprites")]
+
+		[SerializeField] private List<Sprite> m_planetSprites;
 			
 		#endregion
 

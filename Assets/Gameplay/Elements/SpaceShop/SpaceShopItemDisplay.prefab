@@ -137,6 +137,7 @@ MonoBehaviour:
   useRandomTimeAtStart: 0
   isClockwise: 0
   m_orbitDuration: 60
+  m_testAngle: 0
   m_angle: 0
 --- !u!114 &6544545369943019326
 MonoBehaviour:
@@ -155,6 +156,8 @@ MonoBehaviour:
   m_orbiterMinMaxAngleTop: {x: 0, y: 0}
   m_orbiterMinMaxAngleBot: {x: 0, y: 0}
   m_sunSocket: {fileID: 2188040829206643764}
+  m_spriteRenderer: {fileID: 1956348048407751732}
+  m_minMaxScale: {x: 0.1, y: 0.2}
 --- !u!1 &3118315462479988159
 GameObject:
   m_ObjectHideFlags: 0

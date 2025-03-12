@@ -44,5 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377631d271f1c854f928600b98fce968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_amount: 0
   m_moduleChannel: {fileID: 11400000, guid: 2eb9a1798178a2f4b960caee326ac98b, type: 2}
   m_itemDisplays: []
+  m_planetSprites:
+  - {fileID: 21300000, guid: 1cc41abb351b31e4f81d6803231540f3, type: 3}
+  - {fileID: 21300000, guid: b7593a48af47dc64fa4e4828d51430ca, type: 3}
+  - {fileID: 21300000, guid: 5fa7fa07e0fc7204fbc8def3a51f23a7, type: 3}
+  - {fileID: 21300000, guid: bdebc56eac858b34a85c7c278377a5a9, type: 3}
+  - {fileID: 21300000, guid: ddf5fbc1425d4a44baf95abd694012ee, type: 3}
+  - {fileID: 21300000, guid: b49f7de4faab2a343aa9eeb59c9e0146, type: 3}
+  - {fileID: 21300000, guid: f7971b8369218bf40aab61639e3504f2, type: 3}
+  - {fileID: 21300000, guid: 2c85e1e4ed8b4704586a8e662d6758c3, type: 3}
+  - {fileID: 21300000, guid: f83dfff742df2574d93a6b960a8eeec2, type: 3}
+  - {fileID: 21300000, guid: 821d2fe3b21c76d498bbdbf888ac8738, type: 3}

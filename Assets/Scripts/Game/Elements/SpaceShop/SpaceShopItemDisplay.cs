@@ -22,7 +22,7 @@ namespace StarWielder.Gameplay.Elements
 			{
 				return;
 			}
-			
+
 			currentSpaceShopItem = item;
 
 			GameObject phyisicalItem = Instantiate(currentSpaceShopItem.PhysicalItem, m_physicalItemAnchor);
@@ -51,17 +51,18 @@ namespace StarWielder.Gameplay.Elements
 			if (topOrBot)
 			{
 				rndAngle = Mathf.Lerp(m_orbiterMinMaxAngleTop.x, m_orbiterMinMaxAngleTop.y, Random.Range(0, 1f));
-				m_orbiter.SetTime(rndAngle);
 				m_orbiter.isClockwise = true;
-			}		
+				m_orbiter.SetTime(rndAngle);
+			}
 			else
 			{
 				rndAngle = Mathf.Lerp(m_orbiterMinMaxAngleBot.x, m_orbiterMinMaxAngleBot.y, Random.Range(0, 1f));
-				m_orbiter.SetTime(rndAngle);
 				m_orbiter.isClockwise = false;
+				m_orbiter.SetTime(rndAngle);
+				m_orbiter.UpdatePosition();
 			}
 		}
-			
+
 		#endregion
 
 		#region MonoBehaviour
@@ -99,6 +100,27 @@ namespace StarWielder.Gameplay.Elements
 		private void CallbackUnsocket(Star sun)
 		{
 
+		}
+
+		#endregion
+
+		#region Visual
+
+		[Header("Visual")]
+
+		[SerializeField] private SpriteRenderer m_spriteRenderer;
+
+		[SerializeField] private Vector2 m_minMaxScale;
+
+		public void SetSprite(Sprite sprite)
+		{
+			m_spriteRenderer.sprite = sprite;
+		}
+
+		public void RandomizeScale()
+		{
+			float rndScale = Random.Range(m_minMaxScale.x, m_minMaxScale.y);
+			m_spriteRenderer.transform.localScale = new Vector3(rndScale, rndScale, 1f);
 		}
 
 		#endregion
