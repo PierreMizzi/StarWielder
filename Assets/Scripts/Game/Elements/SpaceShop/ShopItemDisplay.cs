@@ -34,6 +34,20 @@ namespace StarWielder.Gameplay.Elements
 			EnableSunSocket();
 		}
 
+		public void AssignPlanetConfig(SpaceShop.PlanetConfig config)
+		{
+			// Planet Sprite
+			m_planetSpriteRenderer.sprite = config.planetSprite;
+			RandomizeScale();
+
+			// Orbit Sprite
+			m_orbitSprite.SetProperty(colorOrbitColor, config.orbitColor);
+			m_orbitSprite.SetProperty(colorTrailColor, config.trailColor);
+
+			// Orbit
+			RandomizeOrbit();
+		}
+
 		public void Clear()
 		{
 			m_currentItem = null;
@@ -54,12 +68,12 @@ namespace StarWielder.Gameplay.Elements
 			}
 		}
 
-        protected void LateUpdate()
-        {
-            UpdateOrbitSprite();
-        }
+		protected void LateUpdate()
+		{
+			UpdateOrbitSprite();
+		}
 
-        private void OnDestroy()
+		private void OnDestroy()
 		{
 			if (name != null)
 			{
@@ -89,7 +103,7 @@ namespace StarWielder.Gameplay.Elements
 				m_orbiter.isClockwise = true;
 				m_orbiter.SetTime(rndAngle);
 
-				m_orbitSprite.SetProperty("_IsClockwise", 0);
+				m_orbitSprite.SetProperty(floatIsClockwise, 0);
 			}
 			else
 			{
@@ -98,7 +112,7 @@ namespace StarWielder.Gameplay.Elements
 				m_orbiter.SetTime(rndAngle);
 				m_orbiter.UpdatePosition();
 
-				m_orbitSprite.SetProperty("_IsClockwise", 1);
+				m_orbitSprite.SetProperty(floatIsClockwise, 1);
 			}
 		}
 
@@ -108,11 +122,15 @@ namespace StarWielder.Gameplay.Elements
 
 		[SerializeField] private MaterialPropertyBlockModifier m_orbitSprite;
 
+		private const string floatIsClockwise = "_IsClockwise";
+		private const string colorOrbitColor = "_OrbitColor";
+		private const string colorTrailColor = "_FadeColor";
+
 		private void UpdateOrbitSprite()
 		{
 			m_orbitSprite.transform.right = -(m_orbiter.center.position - m_orbiter.transform.position).normalized;
 		}
-			
+
 		#endregion
 
 		#region Sun Socket
@@ -164,9 +182,9 @@ namespace StarWielder.Gameplay.Elements
 
 		[SerializeField] private Vector2 m_minMaxScale;
 
+		[Obsolete]
 		public void SetSprite(Sprite sprite)
 		{
-			m_planetSpriteRenderer.sprite = sprite;
 		}
 
 		public void RandomizeScale()

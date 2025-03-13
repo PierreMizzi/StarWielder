@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using PierreMizzi.Useful;
@@ -39,15 +40,13 @@ namespace StarWielder.Gameplay.Elements
 
 		public void RandomizeItemDisplay()
 		{
-			List<Sprite> planetSprites = m_planetSprites.PickRandom(3);
+			List<PlanetConfig> selectedPlanetConfigs = m_planetConfigs.PickRandom(3);
 			ShopItemDisplay itemDisplay;
 
 			for (int i = 0; i < m_itemDisplays.Count; i++)
 			{
 				itemDisplay = m_itemDisplays[i];
-				itemDisplay.SetSprite(planetSprites[i]);
-				itemDisplay.RandomizeScale();
-				itemDisplay.RandomizeOrbit();
+				itemDisplay.AssignPlanetConfig(selectedPlanetConfigs[i]);
 			}
 		}
 
@@ -75,11 +74,44 @@ namespace StarWielder.Gameplay.Elements
 			
 		#endregion
 
-		#region Sprites
+		#region Planets
 
-		[Header("Sprites")]
+		[Header("Planets")]
 
-		[SerializeField] private List<Sprite> m_planetSprites;
+		[SerializeField] private List<PlanetConfig> m_planetConfigs;
+
+		[Serializable]
+		public struct PlanetConfig
+		{
+			public string name;
+			public Sprite planetSprite;
+			public Color orbitColor;
+			public Color trailColor;
+		}
+			
+		#endregion
+
+		#region Debug
+
+		[ContextMenu("Call SpaceShopPlanet config")]
+		public void TestPlanetConfigs()
+		{
+			if (m_itemDisplays.Count != m_planetConfigs.Count)
+			{
+				return;
+			}
+
+			ShopItemDisplay itemDisplay;
+			PlanetConfig planetConfig;
+
+			for (int i = 0; i < m_itemDisplays.Count; i++)
+			{
+				itemDisplay = m_itemDisplays[i];
+				planetConfig = m_planetConfigs[i];
+
+				itemDisplay.AssignPlanetConfig(planetConfig);
+			}
+		}
 			
 		#endregion
 

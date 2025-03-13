@@ -17,6 +17,7 @@ public class MineralNuggetUI : MonoBehaviour
 			m_gameChannel.onIncrementMineralNugget += RefreshText;
 			m_gameChannel.onDecrementMineralNugget += RefreshText;
 		}
+		
 	}
 
 	private void OnDestroy()
