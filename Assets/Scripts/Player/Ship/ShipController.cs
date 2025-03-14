@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using DG.Tweening;
 using PierreMizzi.SoundManager;
 using System;
+using System.ComponentModel.Design;
 
 namespace StarWielder.Gameplay.Player
 {
@@ -14,7 +15,7 @@ namespace StarWielder.Gameplay.Player
 	public class ShipController : MonoBehaviour
 	{
 
-		#region Main
+		#region Behaviour
 
 		[SerializeField] private ShipSettings m_settings = null;
 		private Ship m_ship;
@@ -39,6 +40,8 @@ namespace StarWielder.Gameplay.Player
 		private void Update()
 		{
 			ReadMousePositionInputs();
+
+
 			Rotate();
 
 			if (m_dashActionReference.action.IsPressed() && m_isDashing == false)
@@ -53,7 +56,6 @@ namespace StarWielder.Gameplay.Player
 
 			if (!m_isDashing)
 			{
-
 				m_locomotionActionValue = m_locomotionActionReference.action.ReadValue<Vector2>().normalized;
 
 				if (m_locomotionActionValue == Vector3.zero)
