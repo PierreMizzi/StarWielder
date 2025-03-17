@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 2
   dockedEnergyDepleateSpeed: 2.5
-  maxEmergencyEnergy: 6
-  emergencyEnergyDepleatRate: 1.2
+  maxEmergencyEnergy: 5
+  emergencyEnergyDepleatRate: 1
   emergencyEnergyDuration: 5
   labelName: FIGHT
   labelColor: {r: 0.76470596, g: 0.14117648, b: 0.33333334, a: 1}

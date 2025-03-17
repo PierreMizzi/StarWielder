@@ -36,6 +36,9 @@ namespace StarWielder.Gameplay.Player
 		[SerializeField] private InputActionReference m_mouseClickAction;
 		public InputActionReference mouseClickAction => m_mouseClickAction;
 
+		[SerializeField] private InputActionReference m_ability_01;
+		public InputActionReference Ability_01 => m_ability_01;
+
 		private void CallbackGameOver(GameOverReason reason)
 		{
 			if (reason == GameOverReason.ShipDestroyed)
@@ -92,7 +95,7 @@ namespace StarWielder.Gameplay.Player
 			currentState?.Update();
 		}
 
-		private bool IsState(StarStateType nextState)
+		public bool IsState(StarStateType nextState)
 		{
 			return (StarStateType)currentState.type == nextState;
 		}

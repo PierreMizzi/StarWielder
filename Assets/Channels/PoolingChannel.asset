@@ -85,3 +85,7 @@ MonoBehaviour:
     prefab: {fileID: 5670462325288713454, guid: e82672d7972421f4681f3d1ae5ce2cd0, type: 3}
     defaultSize: 10
     maxSize: 20
+  - name: HomingLazer
+    prefab: {fileID: 1518563223782150861, guid: ad7256b03efb3e34d92969574ad62e84, type: 3}
+    defaultSize: 2
+    maxSize: 10

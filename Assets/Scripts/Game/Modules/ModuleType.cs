@@ -5,5 +5,6 @@ namespace StarWielder.Gameplay.Modules
 		None,
 		TwinDashStar,
 		EconomicMode,
+		HomingLazer,
 	}
 }

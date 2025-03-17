@@ -13,6 +13,9 @@ namespace StarWielder.Gameplay.Modules
 		[SerializeField] protected ModuleType m_type;
 		public ModuleType Type => m_type;
 
+		[SerializeField] private bool m_autoEnable;
+		public bool AutoEnable => m_autoEnable;
+
 		private void OnEnable()
 		{
 			m_shopItem.moduleType = m_type;

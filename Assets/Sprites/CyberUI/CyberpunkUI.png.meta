@@ -903,7 +903,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CyberCash
+      name: Module_HomingLazer
       rect:
         serializedVersion: 2
         x: 158
@@ -1052,7 +1052,6 @@ TextureImporter:
       Corners_03: -133304985065293701
       Currency: -250073034
       CyberArrow: 401274590
-      CyberCash: 623715619
       CyberpunkUI_0: 1571440639
       CyberpunkUI_1: -1747414564
       CyberpunkUI_16: 8013544444269992262
@@ -1068,6 +1067,7 @@ TextureImporter:
       EnergyShipBackbround_02: 259503743442974435
       EnergyShipBackbround_03: -7227101389403374142
       Module_EconomicMode: -467114729
+      Module_HomingLazer: 623715619
       Module_TwinDashStar: 111374669
       Mouse: 3000532024014289552
       Plus: -118551214427591287

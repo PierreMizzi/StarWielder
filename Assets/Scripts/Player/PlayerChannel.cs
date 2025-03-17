@@ -23,12 +23,15 @@ namespace StarWielder.Gameplay.Player
 
 		#region Emergency Energy
 
+		public FloatDelegate onIncrementEmergencyEnergy = (float energy) => { };
 		public FloatDelegate onRefreshEmergencyEnergy;
 
 		#endregion
 
 		#region Health
 
+		public FloatDelegate onIncrementShipHealth = (float addedHealth) => { };
+		public FloatDelegate onDecrementShipHealth = (float lostHealth) => { };
 		public FloatDelegate onRefreshShipHealth;
 
 		#endregion

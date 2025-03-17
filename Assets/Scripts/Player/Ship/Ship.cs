@@ -113,10 +113,16 @@ namespace StarWielder.Gameplay.Player
 			{
 				m_playerChannel.onSetEnergyConsumptionMode += SetEnergyConsumptionMode;
 				m_playerChannel.onSetAppropriateEnergyConsumptionMode += SetAppropriateEnergyConsumptionMode;
+
+				m_playerChannel.onIncrementEmergencyEnergy += CallbackIncrementEmergencyEnergy;
+				m_playerChannel.onIncrementShipHealth += CallbackIncrementShipHealth;
+				m_playerChannel.onDecrementShipHealth += CallbackDecrementShipHealth;
 			}
 		}
 
-		private void Update()
+
+
+        private void Update()
 		{
 			UpdateState();
 
@@ -139,6 +145,8 @@ namespace StarWielder.Gameplay.Player
 			{
 				m_playerChannel.onSetEnergyConsumptionMode -= SetEnergyConsumptionMode;
 				m_playerChannel.onSetAppropriateEnergyConsumptionMode -= SetAppropriateEnergyConsumptionMode;
+
+				m_playerChannel.onIncrementEmergencyEnergy -= CallbackIncrementEmergencyEnergy;
 			}
 		}
 
@@ -171,6 +179,8 @@ namespace StarWielder.Gameplay.Player
 				Energy Consumption Mode
 		*/
 
+		public delegate void EnergyConsumptionModeDelegate(EnergyConsumptionMode mode);
+
 		public enum EnergyConsumptionMode
 		{
 			None,
@@ -183,33 +193,6 @@ namespace StarWielder.Gameplay.Player
 		private ShipEnergyConsumptionSettings m_currentEnergyConsumptionSettings;
 		public ShipEnergyConsumptionSettings CurrentEnergyConsumptionSettings => m_currentEnergyConsumptionSettings;
 
-
-
-		public delegate void EnergyConsumptionModeDelegate(EnergyConsumptionMode mode);
-
-		/*
-				Emergency Energy
-		*/
-
-		public float normalizedEmergencyEnergy
-		{
-			get
-			{
-				return m_emergencyEnergy / m_stats.maxEmergencyEnergy;
-			}
-		}
-
-		private float m_emergencyEnergy;
-		public float emergencyEnergy
-		{
-			get { return m_emergencyEnergy; }
-			set
-			{
-				m_emergencyEnergy = Mathf.Clamp(value, 0f, m_stats.maxEmergencyEnergy);
-				m_playerChannel.onRefreshEmergencyEnergy.Invoke(normalizedEmergencyEnergy);
-			}
-		}
-
 		public void SetEnergyConsumptionMode(EnergyConsumptionMode mode)
 		{
 			if (m_settings == null)
@@ -218,11 +201,12 @@ namespace StarWielder.Gameplay.Player
 			m_currentEnergyConsumptionSettings = m_settings.GetEnergyConsumptionSettingsFromMode(mode);
 		}
 
+
 		public void SetAppropriateEnergyConsumptionMode()
 		{
 			if (m_settings == null || m_playerChannel == null)
 				return;
-			
+
 			switch (m_gameChannel.currentStagetype)
 			{
 				case StageStateType.Fight:
@@ -245,6 +229,33 @@ namespace StarWielder.Gameplay.Player
 					break;
 			}
 
+		}
+
+		/*
+				Emergency Energy
+		*/
+
+		public float normalizedEmergencyEnergy
+		{
+			get
+			{
+				return m_emergencyEnergy / m_stats.maxEmergencyEnergy;
+			}
+		}
+		private float m_emergencyEnergy;
+		public float emergencyEnergy
+		{
+			get { return m_emergencyEnergy; }
+			set
+			{
+				m_emergencyEnergy = Mathf.Clamp(value, 0f, m_stats.maxEmergencyEnergy);
+				m_playerChannel.onRefreshEmergencyEnergy.Invoke(normalizedEmergencyEnergy);
+			}
+		}
+
+		private void CallbackIncrementEmergencyEnergy(float value)
+		{
+			emergencyEnergy += value;
 		}
 
 		public void DepleateEmergencyEnergy()
@@ -272,19 +283,36 @@ namespace StarWielder.Gameplay.Player
 
 		private float m_currentHealth;
 
+		private void CallbackIncrementShipHealth(float value)
+		{
+			m_currentHealth += value;
+			m_currentHealth = Math.Clamp(m_currentHealth, 0, m_stats.maxHealth);
+			m_playerChannel.onRefreshShipHealth.Invoke(m_currentHealth / m_settings.maxHealth);
+		}
+
+		private void CallbackDecrementShipHealth(float value)
+		{
+			m_currentHealth -= Mathf.Abs(value);
+			m_currentHealth = Math.Clamp(m_currentHealth, 0, m_stats.maxHealth);
+			m_playerChannel.onRefreshShipHealth.Invoke(m_currentHealth / m_settings.maxHealth);
+
+			SoundManager.PlaySFX(SoundDataID.SHIP_HURT);
+		}
+
 		private void CheckIsHealthModifier(Collider2D other)
 		{
 			if (other.TryGetComponent(out ShipHealthModifier healthModifier))
 			{
 				healthModifier.onModify.Invoke();
 
-				// Note : can add negative values (values etc)
-				m_currentHealth += healthModifier.healthModification;
-				m_currentHealth = Math.Clamp(m_currentHealth, 0, m_stats.maxHealth);
-				m_playerChannel.onRefreshShipHealth.Invoke(m_currentHealth / m_settings.maxHealth);
-
 				if (healthModifier.healthModification < 0)
-					SoundManager.PlaySFX(SoundDataID.SHIP_HURT);
+				{
+					m_playerChannel.onDecrementShipHealth?.Invoke(healthModifier.healthModification);
+				}
+				else if (healthModifier.healthModification > 0)
+				{
+					m_playerChannel.onIncrementShipHealth?.Invoke(healthModifier.healthModification);
+				}
 
 				if (m_currentHealth <= 0)
 					ChangeState(ShipStateType.Destroyed);

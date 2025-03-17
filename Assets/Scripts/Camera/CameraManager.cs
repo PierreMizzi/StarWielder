@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using PierreMizzi.Useful;
 using StarWielder.Gameplay.Player;
@@ -11,6 +12,7 @@ namespace StarWielder.Gameplay
 		#region Main
 
 		[Header("Main")]
+		[SerializeField] private CameraChannel m_cameraChannel;
 		[SerializeField] private PlayerChannel m_playerChannel = null;
 		[SerializeField] private Camera m_camera = null;
 		[SerializeField] private float m_transferTransitionDuration = 0.5f;
@@ -18,6 +20,11 @@ namespace StarWielder.Gameplay
 		private void ResetCameraPosition()
 		{
 			m_camera.transform.localPosition = Vector3.zero;
+		}
+
+		private void CallbackShakeCameraPosition(ShakeTweenSettings settings)
+		{
+			m_shakeTween = settings.PlayPositionShake(m_camera.transform).OnComplete(ResetCameraPosition);
 		}
 
 		#endregion
@@ -31,8 +38,11 @@ namespace StarWielder.Gameplay
 				m_playerChannel.onStartEnergyTransfer += CallbackStartEnergyTransfer;
 				m_playerChannel.onStopEnergyTransfer += CallbackStopEnergyTransfer;
 
-				m_playerChannel.onRefreshShipHealth += CallbackShipHurt;
+				m_playerChannel.onDecrementShipHealth += CallbackDecrementShipHealth;
 			}
+			if (m_cameraChannel != null)
+				m_cameraChannel.onShakeCameraPosition += CallbackShakeCameraPosition;
+
 		}
 
 		private void OnDestroy()
@@ -42,15 +52,18 @@ namespace StarWielder.Gameplay
 				m_playerChannel.onStartEnergyTransfer -= CallbackStartEnergyTransfer;
 				m_playerChannel.onStopEnergyTransfer -= CallbackStopEnergyTransfer;
 
-				m_playerChannel.onRefreshShipHealth -= CallbackShipHurt;
+				m_playerChannel.onDecrementShipHealth -= CallbackDecrementShipHealth;
 			}
+
+			if (m_cameraChannel != null)
+				m_cameraChannel.onShakeCameraPosition -= CallbackShakeCameraPosition;
 		}
 
-		#endregion
+        #endregion
 
-		#region Energy Transfer
+        #region Energy Transfer
 
-		[Header("Energy Transfer")]
+        [Header("Energy Transfer")]
 		[SerializeField] private ShakeTweenSettings m_energyTransferShakeSettings;
 		[SerializeField] private float m_defaultZoom = 5;
 		[SerializeField] private float m_shipZoom = 4;
@@ -87,7 +100,7 @@ namespace StarWielder.Gameplay
 		[Header("Ship Hurt")]
 		[SerializeField] private ShakeTweenSettings m_shipHurtShakeSettings;
 
-		private void CallbackShipHurt(float normalizedHealth)
+		private void CallbackDecrementShipHealth(float normalizedHealth)
 		{
 			m_camera.DOShakePosition(
 				m_shipHurtShakeSettings.duration,

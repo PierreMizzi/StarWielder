@@ -7,6 +7,7 @@ namespace StarWielder.Gameplay.Modules
 	/// </summary>
 	public class BaseModule : MonoBehaviour
 	{
+		[Header("BaseModule")]
 		[SerializeField] protected ModuleChannel m_moduleChannel;
 		[SerializeField] protected BaseModuleSettings m_settings;
 		public BaseModuleSettings Settings => m_settings;
@@ -43,6 +44,21 @@ namespace StarWielder.Gameplay.Modules
 		public virtual void Disable()
 		{
 			m_isEnabled = false;
+		}
+
+		protected virtual void Start()
+		{
+#if UNITY_EDITOR
+			if (m_settings == null)
+			{
+				return;
+			}
+
+			if (m_settings.AutoEnable)
+			{
+				Enable();
+			}
+#endif
 		}
 	}
 }

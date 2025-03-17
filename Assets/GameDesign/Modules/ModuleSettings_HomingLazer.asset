@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d03dad30091e7f408590a89c1b3017d, type: 3}
+  m_Name: ModuleSettings_HomingLazer
+  m_EditorClassIdentifier: 
+  m_type: 3
+  m_autoEnable: 1
+  m_shopItem:
+    name: Homing Lazer
+    description: Everytime you launch the Sun, you can fire a lazer back to your
+      ship. Every star hit in-between will be destroy and their energy reused to
+      heal your ship.
+    price: 10
+    sprite: {fileID: 623715619, guid: 74e2d37886f9fa341af09ff8f23db102, type: 3}
+    moduleType: 3
+  m_energyToHealthRatio: 0.33
+  m_lazerWidth: 0.2
+  m_lazerSpeed: 300
+  m_lazerTrailDelay: 0.1
+  m_lazerTrailLifetime: 1
+  m_trailBaseColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

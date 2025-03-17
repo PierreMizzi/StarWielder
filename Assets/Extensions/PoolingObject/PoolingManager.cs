@@ -6,7 +6,7 @@ namespace PierreMizzi.Useful.PoolingObjects
 {
 
     // TODO : 🟥 Released objects are put back into their container
-
+    // 🟥 : Proper initialization of PooledObject (cf. HomingLazer)
     public delegate void GameObjectDelegate(GameObject value);
 
     public class PoolingManager : MonoBehaviour
@@ -16,29 +16,20 @@ namespace PierreMizzi.Useful.PoolingObjects
 
         private void Awake()
         {
-            Subscribe();
-            InitiliazePools();
-        }
-
-
-        private void OnDestroy()
-        {
-            Unsubscribe();
-        }
-
-        private void Subscribe()
-        {
             if (m_poolingChannel != null)
             {
+                m_poolingChannel.onCreatePool += CallbackCreatePool;
                 m_poolingChannel.onGetFromPool += CallbackGetFromPool;
                 m_poolingChannel.onReleaseToPool += CallbackReleaseToPool;
             }
+            InitiliazePools();
         }
 
-        private void Unsubscribe()
+        private void OnDestroy()
         {
             if (m_poolingChannel != null)
             {
+                m_poolingChannel.onCreatePool -= CallbackCreatePool;
                 m_poolingChannel.onGetFromPool -= CallbackGetFromPool;
                 m_poolingChannel.onReleaseToPool -= CallbackReleaseToPool;
             }
@@ -64,6 +55,11 @@ namespace PierreMizzi.Useful.PoolingObjects
                 return m_objectPools[gameObject.name].Get();
             else
                 return null;
+        }
+
+        private void CallbackCreatePool(PoolConfig config)
+        {
+            CreatePoolFromConfig(config);
         }
 
         private void CreatePoolFromConfig(PoolConfig config)
