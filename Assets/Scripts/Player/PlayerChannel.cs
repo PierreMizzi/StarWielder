@@ -38,6 +38,8 @@ namespace StarWielder.Gameplay.Player
 
 		#region Combo
 
+		[Header("Combo")]
+		[Range(0, 15)]public int maxCombo = 10;
 		private int m_currentCombo;
 		public int currentCombo
 		{
@@ -51,14 +53,17 @@ namespace StarWielder.Gameplay.Player
 			}
 		}
 
-		public Action onComboIncrement;
-		public Action onComboBreak;
 
-		[ContextMenu("Call IncrementCombo")]
-		public void IncrementCombo()
+		public float currentNormalizedCombo
 		{
-			onComboIncrement.Invoke();
+			get
+			{
+				return (float)(currentCombo - 1) / maxCombo;
+			}
 		}
+
+		public Action onIncrementCombo;
+		public Action onComboBreak;
 
 		#endregion
 
@@ -87,7 +92,7 @@ namespace StarWielder.Gameplay.Player
 			onRefreshShipHealth = (float normalizedHealth) => { };
 
 			// Combo
-			onComboIncrement = () => { m_currentCombo++; };
+			onIncrementCombo = () => { m_currentCombo++; };
 			onComboBreak = () => { m_currentCombo = 0; };
 
 			// Controller

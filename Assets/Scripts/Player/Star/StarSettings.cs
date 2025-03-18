@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace StarWielder.Gameplay.Player
@@ -38,6 +39,20 @@ namespace StarWielder.Gameplay.Player
 		[Header("Transfer")]
 		public float transferBaseDuration = 0.5f;
 		public float transferDurationRatio = 0.05f;
+
+		public List<SunMaterialConfig> sunMaterialConfigs = new List<SunMaterialConfig>();
+		public List<SunMaterialConfig> otherSunMaterialConfigs = new List<SunMaterialConfig>();
+
+		public SunMaterialConfig GetSunMaterialConfig(int index)
+		{
+			if (sunMaterialConfigs.Count == 0)
+			{
+				return null;
+			}
+
+			index = Mathf.Clamp(index, 0, sunMaterialConfigs.Count - 1);
+			return sunMaterialConfigs[index];
+		}
 
 		[Header("Combo")]
 		public float pitchShift = 0.1f;

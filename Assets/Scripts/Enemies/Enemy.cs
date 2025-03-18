@@ -26,7 +26,7 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			m_manager.RemoveSpawnedEnemy(this);
 			m_poolingChannel.onReleaseToPool.Invoke(gameObject);
-			m_playerChannel.onComboIncrement.Invoke();
+			m_playerChannel.onIncrementCombo.Invoke();
 		}
 
 		#region MonoBehaviour

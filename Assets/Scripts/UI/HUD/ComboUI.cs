@@ -16,7 +16,6 @@ namespace StarWielder.UI
 
 		[Header("Main")]
 		[SerializeField] private PlayerChannel m_playerChannel;
-
 		[SerializeField] private TextMeshProUGUI m_comboLabel;
 
 		[SerializeField] private ShakeTweenSettings m_shakeSettings;
@@ -52,7 +51,7 @@ namespace StarWielder.UI
 		{
 			if (m_playerChannel != null)
 			{
-				m_playerChannel.onComboIncrement += CallbackComboIncrement;
+				m_playerChannel.onIncrementCombo += CallbackComboIncrement;
 				m_playerChannel.onComboBreak += CallbackComboBreak;
 			}
 		}
@@ -61,7 +60,7 @@ namespace StarWielder.UI
 		{
 			if (m_playerChannel != null)
 			{
-				m_playerChannel.onComboIncrement -= CallbackComboIncrement;
+				m_playerChannel.onIncrementCombo -= CallbackComboIncrement;
 				m_playerChannel.onComboBreak -= CallbackComboBreak;
 			}
 		}
@@ -80,13 +79,11 @@ namespace StarWielder.UI
 		[SerializeField] private Gradient m_gradient;
 
 		[Header("Settings")]
-		[SerializeField] private int m_maxCombo = 10;
 		[SerializeField] private float m_minFillValue = 0.1f;
 		[SerializeField] private float m_maxFillValue = 0.9f;
 		[SerializeField] private float m_noiseAmplitude = 0.05f;
 		[SerializeField] private float m_noiseFrequency = 15f;
 
-		private float m_normalizedCombo => (float)(m_playerChannel.currentCombo - 1) / (float)m_maxCombo;
 		private float m_fillAmount = 0;
 		private float m_noiseSeed;
 		private float m_noiseValue;
@@ -97,7 +94,7 @@ namespace StarWielder.UI
 			m_noiseValue = Mathf.PerlinNoise(m_noiseSeed, 0);
 			m_noiseValue = UtilsClass.ZeroPlusToMinusPlus(m_noiseValue);
 
-			m_fillAmount = NormalizedToFill(m_normalizedCombo) + m_noiseValue * m_noiseAmplitude;
+			m_fillAmount = NormalizedToFill(m_playerChannel.currentNormalizedCombo) + m_noiseValue * m_noiseAmplitude;
 			m_fillImage.fillAmount = m_fillAmount;
 
 			m_fillImage.color = m_gradient.Evaluate(m_fillAmount);

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: PostProcess Profile
+  m_Name: PostProcessProfile_NicePlanets
   m_EditorClassIdentifier: 
   components:
   - {fileID: 8202077401185334677}
@@ -32,13 +32,13 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 1.2
+    m_Value: 0.75
   intensity:
     m_OverrideState: 1
-    m_Value: 200
+    m_Value: 87.5
   scatter:
     m_OverrideState: 1
-    m_Value: 0.75
+    m_Value: 0.406
   clamp:
     m_OverrideState: 0
     m_Value: 65472

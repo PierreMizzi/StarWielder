@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters;
+using PierreMizzi.Rendering;
 using PierreMizzi.SoundManager;
 using PierreMizzi.Useful.PoolingObjects;
 using PierreMizzi.Useful.StateMachines;
@@ -35,9 +37,6 @@ namespace StarWielder.Gameplay.Player
 
 		[SerializeField] private InputActionReference m_mouseClickAction;
 		public InputActionReference mouseClickAction => m_mouseClickAction;
-
-		[SerializeField] private InputActionReference m_ability_01;
-		public InputActionReference Ability_01 => m_ability_01;
 
 		private void CallbackGameOver(GameOverReason reason)
 		{
@@ -123,6 +122,8 @@ namespace StarWielder.Gameplay.Player
 			// SetVelocityFromEnergy();
 
 			InitializeStates();
+
+			MatchSunColorsToCombo(0);
 		}
 
 		private void Start()
@@ -135,13 +136,30 @@ namespace StarWielder.Gameplay.Player
 
 				m_gameChannel.onGameOver += CallbackGameOver;
 			}
+
+			if (m_playerChannel != null)
+			{
+				m_playerChannel.onIncrementCombo += CallbackComboIncrement;
+					m_playerChannel.onComboBreak += CallbackComboBreak;
+			}
+
 		}
 
-		protected void Update()
+        protected void Update()
 		{
 			UpdateState();
 			CheckEnergy();
 			ManageScaleFromVelocity();
+
+			if (Input.GetKeyDown(KeyCode.Minus))
+			{
+				m_playerChannel.onIncrementCombo.Invoke();
+			}
+
+			if (Input.GetKeyDown(KeyCode.Plus))
+			{
+				m_playerChannel.onComboBreak.Invoke();
+			}
 		}
 
 		private void OnCollisionEnter2D(Collision2D other)
@@ -177,13 +195,19 @@ namespace StarWielder.Gameplay.Player
 
 				m_gameChannel.onGameOver -= CallbackGameOver;
 			}
+
+			if (m_playerChannel != null)
+			{
+				m_playerChannel.onIncrementCombo -= CallbackComboIncrement;
+				m_playerChannel.onComboBreak -= CallbackComboBreak;
+			}
 		}
 
-		#endregion
+        #endregion
 
-		#region Ship
+        #region Ship
 
-		[Header("Ship")]
+        [Header("Ship")]
 		[SerializeField] private Ship m_ship;
 		public Ship ship => m_ship;
 
@@ -377,6 +401,39 @@ namespace StarWielder.Gameplay.Player
 			ContactPoint2D contact = other.GetContact(0);
 			ps.transform.position = contact.point;
 			ps.transform.up = contact.normal;
+		}
+
+		#endregion
+		
+		#region Combo
+
+		[Header("Combo")]
+		[SerializeField] private MaterialPropertyBlockModifier m_sunMaterial;
+		[SerializeField] private MaterialPropertyBlockModifier m_trailMaterial;
+
+		private void CallbackComboIncrement()
+		{
+			MatchSunColorsToCombo(m_playerChannel.currentCombo);
+		}
+
+		private void CallbackComboBreak()
+		{
+			MatchSunColorsToCombo(m_playerChannel.currentCombo);
+		}
+
+		private void MatchSunColorsToCombo(int index)
+		{
+			SunMaterialConfig config = m_settings.GetSunMaterialConfig(index);
+
+			if (config == null)
+			{
+				return;
+			}
+
+			m_sunMaterial.SetProperty(SunMaterialConfig.color_innerColor, config.innerColor);
+			m_sunMaterial.SetProperty(SunMaterialConfig.color_outerColor, config.outerColor);
+			m_sunMaterial.SetProperty(SunMaterialConfig.float_speed, config.scrollSpeed);
+			m_trailMaterial.SetProperty(SunMaterialConfig.color_color, config.trailColor);
 		}
 
 		#endregion
