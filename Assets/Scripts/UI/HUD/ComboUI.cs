@@ -18,13 +18,16 @@ namespace StarWielder.UI
 		[SerializeField] private PlayerChannel m_playerChannel;
 		[SerializeField] private TextMeshProUGUI m_comboLabel;
 
-		[SerializeField] private ShakeTweenSettings m_shakeSettings;
+		[SerializeField] private ShakeTweenSettings m_shakeSettingsComboBreak;
+		[SerializeField] private ShakeTweenSettings m_shakeSettingsComboIncrement;
 
 		private const string k_multiplyText = "<size=50%>x</size>";
 
+		[ContextMenu("Call CallbackComboBreak")]
 		private void CallbackComboBreak()
 		{
-			m_comboLabel.text = "";
+			m_comboLabel.text = k_multiplyText + m_playerChannel.currentCombo.ToString();
+			m_shakeSettingsComboBreak.PlayPositionShake(m_comboLabel.transform);
 		}
 
 		[ContextMenu("Call CallbackComboIncrement")]
@@ -32,14 +35,26 @@ namespace StarWielder.UI
 		{
 			m_comboLabel.text = k_multiplyText + m_playerChannel.currentCombo.ToString();
 
-			m_comboLabel.transform.DOShakePosition(
-				m_shakeSettings.duration,
-			 	m_shakeSettings.strength,
-				m_shakeSettings.vibrato,
-				m_shakeSettings.randomness,
-				m_shakeSettings.snapping,
-				m_shakeSettings.fadeOut,
-				m_shakeSettings.randomnessMode
+			Sequence sequence = DOTween.Sequence();
+
+			sequence
+			.Append // Scale down on font
+			(
+				DOVirtual
+				.Float(
+					0f,
+					1f,
+					0.25f,
+					(float value) =>
+					{
+						m_comboLabel.fontSize = Mathf.Lerp(300, 90, value);
+					}
+				)
+				.SetEase(Ease.OutCubic)
+			)
+			.Append // Impact
+			(
+				m_shakeSettingsComboIncrement.PlayPositionShake(m_comboLabel.transform)
 			);
 		}
 

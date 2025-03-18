@@ -410,15 +410,20 @@ namespace StarWielder.Gameplay.Player
 		[Header("Combo")]
 		[SerializeField] private MaterialPropertyBlockModifier m_sunMaterial;
 		[SerializeField] private MaterialPropertyBlockModifier m_trailMaterial;
+		[SerializeField] private ParticleSystem m_comboIncrementParticle;
+		[SerializeField] private MaterialPropertyBlockModifier m_comboIncrementParticleMaterial;
 
 		private void CallbackComboIncrement()
 		{
 			MatchSunColorsToCombo(m_playerChannel.currentCombo);
+			SoundManager.PlaySFX(SoundDataID.STAR_COMBO);
+			m_comboIncrementParticle.Play();
 		}
 
 		private void CallbackComboBreak()
 		{
 			MatchSunColorsToCombo(m_playerChannel.currentCombo);
+			SoundManager.PlaySFX(SoundDataID.SUN_COMBO_BREAK);
 		}
 
 		private void MatchSunColorsToCombo(int index)
@@ -434,6 +439,9 @@ namespace StarWielder.Gameplay.Player
 			m_sunMaterial.SetProperty(SunMaterialConfig.color_outerColor, config.outerColor);
 			m_sunMaterial.SetProperty(SunMaterialConfig.float_speed, config.scrollSpeed);
 			m_trailMaterial.SetProperty(SunMaterialConfig.color_color, config.trailColor);
+
+			m_comboIncrementParticleMaterial.SetProperty("_EmissionColor", config.innerColor);
+			m_comboIncrementParticle.startColor = config.trailColor;
 		}
 
 		#endregion

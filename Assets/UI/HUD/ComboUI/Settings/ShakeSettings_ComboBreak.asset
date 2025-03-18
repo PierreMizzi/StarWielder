@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 338074621df71ac4aac0934c0f4ffc9a, type: 3}
-  m_Name: ComboUIShakeSettings
+  m_Name: ShakeSettings_ComboBreak
   m_EditorClassIdentifier: 
   m_duration: 1
   m_strength: {x: 60, y: 60, z: 1}

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_trailRemaining: {fileID: 7701479574589665450}
   m_raycastLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
 --- !u!1 &4893699161149939521
 GameObject:
   m_ObjectHideFlags: 0
