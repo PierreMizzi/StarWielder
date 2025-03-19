@@ -37,7 +37,7 @@ namespace StarWielder.Gameplay.Elements
 		public void AssignPlanetConfig(SpaceShop.PlanetConfig config)
 		{
 			// Planet Sprite
-			m_planetSpriteRenderer.sprite = config.planetSprite;
+			m_planetSpriteRenderer.sprite = config.sprite;
 			RandomizeScale();
 
 			// Orbit Sprite
@@ -122,9 +122,9 @@ namespace StarWielder.Gameplay.Elements
 
 		[SerializeField] private MaterialPropertyBlockModifier m_orbitSprite;
 
-		private const string floatIsClockwise = "_IsClockwise";
-		private const string colorOrbitColor = "_OrbitColor";
-		private const string colorTrailColor = "_FadeColor";
+		public const string floatIsClockwise = "_IsClockwise";
+		public const string colorOrbitColor = "_OrbitColor";
+		public const string colorTrailColor = "_FadeColor";
 
 		private void UpdateOrbitSprite()
 		{
@@ -182,16 +182,18 @@ namespace StarWielder.Gameplay.Elements
 
 		[SerializeField] private Vector2 m_minMaxScale;
 
-		[Obsolete]
-		public void SetSprite(Sprite sprite)
-		{
-		}
-
 		public void RandomizeScale()
 		{
 			float rndScale = Random.Range(m_minMaxScale.x, m_minMaxScale.y);
 			m_planetSpriteRenderer.transform.localScale = new Vector3(rndScale, rndScale, 1f);
 		}
+
+		#endregion
+
+		#region Debug
+
+		public SpriteRenderer PlanetSpriteRenderer => m_planetSpriteRenderer;
+		public MaterialPropertyBlockModifier OrbitSprite => m_orbitSprite;
 
 		#endregion
 	}

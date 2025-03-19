@@ -13,7 +13,7 @@ namespace StarWielder.Gameplay.Elements
 
 	public class SpaceShop : MonoBehaviour
 	{
-		
+
 		#region Behaviour
 
 		[SerializeField] private int m_amount;
@@ -59,19 +59,20 @@ namespace StarWielder.Gameplay.Elements
 			RandomizeItemDisplay();
 			GenerateShopContent();
 		}
-			
+
 		#endregion
 
 		#region Module
 
 		public List<BaseModule> GetRandomBuyableModules(int amount)
 		{
-			List<BaseModule> buyableModules = (from module in m_moduleChannel.moduleManager.Modules 
-											  where module.Value.IsBuyable select module.Value).ToList();
+			List<BaseModule> buyableModules = (from module in m_moduleChannel.moduleManager.Modules
+											   where module.Value.IsBuyable
+											   select module.Value).ToList();
 
 			return buyableModules.PickRandom(amount, true);
 		}
-			
+
 		#endregion
 
 		#region Planets
@@ -84,17 +85,20 @@ namespace StarWielder.Gameplay.Elements
 		public struct PlanetConfig
 		{
 			public string name;
-			public Sprite planetSprite;
-			public Color orbitColor;
-			public Color trailColor;
+			public Sprite sprite;
+			[ColorUsage(false, true)] public Color orbitColor;
+			[ColorUsage(false, true)] public Color trailColor;
 		}
-			
+
 		#endregion
 
 		#region Debug
 
-		[ContextMenu("Call SpaceShopPlanet config")]
-		public void TestPlanetConfigs()
+		[Header("Debug")]
+		[SerializeField] private List<PlanetConfig> m_savedPlanetConfigs;
+
+		[ContextMenu("Call ApplyPlanetConfigs")]
+		public void ApplyPlanetConfigs()
 		{
 			if (m_itemDisplays.Count != m_planetConfigs.Count)
 			{
@@ -112,7 +116,35 @@ namespace StarWielder.Gameplay.Elements
 				itemDisplay.AssignPlanetConfig(planetConfig);
 			}
 		}
-			
+
+		[ContextMenu("Call SavePlanetConfigs")]
+		public void SavePlanetConfigs()
+		{
+			m_savedPlanetConfigs.Clear();
+
+			int index = 0;
+			foreach (ShopItemDisplay itemDisplay in m_itemDisplays)
+			{
+				if (itemDisplay == null ||
+					itemDisplay.OrbitSprite == null ||
+					itemDisplay.PlanetSpriteRenderer == null)
+				{
+					continue;
+				}
+
+				PlanetConfig config = new ()
+				{
+					name = "Planet_" + index,
+					sprite = itemDisplay.PlanetSpriteRenderer.sprite,
+					orbitColor = itemDisplay.OrbitSprite.GetProperty(ShopItemDisplay.colorOrbitColor).colorValue,
+					trailColor = itemDisplay.OrbitSprite.GetProperty(ShopItemDisplay.colorTrailColor).colorValue,
+				};
+
+				m_savedPlanetConfigs.Add(config);
+				index++;
+			}
+		}		
+
 		#endregion
 
 	}

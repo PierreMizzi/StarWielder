@@ -3227,6 +3227,10 @@ PrefabInstance:
       propertyPath: m_FlipY
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1956348048407751732, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2476734984852858379, guid: 73b179e2c278ed4408e1ccef2a2bfce0, type: 3}
       propertyPath: m_Name
       value: ShopItemDisplay_2
@@ -6600,7 +6604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2044057711
 Transform:
   m_ObjectHideFlags: 0

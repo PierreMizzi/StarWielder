@@ -39,10 +39,12 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: 0.25
+    - _Speed: -0.25
     m_Colors:
     - Color_9ad5428caa564e35af31cebaf38f15f8: {r: 1.6055589, g: 0.40948412, b: 0, a: 0}
     - Color_de0b35867d084d0780f26c33d8b97529: {r: 1.0717734, g: 0.17528096, b: 0, a: 0}
+    - _InnerColor: {r: 0.77254903, g: 0.33962393, b: 0, a: 0}
+    - _OuterColor: {r: 0.7747629, g: 0.24148639, b: 0, a: 0}
     - _Tilling: {r: 5, g: 5, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7680649654641911

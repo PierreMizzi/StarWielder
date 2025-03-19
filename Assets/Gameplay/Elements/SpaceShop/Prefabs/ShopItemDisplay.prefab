@@ -86,7 +86,7 @@ MonoBehaviour:
   m_orbitSprite: {fileID: 8920097911306096673}
   m_sunSocket: {fileID: 748935052335476413}
   m_sunSocketSpriteRenderer: {fileID: 653787429571677466}
-  m_enabledColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enabledColor: {r: 0.85, g: 0.85, b: 0.85, a: 1}
   m_disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_planetSpriteRenderer: {fileID: 1956348048407751732}
   m_minMaxScale: {x: 0.1, y: 0.2}
@@ -196,7 +196,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 821d2fe3b21c76d498bbdbf888ac8738, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8742138, g: 0.8742138, b: 0.8742138, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -385,6 +385,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1726151235664569697}
     m_Modifications:
+    - target: {fileID: 3062566931357880693, guid: 9bcecb1d909e3344fad0e1dfff0e48c7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3537514021830975229, guid: 9bcecb1d909e3344fad0e1dfff0e48c7, type: 3}
       propertyPath: m_Name
       value: SunSocket
