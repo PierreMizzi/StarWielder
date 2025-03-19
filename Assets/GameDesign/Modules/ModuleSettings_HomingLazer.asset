@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ModuleSettings_HomingLazer
   m_EditorClassIdentifier: 
   m_type: 3
-  m_autoEnable: 1
+  m_autoEnable: 0
   m_shopItem:
     name: Homing Lazer
     description: Everytime you launch the Sun, you can fire a lazer back to your

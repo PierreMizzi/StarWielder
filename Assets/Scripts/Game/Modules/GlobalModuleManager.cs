@@ -90,11 +90,20 @@ namespace StarWielder.Gameplay.Modules
 				{
 					if (m_modules.ContainsKey(module.Type) == false)
 					{
+						module.Initialize(this);
 						m_modules.Add(module.Type, module);
 					}
 				}
 			}
 		}
+
+		#endregion
+
+		#region Modules UI
+			
+		[Header("Modules UI")]
+		[SerializeField] private RectTransform m_moduleUIContainer;
+		public RectTransform ModuleUIContainer => m_moduleUIContainer;
 
 		#endregion
 

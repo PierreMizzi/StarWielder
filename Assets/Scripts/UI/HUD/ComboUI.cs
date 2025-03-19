@@ -18,8 +18,18 @@ namespace StarWielder.UI
 		[SerializeField] private PlayerChannel m_playerChannel;
 		[SerializeField] private TextMeshProUGUI m_comboLabel;
 
+		[Header("Combo Break Settings")]
 		[SerializeField] private ShakeTweenSettings m_shakeSettingsComboBreak;
+
+		[SerializeField] private float m_baseFontSize = 90f;
+		[SerializeField] private Color m_baseFontColor = Color.white;
+		[SerializeField] private float m_comboBreakFontSize = 250f;
+		[SerializeField] private Color m_comboBreakFontColor = Color.red;
+
+		[Header("Combo Increment Settings")]
 		[SerializeField] private ShakeTweenSettings m_shakeSettingsComboIncrement;
+		[SerializeField] private float m_comboIncrementDuration = 0.33f;
+		[SerializeField] private float m_comboIncrementFontSize = 500f;
 
 		private const string k_multiplyText = "<size=50%>x</size>";
 
@@ -27,7 +37,15 @@ namespace StarWielder.UI
 		private void CallbackComboBreak()
 		{
 			m_comboLabel.text = k_multiplyText + m_playerChannel.currentCombo.ToString();
-			m_shakeSettingsComboBreak.PlayPositionShake(m_comboLabel.transform);
+			m_comboLabel.fontSize = m_comboBreakFontSize;
+			m_comboLabel.color = m_comboBreakFontColor;
+
+			m_shakeSettingsComboBreak
+				.PlayPositionShake(m_comboLabel.transform)
+				.OnComplete(()=>{
+					m_comboLabel.fontSize = m_baseFontSize;
+					m_comboLabel.color = m_baseFontColor;
+				});
 		}
 
 		[ContextMenu("Call CallbackComboIncrement")]
@@ -43,14 +61,15 @@ namespace StarWielder.UI
 				DOVirtual
 				.Float(
 					0f,
-					1f,
-					0.25f,
+					Mathf.PI,
+					m_comboIncrementDuration,
 					(float value) =>
 					{
-						m_comboLabel.fontSize = Mathf.Lerp(300, 90, value);
+						value = Mathf.Sin(value);
+						m_comboLabel.fontSize = Mathf.Lerp(m_baseFontSize, m_comboIncrementFontSize, value);
 					}
 				)
-				.SetEase(Ease.OutCubic)
+				.SetEase(Ease.Linear)
 			)
 			.Append // Impact
 			(
@@ -83,6 +102,12 @@ namespace StarWielder.UI
 		private void Update()
 		{
 			UpdateComboBar();
+
+			if (Input.GetKeyDown(KeyCode.Keypad9))
+			{
+				CallbackComboIncrement();
+			}
+
 		}
 
 		#endregion
@@ -93,7 +118,7 @@ namespace StarWielder.UI
 		[SerializeField] private Image m_fillImage;
 		[SerializeField] private Gradient m_gradient;
 
-		[Header("Settings")]
+		[Header("Combo Bar Settings")]
 		[SerializeField] private float m_minFillValue = 0.1f;
 		[SerializeField] private float m_maxFillValue = 0.9f;
 		[SerializeField] private float m_noiseAmplitude = 0.05f;
@@ -103,7 +128,7 @@ namespace StarWielder.UI
 		private float m_noiseSeed;
 		private float m_noiseValue;
 
-		private void UpdateComboBar()
+        private void UpdateComboBar()
 		{
 			m_noiseSeed += Time.deltaTime * m_noiseFrequency;
 			m_noiseValue = Mathf.PerlinNoise(m_noiseSeed, 0);

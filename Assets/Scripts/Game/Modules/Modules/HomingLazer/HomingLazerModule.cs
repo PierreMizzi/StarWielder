@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 namespace StarWielder.Gameplay.Modules
 {
 
-	// 🟥 : HomingLazerModule : Add Homing Lazer when enabled
 	public class HomingLazerModule : BaseModule
 	{
 
@@ -20,11 +19,13 @@ namespace StarWielder.Gameplay.Modules
 		{
 			base.Enable();
 
+			SetAvailable();
+
 			if (m_inputAction != null)
 				m_inputAction.action.performed += CallbackFireInput;
 
 			if (m_playerChannel.onStarDocked != null)
-				m_playerChannel.onStarDocked += CallbackStarDocked;
+				m_playerChannel.onStarDocked += SetAvailable;
 		}
 
 
@@ -36,7 +37,7 @@ namespace StarWielder.Gameplay.Modules
 				m_inputAction.action.performed -= CallbackFireInput;
 
 			if (m_playerChannel.onStarDocked != null)
-				m_playerChannel.onStarDocked -= CallbackStarDocked;
+				m_playerChannel.onStarDocked -= SetAvailable;
 		}
 
 		#endregion
@@ -48,9 +49,6 @@ namespace StarWielder.Gameplay.Modules
 		[SerializeField] private InputActionReference m_inputAction;
 		[SerializeField] private Ship m_ship;
 		[SerializeField] private Star m_sun;
-
-
-		private bool hasFired = false;
 
 		private void CallbackFireInput(InputAction.CallbackContext context)
 		{
@@ -72,7 +70,7 @@ namespace StarWielder.Gameplay.Modules
 			if (lazerGameObject.TryGetComponent(out HomingLazer lazer))
 			{
 				lazer.Fire(this, m_sun.transform.position, m_ship.transform.position);
-				hasFired = true;
+				SetUnavailable();
 			}
 		}
 
@@ -85,7 +83,7 @@ namespace StarWielder.Gameplay.Modules
 
 		private bool CanFire()
 		{
-			return hasFired == false &&
+			return m_isAvailable &&
 				   (m_sun.IsState(StarStateType.Free) || m_sun.IsState(StarStateType.Returning));
 		}
 
@@ -100,11 +98,6 @@ namespace StarWielder.Gameplay.Modules
 			m_cameraChannel.onShakeCameraPosition?.Invoke(m_shakeTweenSettings);
 		}
 
-		private void CallbackStarDocked()
-		{
-			hasFired = false;
-		}
-
 		#endregion
 
 
@@ -115,6 +108,8 @@ namespace StarWielder.Gameplay.Modules
 		[Header("Camera")]
 		[SerializeField] private CameraChannel m_cameraChannel;
 		[SerializeField] private ShakeTweenSettings m_shakeTweenSettings;
+
+
 
 
 	}

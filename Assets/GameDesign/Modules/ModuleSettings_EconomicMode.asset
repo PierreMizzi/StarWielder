@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ModuleSettings_EconomicMode
   m_EditorClassIdentifier: 
   m_type: 2
+  m_autoEnable: 1
   m_shopItem:
     name: Start-Stop System
     description: After staying immobile for a brief moment, energy consumption of
