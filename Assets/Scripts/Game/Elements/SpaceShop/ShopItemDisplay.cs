@@ -137,10 +137,10 @@ namespace StarWielder.Gameplay.Elements
 
 		[Header("Sun Socket")]
 		[SerializeField] private SunSocket m_sunSocket;
-		[SerializeField] private SpriteRenderer m_sunSocketSpriteRenderer;
+		// [SerializeField] private SpriteRenderer m_sunSocketSpriteRenderer;
 
-		[SerializeField] private Color m_enabledColor = Color.white;
-		[SerializeField] private Color m_disabledColor = Color.grey;
+		// [SerializeField] private Color m_enabledColor = Color.white;
+		// [SerializeField] private Color m_disabledColor = Color.grey;
 
 		private void CallbackSocket(Star sun)
 		{
@@ -163,13 +163,13 @@ namespace StarWielder.Gameplay.Elements
 		public void EnableSunSocket()
 		{
 			m_sunSocket.Enable();
-			m_sunSocketSpriteRenderer.color = m_enabledColor;
+			// m_sunSocketSpriteRenderer.color = m_enabledColor;
 		}
 
 		public void DisableSunSocket()
 		{
 			m_sunSocket.Disable();
-			m_sunSocketSpriteRenderer.color = m_disabledColor;
+			// m_sunSocketSpriteRenderer.color = m_disabledColor;
 		}
 
 		#endregion

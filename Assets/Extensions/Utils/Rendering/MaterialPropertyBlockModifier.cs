@@ -7,6 +7,13 @@ namespace PierreMizzi.Rendering
 	[RequireComponent(typeof(Renderer))]
 	public class MaterialPropertyBlockModifier : MonoBehaviour
 	{
+
+		#region Common Material Properties
+
+
+			
+		#endregion
+
 		private static MaterialPropertyBlock s_materialPropertyBlock { get; set; }
 
 		[Serializable]
@@ -164,5 +171,27 @@ namespace PierreMizzi.Rendering
 			}
 			return m_propreties.Find((Property property) => property.name == propertyName);
 		}
+
+        public void SetProperty(object k_baseColor, Color m_colorSolarPanelOn)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+	public static class MaterialPropertyName
+	{
+		public static string k_color = "_Color";
+
+		/// <summary>
+		/// Universal Render Pipeline/Lit |
+		/// </summary>
+		public static string k_baseColor = "_BaseColor";
+
+		/// <summary>
+		/// Universal Render Pipeline/Lit |
+		/// </summary>
+		public static string k_emissionColor = "_EmissionColor"; 
+		public static string k_tint = "_Tint";
 	}
+
 }

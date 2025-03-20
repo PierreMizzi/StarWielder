@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 
@@ -142,7 +143,44 @@ public class Sandbox : MonoBehaviour
 
 	#region Orbiter Time
 
-		
+
+	#endregion
+
+	#region Sun Socket Rotation
+
+	private float m_time;
+	[SerializeField] private float m_speed;
+
+	void Update()
+	{
+
+		// Rotate around local forward, somehow
+		// transform.rotation *= Quaternion.Euler(Vector3.forward * Time.DeltaTime);
+
+		// m_time += Time.deltaTime * m_speed;
+		// transform.RotateAround(transform.position, Vector3.forward, Time.deltaTime * m_speed);
+		if (Input.GetKeyDown(KeyCode.L))
+		{
+			Test();
+		}
+	}
+
+	private void Test()
+	{
+		DOVirtual
+		.Float(
+			0f,
+			1f,
+			1f,
+			(float value) =>
+			{
+				transform.localRotation = Quaternion.Euler(0, 0, Mathf.Lerp(25, 90, value));
+			}
+		)
+		.SetEase(Ease.OutCubic);
+
+	}
+
 	#endregion
 
 }
