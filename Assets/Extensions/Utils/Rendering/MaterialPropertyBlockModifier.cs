@@ -47,12 +47,20 @@ namespace PierreMizzi.Rendering
 
 		public void Awake()
 		{
-			this.renderer = base.GetComponent<Renderer>();
+			RendererReferenceSafety();
 
 			if (s_materialPropertyBlock == null)
 				s_materialPropertyBlock = new MaterialPropertyBlock();
 
 			this.ApplyProperties();
+		}
+
+		private void RendererReferenceSafety()
+		{
+			if (renderer == null)
+			{
+				this.renderer = GetComponent<Renderer>();
+			}
 		}
 
 		private void OnValidate()
@@ -71,6 +79,8 @@ namespace PierreMizzi.Rendering
 
 		private void ApplyProperties()
 		{
+			RendererReferenceSafety();
+
 			this.renderer.GetPropertyBlock(s_materialPropertyBlock, m_materialIndex);
 
 			foreach (Property property in m_propreties)
@@ -116,6 +126,8 @@ namespace PierreMizzi.Rendering
 
 		public void SetProperty(string propertyName, float value)
 		{
+			RendererReferenceSafety();
+
 			this.renderer.GetPropertyBlock(s_materialPropertyBlock, m_materialIndex);
 			Property property = m_propreties.Find(item => item.name == propertyName);
 			if (property != null)
@@ -126,9 +138,10 @@ namespace PierreMizzi.Rendering
 			}
 		}
 
-
 		public void SetProperty(string propertyName, Color value)
 		{
+			RendererReferenceSafety();
+
 			this.renderer.GetPropertyBlock(s_materialPropertyBlock, m_materialIndex);
 			Property property = m_propreties.Find(item => item.name == propertyName);
 			if (property != null)
@@ -141,6 +154,8 @@ namespace PierreMizzi.Rendering
 
 		public void SetProperty(string propertyName, Vector4 value)
 		{
+			RendererReferenceSafety();
+
 			this.renderer.GetPropertyBlock(s_materialPropertyBlock, m_materialIndex);
 			Property property = m_propreties.Find(item => item.name == propertyName);
 			if (property != null)
@@ -153,6 +168,8 @@ namespace PierreMizzi.Rendering
 
 		public void SetProperty(string propertyName, Texture value)
 		{
+			RendererReferenceSafety();
+
 			this.renderer.GetPropertyBlock(s_materialPropertyBlock, m_materialIndex);
 			Property property = m_propreties.Find(item => item.name == propertyName);
 			if (property != null)
@@ -171,16 +188,13 @@ namespace PierreMizzi.Rendering
 			}
 			return m_propreties.Find((Property property) => property.name == propertyName);
 		}
-
-        public void SetProperty(object k_baseColor, Color m_colorSolarPanelOn)
-        {
-            throw new NotImplementedException();
-        }
     }
 
 	public static class MaterialPropertyName
 	{
 		public static string k_color = "_Color";
+
+		public static string k_tint = "_Tint";
 
 		/// <summary>
 		/// Universal Render Pipeline/Lit |
@@ -191,7 +205,6 @@ namespace PierreMizzi.Rendering
 		/// Universal Render Pipeline/Lit |
 		/// </summary>
 		public static string k_emissionColor = "_EmissionColor"; 
-		public static string k_tint = "_Tint";
 	}
 
 }

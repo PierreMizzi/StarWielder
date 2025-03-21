@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4377124301565917669}
   - component: {fileID: 7157954164514131060}
   - component: {fileID: 4513334416715528497}
+  - component: {fileID: 3005863183104582715}
   m_Layer: 0
   m_Name: SunHologram
   m_TagString: Untagged
@@ -96,6 +97,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd659f98f8edf0b46bb84eea6fc0b93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_generateOnStart: 1
+--- !u!114 &3005863183104582715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268305706463167365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51b2a5c411554a7981f82b4a7a2e5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_materialIndex: 0
+  m_propreties:
+  - name: _WireColor
+    type: 3
+    floatValue: 0
+    intValue: 0
+    colorValue:
+      serializedVersion: 2
+      rgba: 13311
+    textureValue: {fileID: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6749461837023753180
 GameObject:
   m_ObjectHideFlags: 0

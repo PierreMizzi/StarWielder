@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7834322741092635477, guid: bd80df729d340c04a9979feaeeae002e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bd80df729d340c04a9979feaeeae002e, type: 3}
       propertyPath: m_Name
       value: SunSocketRing

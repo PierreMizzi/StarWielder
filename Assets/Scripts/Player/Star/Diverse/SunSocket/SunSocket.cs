@@ -9,6 +9,8 @@ namespace StarWielder.Gameplay.Player
 {
 	public delegate void SunDelegate(Star sun);
 
+
+
 	[RequireComponent(typeof(CircleCollider2D))]
 	public class SunSocket : MonoBehaviour
 	{
@@ -124,7 +126,6 @@ namespace StarWielder.Gameplay.Player
 		[SerializeField] private List<SunSocketRing> m_rings;
 		private SunSocketRing tmpRing;
 
-
 		private void InitialRing()
 		{
 			for (int i = 0; i < m_rings.Count; i++)
@@ -152,9 +153,11 @@ namespace StarWielder.Gameplay.Player
 
 		[SerializeField] private float m_openRingAngle;
 		[SerializeField] private float m_closeRingAngle;
-		
+
+		// 🟥 : Implement and use ISocketable instead
+
 		[ContextMenu("Open")]
-		private void Open()
+		public void Open()
 		{
 			m_sunHologram.SetActive(true);
 
@@ -184,7 +187,7 @@ namespace StarWielder.Gameplay.Player
 		}
 
         [ContextMenu("Close")]
-		private void Close()
+		public void Close()
 		{
 			m_sunHologram.SetActive(false);
 
@@ -214,9 +217,8 @@ namespace StarWielder.Gameplay.Player
 		}
 
 		#endregion
-
 		#region Sun Hologranm
-
+		[Header("Sun Hologram")]
 		[SerializeField] private GameObject m_sunHologram;
 			
 		#endregion

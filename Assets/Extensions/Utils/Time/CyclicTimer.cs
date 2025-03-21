@@ -9,8 +9,6 @@ namespace PierreMizzi.Useful
 		[Header("Main")]
 		[SerializeField] private float m_cycleDuration = 1f;
 
-		[SerializeField] private float m_cycleDuration0 = 1f;
-		public float cycleDuration0 { get { return m_cycleDuration0; } set { m_cycleDuration0 = value; } }
 
 		private IEnumerator m_coroutine;
 		public Action onCycleCompleted;
@@ -18,7 +16,6 @@ namespace PierreMizzi.Useful
 
 		private void Awake()
 		{
-			m_cycleDuration0 = m_cycleDuration;
 			onCycleCompleted = () => { };
 		}
 

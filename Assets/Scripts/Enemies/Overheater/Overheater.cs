@@ -21,16 +21,23 @@ namespace StarWielder.Gameplay.Enemies
 
 			Awake();
 
-			energyDrainSpeed = m_maxEnergy / m_energyDrainDuration;
-			energyCoolingSpeed = m_maxEnergy / m_energyCoolingDuration;
-
+			// Energy
+			energyDrainSpeed = m_requiredEnergy / m_energyDrainDuration;
+			energyCoolingSpeed = m_requiredEnergy / m_energyCoolingDuration;
 			m_currentEnergy = 0;
-
+			
+			// Spawning
 			float rndDelay = UnityEngine.Random.Range(m_minDelayBeforeSpawning, m_maxDelayBeforeSpawning);
 			DOVirtual.DelayedCall(rndDelay, StartSpawning);
 
-			PopulateEnemyStars();
+			// EnemyStars
+			StoreFakeSunSockets();
+			PoolEnemyStars();
 
+			// SunSockets
+			StoreMineSpawners();
+
+			// State Machine
 			InitializeStates();
 			ChangeState(OverheaterStateType.Active);
 		}
@@ -78,6 +85,7 @@ namespace StarWielder.Gameplay.Enemies
 		#endregion
 
 		#region MonoBehaviour
+	
 
 		private void Start()
 		{
@@ -102,13 +110,31 @@ namespace StarWielder.Gameplay.Enemies
 
 		[Header("Enemy Stars")]
 		[SerializeField] private EnemyStar m_enemyStarPrefab;
-		[SerializeField] public List<Transform> m_enemyStarAnchors = new List<Transform>();
+		
+		[SerializeField] private Transform m_fakeSunSocketsContainer;
+		private List<SunSocket> m_fakeSunSockets = new List<SunSocket>();
 
 		private List<EnemyStar> m_enemyStars = new List<EnemyStar>();
 
-		private void PopulateEnemyStars()
+		private void StoreFakeSunSockets()
 		{
-			foreach (Transform anchor in m_enemyStarAnchors)
+			if (m_fakeSunSocketsContainer == null || m_fakeSunSockets.Count != 0)
+			{
+				return;
+			}
+
+			foreach (Transform child in m_fakeSunSocketsContainer)
+			{
+				if (child.TryGetComponent(out SunSocket sunSocket))
+				{
+					m_fakeSunSockets.Add(sunSocket);
+				}
+			}
+		}
+
+		private void PoolEnemyStars()
+		{
+			foreach (SunSocket fakeSunSocket in m_fakeSunSockets)
 			{
 				GameObject objectPooled = m_poolingChannel.onGetFromPool.Invoke(m_enemyStarPrefab.gameObject);
 
@@ -116,10 +142,12 @@ namespace StarWielder.Gameplay.Enemies
 				{
 					star.QuickAppear();
 					star.SetUninteractable();
-					star.transform.SetParent(anchor);
+					star.transform.SetParent(fakeSunSocket.transform);
 					star.transform.localPosition = Vector3.zero;
 
-					m_enemyStars.Add(star); 
+					fakeSunSocket.Close();
+
+					m_enemyStars.Add(star);
 				}
 			}
 		}
@@ -136,15 +164,32 @@ namespace StarWielder.Gameplay.Enemies
 
 		#endregion
 
-		#region Mine
+		#region Mines Spawners
 
-		[Header("Mine")]
+		[Header("Mine Spawners")]
 
+		[SerializeField] private Transform m_mineSpawnersContainer;
 		[SerializeField] private float m_minDelayBeforeSpawning = 1f;
 		[SerializeField] private float m_maxDelayBeforeSpawning = 2f;
-		[SerializeField] private List<OverheaterMineSpawner> m_mineSpawners = new List<OverheaterMineSpawner>();
 		[SerializeField] private CyclicTimer m_mineSpawningTimer;
-		private List<OverheaterMineSpawner> m_availableMineSpawners = new List<OverheaterMineSpawner>();
+		private List<OverheaterMineSpawner> m_mineSpawners = new List<OverheaterMineSpawner>();
+
+		private void StoreMineSpawners()
+		{
+			if (m_mineSpawnersContainer == null || m_mineSpawners.Count != 0)
+			{
+				return;
+			}
+
+			m_mineSpawners.Clear();
+			foreach (Transform child in m_mineSpawnersContainer)
+			{
+				if (child.TryGetComponent(out OverheaterMineSpawner spawner))
+				{
+					m_mineSpawners.Add(spawner);
+				}
+			}
+		}
 
 		public void StartSpawning()
 		{
@@ -169,14 +214,16 @@ namespace StarWielder.Gameplay.Enemies
 
 		private OverheaterMineSpawner GetAvailableMineSpawner()
 		{
-			m_availableMineSpawners.Clear();
+			List<OverheaterMineSpawner> availableSpawner = new List<OverheaterMineSpawner>();
 
 			foreach (OverheaterMineSpawner mineSpawner in m_mineSpawners)
 			{
 				if (mineSpawner.canSpawn)
-					m_availableMineSpawners.Add(mineSpawner);
+				{
+					availableSpawner.Add(mineSpawner);
+				}
 			}
-			return m_availableMineSpawners.PickRandom();
+			return availableSpawner.PickRandom();
 		}
 
 		#endregion
@@ -227,8 +274,8 @@ namespace StarWielder.Gameplay.Enemies
 		#region Energy Management
 
 		[Header("Energy")]
-		[SerializeField] private float m_maxEnergy;
-		public float maxEnergy => m_maxEnergy;
+		[SerializeField] private float m_requiredEnergy = 6f;
+		public float RequiredEnergy => m_requiredEnergy;
 
 		private float m_currentEnergy;
 
@@ -237,13 +284,13 @@ namespace StarWielder.Gameplay.Enemies
 			get { return m_currentEnergy; }
 			set
 			{
-				m_currentEnergy = Mathf.Clamp(value, 0f, m_maxEnergy);
+				m_currentEnergy = Mathf.Clamp(value, 0f, m_requiredEnergy);
 				m_animator.SetFloat(k_floatEnergyNormalized, currentEnergyNormalized);
 			}
 		}
 		public float currentEnergyNormalized
 		{
-			get { return m_currentEnergy / m_maxEnergy; }
+			get { return m_currentEnergy / m_requiredEnergy; }
 		}
 
 		[Header("Energ Draining")]
@@ -293,16 +340,7 @@ namespace StarWielder.Gameplay.Enemies
 
 		private const string k_floatEnergyNormalized = "EnergyNormalized";
 
-		[Obsolete]
-		private const string k_boolHasStar = "HasStar";
-
 		private const string k_floatHeatProgress = "Progress";
-
-		[Obsolete]
-		public void SetHasStar(bool hasStar)
-		{
-			m_animator.SetBool(k_boolHasStar, hasStar);
-		}
 
 		public void SetHeatProgress(float progress)
 		{

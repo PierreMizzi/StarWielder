@@ -6,7 +6,7 @@ namespace PierreMizzi.Useful.PoolingObjects
 {
 
     // TODO : 🟥 Released objects are put back into their container
-    // 🟥 : Proper initialization of PooledObject (cf. HomingLazer)
+    // 🟥 : Proper initialization of PooledObject (cf. HomingLazer or for Hoverheater enemy as well)
     public delegate void GameObjectDelegate(GameObject value);
 
     public class PoolingManager : MonoBehaviour

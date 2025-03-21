@@ -5,9 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 public class MeshDataBuilder : MonoBehaviour
 {
-    private void Reset()
+
+    [SerializeField] private bool m_generateOnStart = true;
+
+    private void Start()
     {
-        GenerateMeshData();
+        if (m_generateOnStart)
+        {
+            GenerateMeshData();
+        }
     }
 
     /// <summary>

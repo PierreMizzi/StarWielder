@@ -19,8 +19,6 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			base.DefaultEnter();
 
-			m_this.SetHasStar(true);
-
 			// m_this.star.ChangeState(StarStateType.Locked);
 			// m_this.star.transform.SetParent(m_this.Core.transform);
 			// m_this.star.transform.localPosition = Vector3.zero;
@@ -48,7 +46,7 @@ namespace StarWielder.Gameplay.Enemies
 			m_this.Shake(m_this.currentEnergyNormalized);
 			m_this.SetHeatProgress(m_this.currentEnergyNormalized);
 
-			if (m_this.currentEnergy >= m_this.maxEnergy)
+			if (m_this.currentEnergy >= m_this.RequiredEnergy)
 			{
 				m_this.sun.ChangeState(StarStateType.Free);
 				m_this.Kill();
@@ -68,7 +66,6 @@ namespace StarWielder.Gameplay.Enemies
 		{
 			m_this.sun.transform.SetParent(null);
 			m_this.sun = null;
-			m_this.SetHasStar(false);
 
 			ChangeState((int)OverheaterStateType.Cooling);
 		}

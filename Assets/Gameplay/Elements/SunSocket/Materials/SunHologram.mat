@@ -54,8 +54,11 @@ Material:
     - Vector1_B0D81385: 1.43
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Smoothness: 1
+    - _Thickness: 1
     m_Colors:
     - Color_1221528D: {r: 0.72327036, g: 0.72327036, b: 0.72327036, a: 0}
     - Color_6F4043B5: {r: 1, g: 0.24019608, b: 0, a: 0}
     - _Albedo: {r: 1, g: 1, b: 1, a: 1}
+    - _WireColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
