@@ -41,4 +41,6 @@ public static class CameraExtensions
 
 		return camera.pixelWidth / 2f * absSinAngle <= camera.pixelHeight / 2f * absCosAngle;
 	}
+
+
 }

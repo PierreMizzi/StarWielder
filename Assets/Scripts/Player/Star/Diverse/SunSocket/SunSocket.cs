@@ -217,6 +217,7 @@ namespace StarWielder.Gameplay.Player
 		}
 
 		#endregion
+		
 		#region Sun Hologranm
 		[Header("Sun Hologram")]
 		[SerializeField] private GameObject m_sunHologram;

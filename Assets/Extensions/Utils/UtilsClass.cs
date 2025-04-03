@@ -268,6 +268,8 @@ namespace PierreMizzi.Useful
 			get { return new Vector3(Screen.width / 2f, Screen.height / 2f, 0f); }
 		}
 
+
+
 		public static Vector3 RandomDirection()
 		{
 			return new Vector3(Random.Range(-1f, 1),
@@ -497,6 +499,19 @@ namespace PierreMizzi.Useful
 			return Regex.Replace(text, "(\\B[A-Z])", " $1");
 		}
 
+		#endregion
+	
+		#region UI
+
+		public static Vector2 ViewportToCanvasCoords(Vector2 viewportCoords)
+		{
+			viewportCoords -= new Vector2(0.5f, 0.5f);
+			viewportCoords.x = Screen.width * viewportCoords.x;
+			viewportCoords.y = Screen.height * viewportCoords.y;
+			Debug.Log(Screen.height + "" + Screen.width);
+			return viewportCoords;
+		}
+			
 		#endregion
 	}
 }

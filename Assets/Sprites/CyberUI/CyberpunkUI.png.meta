@@ -1028,6 +1028,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Cross
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 135
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbd985287fd59ab458fecbb7267d19a7
+      internalID: -503856917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1050,6 +1071,7 @@ TextureImporter:
       Corners_01: 2497425846062138918
       Corners_02: 3305985355890479760
       Corners_03: -133304985065293701
+      Cross: -503856917
       Currency: -250073034
       CyberArrow: 401274590
       CyberpunkUI_0: 1571440639
