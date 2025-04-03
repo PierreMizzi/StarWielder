@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5614812020479975089
+--- !u!1001 &3758932419173538239
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1764817764239379149, guid: fce7338f591696d4ebc2ea1cf61dba55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.01
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1764817764239379149, guid: fce7338f591696d4ebc2ea1cf61dba55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1764817764239379149, guid: fce7338f591696d4ebc2ea1cf61dba55, type: 3}
       propertyPath: m_LocalPosition.z
@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6749461837023753180, guid: fce7338f591696d4ebc2ea1cf61dba55, type: 3}
       propertyPath: m_Name
-      value: DialogueSunSocket
+      value: EventSunSocket Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -58,24 +58,28 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6749461837023753180, guid: fce7338f591696d4ebc2ea1cf61dba55, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4735988039821406389}
+      addedObject: {fileID: 6236658874186002890}
   m_SourcePrefab: {fileID: 100100000, guid: fce7338f591696d4ebc2ea1cf61dba55, type: 3}
---- !u!1 &1171276817984023917 stripped
+--- !u!1 &7602233234991278691 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6749461837023753180, guid: fce7338f591696d4ebc2ea1cf61dba55, type: 3}
-  m_PrefabInstance: {fileID: 5614812020479975089}
+  m_PrefabInstance: {fileID: 3758932419173538239}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4735988039821406389
+--- !u!114 &6236658874186002890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171276817984023917}
+  m_GameObject: {fileID: 7602233234991278691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1b711832a103784eacc9428ba559ddc, type: 3}
+  m_Script: {fileID: 11500000, guid: 2560afb4f7ce0604ea430e6eafaa24ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_data: {fileID: 11400000, guid: 8d6526da5c6711944b98f2e067c1de60, type: 2}
-  m_UIChannel: {fileID: 11400000, guid: d0074dd4f6d4b204288472610587bc20, type: 2}
+  m_onSocket:
+    m_PersistentCalls:
+      m_Calls: []
+  m_onUnsocket:
+    m_PersistentCalls:
+      m_Calls: []
