@@ -24,8 +24,8 @@ namespace StarWielder.Gameplay
 			if (!HasGameStarted)
 			{
 				HasGameStarted = true;
-				m_gameChannel.onStartGame.Invoke();
-				StartTimer();
+				// m_gameChannel.onStartGame.Invoke();
+				// StartTimer();
 				SetNormalCutoff();
 			}
 		}

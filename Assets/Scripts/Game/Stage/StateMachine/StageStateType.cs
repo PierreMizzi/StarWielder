@@ -7,5 +7,6 @@ namespace StarWielder.Gameplay
 		Resources,
 		Shop,
 		Idle,
+		Tutorial,
 	}
 }

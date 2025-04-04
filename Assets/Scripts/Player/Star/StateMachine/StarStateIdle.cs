@@ -22,6 +22,5 @@ namespace StarWielder.Gameplay.Player
 			m_this.rigidbody.velocity = Vector2.zero;
 		}
 
-
 	}
 }

@@ -20,17 +20,17 @@ namespace StarWielder.UI
 		private void Start()
 		{
 			if (m_gameChannel != null)
-				m_gameChannel.onStartGame += CallbackStartGame;
+				m_gameChannel.onFirstDocking += CallbackFirstDocking;
 		}
 
 		private void OnDestroy()
 		{
 
 			if (m_gameChannel != null)
-				m_gameChannel.onStartGame -= CallbackStartGame;
+				m_gameChannel.onFirstDocking -= CallbackFirstDocking;
 		}
 
-		private void CallbackStartGame()
+		private void CallbackFirstDocking()
 		{
 			_animator.SetTrigger(k_display);
 		}

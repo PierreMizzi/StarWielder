@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3721afa3f7efca4cac0a213f4181ebe, type: 3}
-  m_Name: ResourcesStageSettings_Debug
+  m_Name: TutorialStageSettings
   m_EditorClassIdentifier: 
   note: 
-  m_type: 3
+  m_type: 5

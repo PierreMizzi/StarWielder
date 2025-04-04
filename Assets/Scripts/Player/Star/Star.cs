@@ -69,6 +69,7 @@ namespace StarWielder.Gameplay.Player
 			};
 
 			ChangeState(m_initialState);
+			rigidbody.velocity = Vector2.zero;
 		}
 
 		public void ChangeState(StarStateType nextState, StarStateType previousState = StarStateType.None)
@@ -145,7 +146,7 @@ namespace StarWielder.Gameplay.Player
 
 		}
 
-        protected void Update()
+		protected void Update()
 		{
 			UpdateState();
 			CheckEnergy();
@@ -187,8 +188,8 @@ namespace StarWielder.Gameplay.Player
 			onTriggerEnter2D.Invoke(other);
 		}
 
-        void OnDestroy()
-        {
+		void OnDestroy()
+		{
 			if (m_gameChannel != null)
 			{
 				m_gameChannel.onSunIncrementEnergy -= CallbackIncrementEnergy;
@@ -203,11 +204,11 @@ namespace StarWielder.Gameplay.Player
 			}
 		}
 
-        #endregion
+		#endregion
 
-        #region Ship
+		#region Ship
 
-        [Header("Ship")]
+		[Header("Ship")]
 		[SerializeField] private Ship m_ship;
 		public Ship ship => m_ship;
 

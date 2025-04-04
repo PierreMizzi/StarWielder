@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3721afa3f7efca4cac0a213f4181ebe, type: 3}
-  m_Name: ResourcesStageSettings_Debug
+  m_Script: {fileID: 11500000, guid: 642f12e40d4606142a053424b24460fe, type: 3}
+  m_Name: PreTutorial_Dash
   m_EditorClassIdentifier: 
-  note: 
-  m_type: 3
+  text: Move using WASD, Dash using SPACE

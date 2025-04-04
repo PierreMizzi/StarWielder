@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6749461837023753180, guid: fce7338f591696d4ebc2ea1cf61dba55, type: 3}
       propertyPath: m_Name
-      value: EventSunSocket Variant
+      value: EventSunSocket
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

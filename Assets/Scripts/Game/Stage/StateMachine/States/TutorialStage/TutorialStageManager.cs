@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace StarWielder.Gameplay
 {
-	public class ShopStageManager : StageStateManager
+	public class TutorialStageManager : StageStateManager
 	{
 
 		public override void StartStage()

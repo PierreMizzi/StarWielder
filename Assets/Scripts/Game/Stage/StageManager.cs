@@ -3,6 +3,8 @@ using PierreMizzi.Useful.StateMachines;
 using UnityEngine;
 using StarWielder.Gameplay;
 using System;
+using UnityEngine.UI;
+
 
 
 #if UNITY_EDITOR
@@ -19,6 +21,9 @@ using UnityEditor;
 		- Fight
 		- Shop
 		- Resources
+
+
+	
 */
 
 
@@ -35,9 +40,13 @@ namespace StarWielder.Gameplay
 		[SerializeField] private GameChannel m_gameChannel;
 		public GameChannel gameChannel { get { return m_gameChannel; } }
 
+
+		/// <summary>
+		/// Launches the first stage inside m_stagesOrder
+		/// </summary>
 		private void CallbackStartGame()
 		{
-			StartStage();
+			LaunchCurrentStage();
 		}
 
 		private void CallbackGameOver(GameOverReason reason)
@@ -76,13 +85,15 @@ namespace StarWielder.Gameplay
 		{
 			InitializeStageStateManagers();
 			InitializeStates();
+
+			LaunchCurrentStage();
 		}
 
 		private void Start()
 		{
 			if (m_gameChannel != null)
 			{
-				m_gameChannel.onStartGame += CallbackStartGame;
+				// m_gameChannel.onStartGame += CallbackStartGame;
 				m_gameChannel.onGameOver += CallbackGameOver;
 			}
 		}
@@ -99,7 +110,7 @@ namespace StarWielder.Gameplay
 		{
 			if (m_gameChannel != null)
 			{
-				m_gameChannel.onStartGame -= CallbackStartGame;
+				// m_gameChannel.onStartGame -= CallbackStartGame;
 				m_gameChannel.onGameOver -= CallbackGameOver;
 			}
 		}
@@ -111,7 +122,7 @@ namespace StarWielder.Gameplay
 		private int m_currentStageIndex = 0;
 		[SerializeField] private List<StageSettings> m_stagesOrder = new List<StageSettings>();
 
-		private void StartStage()
+		private void LaunchCurrentStage()
 		{
 			StageSettings currentStageSettings = m_stagesOrder[m_currentStageIndex];
 			ChangeState(currentStageSettings);
@@ -122,7 +133,7 @@ namespace StarWielder.Gameplay
 			m_currentStageIndex++;
 
 			if (m_currentStageIndex < m_stagesOrder.Count)
-				StartStage();
+				LaunchCurrentStage();
 			else
 				Debug.Log("Game finished !");
 		}
@@ -149,12 +160,25 @@ namespace StarWielder.Gameplay
 				new ResourcesStageState(this),
 				new IdleStageState(this),
 				new ShopStageState(this),
+				new TutorialStageState(this),
 			};
 		}
 
 		public void UpdateState()
 		{
 			currentState?.Update();
+		}
+
+		public void ChangeState(StageStateType nextStageType, StageStateType previousState = StageStateType.None)
+		{
+			StageSettings nextStageSettings = m_stagesOrder.Find((StageSettings item)=> item.Type == nextStageType);
+
+			if (nextStageSettings == null)
+			{
+				return;
+			}
+
+			ChangeState(nextStageSettings);
 		}
 
 		public void ChangeState(StageSettings nextStageSettings, StageStateType previousState = StageStateType.None)
@@ -174,14 +198,7 @@ namespace StarWielder.Gameplay
 			}
 		}
 
-		[Obsolete]
 		public void ChangeState(int previousState, int nextState) { }
-
-
-		public StageState StageStateFromType(StageStateType type)
-		{
-			return (StageState)states.Find((AState state) => state.type == (int)type);
-		}
 
 		public T GetState<T>() where T : StageState
 		{
@@ -224,6 +241,27 @@ public class StageManagerEditor : Editor
 		if (GUILayout.Button("Next Stage"))
 		{
 			m_target?.NextStage();
+		}
+
+		// Launch choosen stage
+		if (Application.isPlaying)
+		{
+			GUILayout.Space(EditorGUIUtility.standardVerticalSpacing);
+
+			GUILayout.Label("Launch Stage");
+			string[] stages = Enum.GetNames(typeof(StageStateType));
+			for (int i = 0; i < stages.Length; i++)
+			{
+				if ((StageStateType)i == StageStateType.None)
+				{
+					continue;
+				}
+
+				if (GUILayout.Button($"{stages[i]}"))
+				{
+					m_target.ChangeState((StageStateType)i);
+				}
+			}
 		}
 
 	}
